@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rejestracja – Gdynia Science Slam</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- intl-tel-input stylesheet-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
+</head>
+
+<body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
+
+  <!-- NAVBAR -->
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <img class="max-h-20" src="assets/logo.png">
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="index.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="team.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="about.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="previous.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="partners.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="register.html"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+    
+
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="index.html" class="text-lg  block">Home</a>
+          <a href="team.html" class="text-lg block">Team</a>
+          <a href="about.html" class="text-lg block">About</a>
+          <a href="previous.html" class="text-lg block">Poprzednie edycje</a>
+          <a href="partners.html" class="text-lg block">Partnerzy</a>
+          <a href="register.html"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center">
+      <h1 class="text-4xl font-bold text-center mb-12">
+        Formularz przykładowy
+      </h1>
+        <div class="md:w-2/3 mx-auto left-1/6">
+            <form method="POST" action="/testForm" enctype="multipart/form-data">
+                <!-- Name and surname-->
+                <div class="flex gap-4 pb-6">
+                    <label for="name" class="sr-only">Imię</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                        <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+                      </svg>
+                      
+                    <input type="text"
+                     id="name"
+                     name="name"
+                     placeholder="Imię*"
+                     class="w-1/2 border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+
+                    <label for="surname" class="sr-only"> Nazwisko </label>
+                    <input type="text"
+                     id="surname"
+                     name="surname"
+                     placeholder="Nazwisko*"
+                     class="w-1/2 border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-1 pb-1 font-bold placeholder-gray-600" required/>
+                </div>
+                <!-- Email-->
+                <div class="flex pb-6">
+                    <label for="email" class="sr-only">Adres E-Mail</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                      </svg>
+                      
+                      
+                    <input type="email"
+                     id="email"
+                     name="email"
+                     placeholder="Adres E-Mail*"
+                     class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                     required/>
+                </div>
+                <!-- Phone number-->
+                <div class="relative w-full mb-4 tailwind-phone-input w-full border-b-2 border-white outline-none pr-0 pb-1">
+                    <label for="phone" class="sr-only">Numer telefonu</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                        <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                        <path fill-rule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clip-rule="evenodd" />
+                      </svg>
+                      
+                      
+                      
+                    <input type="tel"
+                     id="phone"
+                     name="phone"
+                     placeholder="Numer telefonu*"
+                     class="w-full bg-white/0 focus:border-blue-500font-bold placeholder-gray-600 iti__input"
+                     required/>
+                </div>
+                <!-- School (WiP)-->
+                <div class="flex pb-6">
+                    <label for="school" class="sr-only">Nazwa szkoły</label>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                        <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002c-.114.06-.227.119-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
+                        <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z" />
+                        <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
+                      </svg>
+                      
+                      
+                      
+                    <input type="email"
+                     id="email"
+                     name="email"
+                     placeholder="Adres E-Mail*"
+                     class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"/>
+                </div>
+                <!-- temporary input button (for checkig type handling)-->
+                 <input type="submit" value="Submit"/>
+            </form>
+        </div>
+      
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+    <p class="mb-2">📧 kontakt@gdyniascienceslam.pl</p>
+    <p class="mb-2">📍 Gdynia</p>
+    <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+  
+    menuBtn.addEventListener('click', () => {
+      if (mobileMenu.classList.contains("max-h-0")){
+        mobileMenu.classList.remove("max-h-0");
+        mobileMenu.classList.add("max-h-96");
+      }else{
+        mobileMenu.classList.add("max-h-0");
+        mobileMenu.classList.remove("max-h-96");
+      }
+    });
+  </script>
+    <!-- phone number handling script-->
+    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+    <script>
+        const input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+          initialCountry: "pl",
+          countryOrder: ["pl"],
+          customContainer: "tailwind-phone-input",
+          separateDialCode: true,
+          loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
+        });
+      </script>
+      <style>
+        .tailwind-phone-input .iti {
+            width: 100% !important;
+            left: 2.5rem !important;
+            top:50% !important;
+            font-weight: bold;
+        }
+      </style>
+</body>
+</html>
