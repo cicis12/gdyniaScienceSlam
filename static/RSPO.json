@@ -1,0 +1,5278 @@
+[
+  {
+    "name": "\"FREGATA\" SZKOŁA PODSTAWOWA DLA CHŁOPCÓW",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "\"OTWARTA\" NIEPUBLICZNA SZKOŁA PODSTAWOWA NR 1",
+    "city": "Banino"
+  },
+  {
+    "name": "AKADEMIA REALIZACJI DŹWIĘKU W GDYNI SZKOŁA POLICEALNA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "AKADEMIA SUKCESU \"NASZA SZKOŁA\" SPOŁECZNA SZKOŁA PODSTAWOWA",
+    "city": "Czersk"
+  },
+  {
+    "name": "AKADEMICKIE LICEUM OGÓLNOKSZTAŁCĄCE \"LINGWISTA\" IM. HYMNU NARODOWEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "AKADEMICKIE LICEUM OGÓLNOKSZTAŁCĄCE \"POMERANIA\"",
+    "city": "Chojnice"
+  },
+  {
+    "name": "AKADEMICKIE LICEUM OGÓLNOKSZTAŁCĄCE DLA MŁODZIEŻY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "AMERYKAŃSKA SZKOŁA PODSTAWOWA Z WYKŁADOWYM JĘZYKIEM ANGIELSKIM",
+    "city": "Gdynia"
+  },
+  {
+    "name": "ART BALLET NIEPUBLICZNA SZKOŁA SZTUKI TAŃCA W GDYNI KAMILA PALEŃ-KORZEB",
+    "city": "Gdynia"
+  },
+  {
+    "name": "AUTONOMICZNA SZKOŁA PODSTAWOWA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BAŁTYCKA SZKOŁA POLICEALNA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "BAŁTYCKIE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Czarne"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Stara Kiszewa"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Łodzierz"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Debrzno"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA \"COSINUS\" W GDANSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA \"COSINUS\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA \"RZEMIOSŁO\"",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA \"TOKARNIA\" W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA IM. AUGUSTYNA SZPRĘGI",
+    "city": "Malachin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA IM. IRENY SENDLEROWEJ",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA IM. KAZIMIERZA SIKORSKIEGO",
+    "city": "Brusy"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA IM. KS. BERNARDA ŁOSIŃSKIEGO W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1",
+    "city": "Człuchów"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1",
+    "city": "Bytów"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 IM. WIESŁAWA SZAJDY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 W MALBORKU ZESPÓŁ SZKÓŁ TECHNICZNYCH W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 W ZESPOLE SZKÓŁ OGRODNICZYCH I OGÓLNOKSZTAŁCĄCYCH W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 1 Z ODDZIAŁAMI INTEGRACYJNYMI W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2",
+    "city": "Człuchów"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W KWIDZYNIE ZESPÓŁ SZKÓŁ NR 2 IM. MARII SKŁODOWSKIEJ - CURIE W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 2 W ZESPOLE SZKÓŁTECHNICZNYCH CENTRUM KSZTAŁCENIA ZAWODOWEGO IM. MACIEJA RATAJA W RUSOCINIE",
+    "city": "Rusocin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 3 IM. BOHATERSKIEJ ZAŁOGI ORP \"ORZEŁ\" W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 3 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 3 Z ODDZIAŁAMI INTEGRACYJNYMI W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 4 W KWIDZYNIE CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 4 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 5 SPECJALNA",
+    "city": "Tczew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 5 SPECJALNA",
+    "city": "Malbork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 5 SPECJALNA W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 5 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 5 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 6 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA NR 6 W SCHRONISKU DLA NIELETNICH W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA",
+    "city": "Malachin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA NR 2",
+    "city": "Bytów"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA NR 2",
+    "city": "Malbork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA NR 2 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA NR 4 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA W SPECJALNYM OŚRODKU SZKOLNO - WYCHOWAWCZYM W KOŁOZĘBIU",
+    "city": "Kołoząb"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA SPECJALNA W ZESPOLE SZKÓŁ TECHNICZNYCH CENTRUM KSZTAŁCENIA ZAWODOWEGO IM. MACIEJA RATAJA W RUSOCINIE",
+    "city": "Rusocin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA TOWARZYSTWA SALEZJAŃSKIEGO IM. KS. IGNACEGO BŁAŻEWSKIEGO W KNIEWIE",
+    "city": "Kniewo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W CZARNEJ WODZIE",
+    "city": "Czarna Woda"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W KŁANINIE W POWIATOWYM ZESPOLE SZKÓŁ IM. STANISŁAWA STASZICA W KŁANINIE",
+    "city": "Kłanino"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W PRABUTACH ZESPÓŁ SZKÓŁ W PRABUTACH",
+    "city": "Prabuty"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W PRZODKOWIE",
+    "city": "Przodkowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W PUCKU W POWIATOWYM CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W SOMONINIE",
+    "city": "Somonino"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W STAROGARDZIE W ZESPOLE SZKÓŁ ZAWODOWYCH IM. MJR. H. DOBRZAŃSKIEGO HUBALA W STAROGARDZIE GD",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "BRANZOWA SZKOŁA I STOPNIA W SWAROŻYNIE",
+    "city": "Swarożyn"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W ZESPOLE SZKÓŁ IM. CYPRIANA KAMILA NORWIDA W DZIERZGONIU",
+    "city": "Dzierzgoń"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W ZESPOLE SZKÓŁ PONADPODSTAWOWYCH IM. WŁODZIMIERZA MYKIETYNA W SKÓRCZU",
+    "city": "Skórcz"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I STOPNIA W ZESPOLE SZKÓŁ ZAWODOWYCH IM. STANISŁAWA STASZICA W BARLEWICZKACH",
+    "city": "Barlewiczki"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA I-GO STOPNIA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA NR 1 W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA NR 1 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA NR 2 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA NR 2 W ZESPOLE SZKÓŁ TECHNICZNYCH CENTRUM KSZTAŁCENIA ZAWODOWEGO IM. MACIEJA RATAJA W RUSOCINIE",
+    "city": "Rusocin"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA W SWAROŻYWNIE",
+    "city": "Swarożyn"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA II STOPNIA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA SPECJALNA I STOPNIA NR 4 W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM NR 2 DLA NIESŁYSZĄCYCH I SŁABOSŁYSZĄCYCH IM. JANA SIESTRZYŃSKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA SPECJALNA I STOPNIA NR 6 W MŁODZIEŻOWYM OŚRODKU WYCHOWAWCZYM IM. JANUSZA KORCZAKA W KWIDZYNIE DLA UCZNIÓW NIEDOSTOSOWANYCH SPOŁECZNIE ORAZ DLA UCZNIÓW NIEDOSTOSOWANYCH SPOŁECZNIE Z UPOŚLEDZENIEM UMYSŁOWYM W STOPNIU LEKKIM",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA SPECJALNA I STOPNIA NR 7",
+    "city": "Gdynia"
+  },
+  {
+    "name": "BRANŻOWA SZKOŁA SPECJALNA I STOPNIA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "BRITISH INTERNATIONAL SCHOOL GDAŃSK - LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "BRITISH INTERNATIONAL SCHOOL GDAŃSK - SZKOLA PODSTAWOWA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA PLEJADA SZKOŁA POLICEALNA NOVUM W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA PLEJADA SZKOŁA POLICEALNA NOVUM W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 1 - TECHNIKUM NR 2 IM. MARSZAŁKA JÓZEFA PIŁSUDSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 1 BRANŻOWA SZKOŁA I STOPNIA NR 2 IM. MARSZAŁKA JÓZEFA PIŁSUDSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 1 I LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 1 SZKOŁA PODSTAWOWA DLA DOROSŁYCH W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 1- SZKOŁA POLICEALNA NR 1 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 2 BRANŻOWA SZKOŁA I STOPNIA NR 8 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 2 TECHNIKUM NR 14 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO NR 2 TECHNIKUM NR 8 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CHOJNICKA SZKOŁA REALNA - LICEUM OGÓLNOKSZTAŁCACE DLA DOROSŁYCH W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "CHRZEŚCIJAŃSKA SZKOŁA MONTESSORI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CHRZEŚCIJAŃSKA SZKOŁA MONTESSORI NR 2",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CHRZEŚCIJAŃSKA SZKOŁA MONTESSORI NR 3",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "CHRZEŚCIJAŃSKIE AUTORSKIE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "COLLEGIUM MARIANUM, LICEUM KATOLICKIE W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "CZERSKA SZKOŁA REALNA - LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W MALACHINIE",
+    "city": "Malachin"
+  },
+  {
+    "name": "CZERSKA SZKOŁA REALNA - POLICEALNE STUDIUM ZAWODOWE W MALACHINIE",
+    "city": "Malachin"
+  },
+  {
+    "name": "ELEMENTARY INTERNATIONAL SCHOOL OF GDANSK/MIĘDZYNARODOWA SZKOŁA PODSTAWOWA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "EXTERNUS- STUDIUM ZDROWIA I TERAPII",
+    "city": "Lębork"
+  },
+  {
+    "name": "FONTANNA MARZEŃ PRYWATNA SZKOŁA PODSTAWOWA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "FREGATA SZKOŁA PODSTAWOWA DLA DZIEWCZĄT",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKA SZKOŁA PODSTAWOWA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKA SZKOŁA PODSTAWOWA \"LINGWISTA\" IM. ZJEDNOCZONEJ EUROPY",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKA SZKOŁA PODSTAWOWA LINGWISTA IM. HYMNU NARODOWEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKA SZKOŁA SZERMIERKI - SZKOŁA PODSTAWOWA NR 70 Z ODDZIAŁAMI SPORTOWYMI W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKIE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKIE SZKOŁY AUTONOMICZNE GDAŃSKA AUTONOMICZNA SZKOŁA PODSTAWOWA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKIE SZKOŁY AUTONOMICZNE GDAŃSKIE LICEUM AUTONOMICZNE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDAŃSKIE SZKOŁY MEDYCZNE SZKOŁA POLICEALNA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "GDYNIA INTERNATIONAL SCHOOL SZKOŁA PODSTAWOWA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "GDYŃSKA SZKOŁA SPOŁECZNA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "GDYŃSKIE LICEUM AUTORSKIE SPOŁECZNEGO TOWARZYSTWA OŚWIATOWEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "HIGH INTERNATIONAL SCHOOL OF GDANSK/MIĘDZYNARODOWE LICEUM OGÓLNOKSZTAŁCĄCE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "I AKADEMICKIE LICEUM OGÓLNOKSZTAŁCĄCE IM. ZASŁUŻONYCH LUDZI MORZA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Bytów"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE CN-B IM. POLSKICH SPADOCHRONIARZY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM JÓZEFA WYBICKIEGO",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. BOLESŁAWA KRZYWOUSTEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. DR. WŁADYSŁAWA GĘBIKA D. POLSKIE GIMNAZJUM W KWIDZYNIE ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 1 W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. HENRYKA SIENKIEWICZA",
+    "city": "Malbork"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. KRÓLA JANA III SOBIESKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. KSIĄŻĄT POMORSKICH W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. MARII SKŁODOWSKIEJ-CURIE W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. MARII SKŁODOWSKIEJ-CURIE W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE IM. MIKOŁAJA KOPERNIKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. STEFANA ŻEROMSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "I LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO IM. MARII SKŁODOWSKIEJ-CURIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "I PRYWATNE LICEUM OGÓLNOKSZTAŁCĄCE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "I SPOŁECZNA SZKOŁA PODSTAWOWA SPOŁECZNEGO TOWARZYSTWA OŚWIATOWEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "I SPOŁECZNA SZKOŁA PODSTAWOWA STO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "I SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE IM. ZJEDNOCZONEJ EUROPY STO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Malbork"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. ADAMA MICKIEWICZA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. BOLESŁAWA CHROBREGO W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. DR. WŁADYSŁAWA PNIEWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. DRA ALEKSANDRA MAJKOWSKIEGO",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. GEN. WŁADYSŁAWA ANDERSA W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. J. K. KORZENIOWSKIEGO",
+    "city": "Rumia"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. JANA III SOBIESKIEGO W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM. STANISŁAWA WYSPIAŃSKIEGO W KWIDZYNIE ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 2 W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE IM.ZIEMI KOCIEWSKIEJ W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE MISTRZOSTWA SPORTOWEGO W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE W PUCKU W POWIATOWYM CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "II LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. ADAMA MICKIEWICZA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "II SPOŁECZNA SZKOŁA PODSTAWOWA SPOŁECZNEGO TOWARZYSTWA OŚWIATOWEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "II SPOŁECZNA SZKOŁA PODSTAWOWA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "III LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "III LICEUM OGÓLNOKSZTAŁCĄCE IM. AGNIESZKI OSIECKIEJ W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "III LICEUM OGÓLNOKSZTAŁCĄCE W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "III LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZ. DWUJĘZYCZNYMI IM. MARYNARKI WOJENNEJ RP",
+    "city": "Gdynia"
+  },
+  {
+    "name": "III LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. BOHATERÓW WESTERPLATTE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "III SPOŁECZNA SZKOŁA PODSTAWOWA SPOŁECZNEGO TOWARZYSTWA OŚWIATOWEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "INTEGRACYJNA PRYWATNA SZKOŁA PODSTAWOWA MONTESSORI IM. TERESY BAUMAN",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE CN-B IM. POLSKICH SPADOCHRONIARZY W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE IM. KRZYSZTOFA KAMILA BACZYŃSKIEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE W MALBORKU ZESPÓŁ SZKÓŁ TECHNICZNYCH W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "IV LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO IM. MARYNARZY WOJSK OCHRONY POGRANICZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "IX LICEUM OGÓLNOKSZTAŁCĄCE IM. MARSZAŁKA JÓZEFA PIŁSUDSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "KASZUBSKIE LICEUM OGÓLNOKSZTAŁCĄCE W BRUSACH",
+    "city": "Brusy"
+  },
+  {
+    "name": "KATOLICKA NIEPUBLICZNA SZKOŁA PODSTAWOWA IM. ŚW. JANA PAWŁA II",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA IM ŚW. RODZINY W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA IM. PIOTRA DUNINA W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA IM. ŚW. JANA PAWŁA II",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA IM. ŚW. JANA PAWŁA II W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA IM. ŚW. KAZIMIERZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA ŚWIĘTEJ RODZINY Z NAZARETU - ZIARNO",
+    "city": "Słupsk"
+  },
+  {
+    "name": "KATOLICKA SZKOŁA PODSTAWOWA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "KATOLICKIE LICEUM OGÓLNOKSZTAŁCĄCE HUMANITAS IM. ŚW. JANA PAWŁA II",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "KATOLICKIE LICEUM OGÓLNOKSZTAŁCĄCE IM. ROMUALDA TRAUGUTTA W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "KATOLICKIE LICEUM OGÓLNOKSZTAŁCĄCE IM. ŚW. JANA PAWŁA II W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "KWIDZYŃSKA SZKOŁA REALNA - LICEUM OGÓLNOKSZTAŁCĄCE NR 3 IM. HM. J. MACHUTTY W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "LICEUM AKADEMICKIE IM. MACIEJA PŁAŻYŃSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "LICEUM AKADEMII DOBREJ EDUKACJI IM. MACIEJA PŁAŻYŃSKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM MISTRZOSTWA SPORTOWEGO W GNIEWINIE",
+    "city": "Gniewino"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Hel"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Tczew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE \"COLLEGIUM GEDANENSE\"",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE CKU CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE COLUMBUS",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Czarne"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Gdynia"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Sztum"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Brusy"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Lębork"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Malbork"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Tczew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCACE DLA DOROSŁYCH",
+    "city": "Tczew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"PASCAL\" W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"PASCAL\" W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"ŻAK\"",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"ŻAK\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"ŻAK\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"ŻAK\" W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH EDU - SCHOLARIS W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH IM. MAURYCEGO MOCHNACKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "LICEUM OGOLNOKSZTAŁCĄCE DLA DOROSŁYCH OMEGA W GDANSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W CZARNEJ WODZIE",
+    "city": "Czarna Woda"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W PUCKU W POWIATOWYM CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. FILOMATÓW CHOJNICKICH W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. KS. J. ST. PASIERBA W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. MAURYCEGO MOCHNACKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. ŚW. O. PIO",
+    "city": "Tczew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. WACŁAWA SIERPIŃSKIEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. WINCENTEGO POLA W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE IM. ZIEMI ŻUŁAWSKIEJ",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE MISTRZOSTWA SPORTOWEGO IM. DR JERZEGO KRZYSZTOFOWICZA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE MISTRZOSTWA SPORTOWEGO W STĘŻYCY",
+    "city": "Stężyca"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE MUNDUROWE SPARTAKUS IM. MIECZYSŁAWA JAŁOWIECKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE MUNDUROWE SPARTAKUS W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE SG BAŁTYCKA",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE SPECJALNE NR III",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE SPORTOWE",
+    "city": "Człuchów"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE STRAŻY GRANICZNEJ I STRAŻY POŻARNEJ W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE TEB EDUKACJA DLA DOROSŁYCH",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE TEB EDUKACJA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE TEB EDUKACJA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE TEB EDUKACJA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE THINKING ZONE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W CZARNEM",
+    "city": "Czarne"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W CZŁUCHOWIE",
+    "city": "Człuchów"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W KŁANINIE POWIATOWYM ZESPOLE SZKÓŁ IM. STANISŁAWA STASZICA W KŁANINIE",
+    "city": "Kłanino"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W REDZIKOWIE",
+    "city": "Redzikowo"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO IM. \"WYNALAZCÓW POLSKICH\"",
+    "city": "Miastko"
+  },
+  {
+    "name": "LICEUM PRAKTYCZNE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM SŁUŻB MUNDUROWYCH IM. MACIEJA PŁAŻYŃSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "LICEUM SZTUK PLASTYCZNYCH IM. JACKA MYDLARSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM SZTUK PLASTYCZNYCH IM. STANISŁAWA IGNACEGO WITKIEWICZA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "LICEUM SZTUK PLASTYCZNYCH TEB EDUKACJA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "LICEUM SZTUK PLASTYCZNYCH W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "MEDYCZNA SZKOŁA POLICEALNA IM. KS. JANA KACZKOWSKIEGO W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "MEDYCZNE STUDIUM ZAWODOWE IM. STANISŁAWY STERCZEWSKIEJ W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "MŁODZIEŻOWE LICEUM OGÓLNOKSZTAŁCĄCE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "MŁODZIEŻOWY OŚRODEK SOCJOTERAPII W KARTUZACH, SZKOŁA PODSTAWOWA NR 6 SPECJALNA W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "MŁODZIEŻOWY OŚRODEK SOCJOTERAPII W USTCE - SZKOŁA PODSTAWOWA NR 4 W USTCE",
+    "city": "Ustka"
+  },
+  {
+    "name": "MORSKA SZKOŁA PODSTAWOWA GDAŃSK-POŁUDNIE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "MORSKA SZKOŁA PODSTAWOWA IM. ALEKSANDRA DOBY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA BRANŻOWA SZKOŁA I STOPNIA \"REMEDIUM\" W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "NIEPUBLICZNA BRANŻOWA SZKOŁA I STOPNIA \"RZEMIEŚLNIK\"",
+    "city": "Lębork"
+  },
+  {
+    "name": "NIEPUBLICZNA INTEGRACYJNA SZKOŁA PODSTAWOWA ESYFLORESY",
+    "city": "Tczew"
+  },
+  {
+    "name": "NIEPUBLICZNA OGÓLNOKSZTAŁCĄCA SZKOŁA MUZYCZNA I STOPNIA LAS ACADEMY W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNA PODSTAWOWA SZKOŁA SPECJALNA IM. PAWŁA ADAMOWICZA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA POLICEALNA SZKOŁA PLASTYCZNA WIZAŻU I CHARAKTERYZACJI MAKE UP MASTERS W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "NIEPUBLICZNA POLSKO-BRYTYJSKA SZKOŁA PODSTAWOWA NR 1",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SPECJALNA SZKOŁA PODSTAWOWA \"PRZYSTAŃ PIANO\"",
+    "city": "Człuchów"
+  },
+  {
+    "name": "NIEPUBLICZNA SPECJALNA SZKOŁA PODSTAWOWA \"SZCZĘŚLIWA PRZYSTAŃ\"",
+    "city": "Lębork"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA BRANŻOWA I STOPNIA \"ZŁOTY FACH\"",
+    "city": "Słupsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA \"AZYMUT\" IM. JACKA PAŁKIEWICZA",
+    "city": "Mosty"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA \"NASZA SZKOŁA\"",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA \"SOKRATES\"",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA \"SOPOCKA SZKOŁA MONTESSORI\" W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA \"SUKCES\" W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA „LAS ACADEMY”",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA ADVENTURE W USTCE",
+    "city": "Ustka"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA AIB",
+    "city": "Banino"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA AKADEMIA MONTESSORI W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA DOBRE MIEJSCE",
+    "city": "Gorzędziej"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA EINSTEIN INTERNATIONAL SCHOOL",
+    "city": "Gdynia"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA IM. ANDRZEJA GRUBBY W PRZYTOCKU",
+    "city": "Przytocko"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA IM. DR WANDY BŁEŃSKIEJ W KOWALACH",
+    "city": "Kowale"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA IM. ŚW. O. PIO W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA INTEGRACYJNA \"LAWENDOWY KRÓL\"",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MENTAL ARTS",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MISTRZOSTWA SPORTOWEGO CETNIEWO WE WŁADYSŁAWOWIE",
+    "city": "Władysławowo"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MISTRZOSTWA SPORTOWEGO GDAŃSKIEGO KLUBU SPORTOWEGO GEDANIA 1922",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MONTESSORI",
+    "city": "Tczew"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MONTESSORI LATAWIEC",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA MONTESSORI LATAWIEC",
+    "city": "Gdynia"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA NOWA SZKOŁA SOPOT",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA NR 7 IM. MARII SKŁODOWSKIEJ-CURIE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA OCTOSCHOOL",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA SPECJALNA ,,JA SAM''",
+    "city": "Gdynia"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA SPECJALNA \"NIEBIESKI BALONIK\" W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA THINKING ZONE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA W BUKOWINIE",
+    "city": "Bukowina"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA W POPOWIE",
+    "city": "Popowo"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI \"PIANO\"",
+    "city": "Człuchów"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA Z ODDZIAŁAMI PRZEDSZKOLNYMI I INTEGRACYJNYMI",
+    "city": "Kamnica"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PODSTAWOWA ŻYRAFIA OSADA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA POLICEALNA TEB EDUKACJA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA POLICEALNA TEB EDUKACJA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA POLICEALNA TEB EDUKACJA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA POLICEALNA TEB EDUKACJA W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PRZYSPOSABIAJĄCA DO PRACY \"SZCZĘŚLIWA PRZYSTAŃ\"",
+    "city": "Lębork"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PRZYSPOSABIAJĄCA DO PRACY IM. PAWŁA ADAMOWICZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA PRZYSPOSABIAJĄCA DO PRACY W SKARSZEWACH",
+    "city": "Skarszewy"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA RZEMIOSŁA IM. ŚW. JÓZEFA W WEJHEROWIE-BRANŻOWA SZKOŁA II STOPNIA",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA RZEMIOSŁA W WEJHEROWIE IM. ŚW. JÓZEFA W WEJHEROWIE - BRANŻOWA SZKOŁA I STOPNIA",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "NIEPUBLICZNA SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY IM. PROF. JERZEGO LIMONA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE DYPLOMUS W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE IM. DR WANDY BŁEŃSKIEJ",
+    "city": "Kowale"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE LAS ACADEMY W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE MENTAL ARTS",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE SZKOŁA MISTRZOSTWA SPORTOWEGO POLSKIEGO ZWIĄZKU KOSZYKÓWKI WE WŁADYSŁAWOWIE",
+    "city": "Władysławowo"
+  },
+  {
+    "name": "NIEPUBLICZNE LICEUM OGÓLNOKSZTAŁCĄCE W KWIDZYNIE - SZKOŁA MISTRZOSTWA SPORTOWEGO ZWIĄZKU PIŁKI RĘCZNEJ W POLSCE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "NOWY ŚWIAT NIEPUBLICZNA SZKOŁA PODSTAWOWA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "OGÓLNOKSZTAŁCĄCA SZKOŁA BALETOWA IM. JANINY JARZYNÓWNY-SOBCZAK W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "OGÓLNOKSZTAŁCĄCA SZKOŁA MUZYCZNA I ST. W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "OGÓLNOKSZTAŁCĄCA SZKOŁA MUZYCZNA II ST. W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "OGÓLNOKSZTAŁCĄCE LICEUM JEZUITÓW Z ODDZIAŁAMI DWUJĘZYCZNYMI IM ŚW. STANISŁAWA KOSTKI W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "OGÓLNOKSZTAŁCĄCE LICEUM PROGRAMÓW INDYWIDUALNYCH IM. ADMIRAŁA JÓZEFA UNRUGA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "OŚRODEK EDUKACJI KASZUBSKIEJ - SZKOŁA PODSTAWOWA NA GŁODNICY",
+    "city": "Strzepcz"
+  },
+  {
+    "name": "OŚRODEK EDUKACJI KASZUBSKIEJ - SZKOŁA PODSTAWOWA W STAREJ HUCIE",
+    "city": "Stara Huta"
+  },
+  {
+    "name": "PAŃSTWOWE LICEUM SZTUK PLASTYCZNYCH IM. MAGDALENY ABAKANOWICZ W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PAŃSTWOWE POLICEALNE STUDIUM WOKALNO-AKTORSKIE IM. DANUTY BADUSZKOWEJ W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PAŃSTWOWE SZKOŁY BUDOWNICTWA W GDAŃSKU - BRANŻOWA SZKOŁA I STOPNIA NR 5",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PAŃSTWOWE SZKOŁY BUDOWNICTWA W GDAŃSKU - BRANŻOWA SZKOŁA II STOPNIA NR 5 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PAŃSTWOWE SZKOŁY BUDOWNICTWA W GDAŃSKU - TECHNIKUM NR 5",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PARAFIALNA SZKOŁA PODSTAWOWA IM. ŚW. FRANCISZKA Z ASYŻU",
+    "city": "Żukowo"
+  },
+  {
+    "name": "PIERWSZA SZKOŁA SPOŁECZNA PODSTAWOWA IM.DZIECI ZJEDNOCZONEJ EUROPY",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PIERWSZE SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE SZKOŁA MISTRZOSTWA SPORTOWEGO W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PODSTAWOWA EKOLOGICZNA SZKOŁA SPOŁECZNA",
+    "city": "Rumia"
+  },
+  {
+    "name": "PODSTAWOWA SZKOŁA GEDANENSIS",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PODSTAWOWA SZKOŁA SPOŁECZNA \"NIEDŹWIEDNIK\"",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA MEDYCZNA \"PASCAL\" W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA MEDYCZNA \"PASCAL\" W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA MEDYCZNA REMEDIUM NR 1",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA MEDYCZNA REMEDIUM NR 2",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA ZAWODOWA \"PASCAL\" W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA ZAWODOWA \"PASCAL\" W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA ZAWODOWA DLA DOROSŁYCH",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "POLICEALNA SZKOŁA ZAWODOWA METAMORFOZA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "POLICEALNE STUDIUM ZAWODOWE",
+    "city": "Tczew"
+  },
+  {
+    "name": "POLICYJNE LICEUM OGÓLNOKSZTAŁCĄCE NR 1 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POLICYJNE LICEUM OGÓLNOKSZTAŁCĄCE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POMORSKA AKADEMIA KSZTAŁCENIA MEDYCZNEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POMORSKA MEDYCZNA SZKOŁA POLICEALNA IM. ALINY PIENKOWSKIEJ W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "POMORSKA MEDYCZNA SZKOŁA POLICEALNA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "POMORSKA MEDYCZNA SZKOŁA POLICEALNA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POMORSKA MEDYCZNA SZKOŁA POLICEALNA W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "POMORSKA MEDYCZNA SZKOŁA POLICEALNA W SZTUMIE",
+    "city": "Sztum"
+  },
+  {
+    "name": "POMORSKIE LICEUM BIZNESU DLA DOROSŁYCH",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POMORSKIE STUDIUM BIZNESU W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "POZYTYWNA SZKOŁA PODSTAWOWA IM. ARKADIUSZA ARAMA RYBICKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PRESTIGE LICEUM OGÓLNOKSZTAŁCĄCE W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "PRESTIGE SZKOŁA POLICEALNA W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA \"HAPPY KIDS''",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA \"LIBER\"",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA \"NAJA SZKOŁA\"",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA \"TĘCZOWA KRAINA\" DLA DZIECI Z ORZECZENIEM O POTRZEBIE KSZTAŁCENIA SPECJALNEGO W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA DEJA CSB",
+    "city": "Reda"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA PRYMUS",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "PRYWATNA SZKOŁA PODSTAWOWA W REDZIE IM. TONY HALIKA",
+    "city": "Reda"
+  },
+  {
+    "name": "PRYWATNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Lębork"
+  },
+  {
+    "name": "PRYWATNE TECHNIKUM GASTRONOMICZNE E.T.MAZUREK",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PSYCHOLOGICZNE LICEUM OGÓLNOKSZTAŁCĄCE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "PUBLICZNA KATOLICKA SZKOŁA PODSTAWOWA Z ODDZIAŁAMI PRZEDSZKOLNYMI",
+    "city": "Malbork"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA \"OLIMPIJCZYK\" W GDAŃSKU Z ODDZIAŁAMI SPORTOWYMI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA HEVELIUS W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. EDMUNDA DYWELSKIEGO W BYTONI",
+    "city": "Bytonia"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W BOBOWIE",
+    "city": "Bobowo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W KLESZCZEWIE KOŚCIERSKIM",
+    "city": "Kleszczewo Kościerskie"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W DĄBRÓWCE",
+    "city": "Dąbrówka"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. KAROLA WOJTYŁY W KAMNICY",
+    "city": "Kamnica"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. KORNELA MAKUSZYŃSKIEGO W SUMINIE",
+    "city": "Sumin"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. KS. KARD. ST. WYSZYŃSKIEGO W LUBICHOWIE",
+    "city": "Lubichowo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. KSIĘDZA SENATORA FELIKSA BOLTA W BARŁOŻNIE",
+    "city": "Barłożno"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA IM. O FLAWIANA SŁOMIŃSKIEGO W BORZECHOWIE",
+    "city": "Borzechowo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 1 IM. HENRYKA SIENKIEWICZA",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 2 IM.MARII KONOPNICKIEJ",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 3 IM. WŁADYSŁAWA BRONIEWSKIEGO",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 4 Z ODDZIAŁAMI INTEGRACYJNYMI IM. JULIUSZA SŁOWACKIEGO",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 6 IM. JANA PAWŁA II",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA NR 8 IM. MIKOŁAJA KOPERNIKA",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA SIÓSTR SALEZJANEK IM. ŚWIĘTEJ RODZINY",
+    "city": "Rumia"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA STOWARZYSZENIA PRZYJACIÓŁ SZKÓŁ KATOLICKICH",
+    "city": "Gogolewo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA STOWARZYSZENIA PRZYJACIÓŁ SZKÓŁ KATOLICKICH",
+    "city": "Tymawa"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W CZARNEJ WODZIE",
+    "city": "Czarna Woda"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W GÓRZE",
+    "city": "Góra"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W JABŁOWIE",
+    "city": "Jabłowo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W KALISKACH",
+    "city": "Kaliska"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W KALISKACH- SZKOŁA FILIALNA W PIECACH IM. ŚWIĘTEGO JANA PAWŁA II",
+    "city": "Piece"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W KOKOSZKOWACH",
+    "city": "Kokoszkowy"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W MIROTKACH",
+    "city": "Mirotki"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W OSIEKU",
+    "city": "Osiek"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W PĄCZEWIE IMIENIA KS. JANA TWARDOWSKIEGO",
+    "city": "Pączewo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W POMIECZYŃSKIEJ HUCIE",
+    "city": "Pomieczyńska Huta"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W ROKOCINIE",
+    "city": "Rokocin"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W RYWAŁDZIE",
+    "city": "Rywałd"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W STAREJ KISZEWIE",
+    "city": "Stara Kiszewa"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W STARYCH POLASZKACH",
+    "city": "Stare Polaszki"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W TRZCINSKU",
+    "city": "Trzcińsk"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W WIELKIM BUKOWCU",
+    "city": "Wielki Bukowiec"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA W ZELGOSZCZY IM. ANDRZEJA GRUBBY",
+    "city": "Zelgoszcz"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI IM. WINCENTEGO KWAŚNIEWSKIEGO W ZBLEWIE",
+    "city": "Zblewo"
+  },
+  {
+    "name": "PUBLICZNA SZKOŁA POLICEALNA \"COSINUS PLUS\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "PUBLICZNE KATOLICKIE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Malbork"
+  },
+  {
+    "name": "PUBLICZNE ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"COSINUS PLUS\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SALEZJAŃSKA SZKOŁA PODSTAWOWA IM. ŚW DOMINIKA SAVIO W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "SALEZJAŃSKIE LICEUM OGÓLNOKSZTAŁCĄCE IM. ŚW. JANA BOSKO W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "SAMORZĄDOWA SZKOŁA PODSTAWOWA IM. GABRIELA NARUTOWICZA",
+    "city": "Gniewino"
+  },
+  {
+    "name": "SAMORZĄDOWA SZKOŁA PODSTAWOWA IM. KS. STANISŁAWA GALASA W KOSTKOWIE",
+    "city": "Kostkowo"
+  },
+  {
+    "name": "SLOT ACADEMY SZKOŁA PODSTAWOWA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SOPOCKA AKADEMIA TENISOWA PRYWATNE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SOPOCKA AUTONOMICZNA SZKOŁA PODSTAWOWA",
+    "city": "Sopot"
+  },
+  {
+    "name": "SOPOCKIE AUTONOMICZNE LICEUM",
+    "city": "Sopot"
+  },
+  {
+    "name": "SPECJALNA BRANŻOWA SZKOŁA I STOPNIA NR 7 W KWIDZYNIE ZESPÓŁ SZKÓŁ NR 2 IM. MARII SKŁODOWSKIEJ - CURIE W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SPECJALNA SZKOŁA PODSTAWOWA NR 11",
+    "city": "Malbork"
+  },
+  {
+    "name": "SPECJALNA SZKOŁA PODSTAWOWA NR 2 W PUCKU W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO - WYCHOWAWCZY IM. BISKUPA Z MIRY ŚWIĘTEGO MIKOŁAJA W ŻUKOWIE SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO - WYCHOWAWCZY IM. BISKUPA Z MIRY ŚWIĘTEGO MIKOŁAJA W ŻUKOWIE, SZKOŁA PODSTAWOWA NR 2 SPECJALNA W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO - WYCHOWAWCZY IM. MARYNARZA POLSKIEGO W DAMNICY - SZKOŁA PODSTAWOWA SPECJALNA NR 2",
+    "city": "Damnica"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO - WYCHOWAWCZY IM. MARYNARZA POLSKIEGO W DAMNICY - SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Damnica"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO-WYCHOWAWCZY NR 2 W GDAŃSKU SZKOŁA PODSTAWOWA SPECJALNA NR 78",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SPECJALNY OŚRODEK SZKOLNO-WYCHOWAWCZY NR 2 W GDAŃSKU SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 1",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SPOŁECZNA JĘZYKOWA SZKOŁA PODSTAWOWA LTO",
+    "city": "Lębork"
+  },
+  {
+    "name": "SPOŁECZNA SZKOŁA PODSTAWOWA",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SPOŁECZNA SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W NIEPOGLĘDZIU",
+    "city": "Niepoględzie"
+  },
+  {
+    "name": "SPOŁECZNA SZKOŁA PODSTAWOWA NR 1",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SPOŁECZNA SZKOŁA PODSTAWOWA SPOŁECZNEGO TOWARZYSTWA OŚWIATOWEGO IM. JANA NOWAKA JEZIORAŃSKIEGO",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SPOŁECZNA SZKOŁA PODSTAWOWA Z PRZEDSZKOLEM DOBRZEWINO-KARCZEMKI W KARCZEMKACH",
+    "city": "Karczemki"
+  },
+  {
+    "name": "SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Lębork"
+  },
+  {
+    "name": "SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE IM. POLSKICH NOBLISTÓW W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SPOŁECZNE LICEUM OGÓLNOKSZTAŁCĄCE W CZŁUCHOWIE",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SPOŁECZNE TECHNIKUM W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SPORTOWA SZKOŁA PODSTAWOWA NR 2 Z ODDZIAŁAMI INTEGRACYJNYMI IM.BOHATERÓW WESTERPLATTE W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SPORTOWE LICEUM OGÓLNOKSZTAŁCĄCE W KWIDZYNIE ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 2 W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "STACJONARNA POLICEALNA SZKOŁA MEDYCZNA \"PASCAL\" W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "STACJONARNA POLICEALNA SZKOŁA MEDYCZNA \"PASCAL\" W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "STAROGARDZKIE SZKOŁY AUTONOMICZNE-STAROGARDZKIE AUTONOMICZNE LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "STOWARZYSZENIE NA RZECZ SZKOŁY W ODRACH",
+    "city": "Odry"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA I STOPNIA",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA I STOPNIA NR 2",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA I STOPNIA NR 3 IM.ALEKSANDRA MAJKOWSKIEGO",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA I STOPNIA SPECJALNA",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA BRANŻOWA W KOŚCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA FILIALNA W DĄBRÓWCE",
+    "city": "Dąbrówka"
+  },
+  {
+    "name": "SZKOŁA FILIALNA W NIEDARZYNIE",
+    "city": "Niedarzyno"
+  },
+  {
+    "name": "SZKOŁA MISTRZOSTWA SPORTOWEGO LICEUM OGÓLNOKSZTAŁCĄCE GDAŃSKIEGO KLUBU SPORTOWEGO GEDANIA 1922",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA MISTRZOSTWA SPORTOWEGO LICEUM OGÓLNOKSZTAŁCĄCE MARCINA GORTATA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA MORSKA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA",
+    "city": "Borek"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA",
+    "city": "Hel"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA",
+    "city": "Węsiory"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA",
+    "city": "Podjazy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA \"TOKARNIA\"",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA AKADEMIA DOBREJ EDUKACJI W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA AKADEMII DOBREJ EDUKACJI IM. MACIEJA PŁAŻYŃSKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA BE MONTESSORI SCHOOL GDAŃSK",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA CET",
+    "city": "Kowale"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA DLA DOROSŁYCH",
+    "city": "Sztum"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA DLA DOROSŁYCH W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA DLA DZIECI NIEWIDOMYCH I SŁABOWIDZĄCYCH IM. ŚW. OJCA PIO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA FACTUM",
+    "city": "Puck"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM KMDR XAWEREGO CZERNICKIEGO W POGÓRZU",
+    "city": "Pogórze"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM OBROŃCÓW KĘPY OKSYWSKIEJ W DĘBOGÓRZU",
+    "city": "Dębogórze"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM PIOTRA DUNINA W MOSTACH",
+    "city": "Mosty"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. 18 PUŁKU UŁANÓW POMORSKICH W NOWEJ CERKWI",
+    "city": "Nowa Cerkiew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ADAMA LORETA W ŁĘCZYCACH",
+    "city": "Łęczyce"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ADAMA MICKIEWICZA W CHWASZCZYNIE",
+    "city": "Chwaszczyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ADAMA MICKIEWICZA W GOGOLEWIE",
+    "city": "Gogolewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ADAMA MICKIEWICZA W ŁEBIE",
+    "city": "Łeba"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ADAMA MICKIEWICZA W ŁUPAWIE",
+    "city": "Łupawa"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ALEKSANDRA MAJKOWSKIEGO W KLUKOWEJ HUCIE",
+    "city": "Klukowa Huta"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ALOJZEGO NAGLA W NOWYM DWORZE WEJHEROWSKIM",
+    "city": "Nowy Dwór Wejherowski"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ALOJZEGO STENZLA W STRZELNIE",
+    "city": "Strzelno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ANDRZEJA GRUBBY W OTŁOWCU",
+    "city": "Otłowiec"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ANTONIEGO ABRAHAMA W POŁCZYNIE",
+    "city": "Połczyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ANTONIEGO ABRAHAMA W PRZODKOWIE",
+    "city": "Przodkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ANTONIEGO ABRAHAMA W SULĘCZYNIE",
+    "city": "Sulęczyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ARMII KRAJOWEJ W NEBROWIE WIELKIM",
+    "city": "Nebrowo Wielkie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. AUGUSTYNA NECLA W MIEROSZYNIE",
+    "city": "Mieroszyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BŁ. JERZEGO POPIEŁUSZKI W PIASECZNIE",
+    "city": "Piaseczno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BŁ.S.MARTY WIECKIEJ",
+    "city": "Szczodrowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BŁOGOSŁAWIONEGO KSIĘDZA JÓZEFA JANKOWSKIEGO W CZYCZKOWACH",
+    "city": "Czyczkowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BOHATERÓW STUTTHOFU W ROZŁAZINIE",
+    "city": "Rozłazino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BOHATERÓW WRZEŚNIA 1939 ROKU W LISEWIE MALBORSKIM",
+    "city": "Lisewo Malborskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BOHATERÓW ZIEMI GDAŃSKIEJ",
+    "city": "Pszczółki"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. BRUNONA GREGORKIEWICZA W BIELKÓWKU",
+    "city": "Bielkówko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. CZESŁAWA LANGA W KOŁCZYGŁOWACH",
+    "city": "Kołczygłowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. DANUTY SIEDZIKÓWNY \"INKI\" W WIŚLINIE",
+    "city": "Wiślina"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. DANUTY SIEDZIKÓWNY PS. INKA",
+    "city": "Czarne"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. DRA ALEKSANDRA MAJKOWSKIEGO W NOWEJ KARCZMIE",
+    "city": "Nowa Karczma"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. EDYTY CZOSKÓWNY W SZYMANKOWIE",
+    "city": "Szymankowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. EUGENIUSZA KWIATKOWSKIEGO W STĘŻYCY",
+    "city": "Stężyca"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. FELIKSA ŁOYKI",
+    "city": "Szropy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. FRANCISZKA JUJKI W ZESPOLE SZKOLNO-PRZEDSZKOLNYM W STARYM TARGU",
+    "city": "Stary Targ"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. FRANCISZKA NIERZWICKIEGO",
+    "city": "Więckowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. AUGUSTA EMILA FIELDORFA PS. \"NIL\" W RAKOWCU",
+    "city": "Rakowiec"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. JÓZEFA WYBICKIEGO",
+    "city": "Parchowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. JÓZEFA WYBICKIEGO W GOSTKOWIE",
+    "city": "Gostkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. JÓZEFA WYBICKIEGO W GRABOWIE KOŚCIERSKIM",
+    "city": "Grabowo Kościerskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. JÓZEFA WYBICKIEGO W STANISZEWIE",
+    "city": "Staniszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. ST. SOSABOWSKIEGO W KALISZU",
+    "city": "Kalisz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GEN. STEFANA ROWECKIEGO \"GROTA\" WE WRZEŚCIU",
+    "city": "Wrzeście"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. GENERAŁA JÓZEFA BEMA W STARYM POLU",
+    "city": "Stare Pole"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. HENRYKA SIENKIEWICZA W DZIERŻĄŻNIE",
+    "city": "Dzierżążno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. HENRYKA SIENKIEWICZA W GŁOBINIE",
+    "city": "Głobino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. HENRYKA SIENKIEWICZA W SADLINKACH",
+    "city": "Sadlinki"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. HENRYKA SIENKIEWICZA W ŚWIERZNIE",
+    "city": "Świerzno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. HIERONIMA DERDOWSKIEGO W PIASZCZYNIE",
+    "city": "Piaszczyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. IRENY SENDLEROWEJ",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JAKUBA WEJHERA W GÓRZE",
+    "city": "Góra"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA BRZECHWY",
+    "city": "Damno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA BRZECHWY W CYGANACH",
+    "city": "Cygany"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA BRZECHWY W ORLU",
+    "city": "Orle"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA BRZECHWY W WICKU",
+    "city": "Wicko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA III SOBIESKIEGO W ŻELISTRZEWIE",
+    "city": "Żelistrzewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA KAZIMIERZA KUCZYŃSKIEGO",
+    "city": "Karwia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA KOCHANOWSKIEGO W KOŃCZEWIE",
+    "city": "Kończewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II NR 1 W PELPLINIE W ZESPOLE KSZTAŁCENIA I WYCHOWANIA NR 1 W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W BORKOWIE",
+    "city": "Borkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W CZECZEWIE",
+    "city": "Czeczewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W GOŁUBIU",
+    "city": "Gołubie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W GOWIDLINIE",
+    "city": "Gowidlino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W KĘBŁOWIE",
+    "city": "Kębłowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W ŁEBNIE",
+    "city": "Łebno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W LEŹNIE",
+    "city": "Leźno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W MŚCISZEWICACH",
+    "city": "Mściszewice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W PROKOWIE",
+    "city": "Prokowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA PAWŁA II W PRZYJAŹNI",
+    "city": "Przyjaźń"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA TREPCZYKA W MIRACHOWIE",
+    "city": "Mirachowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA TREPCZYKA W MISZEWIE",
+    "city": "Miszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANA TWARDOWSKIEGO W BARŁOMINIE",
+    "city": "Barłomino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANINY I CYRYLA ZALEWSKICH W BIESOWICACH",
+    "city": "Biesowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA",
+    "city": "Krynica Morska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W LICZU",
+    "city": "Licze"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W MORZESZCZYNIE",
+    "city": "Morzeszczyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W NAKLI",
+    "city": "Nakla"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W PRZECHLEWIE",
+    "city": "Przechlewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W WYSZECINIE",
+    "city": "Wyszecino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KORCZAKA W ŻARNOWCU",
+    "city": "Żarnowiec"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JANUSZA KUSOCIŃSKIEGO W BOŻYMPOLU WIELKIM",
+    "city": "Bożepole Wielkie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JÓZEFA DAMBKA W LEŚNIEWIE",
+    "city": "Leśniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JÓZEFA WIERZBICKIEGO W POŁCHOWIE",
+    "city": "Połchowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JÓZEFA WYBICKIEGO",
+    "city": "Jastarnia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. JULIUSZA KRAZIEWICZA W SZYMBARKU",
+    "city": "Szymbark"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KARDYNAŁA STEFANA WYSZYŃSKIEGO W LEŚNIE",
+    "city": "Leśno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KARDYNAŁA STEFANA WYSZYŃSKIEGO W LEŚNIE - SZKOŁA FILIALNA W PRZYMUSZEWIE",
+    "city": "Przymuszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KARDYNAŁA STEFANA WYSZYŃSKIEGO W SOMONINIE",
+    "city": "Somonino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAROLA WOJTYŁY W ROTMANCE",
+    "city": "Rotmanka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAWALERÓW ORDERU UŚMIECHU W BARCINIE",
+    "city": "Barcino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAWALERÓW ORDERU UŚMIECHU W BORCZU",
+    "city": "Borcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAWALERÓW ORDERU UŚMIECHU W PRĘGOWIE",
+    "city": "Pręgowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAWALERÓW ORDERU UŚMIECHU W RYCHNOWACH",
+    "city": "Rychnowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KAWALERÓW ORDERU UŚMIECHU W WAŁDOWIE",
+    "city": "Wałdowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KORNELA MAKUSZYŃSKIEGO W KOBYLNICY",
+    "city": "Kobylnica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KORNELA MAKUSZYŃSKIEGO W POLSKIM GRONOWIE",
+    "city": "Polskie Gronowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KPT. Ż. W. KAROLA OLGIERDA BORCHARDTA W STRZEBIELINIE OSIEDLU",
+    "city": "Strzebielino-Osiedle"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. ANASTAZEGO SADOWSKIEGO W LISICH JAMACH",
+    "city": "Lisie Jamy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. ANTONIEGO PEPLIŃSKIEGO W KAMIENICY SZLACHECKIEJ",
+    "city": "Kamienica Szlachecka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. ANTONIEGO PEPLIŃSKIEGO W STUDZIENICACH",
+    "city": "Studzienice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. BERNARDA SYCHTY W PUZDROWIE",
+    "city": "Puzdrowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. BRONISŁAWA SZYMICHOWSKIEGO W POMIECZYNIE",
+    "city": "Pomieczyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. EDMUNDA ROSZCZYNIALSKIEGO W CEWICACH",
+    "city": "Cewice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. JANA PAWŁA AELTERMANNA W MIERZESZYNIE",
+    "city": "Mierzeszyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. JANA TKACZYKA W BRODNICY GÓRNEJ",
+    "city": "Brodnica Górna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. JANA TWARDOWSKIEGO W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. JÓZEFA SOBISZA",
+    "city": "Wysin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. PAWŁA SZYNWELSKIEGO W SMĘTOWIE GRANICZNYM",
+    "city": "Smętowo Graniczne"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. PRAŁATA ZDZISŁAWA JASTRZĘBIEC PESZKOWSKIEGO W SŁOSINKU",
+    "city": "Słosinko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS. WŁADYSŁAWA DEMSKIEGO",
+    "city": "Straszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KS.KAN.BAZYLEGO OLĘCKIEGO W NIEPOCZOŁOWICACH",
+    "city": "Niepoczołowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KSIĄŻĄT POMORSKICH W SŁONOWICACH",
+    "city": "Słonowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KSIĘDZA BERNARDA GOŃCZA W ZESPOLE SZKÓŁ W BOROWYM MŁYNIE",
+    "city": "Borowy Młyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KSIĘDZA BISKUPA KONSTANTYNA DOMINIKA W SWARZEWIE",
+    "city": "Swarzewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KSIĘDZA KANONIKA BOLESŁAWA ŚLEDZIA W KOSOBUDACH",
+    "city": "Kosobudy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KSIĘDZA PRAŁATA JÓZEFA WALĄGA W KOŹLINACH",
+    "city": "Koźliny"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. KUNEGUNDY PAWŁOWSKIEJ W TRĄBKACH WIELKICH",
+    "city": "Trąbki Wielkie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEONA BIZEWSKIEGO W GNIEŻDŻEWIE",
+    "city": "Gnieżdżewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEONA KĄKOLA W GRZYBNIE",
+    "city": "Grzybno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEONIDA TELIGI W LINI",
+    "city": "Linia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEOPOLDA STAFFA WE WŁYNKÓWKU",
+    "city": "Włynkówko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEŚNIKÓW POLSKICH W LEŚNICACH",
+    "city": "Leśnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LEŚNIKÓW POLSKICH W MOTARZYNIE",
+    "city": "Motarzyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. LOTNIKÓW MORSKICH W SIEMIROWICACH",
+    "city": "Siemirowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MAKSYMILIANA WILANDTA W DARZLUBIU",
+    "city": "Darzlubie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARIANA REJEWSKIEGO W STOŁCZNIE",
+    "city": "Stołczno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KONOPNICKIEJ W MIŁORADZU",
+    "city": "Miłoradz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KONOPNICKIEJ W NOWEJ CERKWI",
+    "city": "Nowa Cerkiew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KONOPNICKIEJ W OSTROWITEM",
+    "city": "Ostrowite"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KONOPNICKIEJ W POTĘGOWIE",
+    "city": "Potęgowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KONOPNICKIEJ W SUCHORZU",
+    "city": "Suchorze"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KOTLARZ W TYCHNOWACH",
+    "city": "Tychnowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARII KOWNACKIEJW KŁODAWIE",
+    "city": "Kłodawa"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARIUSZA ZARUSKIEGO W KOLBUDACH SZKOŁA FILIALNA W BUSZKOWACH",
+    "city": "Buszkowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARIUSZA ZARUSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARSZAŁKA JÓZEFA PIŁSUDSKIEGO",
+    "city": "Konarzyny"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARSZAŁKA JÓZEFA PIŁSUDSKIEGO W NIEZABYSZEWIE Z FILIĄ W REKOWIE",
+    "city": "Niezabyszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MARYNARKI WOJENNEJ RP W OSTASZEWIE",
+    "city": "Ostaszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MIKOŁAJA KOPERNIKA",
+    "city": "Ryjewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MJR HENRYKA DOBRZAŃSKIEGO W WANDOWIE",
+    "city": "Wandowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MJR HENRYKA SUCHARSKIEGO W SZEMUDZIE",
+    "city": "Szemud"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MJRA HENRYKA SUCHARSKIEGO W CHMIELNIE",
+    "city": "Chmielno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MJRA HENRYKA SUCHARSKIEGO W JEZIERZYCACH",
+    "city": "Jezierzyce"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. MORSKIEGO ODDZIAŁU STRAŻY GRANICZNEJ W JANTARZE",
+    "city": "Jantar"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. NA BURSZTYNOWYM SZLAKU W MIKOSZEWIE",
+    "city": "Mikoszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OBROŃCÓW POLSKOŚCI NA ZIEMI UGOSKIEJ W UGOSZCZY",
+    "city": "Ugoszcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OBROŃCÓW POMORZA GDAŃSKIEGO W MIŁOBĄDZU",
+    "city": "Miłobądz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OBROŃCÓW WESTERPLATTE W GARDEI",
+    "city": "Gardeja"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OBROŃCÓW WESTERPLATTE W SUCHYM DĘBIE",
+    "city": "Suchy Dąb"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OBROŃCÓW ZIEM POLSKICH W WOCŁAWACH",
+    "city": "Wocławy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ODKRYWCÓW I PODRÓŻNIKÓW W KMIECINIE",
+    "city": "Kmiecin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ORŁA BIAŁEGO W SZCZENURZY",
+    "city": "Szczenurze"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ORŁA BIAŁEGO W WIŚLINCE",
+    "city": "Wiślinka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. OSADNIKÓW ŻUŁAWSKICH W TUJSKU",
+    "city": "Tujsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PAPIEŻA JANA PAWŁA II W CZARNEM DOLNEM",
+    "city": "Czarne Dolne"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PARTYZANTÓW GRYFA POMORSKIEGO W KIEŁPINIE",
+    "city": "Kiełpino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PARTYZANTÓW KASZUBSKICH W KOLECZKOWIE",
+    "city": "Koleczkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PAWŁA GÓRY W MRZEZINIE",
+    "city": "Mrzezino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PIOTRA SZTURMOWSKIEGO",
+    "city": "Pogódki"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PŁK. FRANCISZKA HYNKA W SZATARPACH",
+    "city": "Szatarpy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PŁK. STANISŁAWA DĄBKA",
+    "city": "Sychowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH KAWALERÓW MALTAŃSKICH W OGORZELINACH",
+    "city": "Ogorzeliny"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH NOBLISTÓW W DEBRZNIE",
+    "city": "Debrzno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH NOBLISTÓW W DRETYNIU",
+    "city": "Dretyń"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH NOBLISTÓW W SYCEWICACH",
+    "city": "Sycewice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH OLIMPIJCZYKÓW W KWAKOWIE",
+    "city": "Kwakowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH OLIMPIJCZYKÓW W MASZEWIE LĘBORSKIM",
+    "city": "Maszewo Lęborskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. POLSKICH STRAŻAKÓW W JELEŃSKIEJ HUCIE",
+    "city": "Jeleńska Huta"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PPOR. TADEUSZA BIELAKA W KĘPICACH",
+    "city": "Kępice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. PRZYJACIÓŁ ZIEMI W KŁODAWIE",
+    "city": "Kłodawa"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. REMUSA W GLINCZU",
+    "city": "Glincz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. RODZIMYCH BOHATERÓW II WOJNY ŚWIATOWEJ W ZAŁAKOWIE",
+    "city": "Załakowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. RODZINY SIERAKOWSKICH W WAPLEWIE WIELKIM",
+    "city": "Waplewo Wielkie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ROMUALDA TRAUGUTTA W JAGATOWIE",
+    "city": "Jagatowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. RÓŻY ZAMOYSKIEJ W CZĘSTKOWIE",
+    "city": "Częstkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. SPORTOWCÓW POLSKICH W TRZEBIELINIE",
+    "city": "Trzebielino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STANISŁAWA SIKORSKIEGO W WIELKICH CHEŁMACH",
+    "city": "Wielkie Chełmy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STANISŁAWA SIKORSKIEGO W WIELKICH CHEŁMACH - SZKOŁA FILIALNA W ROLBIKU",
+    "city": "Rolbik"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STEFANA ŻEROMSKIEGO W JASTRZĘBIEJ GÓRZE",
+    "city": "Jastrzębia Góra"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STEFANA ŻEROMSKIEGO W LICHNOWACH",
+    "city": "Lichnowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STEFANA ŻEROMSKIEGO W TRUMIEJACH",
+    "city": "Trumieje"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. STRAŻAKÓW POLSKICH W NOWEJ WSI LĘBORSKIEJ",
+    "city": "Nowa Wieś Lęborska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŚW. FRANCISZKA Z ASYŻU W EGIERTOWIE",
+    "city": "Egiertowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŚW. JANA DE LA SALLE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŚW. JANA PAWŁA II W POMYSKU WIELKIM",
+    "city": "Pomysk Wielki"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŚWIĘTEGO WOJCIECHA W BĄGARCIE",
+    "city": "Bągart"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TADEUSZA KOŚCIUSZKI W DĘBNICY KASZUBSKIEJ",
+    "city": "Dębnica Kaszubska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TADEUSZA KOŚCIUSZKI W SOBOWIDZU",
+    "city": "Sobowidz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TAJNEJ ORGANIZACJI WOJSKOWEJ \"GRYF POMORSKI\" W LUBNI",
+    "city": "Lubnia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TAJNEJ ORGANIZACJI WOJSKOWEJ \"GRYF POMORSKI\" W MIECHUCINIE",
+    "city": "Miechucino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TAJNEJ ORGANIZACJI WOJSKOWEJ \"GRYF POMORSKI\" W SĄPOLNIE",
+    "city": "Sąpolno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TYSIĄCLECIA PAŃSTWA POLSKIEGO",
+    "city": "Dzierzgoń"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. TYSIĄCLECIA PAŃSTWA POLSKIEGO W ZESPOLE SZKÓŁ W LIPNICY",
+    "city": "Lipnica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. UNII EUROPEJSKIEJ W PRZYWIDZU",
+    "city": "Przywidz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WANDY CHOTOMSKIEJ W BRUKU",
+    "city": "Bruk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WANDY CHOTOMSKIEJ W LUBLEWIE GDAŃSKIM",
+    "city": "Lublewo Gdańskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WANDY CHOTOMSKIEJ W PAWŁOWIE",
+    "city": "Pawłowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WICKA ROGALI W WIELU",
+    "city": "Wiele"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WIKTORA CZAPIEWSKIEGO W REKOWIE GÓRNYM",
+    "city": "Rekowo Górne"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WINCENTEGO ROGALI W KARSINIE",
+    "city": "Karsin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WINCENTEGO WITOSA W BIERKOWIE",
+    "city": "Bierkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. WŁADYSŁAWA KONEFKI W STARZYNIE",
+    "city": "Starzyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ZIEMI KASZUBSKIEJ W GORĘCZYNIE",
+    "city": "Goręczyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ZIEMI ŻUŁAWSKIEJ W PRZEJAZDOWIE",
+    "city": "Przejazdowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ZJEDNOCZONEJ EUROPY",
+    "city": "Zagórzyca"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ZJEDNOCZONEJ EUROPY W STARKOWIE",
+    "city": "Starkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŻOŁNIERZY I ARMII WOJSKA POLSKIEGO W KOCZALE",
+    "city": "Koczała"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŻOŁNIERZY MONTE CASSINO W NIEŻYCHOWICACH",
+    "city": "Nieżychowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ŻOŁNIERZY NIEZŁOMNYCH W POBŁOCIU",
+    "city": "Pobłocie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM. ZYGMUNTA BUKOWSKIEGO W CZERNIEWIE",
+    "city": "Czerniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.27 WOŁYŃSKIEJ DYWIZJI PIECHOTY ARMII KRAJOWEJ W CZARNEJ DĄBRÓWCE",
+    "city": "Czarna Dąbrówka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.BOHATERÓW GRUDNIA'70 W ŁĘGOWIE",
+    "city": "Łęgowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.BRACI CZARLIŃSKICH W LUBANIU",
+    "city": "Lubań"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.HENRYKA SIENKIEWICZA W CEDRACH WIELKICH",
+    "city": "Cedry Wielkie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.IGNACEGO KRASICKIEGO W STRASZYNIE",
+    "city": "Straszyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.J.KRAZIEWICZA W CEDRACH MAŁYCH",
+    "city": "Cedry Małe"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.J.WYBICKIEGO W POLNICY",
+    "city": "Polnica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.JANA KOCHANOWSKIEGO W STOWIĘCINIE",
+    "city": "Stowięcino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.JULIANA TUWIMA W POBŁOCIU",
+    "city": "Pobłocie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.KADM.WŁ.STEYERA W KROKOWEJ",
+    "city": "Krokowa"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.KPT.Ż.W.GUSTAWA KAROLA KAŃSKIEGO",
+    "city": "Chłapowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.KS.DR.STANISŁAWA SYCHOWSKIEGO W SKRZESZEWIE",
+    "city": "Skrzeszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.LOTNIKÓW WOJSKA POLSKIEGO W OSIECZNEJ",
+    "city": "Osieczna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.MARIUSZA ZARUSKIEGO W KOLBUDACH",
+    "city": "Kolbudy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.MJR.HENRYKA SUCHARSKIEGO W GOŚCICINIE",
+    "city": "Gościcino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.PAMIĘCI OFIAR STUTTHOFU W SZTUTOWIE",
+    "city": "Sztutowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.POR. JANA PENCONKA W GOWINIE",
+    "city": "Gowino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.PPOR.KLEMENSA WICKIEGO W PĘPOWIE",
+    "city": "Pępowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.RODZINY SZREIBER W MIKOŁAJKACH POMORSKICH",
+    "city": "Mikołajki Pomorskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.SPADOCHRONIARZY WOJSKA POLSKIEGO W SZLACHCIE",
+    "city": "Szlachta"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.TOW \"GRYF POMORSKI\" W REDKOWICACH",
+    "city": "Redkowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IM.WIĘŹNIÓW OBOZU STUTTHOF W NIESTĘPOWIE",
+    "city": "Niestępowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IMIENIA FRANCISZKA TREDERA W BORZESTOWIE",
+    "city": "Borzestowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA IMIENIA TAJNEJ ORGANIZACJI WOJSKOWEJ \"GRYF POMORSKI\" W PÓŁCZNIE",
+    "city": "Półczno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA JEZUITÓW Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. ŚW. STANISŁAWA KOSTKI W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA KREATYWNI W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA LICHNOWY",
+    "city": "Lichnowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA MAŁE MORZE IM. KS. JANA KACZKOWSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA MEGAMOCNI W GOWIDLINIE",
+    "city": "Gowidlino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA MISTRZOSTWA SPORTOWEGO IM. DR. JERZEGO KRZYSZTOFOWICZA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA MONTESSORI W KOWALACH",
+    "city": "Kowale"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. FLORIANA CEYNOWY W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. GEN. JANA HENRYKA DĄBROWSKIEGO",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. HENRYKA SIENKIEWICZA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA III SOBIESKIEGO W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA III SOBIESKIEGO W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA PAWŁA II",
+    "city": "Skarszewy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA PAWŁA II",
+    "city": "Damnica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA PAWŁA II W BRUSACH",
+    "city": "Brusy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANA PAWŁA II W SZTUMIE",
+    "city": "Sztum"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JANUSZA KORCZAKA W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. JÓZEFA WYBICKIEGO",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. KAPITANA LEONIDA TELIGI",
+    "city": "Ustka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. KS. PRAŁATA JÓZEFA BIGUSA W BANINIE",
+    "city": "Banino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. LECHA BĄDKOWSKIEGO W LUZINIE",
+    "city": "Luzino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. MARIUSZA ZARUSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. MIKOŁAJA KOPERNIKA W BOLSZEWIE",
+    "city": "Bolszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. MIKOŁAJA KOPERNIKA W MIASTKU",
+    "city": "Miastko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. PRZYJACIÓŁ ZIEMI",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. ŚW. KAZIMIERZA W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM. TADEUSZA KOŚCIUSZKI W KOŚCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM.JANUSZA KORCZAKA",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 IM.OBROŃCÓW WYBRZEŻA W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 1 Z ODDZIAŁAMI INTEGRACYJNYMI IM. J.RYDZKOWSKIEGO",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 10 IM. EUGENIUSZA KWIATKOWSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 10 SPECJALNA",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 10 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 10 W RUMI IM. JANA BRZECHWY",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 10 Z ODDZIAŁAMI INTEGRACYJNYMI IM.PŁK. STANISŁAWA DĄBKA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 11 IM. BOHATERÓW ZAŁOGI ORP GROM",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 11 IM. MIKOŁAJA KOPERNIKA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 11 IM. MIKOŁAJA KOPERNIKA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 11 IM. TEODORA BOLDUANA",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 12",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 12 IM. PRZYJACIÓŁ GDAŃSKA",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 12 IM.BRONISŁAWA MALINOWSKIEGO W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 13 IM. LUCJANA CYLKOWSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 14 IM. KS. GRZEGORZA PIRAMOWICZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 15 IM. DR URSZULI MROCZKIEWICZ W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 16 IM. ORŁA BIAŁEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 16 IM. WŁADYSŁAWA BRONIEWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 16 Z ODDZIAŁAMI SPORTOWYMI W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 17 IM. HETMANA STEFANA CZARNIECKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 17 IM. WICEADM. JÓZEFA UNRUGA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 18 IM. KORNELA MAKUSZYŃSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 19 IM. ZASŁUŻONYCH LUDZI MORZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2",
+    "city": "Wierzchowo-Dworzec"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2",
+    "city": "Debrzno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM DRA LEONA HEYKEGO W KOŚCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. BOLESŁAWA CHROBREGO W MIASTKU",
+    "city": "Miastko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. GEN. JÓZEFA HALLERA W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. IGNACEGO KRASICKIEGO W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. JANA HEWELIUSZA W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. JANA PAWŁA II W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. JÓZEFA PIŁSUDSKIEGO W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. KMDRA BOLESŁAWA ROMANOWSKIEGO W USTCE",
+    "city": "Ustka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. KONTRADMIRAŁA WŁODZIMIERZA STEYERA",
+    "city": "Władysławowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. MAKSYMILIANA GOLISZA W SZTUMIE",
+    "city": "Sztum"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. MAŁEGO TRÓJMIASTA KASZUBSKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. MIKOŁAJA KOPERNIKA W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. MIKOŁAJA KOPERNIKA W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. PROF. GERARDA LABUDY",
+    "city": "Luzino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. TADEUSZA KOŚCIUSZKI",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM. WINCENTEGO POLAW NOWYM STAWIE",
+    "city": "Nowy Staw"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 IM.MJR.HENRYKA SUCHARSKIEGO W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 PRABUTY",
+    "city": "Prabuty"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 W BANINIE",
+    "city": "Banino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 W BOLSZEWIE",
+    "city": "Bolszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 W BRUSACH",
+    "city": "Brusy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 2 Z ODDZIAŁAMI SPORTOWYMI IM. ARMII KRAJOWEJ W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 20 IM. 2 MORSKIEGO PUŁKU STRZELCÓW",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 20 W GDAŃSKU IM. KMDR PPOR. JANA GRUDZIŃSKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 21 IM. KPT. Ż. W. OLGIERDA BORCHARDTA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 21 IM. LUDZI MORZA I MARZEŃ W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 23",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 23 IM.DZIECI ŚWIATA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 24 IM. GUSTAWA MORCINKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 26 IM. ŻOŁNIERZY ARMII KRAJOWEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 27 IM. DZIECI ZJEDNOCZONEJ EUROPY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 28 IM. LOTNIKÓW POLSKICH",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 29 IM. JERZEGO PUCKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 29 IM. STEFANA ŻEROMSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3",
+    "city": "Władysławowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. 2 PUŁKU NOCNYCH BOMBOWCÓW \"KRAKÓW\" W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. GENERAŁA MARIUSZA ZARUSKIEGO W USTCE",
+    "city": "Ustka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. JANA MATEJKI W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. JANA PAWŁA II W MIASTKU",
+    "city": "Miastko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. JANUSZA KORCZAKA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. PAMIĘCI KOLEJARZY CHOJNICKICH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM. STEFANA ŻEROMSKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 IM.FR.SĘDZICKIEGO W KOŚCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 3 SPECJALNA W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 30 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 31 IM. SYNÓW PUŁKU",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 33 IM. OBROŃCÓW KĘPY OKSYWSKIEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 34 Z ODDZIAŁAMI INTEGRACYJNYMI IM. LEONIDA TELIGI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 35 IM. KPT. STANISŁAWA KOSKO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 35 Z ODDZIAŁAMI SPORTOWYMI IM. JANA PARANDOWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 37 IM. OBROŃCÓW KĘPY OKSYWSKIEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 38 IM. GEN. STANISŁAWA MACZKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 39 IM. KPT Ż. W. KAZIMIERZA JURKIEWICZA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 39 IM. WOJSKA POLSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. ADAMA MICKIEWICZA W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. IGNACEGO JANA PADEREWSKIEGO W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. JANUSZA KORCZAKA",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. KARDYNAŁA STEFANA WYSZYŃSKIEGO W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. KRÓLA KAZIMIERZA JAGIELLOŃCZYKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. NAUCZYCIELI BOHATERÓW ZIEMI KOŚCIERSKIEJ W KOSCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 4 IM. PŁK. KAZIMIERZA PRUSZKOWSKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 40 IM. KPT. LEONIDA TELIGI W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 40 IM. KPT. Ż. W. K. O. BORCHARDTA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 42 IM. KRÓLOWEJ JADWIGI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 43 IM. JANA KOCHANOWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 43 IM. WICEADMIRAŁA KAZIMIERZA PORĘBSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 44 IM. ADAMA MICKIEWICZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 44 IM. OBROŃCÓW WYBRZEŻA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 45",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 45 IM. BOHATERÓW WESTERPLATTE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 46",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 46 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 47 IM FRANCISZKI CEGIELSKIEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 47 IM. KASZUBSKIEJ BRYGADY WOP W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 48 IM. GEN. JÓZEFA HALLERA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 48 IM. PROFESORA KAZIMIERZA DEMELA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 49 IM. KS. BRONISŁAWA KOMOROWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM MJR HENRYKA SUCHARSKIEGO W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. A.MICKIEWICZA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. DRA ALEKSANDRA MAJKOWSKIEGO W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. FRYDERYKA CHOPINA",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. JANA DRZEŻDŻONA W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. JAROSZA HIERONIMA DERDOWSKIEGO",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 IM. ZJEDNOCZONEJ EUROPY W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 SPECJALNA",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 5 Z ODDZIAŁAMI INTEGRACYJNYMI IM. UNICEF W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 50 IM. E.PLATER W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 51 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 52 IM. TADEUSZA KOŚCIUSZKI W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 52 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 53 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 56 IM. ANDRZEJA STRUGA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 57 IM. GEN. WŁADYSŁAWA ANDERSA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 58 IM. KAZIMIERZA SOŁTYSIKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 59 IM. I DYWIZJI PANCERNEJ GEN. STANISŁAWA MACZKA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. ALEKSANDRA MAJKOWSKIEGO W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. ANTONIEGO ABRAHAMA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. JANA KOCHANOWSKIEGO W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. JANA PAWŁA II W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. KS. BERNARDA SYCHTY W KOŚCIERZYNIE",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. LUDWIKA WARYŃSKIEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 IM. TADEUSZA KOŚCIUSZKI",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 W SCHRONISKU DLA NIELETNICH W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 6 Z ODDZIAŁAMI INTEGRACYJNYMI IM. WŁADYSŁAWA GĘBIKA W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 60 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 62 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 65 IM. ALFA LICZMAŃSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 67 IM. KAPITANA ŻEGLUGI WIELKIEJ TADEUSZA ZIÓŁKOWSKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 69 IM GENERAŁA STANISŁAWA SOSABOWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 7",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 7 IM. JANA KARNOWSKIEGO W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 7 IM. KAROLA WOJTYŁY",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 7 IM. STANISŁAWA STASZICA",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 7 SPECJALNA W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 77 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 79 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. KS. STANISŁAWA ORMIŃSKIEGO",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. MARTYROLOGII PIAŚNICY",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. MIKOŁAJA KOPERNIKA W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. OBROŃCÓW HELU",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. ŚW. WOJCIECHA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 IM. ŻOŁNIERZY ARMII KRAJOWEJ W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 8 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 81 W GDAŃSKU IM. PROF. MICHAŁA SIEDLECKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 82 IM. PROF. JANA CZOCHRALSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 83 IM. ŻOŁNIERZY Z WESTERPLATTE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 84 IM. JANA BRZECHWY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 85 IM. ZRZESZENIA KASZUBSKO-POMORSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 86 IM. PROF. JERZEGO SAMPA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 88 IM. DANIELA GABRIELA FAHRENHEITA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 89 IM. TADEUSZA MAZOWIECKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 IM. JÓZEFA WYBICKIEGO",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 IM. KAZIMIERZA JAGIELLOŃCZYKA W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 IM. KMDRA POR. STANISŁAWA HRYNIEWIECKIEGO W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 IM. KPT. Ż. W.K. O. BORCHARDTA",
+    "city": "Rumia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 SPECJALNA W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 9 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA NR 90 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA OBRZYNOWO",
+    "city": "Obrzynowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA RODOWO",
+    "city": "Rodowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA DLA DZIECI PRZEWLEKLE CHORYCH NR 38 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA IM. JANUSZA KORCZAKA W WARCZU",
+    "city": "Warcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 1 W MŁODZIEŻOWYM OŚRODKU WYCHOWAWCZYM IM. JANUSZA KORCZAKA W KWIDZYNIE DLA UCZNIÓW NIEDOSTOSOWANYCH SPOŁECZNIE ORAZ DLA UCZNIÓW NIEDOSTOSOWANYCH SPOŁECZNIE Z UPOŚLEDZENIEM UMYSŁOWYM W STOPNIU LEKKIM",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 10 W SPECJALNYM OŚRODKU SZKOLNO - WYCHOWAWCZYM NR 2 DLA NIESŁYSZĄCYCH I SŁABOSŁYSZĄCYCH IM. JANA SIESTRZYŃSKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 11 W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 2 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 24 IM. MARII GRZEGORZEWSKIEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 26",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 28",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 3 W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 37 IM. SZARYCH SZEREGÓW W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 4 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 49 DLA DZIECI NIEDOSŁYSZĄCYCH",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 5 W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 50",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA NR 7",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA W BARCICACH SPECJALNY OŚRODEK SZKOLNO - WYCHOWAWCZY W BARCICACH",
+    "city": "Barcice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM W KOŁOZĘBIU",
+    "city": "Kołoząb"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA W SPECJALNYM OSRODKU SZKOLNO-WYCHOWAWCZYM W UŚNICACH",
+    "city": "Uśnice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPECJALNA W TURSKU",
+    "city": "Tursko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA SPORTOWA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA STOWARZYSZENIA DAR",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA TOWARZYSTWA EDUKACYJNEGO \"VIZJA\"",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA TOWARZYSTWA SALEZJAŃSKIEGO IM. KS. IGNACEGO BŁAŻEWSKIEGO W KNIEWIE",
+    "city": "Kniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA TRUMIEJKI",
+    "city": "Trumiejki"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W BOJANIE",
+    "city": "Bojano"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W CHARNOWIE",
+    "city": "Charnowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W CHARZYKOWACH",
+    "city": "Charzykowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W CZAPIEWICACH",
+    "city": "Czapiewice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W DĄBRÓWCE",
+    "city": "Dąbrówka Tczewska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W GARCZYNIE",
+    "city": "Garczyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W GŁODOWIE",
+    "city": "Głodowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W GMINIE MALBORK",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W GOTELPIU",
+    "city": "Gotelp"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W GRABINACH-ZAMECZKU",
+    "city": "Grabiny-Zameczek"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W JANOWIE",
+    "city": "Janowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W JASIENIU",
+    "city": "Jasień"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W JELONKU",
+    "city": "Jelonko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KALISKACH",
+    "city": "Kaliska Kościerskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KAMIENICY KRÓLEWSKIEJ",
+    "city": "Kamienica Królewska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KĘTRZYNIE",
+    "city": "Kętrzyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOLONI",
+    "city": "Kolonia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOŃCZEWICACH",
+    "city": "Kończewice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOPYTKOWIE",
+    "city": "Kopytkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KORNEM",
+    "city": "Korne"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KORZENIEWIE",
+    "city": "Korzeniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KORZYBIU",
+    "city": "Korzybie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOSAKOWIE",
+    "city": "Kosakowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOWALACH",
+    "city": "Kowale"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KOŻYCZKOWIE",
+    "city": "Kożyczkowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KRAMARZYNACH",
+    "city": "Kramarzyny"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KRZEMIENIEWIE",
+    "city": "Krzemieniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W KULICACH W ZESPOLE KSZTAŁCENIA I WYCHOWANIA W KULICACH",
+    "city": "Kulice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁAPALICACH",
+    "city": "Łapalice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁEBCZU IMIENIA POLSKICH NOBLISTÓW",
+    "city": "Łebcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁEBIEŃSKIEJ HUCIE",
+    "city": "Łebieńska Huta"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁEBUNI",
+    "city": "Łebunia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W LINIEWIE",
+    "city": "Liniewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁUBIANIE",
+    "city": "Łubiana"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W LUBIESZEWIE",
+    "city": "Lubieszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W LUBISZEWIE",
+    "city": "Lubiszewo Tczewskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁUBNIE",
+    "city": "Łubno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ŁYŚNIEWIE SIERAKOWICKIM",
+    "city": "Łyśniewo Sierakowickie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MAŁYCH WALICHNOWACH",
+    "city": "Małe Walichnowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MARZĘCINIE",
+    "city": "Marzęcino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MASZEWKU",
+    "city": "Maszewko"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MĘCIKALE",
+    "city": "Męcikał"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MIŁOSZEWIE",
+    "city": "Miłoszewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MOJUSZU",
+    "city": "Mojusz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MYŚLICACH",
+    "city": "Myślice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W MYŚLIGOSZCZY",
+    "city": "Myśligoszcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NIEDAMOWIE",
+    "city": "Niedamowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOWEJ WSI",
+    "city": "Nowa Wieś"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOWEJ WSI MALBORSKIEJ",
+    "city": "Nowa Wieś Malborska"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOWEJ WSI PRZYWIDZKIEJ",
+    "city": "Nowa Wieś Przywidzka"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOWYM DWORZE",
+    "city": "Nowy Dwór"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOWYM KLINCZU",
+    "city": "Nowy Klincz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W NOŻYNIE IM. ŚW. JANA PAWŁA II",
+    "city": "Nożyno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W OBJEŹDZIE",
+    "city": "Objazda"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W OSOWIE",
+    "city": "Osowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W POMLEWIE IM.BŁ.KSIĘDZA JERZEGO POPIEŁUSZKI",
+    "city": "Pomlewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RAJKOWACH W ZESPOLE KSZTAŁCENIA I WYCHOWANIA W RAJKOWACH",
+    "city": "Rajkowy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W REDZIKOWIE",
+    "city": "Redzikowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RESKOWIE",
+    "city": "Reskowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ROKITACH IM. GRYFA POMORSKIEGO",
+    "city": "Rokity"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RÓŻYNACH",
+    "city": "Różyny"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RUDNIE W ZESPOLE KSZTAŁCENIA I WYCHOWANIA W RUDNIE",
+    "city": "Rudno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RYTLU FILIA W KRZYŻU",
+    "city": "Krzyż"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RZECZENICY FILIA PIENIĘŻNICA",
+    "city": "Pieniężnica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W RZECZENICY IM. GENERAŁA WŁADYSŁAWA ANDERSA",
+    "city": "Rzeczenica"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SIEMIANICACH",
+    "city": "Siemianice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SILNIE",
+    "city": "Silno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SKÓROWIE IM. LUCJANA KOWALSKIEGO",
+    "city": "Skórowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SKORZEWIE",
+    "city": "Skorzewo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SKOWARCZU",
+    "city": "Skowarcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SMOŁDZINIE",
+    "city": "Smołdzino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W STARYM DZIERZGONIU",
+    "city": "Stary Dzierzgoń"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W STARYM GRONOWIE",
+    "city": "Stare Gronowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W STRZEPCZU IM. ALEKSANDRA LABUDY",
+    "city": "Strzepcz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SWORNEGACIACH",
+    "city": "Swornegacie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W SZARŁACIE",
+    "city": "Szarłata"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W TRZEPOWIE",
+    "city": "Borowina"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W TUCHLINIE",
+    "city": "Tuchlino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W TUCHOMIU",
+    "city": "Tuchom"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W TUCHOMIU",
+    "city": "Tuchomie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W UNIECHOWIE",
+    "city": "Uniechów"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WĄGLIKOWICACH",
+    "city": "Wąglikowice"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WARCINIE IM. KS. PRAŁATA ALFREDA OSIPOWICZA",
+    "city": "Warcino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WERBLINI IM. JANA DRZEŻDŻONA",
+    "city": "Werblinia"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WIELKIM KLINCZU",
+    "city": "Wielki Klincz"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WIELKIM PODLESIU",
+    "city": "Wielki Podleś"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WIERZCHOWIE",
+    "city": "Wierzchowo-Dworzec"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WIERZCHUCINIE",
+    "city": "Wierzchucino"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WILANOWIE",
+    "city": "Wilanowo"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W WYCZECHACH",
+    "city": "Wyczechy"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ZALESIU",
+    "city": "Zalesie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ZALESKICH",
+    "city": "Zaleskie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ZESPOLE SZKÓŁ IM. JANA III SOBIESKIEGO W BRZEŹNIE SZLACHECKIM",
+    "city": "Brzeźno Szlacheckie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA W ZESPOLE SZKÓŁ IM. JÓZEFA CZYŻEWSKIEGO W OPALENIU",
+    "city": "Opalenie"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI IM. BOHATERÓW WESTERPLATTE W KIELNIE",
+    "city": "Kielno"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI IM. LEŚNIKÓW POLSKICH W PRZERYTEM",
+    "city": "Pieski"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 1 IM.ARMII KRAJOWEJ W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 10 IM. POLONII W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 4 IM. GUSTAWA MORCINKA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 5 IM. GRYFITÓW W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 8 IM.JANA MATEJKI",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI INTEGRACYJNYMI NR 9 IM GEN.WŁADYSŁAWA SIKORSKIEGO W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA Z ODDZIAŁAMI SPORTOWYMI NR 7 IM.TADEUSZA KOŚCIUSZKI",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA PODSTAWOWA ZGROMADZENIA SIÓSTR ZMARTWYCHWSTANIA PAŃSKIEGO IM. BŁ. ALICJI KOTOWSKIEJ",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA \"COSINUS PLUS\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA \"COSINUS PLUS\" W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA \"MATRIX\" W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA \"PASCAL\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA AKTYWIZACJI ZAWODOWEJ \"ŻAK\" W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA BEZPIECZEŃSTWA I HIGIENY PRACY \"ŻAK\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA CENTRUM NAUKI I BIZNESU \"ŻAK\"",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA CENTRUM NAUKI I BIZNESU \"ŻAK\" GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA CENTRUM NAUKI I BIZNESU \"ŻAK\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA CKU CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA CNIB\"ŻAK\" W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA EDU - SCHOLARIS W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA FARMACEUTYCZNA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA GDAŃSKIE STUDIUM ADMINISTRACJI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA GDAŃSKIE STUDIUM FARMACEUTYCZNE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA KOSMETYCZNA \"ŻAK\"",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA KOSMETYCZNA \"ŻAK\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA MEDYCZNA \"ŻAK\" W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA MEDYCZNA ŻAK W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA MEDYCZNA ŻAK W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA MEDYCZNO-SPOŁECZNA NR 4 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA NR 10",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA OMEGA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA OPIEKI MEDYCZNEJ ,,ŻAK\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA OPIEKI MEDYCZNEJ \"ŻAK\" W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA OPIEKI MEDYCZNEJ \"ŻAK\" W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA OPIEKI MEDYCZNEJ ŻAK W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA PRAWNO-ADMINISTRACYJNA \"ŻAK\"",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA STUDIUM PRACOWNIKÓW MEDYCZNYCH I SPOŁECZNYCH",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA STUDIUM PRACOWNIKÓW MEDYCZNYCH I SPOŁECZNYCH",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA STUDIUM PRACOWNIKÓW MEDYCZNYCH I SPOŁECZNYCH",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA POLICEALNA WIELOBRANŻOWA NR 5 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Człuchów"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Bytów"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY IM. IRENY SENDLEROWEJ",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "SZKOŁA PRZYSPOSABIAJĄCA DO PRACY NR 2 W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY",
+    "city": "Malbork"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY DLA UCZNIÓW Z NIEPEŁNOSPRAWNOŚCIĄ INTELEKTUALNĄ W STOPNIU UMIARKOWANYM LUB ZNACZNYM I NIEPEŁNOSPRAWNOŚCIAMI SPRZĘŻONYMI W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 1",
+    "city": "Gdynia"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 1 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 2 W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM NR 2 DLA NIESŁYSZĄCYCH I SŁABOSŁYSZĄCYCH IM. JANA SIESTRZYŃSKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W CZERSKU",
+    "city": "Czersk"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W PELPLINIE",
+    "city": "Pelplin"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W PUCKU W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM W UŚNICACH",
+    "city": "Uśnice"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W TURSKU",
+    "city": "Tursko"
+  },
+  {
+    "name": "SZKOŁA SPECJALNA PRZYSPOSOBIAJĄCA DO PRACY W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "SZKOŁA TECHNICZNA IM. DYWIZJONU 303 BYDGOSKIEGO ZAKŁADU DOSKONALENIA ZAWODOWEGO W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "SZKOŁY EKONOMICZNO-HANDLOWE IM. MACIERZY SZKOLNEJ W GDAŃSKU TECHNIKUM NR 11 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁY OKRĘTOWE I TECHNICZNE \"CONRADINUM\" W GDAŃSKU BRANŻOWA SZKOŁA I STOPNIA NR 18",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "SZKOŁY OKRĘTOWE I TECHNICZNE \"CONRADINUM\" W GDAŃSKU TECHNIKUM NR 18",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "TECHNIKUM",
+    "city": "Bolesławowo"
+  },
+  {
+    "name": "TECHNIKUM",
+    "city": "Nowy Dwór Gdański"
+  },
+  {
+    "name": "TECHNIKUM ,,COSINUS'' W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM \"COSINUS\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "TECHNIKUM \"COSINUS\" W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM AGROBIZNESU ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM ARCHITEKTURY KRAJOBRAZU ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM BUDOWLANE",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM BUDOWY OKRĘTÓW",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM CHŁODNICZE IM. PROF. M.T. HUBERA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM EKONOMICZNE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. ROTMISTRZA WITOLDA PILECKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM EKONOMICZNE ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM ELEKTRONICZNE NR 1 Z ODDZIAŁAMI DWUJĘZYCZNYMI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM GASTRONOMICZNE",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM GEODEZYJNE ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM HOTELARSKIE",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM IM. \"WYNALAZCÓW POLSKICH\"",
+    "city": "Miastko"
+  },
+  {
+    "name": "TECHNIKUM IM. AUGUSTYNA SZPRĘGI W MALACHINIE",
+    "city": "Malachin"
+  },
+  {
+    "name": "TECHNIKUM IM. GEN. JÓZEFA HALLERA W OWIDZU",
+    "city": "Owidz"
+  },
+  {
+    "name": "TECHNIKUM IM. MAURYCEGO MOCHNACKIEGO W REDZIE",
+    "city": "Reda"
+  },
+  {
+    "name": "TECHNIKUM IM. ROTMISTRZA WITOLDA PILECKIEGO W PRZODKOWIE",
+    "city": "Przodkowo"
+  },
+  {
+    "name": "TECHNIKUM IM. STEFANA BIESZKA W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "TECHNIKUM INFORMATYCZNE IM. MACIEJA PŁAŻYŃSKIEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "TECHNIKUM INFORMATYCZNE ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM KSZTAŁCENIA ZAWODOWEGO NR 4 IM. HM. J. MACHUTTY W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "TECHNIKUM LEŚNE W WARCINIE IM. PROF. STANISŁAWA SOKOŁOWSKIEGO",
+    "city": "Warcino"
+  },
+  {
+    "name": "TECHNIKUM MECHANICZNE NR 1",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM NR 1",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "TECHNIKUM NR 1 IM. BOHATERSKIEJ ZAŁOGI ORP \"ORZEŁ\" W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "TECHNIKUM NR 1 IM. NOBLISTÓW POLSKICH W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "TECHNIKUM NR 1 IM. WIESŁAWA SZAJDY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "TECHNIKUM NR 1 IM.DANUTY SIEDZIKÓWNY \"INKI\" W SOPOCIE",
+    "city": "Sopot"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W KWIDZYNIE ZESPÓŁ SZKÓŁ NR 1 IM. STANISŁAWA STASZICA W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM NR 1 W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "TECHNIKUM NR 2",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "TECHNIKUM NR 2",
+    "city": "Bytów"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W KWIDZYNIE ZESPÓŁ SZKÓŁ NR 2 IM. MARII SKŁODOWSKIEJ - CURIE W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W MALBORKU ZESPÓŁ SZKÓŁ TECHNICZNYCH W MALBORKU",
+    "city": "Malbork"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "TECHNIKUM NR 2 W ZESPOLE SZKÓŁ TECHNICZNYCH CENTRUM KSZTAŁCENIA ZAWODOWEGO IM. MACIEJA RATAJA W RUSOCINIE",
+    "city": "Rusocin"
+  },
+  {
+    "name": "TECHNIKUM NR 3",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM NR 3",
+    "city": "Malbork"
+  },
+  {
+    "name": "TECHNIKUM NR 3 IM. ALEKSANDRA MAJKOWSKIEGO",
+    "city": "Kościerzyna"
+  },
+  {
+    "name": "TECHNIKUM NR 3 IM. BOHATERÓW SZARŻY POD KROJANTAMI W CHOJNICACH",
+    "city": "Chojnice"
+  },
+  {
+    "name": "TECHNIKUM NR 3 W KWIDZYNIE CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W KWIDZYNIE",
+    "city": "Kwidzyn"
+  },
+  {
+    "name": "TECHNIKUM NR 3 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "TECHNIKUM NR 3 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM NR 3 W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "TECHNIKUM NR 3 W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "TECHNIKUM NR 4 W LĘBORKU",
+    "city": "Lębork"
+  },
+  {
+    "name": "TECHNIKUM NR 4 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM NR 4 W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "TECHNIKUM NR 5 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM PRAKTYCZNEJ AKADEMII DOBREJ EDUKACJI W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "TECHNIKUM SPECJALNE NR 4 W SPECJALNYM OŚRODKU SZKOLNO - WYCHOWAWCZYM NR 2 DLA NIESŁYSZĄCYCH I SŁABOSŁYSZĄCYCH IM. JANA SIESTRZYŃSKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "TECHNIKUM TEB EDUKACJA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "TECHNIKUM TEB EDUKACJA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM TEB EDUKACJA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM TEB EDUKACJA W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "TECHNIKUM TRANSPORTOWE",
+    "city": "Gdynia"
+  },
+  {
+    "name": "TECHNIKUM W CZARNEM",
+    "city": "Czarne"
+  },
+  {
+    "name": "TECHNIKUM W GNIEWIE",
+    "city": "Gniew"
+  },
+  {
+    "name": "TECHNIKUM W KŁANINIE W POWIATOWYM ZESPOLE SZKÓŁ IM. STANISŁAWA STASZICA W KŁANINIE",
+    "city": "Kłanino"
+  },
+  {
+    "name": "TECHNIKUM W ŁODZIERZY",
+    "city": "Łodzierz"
+  },
+  {
+    "name": "TECHNIKUM W PRABUTACH ZESPÓŁ SZKÓŁ W PRABUTACH",
+    "city": "Prabuty"
+  },
+  {
+    "name": "TECHNIKUM W PUCKU W POWIATOWYM CENTRUM KSZTAŁCENIA ZAWODOWEGO I USTAWICZNEGO W PUCKU",
+    "city": "Puck"
+  },
+  {
+    "name": "TECHNIKUM W RUMI",
+    "city": "Rumia"
+  },
+  {
+    "name": "TECHNIKUM W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "TECHNIKUM W SKÓRCZU",
+    "city": "Skórcz"
+  },
+  {
+    "name": "TECHNIKUM W SOMONINIE",
+    "city": "Somonino"
+  },
+  {
+    "name": "TECHNIKUM W SWAROZYNIE",
+    "city": "Swarożyn"
+  },
+  {
+    "name": "TECHNIKUM W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "TECHNIKUM W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "TECHNIKUM WETERYNARYJNE ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM ZAWODOWE NR 1 W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM ZSI W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "TECHNIKUM ZST CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "TECHNIKUM ŻYWIENIA I USŁUG GASTRONOMICZNYCH ZSA CZŁUCHÓW",
+    "city": "Człuchów"
+  },
+  {
+    "name": "UNIWERSYTECKIE KATOLICKIE LICEUM OGÓLNOKSZTAŁCĄCE W TCZEWIE",
+    "city": "Tczew"
+  },
+  {
+    "name": "UNIWERSYTECKIE LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. PAWŁA ADAMOWICZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "V LICEUM OGÓLNOKSZTAŁCĄCE IM. STEFANA ŻEROMSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "V LICEUM OGÓLNOKSZTAŁCĄCE IM. ZBIGNIEWA HERBERTA W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "V LICEUM OGÓLNOKSZTAŁCĄCE IM.PŁK.STANISŁAWA DĄBKA",
+    "city": "Gdynia"
+  },
+  {
+    "name": "V LICEUM OGÓLNOKSZTAŁCĄCE TEB EDUKACJA W STAROGARDZIE GDAŃSKIM",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "V LICEUM OGÓLNOKSZTAŁCĄCE W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "VI LICEUM OGÓLNOKSZTAŁCĄCE IM. WACŁAWA SIERPIŃSKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "VI LICEUM OGÓLNOKSZTAŁCĄCE SPECJALNE",
+    "city": "Sopot"
+  },
+  {
+    "name": "VI LICEUM OGÓLNOKSZTAŁCĄCE SPECJALNE W SPECJALNYM OŚRODKU SZKOLNO-WYCHOWAWCZYM NR 2 DLA NIESŁYSZĄCYCH I SŁABOSŁYSZĄCYCH IM. JANA SIESTRZYŃSKIEGO W WEJHEROWIE",
+    "city": "Wejherowo"
+  },
+  {
+    "name": "VII SPORTOWE LICEUM OGÓLNOKSZTAŁCĄCE IM. JÓZEFA WYBICKIEGO",
+    "city": "Gdynia"
+  },
+  {
+    "name": "VIII LICEUM OGÓLNOKSZTAŁCĄCE IM. KOMISJI EDUKACJI NARODOWEJ W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "WOJSKOWE LICEUM OGÓLNOKSZTAŁCĄCE W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "X LICEUM OGÓLNOKSZTAŁCĄCE DWUJĘZYCZNE IM. LECHA BĄDKOWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "X LICEUM OGÓLNOKSZTAŁCĄCE IM. GDYŃSKICH NAUCZYCIELI BOHATERÓW II WOJNY ŚWIATOWEJ",
+    "city": "Gdynia"
+  },
+  {
+    "name": "XIV LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. MIKOŁAJA KOPERNIKA W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "XIX LICEUM OGÓLNOKSZTAŁCĄCE IM. MARIANA MOKWY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "XV LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. ZJEDNOCZONEJ EUROPY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "XVI LICEUM OGÓLNOKSZTAŁCĄCE SPECJALNE",
+    "city": "Gdynia"
+  },
+  {
+    "name": "XVII LICEUM OGÓLNOKSZTAŁCĄCE W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "XXI LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI SPORTOWYMI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE ,,BETA\" W GDYNI",
+    "city": "Gdynia"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH",
+    "city": "Lębork"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"COSINUS PLUS\" W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH \"COSINUS PLUS\" W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTALCĄCE DLA DOROSŁYCH W BYTOWIE",
+    "city": "Bytów"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W LUBICHOWIE",
+    "city": "Zelgoszcz"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE W ŁĘGU",
+    "city": "Łąg"
+  },
+  {
+    "name": "ZAOCZNE LICEUM OGÓLNOKSZTAŁCĄCE W LIPUSZU",
+    "city": "Lipusz"
+  },
+  {
+    "name": "ZAOCZNE LICEUM PONADGIMNAZJALNE W SIERAKOWICACH",
+    "city": "Sierakowice"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA PUBLICZNA SZKOŁA PODSTAWOWA IM. BOHATERÓW WESTERPLATTE W PINCZYNIE",
+    "city": "Pinczyn"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA SPECJALNEGO W KARTUZACH, BRANŻOWA SZKOŁA I STOPNIA NR 3 SPECJALNA W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA SPECJALNEGO W KARTUZACH, SZKOŁA PODSTAWOWA NR 2 SPECJALNA ZORGANIZOWANA W SZPITALU SPECJALISTYCZNYM W KOŚCIERZYNIE - ODDZIAŁ REHABILITACJI DZIECIĘCEJ W DZIERŻĄŻNIE",
+    "city": "Dzierżążno"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA SPECJALNEGO W KARTUZACH, SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA SZKOŁA PODSTAWOWA W TURZU",
+    "city": "Turze"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA W DZIEMIANACH - SZKOŁA PODSTAWOWA",
+    "city": "Dziemiany"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA I WYCHOWANIA W SWAROŻYNIE SZKOŁA PODSTAWOWA IM. STEFANA ŻEROMSKIEGO W SWAROŻYNIE",
+    "city": "Swarożyn"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA PODSTAWOWEGO I PRZEDSZKOLNEGO NR 1 W GDAŃSKU - SZKOŁA PODSTAWOWA NR 87",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ KSZTAŁCENIA PODSTAWOWEGO I PRZEDSZKOLNEGO W MAŁEJ SŁOŃCY - SZKOŁA PODSTAWOWA IM. IRENY SENDLEROWEJ W MAŁEJ SŁOŃCY",
+    "city": "Mała Słońca"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ AGROTECHNICZNYCH IM. WŁADYSŁAWA REYMONTA W SŁUPSKU - BRANŻOWA SZKOŁA I STOPNIA NR 6 Z ODDZIAŁAMI INTEGRACYJNYMI W SŁUPSKU",
+    "city": "Słupsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ AGROTECHNICZNYCH IM. WŁADYSŁAWA REYMONTA W SŁUPSKU - TECHNIKUM NR 6",
+    "city": "Słupsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ARCHITEKTONICZNO-PROJEKTOWYCH IM. WŁADYSŁAWA SZAFERA BRANŻOWA SZKOŁA I STOPNIA NR 7 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ARCHITEKTONICZNO-PROJEKTOWYCH IM. WŁADYSŁAWA SZAFERA TECHNIKUM NR 7 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ EKONOMICZNYCH W STAROGARDZIE GDAŃSKIM-KOCIEWSKIE CENTRUM KSZTAŁCENIA USTAWICZNEGO-SZKOŁA POLICEALNA DLA DOROSŁYCH",
+    "city": "Starogard Gdański"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ENERGETYCZNYCH BRANŻOWA SZKOŁA I STOPNIA NR 10 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ENERGETYCZNYCH W GDAŃSKU TECHNIKUM NR 13 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ GASTRONOMICZNO-HOTELARSKICH - TECHNIKUM NR 3 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ GASTRONOMICZNO-HOTELARSKICH W GDAŃSKU BRANŻOWA SZKOŁA I STOPNIA NR 3",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ IM. JANA KASPROWICZA W SZTUMIE - LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Sztum"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ IM. JANA KASPROWICZA W SZTUMIE - TECHNIKUM NR 1",
+    "city": "Sztum"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ IM. JANA PAWŁA II W ŁEBIENIU - SZKOŁA PODSTAWOWA",
+    "city": "Łebień"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ IM.MĘCZENNIKÓW MARSZU ŚMIERCI KL STUTTHOF W GARCZEGORZU - SZKOŁA PODSTAWOWA",
+    "city": "Garczegorze"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ KREOWANIA WIZERUNKU W GDAŃSKU - BRANŻOWA SZKOŁA I STOPNIA NR 9 IM. XYMENY ZANIEWSKIEJ",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ KREOWANIA WIZERUNKU W GDAŃSKU - BRANŻOWA SZKOŁA II STOPNIA NR 9 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ KREOWANIA WIZERUNKU W GDAŃSKU - TECHNIKUM NR 9 IM.XYMENY ZANIEWSKIEJ",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ŁĄCZNOŚCI IM. OBROŃCÓW POCZTY POLSKIEJ - TECHNIKUM ŁĄCZNOŚCI NR 4 IM. OBROŃCÓW POCZTY POLSKIEJ W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ MORSKICH IM. BOHATERSKICH OBROŃCÓW WESTERPLATTE TECHNIKUM NR 16 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ MORSKICH IM.BOHATERSKICH OBRONCÓW WESTERPLATTE BRANŻOWA SZKOŁA I STOPNIA NR 16 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ NR 1 TECHNIKUM",
+    "city": "Władysławowo"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH I TECHNICZNYCH W USTCE - LICEUM OGÓLNOKSZTAŁCĄCE IM. MIKOŁAJA KOPERNIKA",
+    "city": "Ustka"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH I TECHNICZNYCH W USTCE - TECHNIKUM",
+    "city": "Ustka"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 1 IM. MARII KONOPNICKIEJ -LICEUM OGÓLNOKSZTAŁCĄCE NR 1 IM. MARII KONOPNICKIEJ W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 1 IM. MARII KONOPNICKIEJ -SZKOŁA PODSTAWOWA NR 1 IM. MARII KONOPNICKIEJ W PRUSZCZU GDAŃSKIM",
+    "city": "Pruszcz Gdański"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 1 IX LICEUM OGÓLNOKSZTAŁCĄCE IM. KRZYSZTOFA KOLBERGERA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 10 IM. EUGENIUSZA KWIATKOWSKIEGO W GDAŃSKU - SZKOŁA PODSTAWOWA NR 18",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 10 IM. EUGENIUSZA KWIATKOWSKIEGO W GDAŃSKU - XXIII LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 12 XX LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. ZBIGNIEWA HERBERTA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 2 SZKOŁA PODSTAWOWA NR 33 IM. STEFANA BANACHA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 2 XXIV LICEUM OGÓLNOKSZTAŁCĄCE IM. STEFANA BANACHA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 6 - VI LICEUM OGÓLNOKSZTAŁCĄCE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 6 SZKOŁA PODSTAWOWA MISTRZOSTWA SPORTOWEGO NR 94 IM. HANZY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 7 SZKOŁA PODSTAWOWA NR 3 IM. JANA PAWŁA II W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 7 VII LICEUM OGÓLNOKSZTAŁCĄCE IM. JÓZEFA WYBICKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 8 IM. W GDAŃSKU - XIV LICEUM OGÓLNOKSZTAŁCĄCE IM. JANA PAWŁA II",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 8 W GDAŃSKU - SZKOŁA PODSTAWOWA NR 5 IM. JANA PAWŁA II",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 9 W GDAŃSKU SZKOŁA PODSTAWOWA NR 91",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH NR 9 W GDAŃSKU XXV LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH W KARTUZACH, I LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI DWUJĘZYCZNYMI IM. HIERONIMA DERDOWSKIEGO W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ OGÓLNOKSZTAŁCĄCYCH W KARTUZACH, LICEUM OGÓLNOKSZTAŁCĄCE DLA DOROSŁYCH W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ PUBLICZNYCH - BRANŻOWA SZKOŁA I STOPNIA W SKARSZEWACH",
+    "city": "Skarszewy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ PUBLICZNYCH SZKOŁA PODSTAWOWA NR 2 IM. MIKOŁAJA KOPERNIKA",
+    "city": "Skarszewy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ PUBLICZNYCH W SKÓRCZU PUBLICZNA SZKOŁA PODSTAWOWA IM. FRANCISZKA SCHORNAKA",
+    "city": "Skórcz"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SAMOCHODOWYCH BRANŻOWA SZKOŁA I STOPNIA NR 12 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SAMOCHODOWYCH IM. BRYGADY PANCERNEJ IM BOHATERÓW WESTERPLATTE TECHNIKUM NR 12 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPECJALNYCH NR 1 BRANŻOWA SZKOŁA SPECJALNA I STOPNIA NR 19 IM. STEFANA BATOREGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPECJALNYCH NR 1 SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 3 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPECJALNYCH NR 1 W GDAŃSKU SZKOŁA PODSTAWOWA SPECJALNA NR 63 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPECJALNYCH NR 2 BRANŻOWA SZKOŁA SPECJALNA I STOPNIA NR 20 IM. ŚW. MATKI TERESY Z KALKUTY",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPECJALNYCH NR 2 SZKOŁA SPECJALNA PRZYSPOSABIAJĄCA DO PRACY NR 2 IM. ŚW. MATKI TERESY Z KALKUTY W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPORTOWYCH I MISTRZOSTWA SPORTOWEGO IM. JANUSZA KUSOCIŃSKIEGO SPORTOWA SZKOŁA PODSTAWOWA NR 75 Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO IM. JANUSZA KUSOCIŃSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SPORTOWYCH I MISTRZOSTWA SPORTOWEGO IM. JANUSZA KUSOCIŃSKIEGO XII SPORTOWE LICEUM OGÓLNOKSZTAŁCĄCE Z ODDZIAŁAMI MISTRZOSTWA SPORTOWEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SZKOŁA PODSTAWOWA IM. POLSKICH OLIMPIJCZYKÓW W RYTLU",
+    "city": "Rytel"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SZKOŁA PODSTAWOWA IM. RODZINY DONIMIRSKICH W CZERNINIE",
+    "city": "Czernin"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SZKOŁA PODSTAWOWA IM. TADEUSZA KOŚCIUSZKI W ŁĘGU",
+    "city": "Łąg"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ SZKOŁA PODSTAWOWA W GOŚCISZEWIE",
+    "city": "Gościszewo"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ TECHNICZNYCH IM. FLORIANA CEYNOWY W KARTUZACH BRANŻOWA SZKOŁA I STOPNIA NR 2 W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ TECHNICZNYCH IM. FLORIANA CEYNOWY W KARTUZACH TECHNIKUM NR 1 W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W BORZYTUCHOMIU - SZKOŁA PODSTAWOWA",
+    "city": "Borzytuchom"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W DZIERZGONIU - LICEUM OGÓLNOKSZTAŁCĄCE",
+    "city": "Dzierzgoń"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W DZIERZGONIU - TECHNIKUM",
+    "city": "Dzierzgoń"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W LIPUSZU - SZKOŁA PODSTAWOWA",
+    "city": "Lipusz"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W STEGNIE - SZKOŁA PODSTAWOWA W STEGNIE IM. I BRYGADY PANCERNEJ IM. BOHATERÓW WESTERPLATTE",
+    "city": "Stegna"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ W SUBKOWACH - SZKOŁA PODSTAWOWA IM. LEONIDA TELIGI W SUBKOWACH",
+    "city": "Subkowy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W KARTUZACH IM.I BRYGADY PANCERNEJ IM. BOHATERÓW WESTERPLATTE BRANŻOWA SZKOŁA I STOPNIA NR 1 W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W KARTUZACH IM.I BRYGADY PANCERNEJ IM. BOHATERÓW WESTERPLATTE III LICEUM OGÓLNOKSZTAŁCĄCE W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W KARTUZACH IM.I BRYGADY PANCERNEJ IM. BOHATERÓW WESTERPLATTE TECHNIKUM NR 2 W KARTUZACH",
+    "city": "Kartuzy"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W ŻUKOWIE, BRANŻOWA SZKOŁA I STOPNIA IM. KSIĄŻĄT POMORSKICH W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W ŻUKOWIE, LICEUM OGÓLNOKSZTALCĄCE IM. KSIĄŻĄT POMORSKICH W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH I OGÓLNOKSZTAŁCĄCYCH W ŻUKOWIE, TECHNIKUM IM. KSIĄŻĄT POMORSKICH W ŻUKOWIE",
+    "city": "Żukowo"
+  },
+  {
+    "name": "ZESPÓŁ SZKÓŁ ZAWODOWYCH IM.STANISŁAWA STASZICA W BARLEWICZKACH - TECHNIKUM",
+    "city": "Barlewiczki"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO - PRZEDSZKOLNY - SZKOŁA PODSTAWOWA IM. KS. FRANCISZKA SAWICKIEGO",
+    "city": "Godziszewo"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO - PRZEDSZKOLNY IM. UNII EUROPEJSKIEJ W CHOCZEWIE - SZKOŁA PODSTAWOWA W CHOCZEWIE",
+    "city": "Choczewo"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO - PRZEDSZKOLNY NR 1 W GDAŃSKU - SZKOŁA PODSTAWOWA NR 76 IM. JAROSŁAWA DĄBROWSKIEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO - PRZEDSZKOLNY W CIEKOCINIE - SZKOŁA PODSTAWOWA W CIEKOCINIE",
+    "city": "Choczewo"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY MAŁA SZKOŁA W SZOPIE",
+    "city": "Szopa"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 10 - SZKOŁA PODSTAWOWA NR 80 IM. BUDOWNICZYCH PORTU PÓŁNOCNEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 11- SZKOŁA PODSTAWOWA NR 61 IM. JÓZEFA WYBICKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 2 -SZKOŁA PODSTAWOWA NR 42 IM. IGNACEGO JANA PADEREWSKIEGO W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 3 SZKOŁA PODSTAWOWA NR 72 IM. OBROŃCÓW WESTERPLATTE W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 4 SZKOŁA PODSTAWOWA NR 11 IM. NA BURSZTYNOWYM SZLAKU W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 5 SZKOŁA PODSTAWOWA NR 92 IM. KARD. STEFANA WYSZYŃSKIEGO PRYMASA TYSIĄCLECIA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 6 SZKOŁA PODSTAWOWA NR 6 W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 7 SZKOŁA PODSTAWOWA NR 55 IM. JANA HEWELIUSZA W GDAŃSKU",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 8 SZKOŁA PODSTAWOWA NR 8 W GDAŃSKU IM. PRZYJACIÓŁ ZIEMI",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY NR 9 - SZKOŁA PODSTAWOWA NR 7 IM.MJRA MIECZYSŁAWA SŁABEGO",
+    "city": "Gdańsk"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY SZKOŁA PODSTAWOWA IM. WŁADYSŁAWA BRONIEWSKIEGO",
+    "city": "Główczyce"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY W BORKOWIE - SZKOŁA PODSTAWOWA IM.JANA BRZECHWY W BORKOWIE",
+    "city": "Borkowo"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY W DREWNICY - SZKOŁA PODSTAWOWA W DREWNICY",
+    "city": "Drewnica"
+  },
+  {
+    "name": "ZESPÓŁ SZKOLNO-PRZEDSZKOLNY W ŻELKOWIE - SZKOŁA PODSTAWOWA IM. JANA BRZECHWY W ŻELKOWIE",
+    "city": "Żelkowo"
+  }
+]

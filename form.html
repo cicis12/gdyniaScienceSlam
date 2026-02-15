@@ -16,7 +16,7 @@
   
       <!-- LOGO -->
       <div class="font-bold text-xl max-h-20">
-        <img class="max-h-20" src="assets/logo.png">
+        <img class="max-h-20" src="static/assets/logo.png">
       </div>
   
       <!-- DESKTOP MENU -->
@@ -119,8 +119,8 @@
                      class="w-full bg-white/0 focus:border-blue-500font-bold placeholder-gray-600 iti__input"
                      required/>
                 </div>
-                <!-- School (WiP)-->
-                <div class="flex pb-6">
+                <!-- School-->
+                <div class="flex-collumn pb-6">
                     <label for="school" class="sr-only">Nazwa szkoły</label>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
                         <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002c-.114.06-.227.119-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
@@ -130,11 +130,15 @@
                       
                       
                       
-                    <input type="email"
-                     id="email"
-                     name="email"
-                     placeholder="Adres E-Mail*"
+                    <input type="text"
+                     id="school"
+                     name="school"
+                     autocomplete="off"
+                     placeholder="Nazwa szkoły"
                      class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"/>
+                     <div id="results">
+
+                     </div>
                 </div>
                 <!-- temporary input button (for checkig type handling)-->
                  <input type="submit" value="Submit"/>
@@ -184,5 +188,98 @@
             font-weight: bold;
         }
       </style>
+      <!-- school autocompletion -->
+      <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+      <script>
+        let schools = [];
+        let fuse;
+        function normalize(text){
+          return text
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove accents
+            .replace(/ł/g,"l")
+            .replace(/[^\w\s]/g, "")        // remove punctuation
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        function getSchoolNumber(text){
+          const match = text.match(/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\b/i);
+          return match ? match[0].toLowerCase() : null;
+        }
+        fetch("/static/RSPO.json")
+          .then(response => response.json())
+          .then(data => {
+            schools= data.map(s =>{
+              const normalized_name= normalize(s.name);
+              const normalized_city= normalize(s.city);
+              return{
+                name: s.name,
+                city: s.city,
+                normalized_name,
+                normalized_city,
+                school_number: getSchoolNumber(normalized_name)
+              }
+            });
+          });
+         
+          
+
+        const SchoolInput = document.getElementById("school");
+        const SchoolResults = document.getElementById("results");
+
+        SchoolInput.addEventListener("input", () => {
+          
+          const query= normalize(SchoolInput.value);
+          const queryNumber = getSchoolNumber(query);
+          const words= query.split(" ").filter(word => word.length > 1 || word===queryNumber);
+          const filtered = schools.filter(s => {
+
+            if(queryNumber && s.school_number!==queryNumber){
+              return false;
+            }
+            return words.every(word =>
+              s.normalized_name.includes(word) || s.normalized_city.includes(word)
+            )
+        });
+
+
+          if(query.length <2){
+            SchoolResults.innerHTML="";
+            return;
+          }
+
+          const results=new Fuse(filtered, {
+              keys:[
+                { name: "normalized_name", weight:0.7},
+                { name: "normalized_city", weight:0.3 }
+              ],
+              threshold: 0.5,
+              ignoreLocation:true,
+              minMatchCharLength: 2,
+              shouldSort: true,
+              findAllMatches:true,
+              includeScore:true
+            }).search(query);
+
+
+          SchoolResults.innerHTML = results
+            .slice(0,5)
+            .map(result => `
+              <div class="result-item font-bold">${result.item.name} - ${result.item.city}</div>
+            `)
+            .join("");
+        });
+        document.addEventListener("click", (e)=>{
+          if(!e.target.closest("#school") && !e.target.closest("#results")){
+            SchoolResults.innerHTML="";
+          }
+        })
+        SchoolResults.addEventListener("click", (e)=>{
+          if(!e.target.classList.contains("result-item")) return;
+          SchoolInput.value = e.target.textContent;
+          SchoolResults.innerHTML="";
+        })
+      </script>
 </body>
 </html>
