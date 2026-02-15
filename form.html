@@ -140,6 +140,21 @@
 
                      </div>
                 </div>
+                <!-- File-->
+                <div class="flex flex-col pb-6">
+                  <label for="parentconsent" class="sr-only">Zgoda</label>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute size-6">
+                    <path fill-rule="evenodd" d="M18.97 3.659a2.25 2.25 0 0 0-3.182 0l-10.94 10.94a3.75 3.75 0 1 0 5.304 5.303l7.693-7.693a.75.75 0 0 1 1.06 1.06l-7.693 7.693a5.25 5.25 0 1 1-7.424-7.424l10.939-10.94a3.75 3.75 0 1 1 5.303 5.304L9.097 18.835l-.008.008-.007.007-.002.002-.003.002A2.25 2.25 0 0 1 5.91 15.66l7.81-7.81a.75.75 0 0 1 1.061 1.06l-7.81 7.81a.75.75 0 0 0 1.054 1.068L18.97 6.84a2.25 2.25 0 0 0 0-3.182Z" clip-rule="evenodd" />
+                  </svg>
+                  
+    
+                  <input type="file"
+                   id="parentconsent"
+                   name="parentconsent"
+                   class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                   required/>
+                   <p class="text-sm pl-10">Zgoda na uczestnictwo w wydarzeniu</p>
+              </div>
                 <!-- temporary input button (for checkig type handling)-->
                  <input type="submit" value="Submit"/>
             </form>
@@ -203,10 +218,39 @@
             .replace(/\s+/g, " ")
             .trim();
         }
+        const numberMap ={
+          "1" : "i",
+          "2" : "ii",
+          "3" : "iii",
+          "4" : "iv",
+          "5" : "v",
+          "6" : "vi",
+          "7" : "vii",
+          "8" : "viii",
+          "9" : "ix",
+          "10" : "x",
+          "11" : "xi",
+          "12" : "xii",
+          "13" : "xiii",
+          "14" : "xiv",
+          "15" : "xv",
+          "16" : "xvi",
+          "17" : "xvii",
+          "18" : "xviii",
+          "19" : "xix",
+          "20" : "xx"
+        }
         function getSchoolNumber(text){
           const match = text.match(/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\b/i);
-          return match ? match[0].toLowerCase() : null;
+          if(match) return match[0];
+
+          for(const key in numberMap){
+            if(text.includes(key)){
+              return numberMap[key];
+            }
+          }
         }
+        
         fetch("/static/RSPO.json")
           .then(response => response.json())
           .then(data => {
