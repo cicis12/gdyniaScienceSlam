@@ -4,6 +4,24 @@
   <meta charset="UTF-8">
   <title>Gdynia Science Slam</title>
   <script src="https://cdn.tailwindcss.com"></script>
+ <style>
+@keyframes scrollLoop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.slider-track {
+  display: flex;
+  width: max-content;
+  animation: scrollLoop 40s linear infinite;
+}
+</style>
+
+
 </head>
 
 <body class="bg-gray-50 text-gray-800">
@@ -120,33 +138,84 @@
     </div>
   </section>
   <!--zespol-->
-  <section class="py-20 bg-[#5e85b8] text-[#18395d]">
-    <div class="max-w-7xl mx-auto px-6 text-center">
+ <section class="py-20 bg-gray-50">
+  <h2 class="text-3xl font-bold mb-10 text-center">Nasz zespół</h2>
 
-      <h2 class="text-3xl font-bold mb-10">Nasz zespół</h2>
+  <div class="w-full overflow-hidden">
 
-      <div class="flex gap-8 overflow-x-auto justify-center">
-        <!-- osoba -->
+    <div class="slider-track">
+
+      <!-- ZESTAW 1 -->
+      <div class="flex gap-16 px-8">
+
         <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team1.jpg"
+          <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
           <p class="font-semibold">Anna Kowalska</p>
         </div>
 
         <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team2.jpg"
+          <img src="assets/images/team2.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
           <p class="font-semibold">Jan Nowak</p>
         </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Marcul</p>
+        </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Tralalero</p>
+        </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Tralala</p>
+        </div>
+
       </div>
 
-      <a href="team.html"
-         class="inline-block mt-8 text-blue-600 font-semibold hover:underline">
-        Poznaj cały zespół →
-      </a>
+      <!-- ZESTAW 2 (IDENTYCZNA KOPIA!) -->
+      <div class="flex gap-16 px-8">
+
+         <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Anna Kowalska</p>
+        </div>
+
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team2.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Jan Nowak</p>
+        </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Marcul</p>
+        </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Tralalero</p>
+        </div>
+        <div class="flex flex-col items-center min-w-[150px]">
+          <img src="assets/images/team1.jpg"
+               class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">Tralala</p>
+        </div>
+
+      </div>
 
     </div>
-  </section>
+  </div>
+</section>
+
+
+
+
   <!--poprzednia edycja-->
   <section class="py-20 bg-[#819edb] text-[#18395d]">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
