@@ -1,0 +1,15 @@
+#Python
+__pycache__/
+*.pyc
+*.pyo 
+*.pyd
+.venv/
+venv/
+#Envirement variables
+.env
+*.env
+#Uploads
+uploads/zgodauczestnik/*
+uploads/zgodawidz/*
+uploads/zgodawolontariusz/*
+uploads/filmikuczestnik/*
