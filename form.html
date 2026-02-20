@@ -68,81 +68,126 @@
         <div class="md:w-2/3 mx-auto left-1/6">
             <form method="POST" action="/testForm" enctype="multipart/form-data">
                 <!-- Name and surname-->
-                <div class="flex gap-4 pb-6">
-                    <label for="name" class="sr-only">Imię</label>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                <div class="flex gap-4">
+                  <div class="relative flex-1">
+                    <div class="absolute left-0 top-1/2 -translate-y-[58%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
                         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                       </svg>
-                      
+                    </div>
                     <input type="text"
                      id="name"
                      name="name"
-                     placeholder="Imię*"
-                     class="w-1/2 border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                     placeholder=" "
+                     class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                     
+                    <label
+                      for="name"
+                      class="absolute left-10 top-6 text-gray-600 transition-all duration-200
+                      peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                      Imię*</label>
+                  </div>
 
-                    <label for="surname" class="sr-only"> Nazwisko </label>
+                  <div class="relative flex-1">
                     <input type="text"
                      id="surname"
                      name="surname"
-                     placeholder="Nazwisko*"
-                     class="w-1/2 border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-1 pb-1 font-bold placeholder-gray-600" required/>
+                     placeholder=" "
+                     class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
+                     
+                     
+                    <label
+                       for="surname"
+                       class="absolute left-2 top-6 text-gray-600 transition-all duration-200
+                       peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                        Nazwisko*</label>
+                  </div>
                 </div>
                 <!-- Email-->
-                <div class="flex pb-6">
-                    <label for="email" class="sr-only">Adres E-Mail</label>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute">
+                <div class="relative">
+                    <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
                       </svg>
-                      
+                    </div>
                       
                     <input type="email"
                      id="email"
                      name="email"
-                     placeholder="Adres E-Mail*"
-                     class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                     placeholder=" "
+                     class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
+
+                     <label
+                        for="email"
+                        class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                        peer-placeholder-shown:top-6
+                        peer-placeholder-shown:text-gray-600
+                        peer-placeholder-shown:text-base
+                        peer-focus:top-1
+                        peer-focus:text-sm
+                        peer-focus:text-[#18395d]">
+                      Adres E-Mail*</label>
                 </div>
                 <!-- Phone number-->
-                <div class="relative w-full mb-4 tailwind-phone-input w-full border-b-2 border-white outline-none pr-0 pb-1">
-                    <label for="phone" class="sr-only">Numer telefonu</label>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
-                        <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
-                        <path fill-rule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clip-rule="evenodd" />
-                      </svg>
+                <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
+                    
+                    
                       
-                      
-                      
-                    <input type="tel"
-                     id="phone"
-                     name="phone"
-                     placeholder="Numer telefonu*"
-                     class="w-full bg-white/0 focus:border-blue-500font-bold placeholder-gray-600 iti__input"
-                     required/>
+                    
+                      <div class="absolute">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                          <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                          <path fill-rule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clip-rule="evenodd" />
+                        </svg>
+                      </div>
+                      <input type="tel"
+                       id="phone"
+                       name="phone"
+                       placeholder=" "
+                       class="w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
+                       required/>
+                       <label
+                          for="phone"
+                          class="absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
+                        Numer telefonu*</label>
+                    
                 </div>
                 <!-- School-->
-                <div class="flex-collumn pb-6">
-                    <label for="school" class="sr-only">Nazwa szkoły</label>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                <div class="relative">
+                    <div class="absolute left-0 top-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
                         <path d="M11.7 2.805a.75.75 0 0 1 .6 0A60.65 60.65 0 0 1 22.83 8.72a.75.75 0 0 1-.231 1.337 49.948 49.948 0 0 0-9.902 3.912l-.003.002c-.114.06-.227.119-.34.18a.75.75 0 0 1-.707 0A50.88 50.88 0 0 0 7.5 12.173v-.224c0-.131.067-.248.172-.311a54.615 54.615 0 0 1 4.653-2.52.75.75 0 0 0-.65-1.352 56.123 56.123 0 0 0-4.78 2.589 1.858 1.858 0 0 0-.859 1.228 49.803 49.803 0 0 0-4.634-1.527.75.75 0 0 1-.231-1.337A60.653 60.653 0 0 1 11.7 2.805Z" />
                         <path d="M13.06 15.473a48.45 48.45 0 0 1 7.666-3.282c.134 1.414.22 2.843.255 4.284a.75.75 0 0 1-.46.711 47.87 47.87 0 0 0-8.105 4.342.75.75 0 0 1-.832 0 47.87 47.87 0 0 0-8.104-4.342.75.75 0 0 1-.461-.71c.035-1.442.121-2.87.255-4.286.921.304 1.83.634 2.726.99v1.27a1.5 1.5 0 0 0-.14 2.508c-.09.38-.222.753-.397 1.11.452.213.901.434 1.346.66a6.727 6.727 0 0 0 .551-1.607 1.5 1.5 0 0 0 .14-2.67v-.645a48.549 48.549 0 0 1 3.44 1.667 2.25 2.25 0 0 0 2.12 0Z" />
                         <path d="M4.462 19.462c.42-.419.753-.89 1-1.395.453.214.902.435 1.347.662a6.742 6.742 0 0 1-1.286 1.794.75.75 0 0 1-1.06-1.06Z" />
                       </svg>
-                      
+                    </div>
                       
                       
                     <input type="text"
                      id="school"
                      name="school"
                      autocomplete="off"
-                     placeholder="Nazwa szkoły"
-                     class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"/>
+                     placeholder=" "
+                     class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                     required/>
+                     <label
+                        for="school"
+                        class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                        peer-placeholder-shown:top-6
+                        peer-placeholder-shown:text-gray-600
+                        peer-placeholder-shown:text-base
+                        peer-focus:top-1
+                        peer-focus:text-sm
+                        peer-focus:text-[#18395d]">
+                      Nazwa szkoły*</label>
                      <div id="results">
 
                      </div>
+                     
                 </div>
                 <!-- File-->
-                <div class="flex flex-col pb-6">
-                  <label for="parentconsent" class="sr-only">Zgoda</label>
+                <div class="flex flex-col pt-6">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute size-6">
                     <path fill-rule="evenodd" d="M18.97 3.659a2.25 2.25 0 0 0-3.182 0l-10.94 10.94a3.75 3.75 0 1 0 5.304 5.303l7.693-7.693a.75.75 0 0 1 1.06 1.06l-7.693 7.693a5.25 5.25 0 1 1-7.424-7.424l10.939-10.94a3.75 3.75 0 1 1 5.303 5.304L9.097 18.835l-.008.008-.007.007-.002.002-.003.002A2.25 2.25 0 0 1 5.91 15.66l7.81-7.81a.75.75 0 0 1 1.061 1.06l-7.81 7.81a.75.75 0 0 0 1.054 1.068L18.97 6.84a2.25 2.25 0 0 0 0-3.182Z" clip-rule="evenodd" />
                   </svg>
@@ -153,7 +198,33 @@
                    name="parentconsent"
                    class="w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
                    required/>
-                   <p class="text-sm pl-10">Zgoda na uczestnictwo w wydarzeniu</p>
+                   <label for="parentconsent" class="text-sm pl-10 font-bold">Zgoda na uczestnictwo w wydarzeniu</p>
+                </div>
+                <!-- Long text input-->
+                <div class="relative pb-6">
+                  <label for="about" class="sr-only">Opowiedz coś o sobie</label>
+                  <div class="absolute left-0 top-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a5.969 5.969 0 0 1-.474-.065 4.48 4.48 0 0 0 .978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+                    </svg>
+                  </div>
+                  <textarea
+                    id="about"
+                    name="about"
+                    rows="1"
+                    placeholder=""
+                    required
+                    class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"></textarea>
+                    <label
+                        for="about"
+                        class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                        peer-placeholder-shown:top-6
+                        peer-placeholder-shown:text-gray-600
+                        peer-placeholder-shown:text-base
+                        peer-focus:top-1
+                        peer-focus:text-sm
+                        peer-focus:text-[#18395d]">
+                     Opowiedz coś o sobie*</label>
               </div>
                 <!-- temporary input button (for checkig type handling)-->
                  <input type="submit" value="Submit"/>
@@ -194,6 +265,18 @@
           separateDialCode: true,
           loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
         });
+
+        // rising label (peer gets broken by iti)
+        const phoneLabel = document.querySelector(".phone-label");
+        input.addEventListener("focus", ()=> phoneLabel.classList.add("active"));
+        input.addEventListener("blur", ()=> {
+          if(!input.value) phoneLabel.classList.remove("active");
+        });
+
+        document.addEventListener("DOMContentLoaded", ()=>{
+          if(input.value) phoneLabel.classList.add("active");
+        });
+
       </script>
       <style>
         .tailwind-phone-input .iti {
@@ -201,6 +284,18 @@
             left: 2.5rem !important;
             top:50% !important;
             font-weight: bold;
+        }
+        .phone-label {
+          position: absolute;
+          top: 1.5rem;
+          left:8rem;
+          transition: all 0.2s;
+          font-size: 1rem;
+        }
+        .phone-label.active{
+          top: 0.25rem;
+          left:2.5rem;
+          font-size: 0.90rem;
         }
       </style>
       <!-- school autocompletion -->
@@ -325,5 +420,19 @@
           SchoolResults.innerHTML="";
         })
       </script>
+
+      <!-- long text auto expand-->
+       <script>
+          function autoResize(textarea){
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+          }
+          document.addEventListener("DOMContentLoaded", function(){
+            const textareas = document.querySelectorAll(".long-text");
+            textareas.forEach(textarea =>{
+              textarea.addEventListener("input", () => autoResize(textarea));
+            })
+          })
+       </script>
 </body>
 </html>

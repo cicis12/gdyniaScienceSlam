@@ -35,7 +35,7 @@ def ping():
 
 # Handle Post (@app.post)
 
-@app.post("/exampleform")
+@app.post("/testForm")
 def handle_exampleform(
     name: str = Form(...),
     surname: str = Form(...),
