@@ -201,7 +201,7 @@
                    <label for="parentconsent" class="text-sm pl-10 font-bold">Zgoda na uczestnictwo w wydarzeniu</p>
                 </div>
                 <!-- Long text input-->
-                <div class="relative pb-6">
+                <div class="relative">
                   <label for="about" class="sr-only">Opowiedz coś o sobie</label>
                   <div class="absolute left-0 top-6">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
@@ -225,7 +225,85 @@
                         peer-focus:text-sm
                         peer-focus:text-[#18395d]">
                      Opowiedz coś o sobie*</label>
-              </div>
+                </div>
+                <!-- Single choice-->
+                <div class="relative w-full">
+                  <div class="absolute left-0 top-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                    </svg>
+                  </div>
+                  <div id="supervisor-relation-select">
+                    <select class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                      id="supervisor-relation"
+                      name="supervisor-relation" required>
+                      <option value="" disabled selected hidden></option>
+                      <option value="rodzic">Rodzic</option>
+                      <option value="nauczyciel">Nauczyciel</option>
+                      <option value="korepetytor">Korepetytor</option>
+                      <option value="członek rodziny">Członek rodziny</option>
+                    </select>
+                    <label for="supervisor-relation"
+                      class="absolute left-10 top-6 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-valid:text-sm
+                      peer-valid:top-1
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                      Kim jest dla ciebie twój opiekun?
+                    </label>
+                  </div>
+                </div>
+                <!-- Date selector-->
+                 <div class="relative">
+                  <div class="absolute left-0 top-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                    </svg>
+                  </div>
+                  <input type="date"
+                    id="birthdate"
+                    name="birthdate"
+                    placeholder=" "
+                    class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600">
+                    <label for="birthdate"
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">Data Urodzenia*</label>
+                 </div>
+                 <!-- Checkbox-->
+                 <div class="pt-6">
+                  <label class="font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" id="audience_aware" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+
+                      Zdaję sobie sprawę z tego, że w trakcie konferencji będę zobowiązana/zobowiązany do przedstawienia tematu przez dużą grupą odbiorców.
+                  </label>
+                 </div>
                 <!-- temporary input button (for checkig type handling)-->
                  <input type="submit" value="Submit"/>
             </form>

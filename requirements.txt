@@ -1,6 +1,7 @@
 fastapi==0.129.0
+idna==3.11
 Jinja2==3.1.6
-psycopg2-binary==2.9.11
+psycopg==3.3.3
 pydantic==2.12.5
 python-dotenv==1.2.1
 python-multipart==0.0.22

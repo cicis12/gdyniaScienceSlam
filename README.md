@@ -78,13 +78,45 @@ In `main.py` to line starting with `from models import ...` add the name of your
 ```py
 from models import Viewer
 ```
-
+##### 4.5. Handling videos
+If handling videos, in `main.py` add (if not there):
+```py
+from video import
+```
 #### 5. Add POST listening
 
 
 ### Production
 
+#### 0. Change postgre identification settings
+Access the psql superuser console by
+`sudo -u postgres psql`
+or
+`psql -U postgres`
 
+type
+```sql
+SHOW hba_file;
+```
+Enter the given file and search for
+```
+host    all     all     127.0.0.1/32    ident
+```
+or
+```
+host    all     all     127.0.0.1/32    peer
+```
+
+Replace `peer` or `ident` with `scram-sha-256`. Save and exit.<br>
+
+Restart Postgre by
+```bash
+sudo systemctl restart postgresql
+```
+or if it fails
+```bash
+sudo service postgresql restart
+```
 #### 1. Create a user in psql
 Access the psql superuser console by
 `sudo -u postgres psql`
@@ -118,9 +150,9 @@ Add tables to the database by running
 psql -U <adminUsername> -d <DBname> -f databaseScheme.sql
 ```
 #### 3. Add permissions to the app user
-Enter the postgres console:
+Enter the postgres console for the DB u created:
 ```bash
-sudo -u postgres psql
+psql <DBname>
 ```
 Add permissions for the app user:
 ```sql
@@ -133,6 +165,20 @@ TO <appUsername>;
 
 GRANT USAGE, SELECT
 ON ALL SEQUENCES IN SCHEMA public
+TO <appUsername>;
+
+ALTER DEFAULT PRIVILEGES
+FOR ROLE <adminUsername>
+IN SCHEMA public
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON TABLES
+TO <appUsername>;
+
+ALTER DEFAULT PRIVILEGES
+FOR ROLE <adminUsername>
+IN SCHEMA public
+GRANT USAGE, SELECT
+ON SEQUENCES
 TO <appUsername>;
 ``` 
 Exit the psql console by
