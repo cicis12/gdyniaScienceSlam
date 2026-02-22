@@ -67,7 +67,12 @@
       </h1>
 
         <div class="md:w-2/3 mx-auto left-1/6">
-            <form method="POST" action="/contestantForm" enctype="multipart/form-data">
+          <div id="toast" class="fixed top-5 right-5 z-50 hidden">
+            <div id="toast-content" class="px-6 py-4 rounded-xl shadow-lg text-white font-medium">
+
+            </div>
+          </div>
+            <form method="POST" id="contestantForm" action="/contestantForm" enctype="multipart/form-data">
                 <h2 class="text-3xl font-bold text-center">
                     Dane osobowe
                   </h2>
@@ -940,5 +945,55 @@
             })
           })
        </script>
+
+       <!-- Form sending and Toast message handling-->
+        <script>
+          document.addEventListener("DOMContentLoaded", ()=>{
+            function showToast(message, type="success"){
+              const toast = document.getElementById("toast");
+              const content = document.getElementById("toast-content");
+
+              content.textContent=message;
+              content.classList.remove("bg-green-600", "bg-red-600");
+
+              if(type === "success"){
+                content.classList.add("bg-green-600");
+              } else{
+                content.classList.add("bg-red-600");
+              }
+
+              toast.classList.remove("hidden");
+
+              setTimeout(() => {
+                toast.classList.add("hidden");
+              }, 4000);
+            }
+
+
+            const form = document.getElementById("contestantForm");
+
+            form.addEventListener("submit", async (e) => {
+              e.preventDefault();
+
+              const formData = new FormData(form);
+              try{
+                const response = await fetch("/contestantForm", {
+                  method: "POST",
+                  body: formData
+                });
+                const result = await response.json();
+                if(result.success){
+                  showToast(result.message, "success");
+                  form.reset();
+                }else{
+                  showToast(result.message, "error");
+                }
+              } catch(err){
+                showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
+              }
+            });
+          });
+          
+        </script>
 </body>
 </html>

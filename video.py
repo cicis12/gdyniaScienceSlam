@@ -1,21 +1,22 @@
 import os
 from uuid import uuid4
-from fastapi import UploadFile, HTTPException
+from fastapi import UploadFile
+from fastapi.responses import JSONResponse
 
 UPLOAD_DIR = "uploads/filmikuczestnik"
 MAX_FILE_SIZE = 50*1024*1024 #50MB
-ALLOWED_MIME_TYPES = {"video/mp4", "video/webm", "video/quicktime"}
-ALLOWED_EXTENSIONS = {".mp4", ".webm", ".mov"}
+ALLOWED_MIME_TYPES = {"video/mp4", "video/webm", "video/quicktime", "video/x-matroska"}
+ALLOWED_EXTENSIONS = {".mp4", ".webm", ".mov", ".mkv"}
 
 async def save_video(video: UploadFile) -> str:
     if video.content_type not in ALLOWED_MIME_TYPES:
-        raise HTTPException(status_code=400, detail="Invalid video type")
+        return JSONResponse(status_code=400, content={"success": False, "message": "Błędny format filmu, dopuszczamy .mp4 .webm .mov i .mkv"})
 
     _, ext = os.path.splitext(video.filename)
     ext = ext.lower()
 
     if ext not in ALLOWED_EXTENSIONS:
-        raise HTTPException(status_code=400, detail="Invaid video extension")
+        return JSONResponse(status_code=400, content={"success": False, "message": "Błędny format filmu, dopuszczamy .mp4 .webm .mov i .mkv"})
 
     os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -32,7 +33,7 @@ async def save_video(video: UploadFile) -> str:
                 if size > MAX_FILE_SIZE:
                     buffer.close()
                     os.remove(file_path)
-                    raise HTTPException(status_code=400, detail="File too large (max 50MB)")
+                    return JSONResponse(status_code=400, content={"success": False, "message": "Przesłany plik jest zbyt duży (max 50MB)"})
 
                 buffer.write(chunk)
     except Exception:

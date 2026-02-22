@@ -1,5 +1,5 @@
-from fastapi import FastAPI, Form, File, UploadFile, Depends, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi import FastAPI, Form, File, UploadFile, Depends
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles 
 from pathlib import Path
 from sqlalchemy.orm import Session
@@ -109,8 +109,11 @@ async def handle_contestantform(
         db.refresh(new_contestant)
     except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=400, detail="Email already registered")
-
+        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+    )
 @app.post("/testForm")
 async def handle_exampleform(
     name: str = Form(...),
