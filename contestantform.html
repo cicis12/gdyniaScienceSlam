@@ -61,18 +61,17 @@
   </nav>
 
   <main class="flex-grow">
+    <div id="toast" class="fixed top-5 right-5 z-50 hidden">
+      <div id="toast-content" class="px-6 py-4 rounded-xl shadow-lg text-white font-medium">
+
+      </div>
+    </div>
     <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center">
-      <h1 class="text-4xl font-bold text-center mb-12">
-        Zgłoszenie Prelegenta
-      </h1>
-
+      
+        
         <div class="md:w-2/3 mx-auto left-1/6">
-          <div id="toast" class="fixed top-5 right-5 z-50 hidden">
-            <div id="toast-content" class="px-6 py-4 rounded-xl shadow-lg text-white font-medium">
-
-            </div>
-          </div>
-            <form method="POST" id="contestantForm" action="/contestantForm" enctype="multipart/form-data">
+            
+            <form method="POST" id="contestantForm" class="dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
                 <h2 class="text-3xl font-bold text-center">
                     Dane osobowe
                   </h2>
@@ -155,7 +154,7 @@
                        id="phone"
                        name="phone"
                        placeholder=" "
-                       class="w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
+                       class="phone w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
                        required/>
                        <label
                           for="phone"
@@ -164,7 +163,7 @@
                     
                 </div>
                 <!-- School-->
-                <div class="relative">
+                <div class="relative autocompleteConatainer">
                     <div class="absolute left-0 top-6">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
@@ -177,7 +176,7 @@
                      name="school"
                      autocomplete="off"
                      placeholder=" "
-                     class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                     class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
                      required/>
                      <label
                         for="school"
@@ -189,7 +188,7 @@
                         peer-focus:text-sm
                         peer-focus:text-[#18395d]">
                       Nazwa szkoły*</label>
-                     <div id="results">
+                     <div class="results">
 
                      </div>
                      
@@ -765,54 +764,55 @@
       }
     });
   </script>
-    <!-- phone number handling script-->
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
-    <script>
-        const input = document.querySelector("#phone");
-        window.intlTelInput(input, {
-          initialCountry: "pl",
-          countryOrder: ["pl"],
-          customContainer: "tailwind-phone-input",
-          separateDialCode: true,
-          loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
-        });
 
-        // rising label (peer gets broken by iti)
-        const phoneLabel = document.querySelector(".phone-label");
-        input.addEventListener("focus", ()=> phoneLabel.classList.add("active"));
-        input.addEventListener("blur", ()=> {
-          if(!input.value) phoneLabel.classList.remove("active");
-        });
 
-        document.addEventListener("DOMContentLoaded", ()=>{
-          if(input.value) phoneLabel.classList.add("active");
-        });
+  <!-- phone number handling-->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+  <!-- school autocompletion -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    document.querySelectorAll(".dyn-form").forEach(form => {
+      //-------------------TOAST HANDLING-----------------------------
+      
+        function showToast(message, type="success"){
+          const toast = document.getElementById("toast");
+          const content = document.getElementById("toast-content")
+          content.textContent=message;
+          content.classList.remove("bg-green-600", "bg-red-600")
+          if(type === "success"){
+            content.classList.add("bg-green-600");
+          } else{
+            content.classList.add("bg-red-600");
+          }
+          toast.classList.remove("hidden")
+          setTimeout(() => {
+            toast.classList.add("hidden");
+          }, 4000);
+        }
+      //--------------------------------------------------------------
+      //-------------------PHONE HANDLING-----------------------------
+      const input = form.querySelector(".phone");
 
-      </script>
-      <style>
-        .tailwind-phone-input .iti {
-            width: 100% !important;
-            left: 2.5rem !important;
-            top:50% !important;
-            font-weight: bold;
-        }
-        .phone-label {
-          position: absolute;
-          top: 1.5rem;
-          left:8rem;
-          transition: all 0.2s;
-          font-size: 1rem;
-        }
-        .phone-label.active{
-          top: 0.25rem;
-          left:2.5rem;
-          font-size: 0.90rem;
-        }
-      </style>
-      <!-- school autocompletion -->
-      <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
-      <script>
-        let schools = [];
+      window.intlTelInput(input, {
+        initialCountry: "pl",
+        countryOrder: ["pl"],
+        customContainer: "tailwind-phone-input",
+        separateDialCode: true,
+        loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
+      });
+      // rising label (peer gets broken by iti)
+      const phoneLabel = form.querySelector(".phone-label");
+      input.addEventListener("focus", ()=> phoneLabel.classList.add("active"));
+      input.addEventListener("blur", ()=> {
+        if(!input.value) phoneLabel.classList.remove("active");
+      });
+      
+      if(input.value) phoneLabel.classList.add("active");
+      
+      //---------------------------------------------------------------
+      //----------------SCHOOL AUTOCOMPLETION--------------------------
+      let schools = [];
         let fuse;
         function normalize(text){
           return text
@@ -875,8 +875,8 @@
          
           
 
-        const SchoolInput = document.getElementById("school");
-        const SchoolResults = document.getElementById("results");
+        const SchoolInput = form.querySelector(".school");
+        const SchoolResults = form.querySelector(".results");
 
         SchoolInput.addEventListener("input", () => {
           
@@ -920,80 +920,73 @@
             `)
             .join("");
         });
+        const autocompleteConatainer = form.querySelector(".autocompleteConatainer");
+
         document.addEventListener("click", (e)=>{
-          if(!e.target.closest("#school") && !e.target.closest("#results")){
+          if(!autocompleteConatainer.contains(e.target)){
             SchoolResults.innerHTML="";
           }
-        })
+        });
         SchoolResults.addEventListener("click", (e)=>{
           if(!e.target.classList.contains("result-item")) return;
           SchoolInput.value = e.target.textContent;
           SchoolResults.innerHTML="";
-        })
-      </script>
-
-      <!-- long text auto expand-->
-       <script>
-          function autoResize(textarea){
+        });
+        //---------------------------------------------------------------
+        //-------------LONG TEXT AUTO EXPAND-----------------------------
+        function autoResize(textarea){
             textarea.style.height = "auto";
             textarea.style.height = textarea.scrollHeight + "px";
           }
-          document.addEventListener("DOMContentLoaded", function(){
-            const textareas = document.querySelectorAll(".long-text");
-            textareas.forEach(textarea =>{
-              textarea.addEventListener("input", () => autoResize(textarea));
-            })
-          })
-       </script>
-
-       <!-- Form sending and Toast message handling-->
-        <script>
-          document.addEventListener("DOMContentLoaded", ()=>{
-            function showToast(message, type="success"){
-              const toast = document.getElementById("toast");
-              const content = document.getElementById("toast-content");
-
-              content.textContent=message;
-              content.classList.remove("bg-green-600", "bg-red-600");
-
-              if(type === "success"){
-                content.classList.add("bg-green-600");
-              } else{
-                content.classList.add("bg-red-600");
-              }
-
-              toast.classList.remove("hidden");
-
-              setTimeout(() => {
-                toast.classList.add("hidden");
-              }, 4000);
-            }
-
-
-            const form = document.getElementById("contestantForm");
-
-            form.addEventListener("submit", async (e) => {
-              e.preventDefault();
-
-              const formData = new FormData(form);
-              try{
-                const response = await fetch("/contestantForm", {
-                  method: "POST",
-                  body: formData
-                });
-                const result = await response.json();
-                if(result.success){
-                  showToast(result.message, "success");
-                  form.reset();
-                }else{
-                  showToast(result.message, "error");
-                }
-              } catch(err){
-                showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
-              }
-            });
+          const textareas = form.querySelectorAll(".long-text");
+          textareas.forEach(textarea =>{
+            textarea.addEventListener("input", () => autoResize(textarea));
           });
-          
-        </script>
+        //---------------------------------------------------------------
+        //-------------FORM HANDLING-------------------------------------
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const endpoint = form.dataset.endpoint;
+            const formData = new FormData(form);
+            try{
+              const response = await fetch(endpoint, {
+                method: "POST",
+                body: formData
+              });
+              const result = await response.json();
+              if(result.success){
+                showToast(result.message, "success");
+                form.reset();
+              }else{
+                showToast(result.message, "error");
+              }
+            } catch(err){
+              showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
+            }
+          });
+    });
+  });
+  </script>
+  <!-- Phone styling-->
+  <style>
+    .tailwind-phone-input .iti {
+        width: 100% !important;
+        left: 2.5rem !important;
+        top:50% !important;
+        font-weight: bold;
+    }
+    .phone-label {
+      position: absolute;
+      top: 1.5rem;
+      left:8rem;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+    .phone-label.active{
+      top: 0.25rem;
+      left:2.5rem;
+      font-size: 0.90rem;
+    }
+  </style>
 </body>
 </html>
