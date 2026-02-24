@@ -38,9 +38,10 @@ CREATE TABLE viewers (
     name TEXT NOT NULL,
     surname TEXT NOT NULL,
     school TEXT,
+    class_and_profile TEXT,
     email TEXT NOT NULL UNIQUE,
     phone TEXT NOT NULL,
-    consent_file_path TEXT NOT NULL,
+    rules_accepted BOOLEAN NOT NULL,
     created_at TIMESTAMPTZ DEFAULT now()
 );
 
@@ -49,9 +50,12 @@ CREATE TABLE volunteers (
     id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     surname TEXT NOT NULL,
-    school TEXT,
-    email TEXT NOT NULL,
+    school TEXT NOT NULL,
+    class_and_profile TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
     phone TEXT NOT NULL,
+    rules_accepted BOOLEAN NOT NULL,
+    birthdate DATE NOT NULL,
     created_at TIMESTAMPTZ DEFAULT now()
 );
 

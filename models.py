@@ -40,7 +40,21 @@ class Viewer(Base):
     name = Column(String,nullable=False)
     surname = Column(String,nullable=False)
     school = Column(String)
-    email = Column(String,nullable=False)
+    class_and_profile = Column(String)
+    email = Column(String,nullable=False,unique=True)
     phone = Column(String,nullable=False)
-    consent_file_path = Column(String, nullable=False)
+    rules_accepted = Column(Boolean,nullable=False)
+    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+class Volunteer(Base):
+    __tablename__ = "volunteers"
+    id = Column(Integer,primary_key=True,index=True)
+    name = Column(String,nullable=False)
+    surname = Column(String,nullable=False)
+    school = Column(String, nullable=False)
+    class_and_profile = Column(String, nullable=False)
+    email = Column(String,nullable=False,unique=True)
+    phone = Column(String,nullable=False)
+    rules_accepted = Column(Boolean,nullable=False)
+    birthdate = Column(Date,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())

@@ -21,12 +21,12 @@
   
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex space-x-6 items-center">
-        <a href="index.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
-        <a href="team.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
-        <a href="about.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
-        <a href="previous.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
-        <a href="partners.html" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
-        <a href="register.html"
+        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/registration"
            class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
           Rejestracja
         </a>
@@ -40,19 +40,18 @@
       </button>
   
     </div>
-    
-
+  
     <!-- MOBILE MENU -->
     <div
       id="mobile-menu"
       class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
-          <a href="index.html" class="text-lg  block">Home</a>
-          <a href="team.html" class="text-lg block">Team</a>
-          <a href="about.html" class="text-lg block">About</a>
-          <a href="previous.html" class="text-lg block">Poprzednie edycje</a>
-          <a href="partners.html" class="text-lg block">Partnerzy</a>
-          <a href="register.html"
+          <a href="/" class="text-lg block">Home</a>
+          <a href="/team" class="text-lg block">Team</a>
+          <a href="/about" class="text-lg block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="text-lg block">Partnerzy</a>
+          <a href="/registration"
              class="block bg-blue-600 text-white text-center py-2 rounded-full">
             Rejestracja
           </a>
@@ -66,10 +65,29 @@
 
       </div>
     </div>
-    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center">
-      
-        
-        <div class="md:w-2/3 mx-auto left-1/6">
+    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
+      <div class="md:w-2/3 mx-auto left-1/6">
+        <div class="tabs relative bg-white rounded-full p-1 grid grid-cols-3 center mb-8">
+          <div class="absolute inset-y-1 bg-[#819edb] rounded-full transition-transform duration-300" id="tab-slider"></div>
+          <a href="#contestant" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+            </svg>
+            Prelegent</a>
+          <a href="#viewer" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+            Widz</a>
+          <a href="#volunteer" class="tab relative z-10 py-2 font-bold flex items-center justify-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
+            </svg>
+            Wolontariusz</a>
+        </div>
+        <!-- contestant Form-->
+        <div id="contestant" class="form-tab">
             
             <form method="POST" id="contestantForm" class="dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
                 <h2 class="text-3xl font-bold text-center">
@@ -85,13 +103,11 @@
                           
                     </div>
                     <input type="text"
-                     id="name"
                      name="name"
                      placeholder=" "
                      class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
                      
                     <label
-                      for="name"
                       class="absolute left-10 top-6 text-gray-600 transition-all duration-200
                       peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
                       Imię*</label>
@@ -99,14 +115,12 @@
 
                   <div class="relative flex-1">
                     <input type="text"
-                     id="surname"
                      name="surname"
                      placeholder=" "
                      class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
                      
                      
                     <label
-                       for="surname"
                        class="absolute left-2 top-6 text-gray-600 transition-all duration-200
                        peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
                         Nazwisko*</label>
@@ -121,14 +135,12 @@
                     </div>
                       
                     <input type="email"
-                     id="email"
                      name="email"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="email"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -151,13 +163,11 @@
                         </svg>
                       </div>
                       <input type="tel"
-                       id="phone"
                        name="phone"
                        placeholder=" "
                        class="phone w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
                        required/>
                        <label
-                          for="phone"
                           class="absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
                         Numer telefonu*</label>
                     
@@ -172,14 +182,12 @@
                       
                       
                     <input type="text"
-                     id="school"
                      name="school"
                      autocomplete="off"
                      placeholder=" "
                      class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
                      required/>
                      <label
-                        for="school"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -203,14 +211,12 @@
                     </div>
                       
                     <input type="text"
-                     id="class_and_profile"
                      name="class_and_profile"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="class_and_profile"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -231,14 +237,12 @@
                     </div>
                       
                     <input type="text"
-                     id="city"
                      name="city"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="city"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -256,11 +260,10 @@
                       </svg>
                     </div>
                     <input type="date"
-                      id="birthdate"
                       name="birthdate"
                       placeholder=" "
                       class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600">
-                      <label for="birthdate"
+                      <label 
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -282,13 +285,11 @@
                           
                       </div>
                       <input type="text"
-                       id="supervisor_name"
                        name="supervisor_name"
                        placeholder=" "
                        class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
                        
                       <label
-                        for="supervisor_name"
                         class="absolute left-10 top-6 text-gray-600 transition-all duration-200
                         peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
                         Imię opiekuna*</label>
@@ -296,14 +297,12 @@
   
                     <div class="relative flex-1">
                       <input type="text"
-                       id="supervisor_surname"
                        name="supervisor_surname"
                        placeholder=" "
                        class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
                        
                        
                       <label
-                         for="supervisor_surname"
                          class="absolute left-2 top-6 text-gray-600 transition-all duration-200
                          peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
                           Nazwisko opiekuna*</label>
@@ -318,14 +317,12 @@
                     </div>
                       
                     <input type="text"
-                     id="supervisor_info"
                      name="supervisor_info"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="supervisor_info"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -350,13 +347,11 @@
                           
                     </div>
                     <textarea
-                      id="previous_accomplishments"
                       name="previous_accomplishments"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"></textarea>
                       <label
-                          for="previous_accomplishments"
                           class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -376,14 +371,12 @@
                       </svg>
                     </div>
                     <textarea
-                      id="about"
                       name="about"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
                       required></textarea>
                       <label
-                          for="about"
                           class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -405,14 +398,12 @@
                           
                     </div>
                     <textarea
-                      id="interests"
                       name="interests"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
                       required></textarea>
                       <label
-                          for="interests"
                           class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -434,14 +425,12 @@
                           
                     </div>
                     <textarea
-                      id="contributions"
                       name="contributions"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
                       required></textarea>
                       <label
-                          for="contributions"
                           class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -464,14 +453,12 @@
                           
                     </div>
                     <textarea
-                      id="story"
                       name="story"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
                       required></textarea>
                       <label
-                          for="story"
                           class="absolute left-10 top-1 text-xs transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -501,14 +488,12 @@
                     </div>
                       
                     <input type="text"
-                     id="topic"
                      name="topic"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="topic"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -530,14 +515,12 @@
                           
                     </div>
                     <textarea
-                      id="whytopic"
                       name="whytopic"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
                       required></textarea>
                       <label
-                          for="whytopic"
                           class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                           peer-placeholder-shown:top-6
                           peer-placeholder-shown:text-gray-600
@@ -560,14 +543,12 @@
                     </div>
                       
                     <input type="text"
-                     id="persuation"
                      name="persuation"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="persuation"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -590,14 +571,12 @@
                     </div>
                       
                     <input type="text"
-                     id="experience"
                      name="experience"
                      placeholder=" "
                      class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                      required/>
 
                      <label
-                        for="experience"
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -621,14 +600,12 @@
                   </div>
                     
                   <input type="text"
-                   id="ways_of_grabing_interest"
                    name="ways_of_grabing_interest"
                    placeholder=" "
                    class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
                    required/>
 
                    <label
-                      for="ways_of_grabing_interest"
                       class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                       peer-placeholder-shown:top-6
                       peer-placeholder-shown:text-gray-600
@@ -648,12 +625,10 @@
                   
     
                   <input type="file"
-                   id="video"
                    name="video"
                    class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
                    />
                    <label
-                      for="video"
                       class="absolute left-10 top-1 text-xs transition-all duration-200 font-bold text-gray-600
                       peer-placeholder-shown:top-6
                       peer-placeholder-shown:text-gray-600
@@ -666,16 +641,16 @@
                       md:peer-focus:text-sm
                       lg:peer-focus:text-sm">
                     Dwuminutowy film, w ktorym przedstawisz swój pomysł na wystąpienie</label>
-                   <label for="video" class="md:text-sm text-xs pl-10 font-bold">UWAGA: film nie jest obowiązkowy, jednak pomaga w ocenie prelegenta</p>
+                   <label class="md:text-sm text-xs pl-10 font-bold">UWAGA: film nie jest obowiązkowy, jednak pomaga w ocenie prelegenta</p>
                 </div>
                 <h2 class="pt-6 text-3xl font-bold text-center">
                   Zgody
                 </h2>
                 <!-- Are you aware of presenting before a big audience-->
                  <div class="pt-6">
-                  <label class="font-bold flex items-start gap-3 relative cursor-pointer">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
                   <!-- real checkbox-->
-                    <input type="checkbox" id="audience_aware" 
+                    <input type="checkbox"
                     class="peer sr-only"
                     required>
                     <!-- visible stylized box-->
@@ -702,9 +677,9 @@
                  </div>
                  <!-- RulesAccept-->
                  <div class="pt-6">
-                  <label class="font-bold flex items-start gap-3 relative cursor-pointer">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
                   <!-- real checkbox-->
-                    <input type="checkbox" id="rules_accepted" name="rules_accepted" value="true"
+                    <input type="checkbox" name="rules_accepted" value="true"
                     class="peer sr-only"
                     required>
                     <!-- visible stylized box-->
@@ -740,7 +715,392 @@
                   </button> 
             </form>
         </div>
-      
+        <div id="viewer" class="form-tab">
+            
+          <form method="POST" id="viewerForm" class="dyn-form" data-endpoint="/viewerForm" enctype="multipart/form-data">
+              <h2 class="text-3xl font-bold text-center">
+                  Dane osobowe
+                </h2>
+              <!-- Name and surname-->
+              <div class="flex gap-4">
+                <div class="relative flex-1">
+                  <div class="absolute left-0 top-1/2 -translate-y-[58%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                        
+                  </div>
+                  <input type="text"
+                   name="name"
+                   placeholder=" "
+                   class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                   
+                  <label
+                    class="absolute left-10 top-6 text-gray-600 transition-all duration-200
+                    peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                    Imię*</label>
+                </div>
+
+                <div class="relative flex-1">
+                  <input type="text"
+                   name="surname"
+                   placeholder=" "
+                   class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
+                   
+                   
+                  <label
+                     class="absolute left-2 top-6 text-gray-600 transition-all duration-200
+                     peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                      Nazwisko*</label>
+                </div>
+              </div>
+              <!-- Email-->
+              <div class="relative">
+                  <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                  </div>
+                    
+                  <input type="email"
+                   name="email"
+                   placeholder=" "
+                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+                   required/>
+
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Adres E-Mail*</label>
+              </div>
+              <!-- Phone number-->
+              <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
+                  
+                  
+                    
+                  
+                    <div class="absolute">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                        <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                        <path fill-rule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clip-rule="evenodd" />
+                      </svg>
+                    </div>
+                    <input type="tel"
+                     name="phone"
+                     placeholder=" "
+                     class="phone w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
+                     required/>
+                     <label
+                        class="absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
+                      Numer telefonu*</label>
+                  
+              </div>
+              <!-- School-->
+              <div class="relative autocompleteConatainer">
+                  <div class="absolute left-0 top-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                      </svg>
+                  </div>
+                    
+                    
+                  <input type="text"
+                   name="school"
+                   autocomplete="off"
+                   placeholder=" "
+                   class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"/>
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Nazwa szkoły</label>
+                   <div class="results">
+
+                   </div>
+                   
+              </div>
+              <!-- Class and profile-->
+              <div class="relative">
+                  <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                        </svg>
+                        
+                  </div>
+                    
+                  <input type="text"
+                   name="class_and_profile"
+                   placeholder=" "
+                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"/>
+
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Klasa i profil</label>
+              </div>
+              <h2 class="pt-6 text-3xl font-bold text-center">
+                Zgody
+              </h2>
+              
+               <!-- RulesAccept-->
+               <div class="pt-6">
+                <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                <!-- real checkbox-->
+                  <input type="checkbox" name="rules_accepted" value="true"
+                  class="peer sr-only"
+                  required>
+                  <!-- visible stylized box-->
+                  
+                   <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                    transition-all duration-200
+                    peer-checked:border-[#18395d]
+                    peer-checked:bg-[#18395d]
+                    flex items-center justify-center 
+                    text-transparent
+                    peer-checked:text-white">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                      size-6
+                      transition-all duation-200
+                      ">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                    </svg>
+
+                   </div>
+                   <span class="gap-0">
+                    Akceptuję <a href="<regulamin>" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                    </span>
+                </label>
+               </div>
+              <!-- Submit-->
+               <button
+                type="submit"
+                class="mt-8 w-full bg-[#18395d] text-white font-bold py-3 rounded-xl
+                transition-all duration-200 ease-in-out
+                hover:shadow-lg hover:-translate-y-0.5">
+                Wyślij Zgłoszenie
+                </button> 
+          </form>
+        </div>
+        <div id="volunteer" class="form-tab">
+            
+        <form method="POST" id="volunteerForm" class="dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
+            <h2 class="text-3xl font-bold text-center">
+                Dane osobowe
+              </h2>
+            <!-- Name and surname-->
+            <div class="flex gap-4">
+              <div class="relative flex-1">
+                <div class="absolute left-0 top-1/2 -translate-y-[58%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                      </svg>
+                      
+                </div>
+                <input type="text"
+                 name="name"
+                 placeholder=" "
+                 class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                 
+                <label
+                  class="absolute left-10 top-6 text-gray-600 transition-all duration-200
+                  peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                  Imię*</label>
+              </div>
+
+              <div class="relative flex-1">
+                <input type="text"
+                 name="surname"
+                 placeholder=" "
+                 class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
+                 
+                 
+                <label
+                   class="absolute left-2 top-6 text-gray-600 transition-all duration-200
+                   peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                    Nazwisko*</label>
+              </div>
+            </div>
+            <!-- Email-->
+            <div class="relative">
+                <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+                  
+                <input type="email"
+                 name="email"
+                 placeholder=" "
+                 class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+                 required/>
+
+                 <label
+                    class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-placeholder-shown:top-6
+                    peer-placeholder-shown:text-gray-600
+                    peer-placeholder-shown:text-base
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">
+                  Adres E-Mail*</label>
+            </div>
+            <!-- Phone number-->
+            <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
+                
+                
+                  
+                
+                  <div class="absolute">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
+                      <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+                      <path fill-rule="evenodd" d="M8.625.75A3.375 3.375 0 0 0 5.25 4.125v15.75a3.375 3.375 0 0 0 3.375 3.375h6.75a3.375 3.375 0 0 0 3.375-3.375V4.125A3.375 3.375 0 0 0 15.375.75h-6.75ZM7.5 4.125C7.5 3.504 8.004 3 8.625 3H9.75v.375c0 .621.504 1.125 1.125 1.125h2.25c.621 0 1.125-.504 1.125-1.125V3h1.125c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-6.75A1.125 1.125 0 0 1 7.5 19.875V4.125Z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <input type="tel"
+                   name="phone"
+                   placeholder=" "
+                   class="phone w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
+                   required/>
+                   <label
+                      class="absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
+                    Numer telefonu*</label>
+                
+            </div>
+            <!-- School-->
+            <div class="relative autocompleteConatainer">
+                <div class="absolute left-0 top-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                    </svg>
+                </div>
+                  
+                  
+                <input type="text"
+                 name="school"
+                 autocomplete="off"
+                 placeholder=" "
+                 class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                 required/>
+                 <label
+                    class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-placeholder-shown:top-6
+                    peer-placeholder-shown:text-gray-600
+                    peer-placeholder-shown:text-base
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">
+                  Nazwa szkoły*</label>
+                 <div class="results">
+
+                 </div>
+                 
+            </div>
+            <!-- Class and profile-->
+            <div class="relative">
+                <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                      </svg>
+                      
+                </div>
+                  
+                <input type="text"
+                 name="class_and_profile"
+                 placeholder=" "
+                 class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+                 required/>
+
+                 <label
+                    class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-placeholder-shown:top-6
+                    peer-placeholder-shown:text-gray-600
+                    peer-placeholder-shown:text-base
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">
+                  Klasa i profil*</label>
+            </div>
+            
+            <!-- Birthdate -->
+            <div class="relative">
+                <div class="absolute left-0 top-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                  </svg>
+                </div>
+                <input type="date"
+                  name="birthdate"
+                  placeholder=" "
+                  class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600">
+                  <label
+                    class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-placeholder-shown:top-6
+                    peer-placeholder-shown:text-gray-600
+                    peer-placeholder-shown:text-base
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">Data Urodzenia*</label>
+              </div>
+            <h2 class="pt-6 text-3xl font-bold text-center">
+              Zgody
+            </h2>
+            
+             <!-- RulesAccept-->
+             <div class="pt-6">
+              <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+              <!-- real checkbox-->
+                <input type="checkbox" name="rules_accepted" value="true"
+                class="peer sr-only"
+                required>
+                <!-- visible stylized box-->
+                
+                 <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                  transition-all duration-200
+                  peer-checked:border-[#18395d]
+                  peer-checked:bg-[#18395d]
+                  flex items-center justify-center 
+                  text-transparent
+                  peer-checked:text-white">
+
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                    size-6
+                    transition-all duation-200
+                    ">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                  </svg>
+
+                 </div>
+                 <span class="gap-0">
+                  Akceptuję <a href="<regulamin>" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                  </span>
+              </label>
+             </div>
+            <!-- Submit-->
+             <button
+              type="submit"
+              class="mt-8 w-full bg-[#18395d] text-white font-bold py-3 rounded-xl
+              transition-all duration-200 ease-in-out
+              hover:shadow-lg hover:-translate-y-0.5">
+              Wyślij Zgłoszenie
+              </button> 
+        </form>
+        </div>
+      </div>
     </section>
   </main>
 
@@ -765,6 +1125,60 @@
     });
   </script>
 
+  <!-- Tab switching script-->
+   <script>
+    document.addEventListener("DOMContentLoaded", ()=>{
+      function openTab(tabID){
+        const newTab = document.getElementById(tabID);
+        document.querySelectorAll(".form-tab").forEach(t => {
+          t.classList.add("hidden");
+        });
+        newTab.classList.remove("hidden");
+      }
+      function updateTabSlider() {
+        const tabs=document.querySelectorAll(".tab");
+        const slider = document.getElementById("tab-slider");
+
+        const activeIndex = [...tabs].findIndex(tab =>
+          tab.getAttribute("href") === window.location.hash
+        );
+
+        const activeTab = tabs[activeIndex] || tabs[0];
+
+        slider.style.width = activeTab.offsetWidth + "px";
+        slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+        
+      };
+
+
+
+      updateTabSlider();
+      const hash = window.location.hash.replace("#","");
+      if(hash){
+        openTab(hash);
+      }else{
+        openTab("contestant")
+      }
+      window.addEventListener("hashchange", () => {
+        updateTabSlider();
+        const hash = window.location.hash.replace("#","");
+        if(hash){
+          openTab(hash);
+        }else{
+          openTab("contestant")
+        }
+      });
+      window.addEventListener("resize", ()=>{
+        updateTabSlider();
+      })
+
+      
+    });
+
+    
+
+    
+   </script>
 
   <!-- phone number handling-->
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
@@ -986,6 +1400,9 @@
       top: 0.25rem;
       left:2.5rem;
       font-size: 0.90rem;
+    }
+    .dyn-form label:not(.checkbox-label){
+      z-index: -10;
     }
   </style>
 </body>

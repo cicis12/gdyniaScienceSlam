@@ -5,7 +5,7 @@ from pathlib import Path
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import Viewer, Contestant
+from models import Viewer, Contestant, Volunteer
 import uuid
 from datetime import date
 from video import save_video
@@ -28,14 +28,29 @@ def home():
 def team():
     return BASE_DIR/"team.html"
 
-@app.get("/exampleform", response_class=FileResponse)
+@app.get("/registration", response_class=FileResponse)
 def form():
-    return BASE_DIR/"contestantform.html"
+    return BASE_DIR/"registration.html"
 
-@app.get("/ping")
-def ping():
-    return {"message": "pong"}
+@app.get("/about", response_class=FileResponse)
+def form():
+    return BASE_DIR/"about.html"
 
+@app.get("/registration", response_class=FileResponse)
+def form():
+    return BASE_DIR/"registration.html"
+
+@app.get("/previous_editions", response_class=FileResponse)
+def form():
+    return BASE_DIR/"previous.html"
+
+@app.get("/partners", response_class=FileResponse)
+def form():
+    return BASE_DIR/"partners.html"
+
+@app.get("/documents", response_class=FileResponse)
+def form():
+    return BASE_DIR/"documents.html"
 # Handle Post (@app.post)
 @app.post("/contestantForm")
 async def handle_contestantform(
@@ -114,38 +129,72 @@ async def handle_contestantform(
         status_code=200,
         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
     )
-@app.post("/testForm")
-async def handle_exampleform(
+
+@app.post("/viewerForm")
+async def handle_viewerform(
     name: str = Form(...),
     surname: str = Form(...),
     email: str = Form(...),
     phone: str = Form(...),
-    school: str=Form(None),
-    parentconsent: UploadFile = File(...),
-    db: Session = Depends(get_db)
-):
-    existing_viewer= db.query(Viewer).filter(Viewer.email == email).first()
-    if existing_viewer:
-        return {
-            "status": "exists",
-            "message": "viewer with this email already exists",
-            "viewer_id": existing_viewer.id
+    school: str | None = Form(None),
+    class_and_profile: str | None = Form(None),
+    rules_accepted: bool = Form(...),
 
-            # later add frontend support for the display of this message, and an option to change the submit data
-        }
-    file_path= f"uploads/zgodawidz/{uuid.uuid4()}_{parentconsent.filename}"
-    with open(file_path,"wb") as buffer:
-        shutil(parentconsent.file,buffer)
-    
-    viewer = Viewer(
-        name=name,
-        surname=surname,
+    db: Session = Depends(get_db),
+):
+    new_viewer = Viewer(
+        name=name.strip(),
+        surname=surname.strip(),
+        email=email.lower().strip(),
+        phone=phone.strip(),
         school=school,
-        email=email,
-        phone=phone,
-        consent_file_path=file_path
+        class_and_profile=class_and_profile,
+        rules_accepted=rules_accepted,
     )
-    db.add(viewer)
-    db.commit()
-    db.refresh(viewer)
-    return {"message": "Form submitted successfully!", "id": viewer.id}
+    try:
+        db.add(new_viewer)
+        db.commit()
+        db.refresh(new_viewer)
+    except IntegrityError:
+        db.rollback()
+        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+    )
+
+@app.post("/volunteerForm")
+async def handle_volunteerform(
+    name: str = Form(...),
+    surname: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    school: str = Form(...),
+    class_and_profile: str = Form(...),
+    birthdate: date = Form(...),
+    rules_accepted: bool = Form(...),
+
+    db: Session = Depends(get_db),
+):
+    new_volunteer = Volunteer(
+        name=name.strip(),
+        surname=surname.strip(),
+        email=email.lower().strip(),
+        phone=phone.strip(),
+        school=school.strip(),
+        class_and_profile=class_and_profile.strip(),
+        birthdate=birthdate,
+        rules_accepted=rules_accepted,
+    )
+    try:
+        db.add(new_volunteer)
+        db.commit()
+        db.refresh(new_volunteer)
+    except IntegrityError:
+        db.rollback()
+        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+    )
+
