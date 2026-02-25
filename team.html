@@ -1,108 +1,158 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Zespół – Gdynia Science Slam</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<title>Zespół | Gdynia Science Slam</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<style>
+.slide-enter {
+  opacity: 0;
+  transform: translateX(40px);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.5s ease;
+}
+.slide-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+.slide-exit-active {
+  opacity: 0;
+  transform: translateX(-40px);
+  transition: all 0.5s ease;
+}
+</style>
+
 </head>
 
-<body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
+<body class="bg-[#819edb] text-[#18395d]">
 
-  <!-- NAVBAR -->
-  <nav class="bg-[#5e85b8] shadow-md">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-  
-      <!-- LOGO -->
-      <div class="font-bold text-xl max-h-20">
-        <img class="max-h-20" src="static/assets/logo.png">
-      </div>
-  
-      <!-- DESKTOP MENU -->
-      <div class="hidden md:flex space-x-6 items-center">
-        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
-        <a href="/team" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Team</a>
-        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
-        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
-        <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
-        <a href="/registration"
-           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
-          Rejestracja
-        </a>
-      </div>
-  
-      <!-- HAMBURGER -->
-      <button
-        id="menu-btn"
-        class="md:hidden text-3xl focus:outline-none">
-        ☰
+<section class="min-h-screen flex flex-col">
+
+  <!-- DUŻY NAGŁÓWEK -->
+  <div class="pt-10 pb-0 text-center">
+    <h1 class="text-5xl md:text-6xl font-extrabold text-[#18395d] tracking-wide">
+      Nasz Team
+    </h1>
+    <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
+  </div>
+
+  <!-- PROFIL -->
+  <div class="flex-grow flex items-center">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 w-full relative">
+
+      <!-- STRZAŁKA LEWO -->
+      <button id="prev"
+        class="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:scale-110 transition">
+        ←
       </button>
-  
-    </div>
-  
-    <!-- MOBILE MENU -->
-    <div
-      id="mobile-menu"
-      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
-        <div class="px-6 space-y-4 py-4">
-          <a href="/" class="text-lg block">Home</a>
-          <a href="/team" class="text-lg font-bold block">Team</a>
-          <a href="/about" class="text-lg block">About</a>
-          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
-          <a href="/partners" class="text-lg block">Partnerzy</a>
-          <a href="/registration"
-             class="block bg-blue-600 text-white text-center py-2 rounded-full">
-            Rejestracja
-          </a>
-        </div>
-    </div>
-  </nav>
 
-  <main class="flex-grow">
-    <section class="max-w-7xl mx-auto px-6 py-20">
-      <h1 class="text-4xl font-bold text-center mb-12">
-        Nasz zespół
-      </h1>
+      <!-- STRZAŁKA PRAWO -->
+      <button id="next"
+        class="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-12 h-12 flex items-center justify-center hover:scale-110 transition">
+        →
+      </button>
 
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10">
+      <!-- KARTA PROFILU -->
+      <div id="profile"
+  class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-3xl shadow-xl p-8 max-w-5xl mx-auto">
 
-        <!-- OSOBA -->
-        <div class="bg-white p-6 rounded-xl shadow text-center">
-          <img
+        <div>
+          <img id="profile-img"
             src="static/assets/images/team1.jpg"
-            class="w-32 h-32 rounded-full object-cover mx-auto mb-4">
+            class="w-full h-[360px] object-cover rounded-2xl">
+        </div>
 
-          <h3 class="text-xl font-semibold">Anna Kowalska</h3>
-          <p class="text-gray-500 mb-3">Koordynatorka wydarzenia</p>
-          <p class="text-sm text-gray-600">
-            Odpowiada za organizację i kontakt z uczestnikami.
+        <div>
+          <h2 id="profile-name" class="text-4xl font-bold mb-3">
+            Anna Kowalska
+          </h2>
+
+          <p id="profile-role" class="text-xl text-blue-600 font-semibold mb-6">
+            Koordynatorka wydarzenia
+          </p>
+
+          <p id="profile-desc" class="text-gray-600 leading-relaxed">
+            Anna odpowiada za organizację całego wydarzenia,
+            współpracę z partnerami oraz komunikację zespołu.
           </p>
         </div>
 
-        <!-- kolejni członkowie -->
       </div>
-    </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
-    <p class="mb-2">📧 kontakt@gdyniascienceslam.pl</p>
-    <p class="mb-2">📍 Gdynia</p>
-    <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
-  </footer>
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-  
-    menuBtn.addEventListener('click', () => {
-      if (mobileMenu.classList.contains("max-h-0")){
-        mobileMenu.classList.remove("max-h-0");
-        mobileMenu.classList.add("max-h-96");
-      }else{
-        mobileMenu.classList.add("max-h-0");
-        mobileMenu.classList.remove("max-h-96");
-      }
-    });
-  </script>
+    </div>
+
+  </div>
+
+</section>
+
+<script>
+
+const members = [
+  {
+    name: "Anna Kowalska",
+    role: "Koordynatorka wydarzenia",
+    desc: "Anna odpowiada za organizację całego wydarzenia, współpracę z partnerami oraz komunikację zespołu.",
+    img: "static/assets/images/team1.jpg"
+  },
+  {
+    name: "Jan Nowak",
+    role: "Marketing & PR",
+    desc: "Jan zajmuje się promocją wydarzenia, social mediami oraz kontaktem z mediami.",
+    img: "static/assets/images/team2.jpg"
+  },
+  {
+    name: "Maria Zielińska",
+    role: "Logistyka",
+    desc: "Maria koordynuje kwestie techniczne, salę oraz kontakt z uczestnikami.",
+    img: "static/assets/images/team3.jpg"
+  }
+];
+
+let current = 0;
+
+const nameEl = document.getElementById("profile-name");
+const roleEl = document.getElementById("profile-role");
+const descEl = document.getElementById("profile-desc");
+const imgEl = document.getElementById("profile-img");
+const profile = document.getElementById("profile");
+
+function updateProfile(index) {
+
+  profile.classList.add("slide-exit-active");
+
+  setTimeout(() => {
+
+    nameEl.textContent = members[index].name;
+    roleEl.textContent = members[index].role;
+    descEl.textContent = members[index].desc;
+    imgEl.src = members[index].img;
+
+    profile.classList.remove("slide-exit-active");
+    profile.classList.add("slide-enter-active");
+
+    setTimeout(() => {
+      profile.classList.remove("slide-enter-active");
+    }, 500);
+
+  }, 300);
+}
+
+document.getElementById("next").addEventListener("click", () => {
+  current = (current + 1) % members.length;
+  updateProfile(current);
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+  current = (current - 1 + members.length) % members.length;
+  updateProfile(current);
+});
+
+</script>
 
 </body>
 </html>
