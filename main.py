@@ -1,17 +1,19 @@
-from fastapi import FastAPI, Form, File, UploadFile, Depends
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi import FastAPI, Form, File, UploadFile, Depends, Request, HTTPException
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles 
 from pathlib import Path
 from sqlalchemy.orm import Session
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import Viewer, Contestant, Volunteer
+from models import Viewer, Contestant, Volunteer, AdminUser
 import uuid
 from datetime import date
 from video import save_video
 from sqlalchemy.exc import IntegrityError
-
-
+from security import verify_password
+from datetime import datetime, timedelta
+from dotenv import load_dotenv
+from jose import jwt
 #set up needed variables
 
 
@@ -33,24 +35,24 @@ def form():
     return BASE_DIR/"registration.html"
 
 @app.get("/about", response_class=FileResponse)
-def form():
+def about():
     return BASE_DIR/"about.html"
 
-@app.get("/registration", response_class=FileResponse)
-def form():
-    return BASE_DIR/"registration.html"
-
 @app.get("/previous_editions", response_class=FileResponse)
-def form():
+def prev():
     return BASE_DIR/"previous.html"
 
 @app.get("/partners", response_class=FileResponse)
-def form():
+def partners():
     return BASE_DIR/"partners.html"
 
 @app.get("/documents", response_class=FileResponse)
-def form():
+def docs():
     return BASE_DIR/"documents.html"
+
+@app.get("/admin/login", response_class=FileResponse)
+def adminloginpage():
+    return BASE_DIR/"admin_login.html"
 # Handle Post (@app.post)
 @app.post("/contestantForm")
 async def handle_contestantform(
@@ -198,3 +200,73 @@ async def handle_volunteerform(
         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
     )
 
+
+#ADMIN PAGES
+load_dotenv("SECRET_KEY.env")
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES = 60
+def get_current_admin(request: Request, db: Session = Depends(get_db)):
+    token = request.cookies.get("admin_session")
+    if not token:
+        raise HTTPException(status_code=401)
+    
+    try:
+        payload = jwt.decode(token,SECRET_KEY, algorithms=[ALGORITHM])
+        username = payload.get("sub")
+    except:
+        raise HTTPException(status_code=401)
+    
+    admin = db.query(AdminUser).filter(
+        AdminUser.username == username
+    ).first()
+
+    if not admin:
+        raise HTTPException(status_code=401)
+
+    return admin
+
+@app.exception_handler(HTTPException)
+async def auth_exception_handler(request: Request, exc: HTTPException):
+    if exc.status_code == 401:
+        return RedirectResponse("/admin/login")
+    return JSONResponse(status_code=exc.status_code, content={"detail":exc.detail})
+
+
+@app.get("/admin/dashboard", response_class=FileResponse)
+def admin_dashboard(admin : AdminUser = Depends(get_current_admin)):
+    return BASE_DIR/"admin_dashboard.html"
+
+@app.post("/adminLogin")
+async def admin_login(
+    username: str = Form(...),
+    password: str = Form(...),
+
+    db: Session = Depends(get_db)
+):
+    admin = db.query(AdminUser).filter(
+        AdminUser.username == username
+    ).first()
+    
+    if not admin or not verify_password(password,admin.password_hash):
+        return JSONResponse(status_code=400, content={"success": False, "message": "Błędna nazwa użytkownika lub hasło"})
+    
+    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+
+    token = jwt.encode(
+        {"sub": admin.username, "exp": expire},
+        SECRET_KEY,
+        algorithm=ALGORITHM
+    )
+
+    response = RedirectResponse("/admin/dashboard", status_code=303)
+
+    response.set_cookie(
+        key="admin_session",
+        value=token,
+        httponly=True,
+        secure=True,
+        samesite="strict"
+    )
+
+    return response

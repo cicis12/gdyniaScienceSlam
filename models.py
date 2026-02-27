@@ -58,3 +58,10 @@ class Volunteer(Base):
     rules_accepted = Column(Boolean,nullable=False)
     birthdate = Column(Date,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+class AdminUser(Base):
+    __tablename__="admin_users"
+    id=Column(Integer,primary_key=True,index=True)
+    username=Column(String,unique=True,nullable=False,index=True)
+    password_hash = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
