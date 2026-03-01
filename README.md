@@ -198,10 +198,12 @@ SHOW hba_file;
 ```
 Enter the given file and search for
 ```
+local   all     all                     ident
 host    all     all     127.0.0.1/32    ident
 ```
 or
 ```
+local   all     all                     peer
 host    all     all     127.0.0.1/32    peer
 ```
 
