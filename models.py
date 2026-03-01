@@ -22,16 +22,17 @@ class Contestant(Base):
     about = Column(String,nullable=False)
     interests = Column(String,nullable=False)
     contributions = Column(String,nullable=False)
-    story = Column(String,nullable=False)
+    inspiration = Column(String,nullable=False)
 
     topic = Column(String,nullable=False)
     whytopic = Column(String,nullable=False)
-    persuation = Column(String,nullable=False)
+    whyinteresting = Column(String,nullable=False)
     experience = Column(String,nullable=False)
     ways_of_grabing_interest = Column(String,nullable=False)
 
     video_file_path = Column(String)
     rules_accepted = Column(Boolean,nullable=False)
+    privacy_policy_accepted = Column(Boolean,nullable=False)
 
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
 class Viewer(Base):
@@ -43,7 +44,9 @@ class Viewer(Base):
     class_and_profile = Column(String)
     email = Column(String,nullable=False,unique=True)
     phone = Column(String,nullable=False)
+    is_contestant_close = Column(String, nullable=False)
     rules_accepted = Column(Boolean,nullable=False)
+    privacy_policy_accepted = Column(Boolean,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
 
 class Volunteer(Base):
@@ -56,6 +59,8 @@ class Volunteer(Base):
     email = Column(String,nullable=False,unique=True)
     phone = Column(String,nullable=False)
     rules_accepted = Column(Boolean,nullable=False)
+    privacy_policy_accepted = Column(Boolean,nullable=False)
+    facebook_link = Column(String,nullable=True)
     birthdate = Column(Date,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
 

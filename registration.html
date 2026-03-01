@@ -22,10 +22,11 @@
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex space-x-6 items-center">
         <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
-        <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/team" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
         <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
         <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
-        <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/partners" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
         <a href="/registration"
            class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
           Rejestracja
@@ -47,10 +48,11 @@
       class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
           <a href="/" class="text-lg block">Home</a>
-          <a href="/team" class="text-lg block">Team</a>
+          <a href="/team" class="hidden text-lg block">Team</a>
           <a href="/about" class="text-lg block">About</a>
           <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
-          <a href="/partners" class="text-lg block">Partnerzy</a>
+          <a href="/partners" class="hidden text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
           <a href="/registration"
              class="block bg-blue-600 text-white text-center py-2 rounded-full">
             Rejestracja
@@ -453,7 +455,7 @@
                           
                     </div>
                     <textarea
-                      name="story"
+                      name="inspiration"
                       rows="1"
                       placeholder=""
                       class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
@@ -470,7 +472,7 @@
                           peer-focus:text-[#18395d]
                           md:peer-focus:text-sm
                           lg:peer-focus:text-sm">
-                       Podaj fikcyjną historię która jest dla Ciebie ważna/cię inspiruje. Dlaczego?*</label>
+                       Kto cię inspiruje? Dlaczego?*</label>
                   </div>
 
 
@@ -532,34 +534,7 @@
                           md:peer-focus:text-sm">
                        Co skłoniło Cię do opowiedzenia o tym temacie?*</label>
                   </div>
-                <!-- Persuation -->
-                <div class="relative">
-                    <div class="absolute left-0 top-1/2 -translate-y-[10%]">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                          </svg>
-                          
-                          
-                    </div>
-                      
-                    <input type="text"
-                     name="persuation"
-                     placeholder=" "
-                     class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
-                     required/>
-
-                     <label
-                        class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
-                        peer-placeholder-shown:top-6
-                        peer-placeholder-shown:text-gray-600
-                        peer-placeholder-shown:text-sm
-                        md:peer-placeholder-shown:text-base
-                        peer-focus:top-1
-                        peer-focus:text-sm
-                        peer-focus:text-[#18395d]
-                        md:peer-focus:text-sm">
-                      Przekonaj sceptyka do swojego tematu w jednym zdaniu*</label>
-                </div>
+                
                 <!-- Experience -->
                 <div class="relative">
                     <div class="absolute left-0 top-1/2 -translate-y-[10%]">
@@ -570,13 +545,38 @@
                           
                     </div>
                       
-                    <input type="text"
-                     name="experience"
-                     placeholder=" "
-                     class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
-                     required/>
-
-                     <label
+                    <textarea
+                      name="experience"
+                      rows="1"
+                      placeholder=""
+                      class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
+                      required></textarea>
+                      <label
+                          class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                          peer-placeholder-shown:top-6
+                          peer-placeholder-shown:text-gray-600
+                          peer-placeholder-shown:text-sm
+                          md:peer-placeholder-shown:text-base
+                          peer-focus:top-1
+                          peer-focus:text-sm
+                          peer-focus:text-[#18395d]
+                          md:peer-focus:text-sm">
+                       Opisz swoje doświadczenie z prezentowanym tematem*</label>
+                </div>
+                <!-- Why interesting -->
+                <div class="relative">
+                  <div class="absolute left-0 top-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
+                    </svg>
+                  </div>
+                    <textarea
+                    name="whyinteresting"
+                    rows="1"
+                    placeholder=""
+                    class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
+                    required></textarea>
+                    <label
                         class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
                         peer-placeholder-shown:top-6
                         peer-placeholder-shown:text-gray-600
@@ -586,7 +586,7 @@
                         peer-focus:text-sm
                         peer-focus:text-[#18395d]
                         md:peer-focus:text-sm">
-                      Opisz swoje doświadczenie z prezentowanym tematem*</label>
+                     Dlaczego twój temat jest interesujący?*</label>
                 </div>
                 <!-- Ways of grabbing interest -->
                 <div class="relative">
@@ -594,29 +594,25 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
                     </svg>
-                    
-                        
-                        
-                  </div>
-                    
-                  <input type="text"
-                   name="ways_of_grabing_interest"
-                   placeholder=" "
-                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
-                   required/>
-
-                   <label
-                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
-                      peer-placeholder-shown:top-6
-                      peer-placeholder-shown:text-gray-600
-                      peer-placeholder-shown:text-sm
-                      md:peer-placeholder-shown:text-base
-                      peer-focus:top-1
-                      peer-focus:text-sm
-                      peer-focus:text-[#18395d]
-                      md:peer-focus:text-sm">
-                    Co zrobisz by zainteresować publiczność?*</label>
-              </div>
+                  </div>   
+                   <textarea
+                      name="ways_of_grabing_interest"
+                      rows="1"
+                      placeholder=""
+                      class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none"
+                      required></textarea>
+                      <label
+                          class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                          peer-placeholder-shown:top-6
+                          peer-placeholder-shown:text-gray-600
+                          peer-placeholder-shown:text-sm
+                          md:peer-placeholder-shown:text-base
+                          peer-focus:top-1
+                          peer-focus:text-sm
+                          peer-focus:text-[#18395d]
+                          md:peer-focus:text-sm">
+                       Co zrobisz by zainteresować publiczność?*</label>
+                </div>
                 <!-- Video-->
                 <div class="relative pt-6">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="absolute size-6">
@@ -701,7 +697,37 @@
 
                      </div>
                      <span class="gap-0">
-                      Akceptuję <a href="<regulamin>" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                      Akceptuję <a href="/static/documents/Regulamin .pdf" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                      </span>
+                  </label>
+                 </div>
+                 <!-- PrivacyPolicy Accept-->
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="privacy_policy_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Polityka prywatności .pdf" class="underline text-blue-700">politykę prywatności</a>. 
                       </span>
                   </label>
                  </div>
@@ -715,9 +741,10 @@
                   </button> 
             </form>
         </div>
+        <!-- viewer Form-->
         <div id="viewer" class="form-tab">
-            
-          <form method="POST" id="viewerForm" class="dyn-form" data-endpoint="/viewerForm" enctype="multipart/form-data">
+            <h1 class="text-4xl font-bold text-center">Zgłoszenia na widownie zostaną otwarte bliżej wydarzenia.</h1>
+          <form method="POST" id="viewerForm" class="hidden dyn-form" data-endpoint="/viewerForm" enctype="multipart/form-data">
               <h2 class="text-3xl font-bold text-center">
                   Dane osobowe
                 </h2>
@@ -852,6 +879,31 @@
                       peer-focus:text-[#18395d]">
                     Klasa i profil</label>
               </div>
+              <!-- Czy jestes bliska osoba dla ktoregos z prelegentow -->
+              <div class="relative w-full">
+                <div class="absolute left-0 top-6">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                  </svg>
+                </div>
+                <div>
+                  <select class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+                    name="is_contestant_close" required>
+                    <option value="" disabled selected hidden></option>
+                    <option value="TAK">TAK</option>
+                    <option value="NIE">NIE</option>
+                  </select>
+                  <label
+                    class="absolute left-10 top-6 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-valid:text-sm
+                    peer-valid:top-1
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">
+                    Czy jesteś bliską osobą któregoś z prelegentów ?*
+                  </label>
+                </div> 
+              </div>
               <h2 class="pt-6 text-3xl font-bold text-center">
                 Zgody
               </h2>
@@ -896,9 +948,10 @@
                 </button> 
           </form>
         </div>
+        <!-- volunteer form-->
         <div id="volunteer" class="form-tab">
-            
-        <form method="POST" id="volunteerForm" class="dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
+          <h1 class="text-4xl font-bold text-center">Zgłoszenia do wolontariatu zostaną otwarte bliżej wydarzenia.</h1>
+        <form method="POST" id="volunteerForm" class="hidden dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
             <h2 class="text-3xl font-bold text-center">
                 Dane osobowe
               </h2>
@@ -1056,6 +1109,31 @@
                     peer-focus:text-sm
                     peer-focus:text-[#18395d]">Data Urodzenia*</label>
               </div>
+              <div class="relative">
+                <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                  </svg>
+                  
+                      
+                </div>
+                  
+                <input type="text"
+                 name="facebook_link"
+                 placeholder=" "
+                 class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+                 required/>
+
+                 <label
+                    class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                    peer-placeholder-shown:top-6
+                    peer-placeholder-shown:text-gray-600
+                    peer-placeholder-shown:text-base
+                    peer-focus:top-1
+                    peer-focus:text-sm
+                    peer-focus:text-[#18395d]">
+                  Link do facebooka (jeśli go posiadasz)</label>
+            </div>
             <h2 class="pt-6 text-3xl font-bold text-center">
               Zgody
             </h2>
@@ -1106,9 +1184,10 @@
 
   <!-- FOOTER -->
   <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
-    <p class="mb-2">📧 kontakt@gdyniascienceslam.pl</p>
+    <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
     <p class="mb-2">📍 Gdynia</p>
     <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+    <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
   </footer>
   <script>
     const menuBtn = document.getElementById('menu-btn');
@@ -1208,7 +1287,7 @@
       //-------------------PHONE HANDLING-----------------------------
       const input = form.querySelector(".phone");
 
-      window.intlTelInput(input, {
+      const iti = window.intlTelInput(input, {
         initialCountry: "pl",
         countryOrder: ["pl"],
         customContainer: "tailwind-phone-input",
@@ -1360,20 +1439,24 @@
         //-------------FORM HANDLING-------------------------------------
         form.addEventListener("submit", async (e) => {
             e.preventDefault();
+            
+
             const endpoint = form.dataset.endpoint;
             const formData = new FormData(form);
+
+            formData.set("phone", iti.getNumber());
             try{
               const response = await fetch(endpoint, {
                 method: "POST",
                 body: formData
               });
               const result = await response.json();
-              if(result.success){
-                showToast(result.message, "success");
-                form.reset();
-              }else{
-                showToast(result.message, "error");
+              if(!response.ok){
+                showToast(result.detail || "Coś poszło nie tak. Spróbuj ponownie.", "error");
+                return;
               }
+              showToast(result.message, "success");
+              form.reset();
             } catch(err){
               showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
             }

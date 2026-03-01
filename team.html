@@ -29,6 +29,55 @@
 </head>
 
 <body class="bg-[#819edb] text-[#18395d]">
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <img class="max-h-20" src="static/assets/logo.png">
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hidden hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/partners" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
+        <a href="/registration"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="/" class="text-lg block">Home</a>
+          <a href="/team" class="text-lg block">Team</a>
+          <a href="/about" class="text-lg block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg font-bold block">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
 
 <section class="min-h-screen flex flex-col">
 
@@ -153,6 +202,11 @@ document.getElementById("prev").addEventListener("click", () => {
 });
 
 </script>
-
+<footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+  <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
+  <p class="mb-2">📍 Gdynia</p>
+  <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+  <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
+</footer>
 </body>
 </html>

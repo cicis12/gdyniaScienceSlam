@@ -1,0 +1,13 @@
+{% extends "admin_base.html" %}
+
+{% block content %}
+
+{% if tab == "contestant" %}
+    {% include "contestant.html" %}
+{% elif tab == "viewer" %}
+    {% include "viewer.html" %}
+{% elif tab == "volunteer" %}
+    {% include "volunteer.html" %}
+{% endif %}
+
+{% endblock %}

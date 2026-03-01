@@ -7,7 +7,55 @@
 </head>
 
 <body class="bg-[#819edb] text-[#18395d]">
-
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <img class="max-h-20" src="static/assets/logo.png">
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/partners" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
+        <a href="/registration"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="/" class="text-lg block">Home</a>
+          <a href="/team" class="hidden text-lg block">Team</a>
+          <a href="/about" class="text-lg font-bold block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="hidden text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
 <!-- NAGŁÓWEK -->
 <section class="pt-10 pb-12 text-center">
   <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide">
@@ -25,28 +73,77 @@
       <h2 class="text-3xl font-bold mb-6">Czym jest Science Slam?</h2>
 
       <p class="text-gray-700 mb-4 leading-relaxed">
-        Gdynia Science Slam to konkurs popularyzujący naukę,
-        w którym badacze, doktoranci i pasjonaci prezentują
-        swoje projekty w przystępnej, dynamicznej i kreatywnej formie.
-      </p>
-
-      <p class="text-gray-700 mb-4 leading-relaxed">
-        Każdy uczestnik ma określony czas, aby w ciekawy sposób
-        przedstawić swój temat przed publicznością.
-        Liczy się nie tylko wiedza, ale też sposób jej przekazania.
-      </p>
-
-      <p class="text-gray-700 leading-relaxed">
-        O zwycięstwie decyduje publiczność oraz jury.
+        <bold class="font-bold text-[#18395d]">Gdynia Science Slam</bold> to wyjątkowa konferencja dająca przestrzeń młodym ludziom marzących o samorozwoju na zaprezentowanie siebie! Prelegenci mają 10 minut na wystąpienie podczas którego każdy ma dowolność przedstawienie swojego dowolnie wybranego tematu.
       </p>
     </div>
 
     <!-- OBRAZ -->
     <div>
-      <img src="static/assets/images/hero.jpg"
+      <img src="static/assets/images/gallery15.jpg"
            class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
     </div>
 
+  </div>
+</section>
+<section class="pb-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <!-- OBRAZ -->
+    <div>
+      <img src="static/assets/images/gallery1.jpg"
+           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
+    </div>
+    <!-- TEKST -->
+    <div class="bg-white rounded-3xl shadow-xl p-10">
+      <h2 class="text-3xl font-bold mb-6">Jak to się zaczeło?</h2>
+
+      <p class="text-gray-700 mb-4 leading-relaxed">
+        Pierwsza edycja odbyła się już dwa lata temu z inicjatywy <span class="font-bold text-blue-600">Kornelii Wieczorek.</span><br>
+        Gdynia Science Slam miał być odpowiedzią na trójmiejską potrzebę przestrzeni wypowiedzi dla młodych naukowców z całego regionu.
+      </p>
+    </div>
+    
+  </div>
+</section>
+<section class="pb-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+    <!-- TEKST -->
+    <div class="bg-white rounded-3xl shadow-xl p-10">
+      <h2 class="text-3xl font-bold mb-6">Co dalej?</h2>
+
+      <p class="text-gray-700 mb-4 leading-relaxed">
+        Po ogromnym sukcesie konferencji, w pełni zorganizowanej przez uczniów <span class="font-bold text-blue-600">Gdyńskiej Trójki</span>
+        jasnym stało się to, że projekt jest strzałem w dziesiątkę.<br>
+        Funkcję lidera przejął <span class="font-bold text-blue-600">Oskar Kotela</span> dzięki któremu idea została popchnięta dalej - przeniósł projekt ze szkolnej auli do
+        <span class="font-bold text-blue-600">Pomorskiego Parku Naukowo Technologicznego</span>, oraz zwiększając nie tylko ilość prelegentów ale również jakość wystąpień nadał wydarzeniu odpowiednią miarę.<br>
+        To głównie dzięki niemu możemy teraz rozwijać już trzecią edycję Gdynia Science Slam oraz kontynuować wsparcie młodych osób, nie tylko z Gdyni, nie tylko z Trójmiasta ale również z całej Polski. 
+       </p>
+    </div>
+    <!-- OBRAZ -->
+    <div>
+      <img src="static/assets/images/gallery2.jpg"
+           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
+    </div>
+  </div>
+</section>
+<section class="pb-20">
+  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+
+    <!-- OBRAZ -->
+    <div>
+      <img src="static/assets/images/gallery14.jpg"
+           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
+    </div>
+    <!-- TEKST -->
+    <div class="bg-white rounded-3xl shadow-xl p-10">
+      <h2 class="text-3xl font-bold mb-6">Czy to dla ciebie?</h2>
+
+      <p class="text-gray-700 mb-4 leading-relaxed">
+        Szukasz okazji, aby się wykazać?<br>
+        Lubisz wyzwania?<br>
+        A może szukasz miejsca w którym ktoś Cię w końcu usłyszy?<br>
+        Jeśli tak, nie czekaj i wypełnij <a href="/registration" class="text-blue-500 underline">formularz zgłoszeniowy</a>!<br>
+      </p>
+    </div>
   </div>
 </section>
 
@@ -64,37 +161,76 @@
 
     <!-- KARTA 1 -->
     <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🎤</div>
-      <h3 class="text-xl font-bold mb-4">Rozwijasz umiejętności wystąpień</h3>
+      <div class="text-4xl mb-4">🕵️</div>
+      <h3 class="text-xl font-bold mb-4">Zgłebisz interesujące tematy</h3>
       <p class="text-gray-600">
-        Nauczysz się mówić o skomplikowanych tematach w sposób
-        przystępny i angażujący.
+        Będziesz mieć idealną okazje, aby dogłębnie przeanalizować interesujący Cię temat.
       </p>
     </div>
 
     <!-- KARTA 2 -->
     <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🤝</div>
-      <h3 class="text-xl font-bold mb-4">Poznasz inspirujących ludzi</h3>
+      <div class="text-4xl mb-4">👀</div>
+      <h3 class="text-xl font-bold mb-4">Wystąpisz przed dużą publicznością</h3>
       <p class="text-gray-600">
-        Spotkasz osoby z różnych dziedzin nauki
-        i nawiążesz wartościowe kontakty.
+        Poprawisz swoje umiejętności występowania przed publicznością. Nie codziennie ma się okazje wystąpić na scenie, przed dużą widownią.
       </p>
     </div>
 
     <!-- KARTA 3 -->
     <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🏆</div>
-      <h3 class="text-xl font-bold mb-4">Możesz wygrać nagrody</h3>
+      <div class="text-4xl mb-4">🫣</div>
+      <h3 class="text-xl font-bold mb-4">Przełamiesz tremę</h3>
       <p class="text-gray-600">
-        Najlepsze prezentacje zostaną nagrodzone
-        przez publiczność oraz jury.
+        Występ przed dużą publicznością dla wielu łączy sie ze stresem. Dlatego w tym roku, planujemy zorganizować warsztaty na temat radzenia sobie ze stresem dla prelegentów.
       </p>
+    </div>
+    <!-- KARTA 4 -->
+    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
+      <div class="text-4xl mb-4">📄</div>
+      <h3 class="text-xl font-bold mb-4">Wzbogacisz swoje CV</h3>
+      <p class="text-gray-600">
+        Udział w ogólnopolskiej konferencji naukowej, to bezdyskusyjnie solidny wpis do CV.
+      </p>
+    </div>
+    <!-- KARTA 5 -->
+    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
+      <div class="text-4xl mb-4">🪪</div>
+      <h3 class="text-xl font-bold mb-4">Zobaczysz inną perspektywę</h3>
+      <p class="text-gray-600">
+        Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.
+      </p>
+    </div>
+    <!-- KARTA 6 -->
+    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
+      <div class="text-4xl mb-4">🏆</div>
+      <h3 class="text-xl font-bold mb-4">Czekają na Ciebie nagrody</h3>
+      <p class="text-gray-600">
+        Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p>
     </div>
 
   </div>
 
 </section>
+<footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+  <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
+  <p class="mb-2">📍 Gdynia</p>
+  <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+  <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
+</footer>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
+  menuBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains("max-h-0")){
+      mobileMenu.classList.remove("max-h-0");
+      mobileMenu.classList.add("max-h-96");
+    }else{
+      mobileMenu.classList.add("max-h-0");
+      mobileMenu.classList.remove("max-h-96");
+    }
+  });
+</script>
 </body>
 </html>

@@ -28,52 +28,54 @@
 
   <!-- NAVBAR -->
   <nav class="bg-[#5e85b8] shadow-md">
-  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
-    <!-- LOGO -->
-    <div class="font-bold text-xl max-h-20">
-      <img class="max-h-20" src="static/assets/logo.png">
-    </div>
-
-    <!-- DESKTOP MENU -->
-    <div class="hidden md:flex space-x-6 items-center">
-      <a href="/" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Home</a>
-      <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
-      <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
-      <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
-      <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
-      <a href="/registration"
-         class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
-        Rejestracja
-      </a>
-    </div>
-
-    <!-- HAMBURGER -->
-    <button
-      id="menu-btn"
-      class="md:hidden text-3xl focus:outline-none">
-      ☰
-    </button>
-
-  </div>
-
-  <!-- MOBILE MENU -->
-  <div
-    id="mobile-menu"
-    class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
-      <div class="px-6 space-y-4 py-4">
-        <a href="/" class="text-lg font-bold block">Home</a>
-        <a href="/team" class="text-lg block">Team</a>
-        <a href="/about" class="text-lg block">About</a>
-        <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
-        <a href="/partners" class="text-lg block">Partnerzy</a>
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <img class="max-h-20" src="static/assets/logo.png">
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/partners" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
         <a href="/registration"
-           class="block bg-blue-600 text-white text-center py-2 rounded-full">
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
           Rejestracja
         </a>
       </div>
-  </div>
-</nav>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="/" class="text-lg font-bold block">Home</a>
+          <a href="/team" class="hidden text-lg block">Team</a>
+          <a href="/about" class="text-lg block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="hidden text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
 
 <main class="flex-grow">
     <!-- HERO -->
@@ -131,14 +133,14 @@
         </a>
       </div>
 
-      <div class="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
-        📷 Zdjęcie wydarzenia
+      <div>
+        <img src="static/assets/images/gallery6.jpg" class="w-full h-auto rounded-xl shadow-xl object-cover">
       </div>
 
     </div>
   </section>
   <!--zespol-->
- <section class="pt-20 pb-15 bg-gray-50">
+ <section class="pt-20 pb-15 bg-gray-50 hidden">
   <h2 class="text-3xl font-bold mb-10 text-center">Nasz zespół</h2>
 
   <div class="w-full overflow-hidden">
@@ -151,28 +153,28 @@
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Anna Kowalska</p>
+          <p class="font-semibold">Osoba</p>
         </div>
 
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team2.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Jan Nowak</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Marcul</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Tralalero</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Tralala</p>
+          <p class="font-semibold">Osoba</p>
         </div>
 
       </div>
@@ -183,28 +185,28 @@
          <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Anna Kowalska</p>
+          <p class="font-semibold">Osoba</p>
         </div>
 
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team2.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Jan Nowak</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Marcul</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Tralalero</p>
+          <p class="font-semibold">Osoba</p>
         </div>
         <div class="flex flex-col items-center min-w-[150px]">
           <img src="assets/images/team1.jpg"
                class="w-32 h-32 rounded-full object-cover mb-3">
-          <p class="font-semibold">Tralala</p>
+          <p class="font-semibold">Osoba</p>
         </div>
 
       </div>
@@ -222,7 +224,7 @@
 
 
   <!--poprzednia edycja-->
-  <section class="py-20 bg-[#819edb] text-[#18395d]">
+  <section class="py-20 bg-[#5e85b8] text-[#18395d]">
     <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -231,20 +233,20 @@
          To już 3 edycja, zobacz jak wyglądały poprzednie
         </p>
 
-        <a href="/previous-editions"
+        <a href="/previous_editions"
            class="text-blue-600 font-semibold hover:underline">
           Przejdź do galerii →
         </a>
       </div>
 
-      <div class="bg-gray-100 rounded-xl h-64 flex items-center justify-center">
-        📷 Zdjęcie wydarzenia
+      <div>
+        <img src="static/assets/images/gallery5.jpg" class="w-full h-auto rounded-xl shadow-xl object-cover">
       </div>
 
     </div>
   </section>
   <!--partnerzy-->
- <section class="py-20 bg-[#5e85b8]">
+ <section class="py-20 bg-[#5e85b8] hidden">
   <h2 class="text-3xl font-bold mb-12 text-center text-[#18395d]">
     Partnerzy
   </h2>
@@ -349,9 +351,10 @@
 </main>
 <!--footer-->
 <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
-  <p class="mb-2">📧 kontakt@gdyniascienceslam.pl</p>
+  <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
   <p class="mb-2">📍 Gdynia</p>
   <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+  <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
 </footer>
 <script>
   const menuBtn = document.getElementById('menu-btn');

@@ -146,15 +146,28 @@ async def handle_exampleform(
     #[...]
 ```
 
+### Adding a new admin page
+If adding an admin page pls render via jinja2
+
 ### Changing the DB (Development)
 #### 1. Apply any nessesary modifications to `models.py`
 #### 2. Update the DB with alembic
 In venv run:
 ```bash
 ENV_FILE="admin_DBcreds.env" alembic revision --autogenerate -m "<descriptionOfChanges>"
+```
+If adding required fields, now:  
+In the newly created alembic migration file find a line:
+```py
+ op.add_column('<table>', sa.Column('<collumn name>', ...
+ ```
+ Add to the end
+ ```py
+ [...], server_default="<server default>")
+```
+```bash
 ENV_FILE="admin_DBcreds.env" alembic upgrade head
 ```
-
 ## Production
 ### Initial deployment:
 #### 0. Enter venv and install dependencies
@@ -286,8 +299,16 @@ TO <appUsername>;
 ``` 
 Exit the psql console by
 `\q`
-
-#### 6. Further actions
+#### 6. Connect your mail API
+For mail support add a file `MAIL.env`
+in which put:
+```env
+MAIL_API_KEY=<mailApiKey>
+EMAIL_FROM=<emailAdressToEmailFrom>
+```
+The Api key you need to get from a provider, like mailersend, mailgun or sendgrid
+Note: email sending in `mail.py` is set up for `mailersend`, if switching providers, modify the file accordingly.
+#### 7. Further actions
 Please follow steps `Add a secret key`  
 and `Creating an admin user for the admin dashboard`  
 
