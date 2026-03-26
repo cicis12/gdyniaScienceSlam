@@ -329,6 +329,16 @@ Run
     python create_admin.py
 ```
 Enter the username and password.
+
+### Add redis to autostart
+The project uses rate limiting with redis.
+You need to install redis on your machine
+And enable it in systemctl
+```bash
+apt install redis-server
+systemctl start redis-server
+systemctl enable redis-server
+```
 ### Updating database (Production)
 Pull the most recent changes from git
 ```bash

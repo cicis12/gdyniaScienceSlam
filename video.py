@@ -3,7 +3,7 @@ from uuid import uuid4
 from fastapi import UploadFile, HTTPException
 
 UPLOAD_DIR = "uploads/filmikuczestnik"
-MAX_FILE_SIZE = 50*1024*1024 #50MB
+MAX_FILE_SIZE = 110*1024*1024 #110MB
 ALLOWED_MIME_TYPES = {"video/mp4", "video/webm", "video/quicktime", "video/x-matroska"}
 ALLOWED_EXTENSIONS = {".mp4", ".webm", ".mov", ".mkv"}
 
@@ -32,7 +32,7 @@ async def save_video(video: UploadFile) -> str:
                 if size > MAX_FILE_SIZE:
                     buffer.close()
                     os.remove(file_path)
-                    raise HTTPException(status_code=400, detail="Przesłany plik jest zbyt duży (max 50MB)")
+                    raise HTTPException(status_code=400, detail="Przesłany plik jest zbyt duży (max 100MB)")
 
                 buffer.write(chunk)
     except Exception:
