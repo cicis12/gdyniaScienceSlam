@@ -36,13 +36,15 @@
   
       <!-- LOGO -->
       <div class="font-bold text-xl max-h-20">
-        <img class="max-h-20" src="static/assets/logo.png">
+        <a href="/">
+          <img class="max-h-20" src="static/assets/logo.png">
+        </a>
       </div>
   
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex space-x-6 items-center">
         <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
-        <a href="/team" class="hidden hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Team</a>
+        <a href="/team" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Team</a>
         <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
         <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
         <a href="/partners" class="hidden hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
@@ -68,11 +70,11 @@
       class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
           <a href="/" class="text-lg block">Home</a>
-          <a href="/team" class="text-lg block">Team</a>
+          <a href="/team" class="text-lg font-bold block">Team</a>
           <a href="/about" class="text-lg block">About</a>
           <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
-          <a href="/partners" class="text-lg block">Partnerzy</a>
-          <a href="/documents" class="text-lg font-bold block">Dokumenty</a>
+          <a href="/partners" class="hidden text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
           <a href="/registration"
              class="block bg-blue-600 text-white text-center py-2 rounded-full">
             Rejestracja
@@ -92,7 +94,7 @@
   </div>
 
   <!-- PROFIL -->
-  <div class="flex-grow flex items-center">
+  <div class="flex-grow flex items-center" id="profile-wrapper">
 
     <div class="max-w-7xl mx-auto px-6 py-4 w-full relative">
 
@@ -110,26 +112,25 @@
 
       <!-- KARTA PROFILU -->
       <div id="profile"
-  class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-3xl shadow-xl p-8 max-w-5xl mx-auto">
+  class="grid md:grid-cols-2 gap-8 items-center bg-white rounded-3xl shadow-xl p-8 max-w-5xl mx-auto touch-pan-y">
 
-        <div>
+        <div class="flex flex-col items-center min-w-[150px]">
           <img id="profile-img"
-            src="static/assets/images/team1.webp"
-            class="w-full h-[360px] object-cover rounded-2xl">
+            src="static/assets/images/team/43.webp"
+            class="w-full rounded-full object-cover mb-3 bg-[#819edb]">
         </div>
 
         <div>
           <h2 id="profile-name" class="text-4xl font-bold mb-3">
-            Anna Kowalska
+            Ignacy Salitra
           </h2>
 
           <p id="profile-role" class="text-xl text-blue-600 font-semibold mb-6">
-            Koordynatorka wydarzenia
+            Leader
           </p>
 
           <p id="profile-desc" class="text-gray-600 leading-relaxed">
-            Anna odpowiada za organizację całego wydarzenia,
-            współpracę z partnerami oraz komunikację zespołu.
+            Hej, jestem Ignacy, znajomi mówią do mnie Igi. Jestem w 3 klasie na profilu biologiczno-chemicznym i w tym roku mam przyjemność koordynować pracę całego zespołu jako lider Gdynia Science Slam 2026. Odpowiadam za wyznaczanie kierunku działań oraz podział zadań w teamie. Poza GSS interesuję się polityką, dlatego od ponad roku jeżdżę po całej Polsce, biorąc udział w konferencjach Model United Nations. Jestem przekonany, że Gdynia Science Slam 2026 będzie najlepszą edycją w historii, dlatego już teraz zapraszam Was do aplikowania na prelegenta. Jeśli natomiast w tym roku nie czujecie, że to Wasz moment na wystąpienia publiczne, zachęcam do aplikowania na widownię lub jako wolontariusz.
           </p>
         </div>
 
@@ -145,23 +146,107 @@
 
 const members = [
   {
-    name: "Anna Kowalska",
-    role: "Koordynatorka wydarzenia",
-    desc: "Anna odpowiada za organizację całego wydarzenia, współpracę z partnerami oraz komunikację zespołu.",
-    img: "static/assets/images/team1.webp"
+    name: "Ignacy Salitra",
+    role: "Leader",
+    desc: "Hej, jestem Ignacy, znajomi mówią do mnie Igi. Jestem w 3 klasie na profilu biologiczno-chemicznym i w tym roku mam przyjemność koordynować pracę całego zespołu jako lider Gdynia Science Slam 2026. Odpowiadam za wyznaczanie kierunku działań oraz podział zadań w teamie. Poza GSS interesuję się polityką, dlatego od ponad roku jeżdżę po całej Polsce, biorąc udział w konferencjach Model United Nations. Jestem przekonany, że Gdynia Science Slam 2026 będzie najlepszą edycją w historii, dlatego już teraz zapraszam Was do aplikowania na prelegenta. Jeśli natomiast w tym roku nie czujecie, że to Wasz moment na wystąpienia publiczne, zachęcam do aplikowania na widownię lub jako wolontariusz.",
+    img: "static/assets/images/team/43.webp"
   },
   {
-    name: "Jan Nowak",
-    role: "Marketing & PR",
-    desc: "Jan zajmuje się promocją wydarzenia, social mediami oraz kontaktem z mediami.",
-    img: "static/assets/images/team2.webp"
+    name: "Kinga Nowak",
+    role: "Deputy Leader",
+    desc: "Hejka! Jestem Kinga i chodzę do klasy 3IB. Możecie mnie kojarzyć z konkursów naukowych lub MUNów. Najbardziej lubię się rozwijać i właśnie dlatego jestem wniebowzięta, że jestem częścią teamu organizacyjnego Slama i mogę tworzyć miejsce skierowane na popularyzacje nauki. Uwielbiam psychologię, neurobiologię, geopolitykę, podróżowanie, taniec, a przede wszystkim poznawanie nowych osób. Moim niszowym hobby jest spanie i jestem w stanie zasnąć zawsze i wszędzie.",
+    img: "static/assets/images/team/41.webp"
   },
   {
-    name: "Maria Zielińska",
-    role: "Logistyka",
-    desc: "Maria koordynuje kwestie techniczne, salę oraz kontakt z uczestnikami.",
-    img: "static/assets/images/team3.webp"
-  }
+    name: "Natalia Sikorska",
+    role: "Deputy Leader",
+    desc: " Hej, nazywam się Natalia i chodzę do 3IB w Gdyńskiej Trójce. Moim hobby jest gra na pianinie i jazda konna, a także przedmioty ścisłe.",
+    img: "static/assets/images/team/42.webp"
+  },
+  {
+    name: "Natasza Sudoł",
+    role: "Media",
+    desc: "Hejka kochani! Ja jestem Natasza i na slamie odpowiadam za koordynacje teamu social media. Interesuję się nauką, szczególnie fizyką i astronomią, a także geopolityką. Nie mogę się doczekać tegorocznego Gdynia Science Slam i mam nadzieję że spotkamy się w Gdyni! Widzimy się!",
+    img: "static/assets/images/team/28.webp"
+  },
+  {
+    name: "Antonina Podgórska",
+    role: "Media",
+    desc: "Hejka, jestem Tosia i w tym roku zajmuje się prowadzeniem mediów Gdynia Science Slam, w wolnym czasie lubię grać w tenisa, słuchać muzyki, wychodzić ze znajomymi i spać tyle ile mogę. Interesuje mnie anatomia człowieka, a szczególnie mózgu. Mam nadzieję, że widzimy się w Gdyni na Science Slamie oraz że razem posłuchamy ciekawych wystąpień naszych prelegentów, Do zobaczenia😘!!",
+    img: "static/assets/images/team/29.webp"
+  },
+  {
+    name: "Kuba Kamiński",
+    role: "Design",
+    desc: "Cześć, jestem Kuba i już trzeci rok z rzędu jestem grafikiem tej konferencji. Chodzę do klasy 3IB, a moje zainteresowania to teatr, kino, matematyka hl i organizacja Gdynia Science Slam.",
+    img: "static/assets/images/team/27.webp"
+  },
+  {
+    name: "Hania Sajdak",
+    role: "Head of Partnerships",
+    desc: "Hejka tu Hania z 3 IB, uwielbiam uprawiać sporty - szczególnie taniec, w wolnym czasie czytam kryminały , oglądam seriale network drama albo uczę się nowych języków.",
+    img: "static/assets/images/team/30.webp"
+  },
+  {
+    name: "Kacper Górski",
+    role: "Partnerships",
+    desc: "Cześć, jestem pasjonatem nauk ścisłych w szczególności astronomii, chociaż uwielbiam też debatować. Interesuję się również filozofią oraz kinem. Do zobaczenia podczas GSS!",
+    img: "static/assets/images/team/31.webp"
+  },
+  {
+    name: "Maciej Miłosz",
+    role: "Partnerships",
+    desc: "Hejka, nazywam się Maciek, uczę się w klasie MYP. Interesuję się w zasadzie wszystkim, z czego w największym stopniu literaturą i filozofią. Publikowałem w kilku czasopismach literackich i na Substacku. Dzięki skrzyżowaniu pewnych stypendiów uczestniczę też w badaniach z zakresu kognitywistyki.",
+    img: "static/assets/images/team/32.webp"
+  },
+  {
+    name: "Marcel Muzyczuk",
+    role: "IT Specialist",
+    desc: "Siema, jestem Marcel. Na slamie jestem odpowiedzialny za informatykę - od strony internetowej, przez zarządzanie zgłoszeniami aż do ogarniania prezentacji. Na codzień interesuje się informatyką, matematyką i logistyką ale też historią i polityką, więc zainteresowanie mnie prezentacją nie będzie trudne. Mam nadzieję że widzimy się w PPNT!",
+    img: "static/assets/images/team/33.webp"
+  },
+  {
+    name: "Oliwia Gatz",
+    role: "IT Specialist",
+    desc: "Cześć jestem Oliwia. Chodzę do klasy matematyczno-informatycznej, w naszym projekcie zajmowałam się razem z Marcelem tworzeniem strony internetowej. W wolnym czasie lubię szydełkować, a moje ulubione zwierzątko to szop🦝",
+    img: "static/assets/images/team/34.webp"
+  },
+  {
+    name: "Julia Willma",
+    role: "Head of Formalities",
+    desc: "Hej, nazywam się Julia i w tej edycji mam okazję odpowiadać za formalności. Oprócz head of formalities na GSS jestem też radną w MRM w Gdańsku i miałam już okazję uczestniczyć w organizacji paru wydarzeń. Nie mogę się jednak doczekać maja kiedy w końcu praca całego teamu będzie widoczna na żywo. You have to be there!!",
+    img: "static/assets/images/team/35.webp"
+  },
+  {
+    name: "Lena Borowska",
+    role: "Formalities",
+    desc: "Hej! Nazywam się Lena i tak jak reszta zespołu interesuje się nauką (oraz kryminalistyką), mam nadzieję, że wasza przygoda z Gdynia Science Slam będzie niesamowitym przeżyciem pełnym dobrej zabawy, oraz możliwością poznania nowych fajnych osób ;))!",
+    img: "static/assets/images/team/36.webp"
+  },
+  {
+    name: "Konstanty Konopka",
+    role: "Finances",
+    desc: "Hej hej! Jestem Kostek Konopka odpowiadam za finansową stronę projektu. Zazwyczaj pracuje z Excelem, zajmuje się wystawianiem faktur oraz przygotowuje preliminarze i kosztorysy wydarzenia, dbając o pokrycie projektu oraz brak dziur finansowych. Poza projektem uczę się w programie IB, a kiedy nic nie muszę to jadę podróż, najlepiej pod namiot jak daleko można.",
+    img: "static/assets/images/team/37.webp"
+  },
+  {
+    name: "Stefan Sadkowski",
+    role: "Content Creator",
+    desc: "siema, jestem Stefan i w tym roku na Science Slamie będę odpowiadać za content na tiktoku naszej konferencji. Chodzę do klasy 1c i możecie mnie kojarzyć ze szkolnego tiktoka, nagrałem tam już trochę fajnych filmików, a jakość tych na Science Slamie będzie jeszcze lepsza. Wraz z Michałem już nagrywamy filmy, więc wyczekujcie ich bo warto!!!!",
+    img: "static/assets/images/team/39.webp"
+  },
+  {
+    name: "Michał Bochentyn",
+    role: "Content Creator",
+    desc: "Cześć! Nazywam się Michał i jestem uczniem klasy matematyczno-geograficznej. Część z Was może mnie kojarzyć ze szkolnego TikToka lub z działalności w samorządzie uczniowskim. W tym roku podczas GSS będę pełnił rolę content creatora, dlatego możecie spodziewać się wielu materiałów i relacji na naszym TikToku. W wolnym czasie interesuję się matematyką, sportem oraz social mediami. Zachęcam do śledzenia TikToka i do zobaczenia wkrótce!",
+    img: "static/assets/images/team/40.webp"
+  },
+  {
+    name: "Izabela Radziuk-Śliwińska",
+    role: "Event Supervisor",
+    desc: "Dzień dobry, nazywam się Izabella Radziuk-Śliwińska, jestem nauczycielką chemii i wychowawczynią w III LO w Gdyni. Na studiach swoją pracę magisterską realizowałam w Katedrze Chemii Organicznej (w Pracowni Chemii Cukrów), jednak najbardziej pasjonuje mnie popularyzacja nauki. Czuję się obdarowana, bo młodzi ludzie, których spotykam w szkole są wspaniali i motywują mnie do rozwoju.",
+    img: "static/assets/images/team/44.webp"
+  },
 ];
 
 let current = 0;
@@ -203,6 +288,48 @@ document.getElementById("prev").addEventListener("click", () => {
   updateProfile(current);
 });
 
+let startX = 0;
+let endX = 0;
+
+const swipeArea = document.querySelector("#profile-wrapper");
+
+swipeArea.addEventListener("touchstart", (e) => {
+  startX=e.touches[0].clientX;
+});
+swipeArea.addEventListener("touchmove", (e) => {
+  endX=e.touches[0].clientX;
+});
+
+swipeArea.addEventListener("touchend", () =>{
+  handleSwipe();
+});
+
+function handleSwipe(){
+  const threshold = 50;
+  if(startX-endX > threshold){
+    current = (current+1) % members.length;
+    updateProfile(current);
+  }else if(endX-startX > threshold){
+    current= (current-1 + members.length) % members.length;
+    updateProfile(current);
+  }
+}
+
+
+</script>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains("max-h-0")){
+      mobileMenu.classList.remove("max-h-0");
+      mobileMenu.classList.add("max-h-96");
+    }else{
+      mobileMenu.classList.add("max-h-0");
+      mobileMenu.classList.remove("max-h-96");
+    }
+  });
 </script>
 <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
   <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>

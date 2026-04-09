@@ -44,9 +44,9 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 def home():
     return BASE_DIR/ "index.html"
 
-# @app.get("/team", response_class=FileResponse)
-# def team():
-#     return BASE_DIR/"team.html"
+@app.get("/team", response_class=FileResponse)
+def team():
+    return BASE_DIR/"team.html"
 
 @app.get("/registration", response_class=FileResponse)
 def form():

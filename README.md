@@ -171,6 +171,10 @@ ENV_FILE="admin_DBcreds.env" alembic upgrade head
 ## Production
 ### Initial deployment:
 #### 0. Enter venv and install dependencies
+Install postgre.
+```bash
+apt install postgresql
+```
 After pulling the repository,enter the pulled folder   
 Install venv by
 ```bash
