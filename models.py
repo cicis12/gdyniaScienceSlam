@@ -35,6 +35,8 @@ class Contestant(Base):
     privacy_policy_accepted = Column(Boolean,nullable=False)
 
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+    favourite = Column(Boolean, default=False)
 class Viewer(Base):
     __tablename__ = "viewers"
     id = Column(Integer,primary_key=True,index=True)
@@ -63,6 +65,8 @@ class Volunteer(Base):
     facebook_link = Column(String,nullable=True)
     birthdate = Column(Date,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+    favourite = Column(Boolean, default=False)
 
 class AdminUser(Base):
     __tablename__="admin_users"

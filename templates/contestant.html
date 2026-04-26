@@ -1,12 +1,19 @@
-
 <section class="min-h-screen flex flex-col">
 
     {% for item in data %}
     <div
     class="gap-8 items-center bg-white rounded-3xl shadow-xl p-8 mx-auto my-8 w-full">
-        <div class="font-bold text-xl gap-4 mb-4">
-            <span>{{ item.name }}</span>
-            <span>{{ item.surname }}</span>
+        <div class="flex justify-between font-bold text-xl mb-4 ">
+            <div class="w-4/5  gap-4">
+                <span>{{ item.name }}</span>
+                <span>{{ item.surname }}</span>
+            </div>
+            <div class="text-yellow-600 text-4xl"><form method="post" action="/admin/toggle-favourite/{{ item.id }}">
+                <button type="submit">
+                    {% if item.favourite %}★{% else %}☆{% endif %}
+                </button>
+            </form>
+            </div>
         </div>
 
         <div class="relative flex flex-row w-full justify-between toggle-btn cursor-pointer"

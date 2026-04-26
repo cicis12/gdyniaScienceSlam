@@ -68,8 +68,8 @@
   <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
 </section>
 
-<!-- PARTNER GŁÓWNY -->
-<section class="pb-20">
+
+<section class="pb-20 hidden">
   <div class="max-w-4xl mx-auto px-6 text-center">
 
     <h2 class="text-2xl font-bold mb-8">Partner Główny</h2>
@@ -82,46 +82,75 @@
 
   </div>
 </section>
-
-<!-- POZOSTALI PARTNERZY -->
+<!-- Sponsorzy -->
 <section class="pb-24">
 
-  <div class="max-w-6xl mx-auto px-6">
+  <div class="max-w-md md:max-w-6xl mx-auto px-6">
 
     <h2 class="text-3xl font-bold text-center mb-12">
-      Pozostali Partnerzy
+      Sponsorzy
     </h2>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
-
-      <!-- PARTNER 1 -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partner1.png"
-             alt="Partner 1"
-             class="h-20 object-contain">
+    <div class="flex flex-wrap justify-center gap-12">
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
+        <img src="static/assets/images/partners/helion.png"
+             alt="Helion"
+             class="object-contain h-24">
+      </div>
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
+        <img src="static/assets/images/partners/milomi.png"
+             alt="MIŁO.MI"
+             class="object-contain h-24 scale-125">
+      </div>
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
+        <img src="static/assets/images/partners/muzeumemigracji.png"
+             alt="Muzeum Emigracji w Gdyni"
+             class="object-contain h-24">
       </div>
 
-      <!-- PARTNER 2 -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partner2.png"
-             alt="Partner 2"
-             class="h-20 object-contain">
-      </div>
+    </div>
 
-      <!-- PARTNER 3 -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partner3.png"
-             alt="Partner 3"
-             class="h-20 object-contain">
-      </div>
+  </div>
 
-      <!-- PARTNER 4 -->
-      <div class="bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partner4.png"
-             alt="Partner 4"
-             class="h-20 object-contain">
-      </div>
+</section>
+<section class="pb-24">
 
+  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
+
+    <h2 class="text-3xl font-bold text-center mb-12">
+      Partner
+    </h2>
+    <div class="flex flex-wrap justify-center gap-10">
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
+        <img src="static/assets/images/partners/talent.jpg"
+             alt="Stowarzyszenie Talent"
+             class="h-24 object-contain">
+      </div>
+      
+    </div>
+
+  </div>
+
+</section>
+<section class="pb-24">
+
+  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
+
+    <h2 class="text-3xl font-bold text-center mb-12">
+      Patroni Medialni
+    </h2>
+    <div class="flex flex-wrap justify-center gap-10">
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg h-36 flex items-center justify-center hover:scale-105 transition overflow-hidden">
+        <img src="static/assets/images/partners/RG logo.svg"
+             alt="Radio Gdańsk"
+             class="h-full w-full object-cover scale-[2]">
+      </div>
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
+        <img src="static/assets/images/partners/trojmiastopl.jpg"
+             alt="trojmiasto.pl"
+             class="object-contain h-24">
+      </div>
+      
     </div>
 
   </div>
@@ -133,6 +162,19 @@
   <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
   <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
 </footer>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
 
+  menuBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains("max-h-0")){
+      mobileMenu.classList.remove("max-h-0");
+      mobileMenu.classList.add("max-h-96");
+    }else{
+      mobileMenu.classList.add("max-h-0");
+      mobileMenu.classList.remove("max-h-96");
+    }
+  });
+</script>
 </body>
 </html>

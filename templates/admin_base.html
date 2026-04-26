@@ -90,6 +90,16 @@
             </svg>
             Wolontariusz</a>
         </div>
+        <form method="get" action="/admin/dashboard">
+          <input type="hidden" name="tab" value ="{{ tab }}">
+          
+          <input type="text" name="search" placeholder="Wyszukaj..." value="{{ request.query_params.get('search', '') }}">
+      
+          <label>
+              <input type="checkbox" name="favourites_only" value="true"
+                  {% if request.query_params.get('favourites_only') %}checked{% endif %}>
+          </label>
+      </form>
         {% block content %}
         {% endblock %}
       </div>
@@ -140,5 +150,28 @@
       slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
     </script>
   {% endif %}
+
+  <script>
+    const searchInput = document.querySelector('input[name="search"]');
+
+    searchInput.addEventListener("input", debounce(() =>{
+      searchInput.closes('form').submit();
+    }, 400));
+
+    function debounce(fn, delay){
+      let timer;
+      return (...args) => {
+        clearTimeout(timer);
+        timer = setTimeout(() => fn(...args),delay);
+      }
+    }
+
+    const checkbox = document.querySelector('input[name="favourites_only"]');
+
+    checkbox.addEventListener('change', () => {
+      checkbox.closest('form').submit();
+    })
+
+  </script>
 </body>
 </html>

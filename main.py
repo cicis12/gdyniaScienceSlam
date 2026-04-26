@@ -4,6 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
 from sqlalchemy.orm import Session
+from sqlalchemy import or_, func
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
 from models import Viewer, Contestant, Volunteer, AdminUser
@@ -60,9 +61,9 @@ def about():
 def prev():
     return BASE_DIR/"previous.html"
 
-# @app.get("/partners", response_class=FileResponse)
-# def partners():
-#     return BASE_DIR/"partners.html"
+@app.get("/partners", response_class=FileResponse)
+def partners():
+    return BASE_DIR/"partners.html"
 
 @app.get("/documents", response_class=FileResponse)
 def docs():
@@ -157,7 +158,7 @@ async def handle_contestantform(
         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
     )
 
-## UNCOMMENT WHEN OPENING
+# # UNCOMMENT WHEN OPENING
 
 # @app.post("/viewerForm")
 # async def handle_viewerform(
@@ -267,16 +268,49 @@ async def auth_exception_handler(request: Request, exc: HTTPException):
 @app.get("/admin/dashboard")
 def admin_dashboard(
     request: Request, tab: str = "contestant",
+    search: str = "", favourites_only: bool=False,
     admin: AdminUser = Depends(get_current_admin), db: Session = Depends(get_db)
 ):
+    search=search.strip()
     if tab == "contestant":
-        data=db.query(Contestant).all()
+        query=db.query(Contestant)
+        query=query.order_by(Contestant.id.asc())
+        if search and query is not None:
+            query = query.filter(
+                or_(
+                    (Contestant.name + " " + Contestant.surname).ilike(f"%{search}%"),
+                    Contestant.email.ilike(f"%{search}%")
+                )
+            )
+        if favourites_only and query is not None:
+            query = query.filter(Contestant.favourite==True)
     elif tab == "viewer":
-        data=db.query(Viewer).all()
+        query=db.query(Viewer)
+        query=query.order_by(Viewer.id.asc())
+        if search and query is not None:
+            query = query.filter(
+                or_(
+                    func.concat(Viewer.name, " ", Viewer.surname).ilike(f"%{search}%"),
+                    Viewer.email.ilike(f"%{search}%")
+                )
+            )
     elif tab == "volunteer":
-        data=db.query(Volunteer).all()
+        query=db.query(Volunteer)
+        query=query.order_by(Volunteer.id.asc())
+        if search and query is not None:
+            query = query.filter(
+                or_(
+                    (Volunteer.name + " " + Volunteer.surname).ilike(f"%{search}%"),
+                    Volunteer.email.ilike(f"%{search}%")
+                )
+            )
+        if favourites_only and query is not None:
+            query = query.filter(Volunteer.favourite==True)
+
     else:
-        data=[]
+        query=None
+
+    data= query.all() if query is not None else []
 
     return templates.TemplateResponse(
         "admin_dashboard.html",
@@ -284,10 +318,31 @@ def admin_dashboard(
             "request": request,
             "tab": tab,
             "data": data,
-            "admin": admin
+            "admin": admin,
+            "favourites_only": favourites_only,
+            "search": search
         }
     )
 
+@app.post("/admin/toggle-favourite/{item_id}")
+def toggle_favourite(
+    item_id: int,
+    tab: str = "contestant",
+    db: Session = Depends(get_db)
+):
+    model = {
+        "contestant": Contestant,
+        "viewer": Viewer,
+        "volunteer": Volunteer
+    }.get(tab)
+
+    if not model:
+        return RedirectResponse("/admin/dashboard", status_code=303)
+    
+    item = db.query(model).get(item_id)
+    item.favourite = not item.favourite
+    db.commit()
+    return RedirectResponse(f"/admin/dashboard?tab={tab}", status_code=303)
 
 @app.get("/admin/login")
 def adminloginpage(request: Request):
