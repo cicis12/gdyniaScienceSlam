@@ -268,7 +268,7 @@ async def auth_exception_handler(request: Request, exc: HTTPException):
 @app.get("/admin/dashboard")
 def admin_dashboard(
     request: Request, tab: str = "contestant",
-    search: str = "", favourites_only: bool=False,
+    search: str = "", favourites_only: bool=False, show_hidden: bool=False,
     admin: AdminUser = Depends(get_current_admin), db: Session = Depends(get_db)
 ):
     search=search.strip()
@@ -284,6 +284,8 @@ def admin_dashboard(
             )
         if favourites_only and query is not None:
             query = query.filter(Contestant.favourite==True)
+        if not show_hidden and query is not None:
+            query = query.filter(Contestant.hidden==False)
     elif tab == "viewer":
         query=db.query(Viewer)
         query=query.order_by(Viewer.id.asc())
@@ -306,6 +308,8 @@ def admin_dashboard(
             )
         if favourites_only and query is not None:
             query = query.filter(Volunteer.favourite==True)
+        if not show_hidden and query is not None:
+            query = query.filter(Contestant.hidden==False)
 
     else:
         query=None
@@ -343,6 +347,27 @@ def toggle_favourite(
     item.favourite = not item.favourite
     db.commit()
     return RedirectResponse(f"/admin/dashboard?tab={tab}", status_code=303)
+
+@app.post("/admin/toggle-hidden/{item_id}")
+def toggle_favourite(
+    item_id: int,
+    redirect_url: str = Form(...),
+    tab: str = "contestant",
+    db: Session = Depends(get_db)
+):
+    model = {
+        "contestant": Contestant,
+        "viewer": Viewer,
+        "volunteer": Volunteer
+    }.get(tab)
+
+    if not model:
+        return RedirectResponse("/admin/dashboard", status_code=303)
+    
+    item = db.query(model).get(item_id)
+    item.hidden = not item.hidden
+    db.commit()
+    return RedirectResponse(redirect_url, status_code=303)
 
 @app.get("/admin/login")
 def adminloginpage(request: Request):

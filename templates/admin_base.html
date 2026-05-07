@@ -94,7 +94,11 @@
           <input type="hidden" name="tab" value ="{{ tab }}">
           
           <input type="text" name="search" placeholder="Wyszukaj..." value="{{ request.query_params.get('search', '') }}">
-      
+          
+          <label>
+            <input type="checkbox" name="show_hidden" value="true"
+                {% if request.query_params.get('show_hidden') %}checked{% endif %}>
+        </label>
           <label>
               <input type="checkbox" name="favourites_only" value="true"
                   {% if request.query_params.get('favourites_only') %}checked{% endif %}>
@@ -155,7 +159,7 @@
     const searchInput = document.querySelector('input[name="search"]');
 
     searchInput.addEventListener("input", debounce(() =>{
-      searchInput.closes('form').submit();
+      searchInput.closest('form').submit();
     }, 400));
 
     function debounce(fn, delay){
@@ -165,6 +169,11 @@
         timer = setTimeout(() => fn(...args),delay);
       }
     }
+    const checkboxH = document.querySelector('input[name="show_hidden"]');
+
+    checkboxH.addEventListener('change', () => {
+      checkboxH.closest('form').submit();
+    })
 
     const checkbox = document.querySelector('input[name="favourites_only"]');
 
