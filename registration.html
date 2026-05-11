@@ -94,8 +94,8 @@
         </div>
         <!-- contestant Form-->
         <div id="contestant" class="form-tab">
-            
-            <form method="POST" id="contestantForm" class="dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
+            <h1 class="text-4xl font-bold text-center">Czas na składanie zgłoszeń na prelegenta już minął.</h1>
+            <form method="POST" id="contestantForm" class="hidden dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
                 <h2 class="text-3xl font-bold text-center">
                     Dane osobowe
                   </h2>
@@ -755,8 +755,10 @@
         </div>
         <!-- viewer Form-->
         <div id="viewer" class="form-tab">
-            <h1 class="text-4xl font-bold text-center">Zgłoszenia na widownie zostaną otwarte bliżej wydarzenia.</h1>
-          <form method="POST" id="viewerForm" class="hidden dyn-form" data-endpoint="/viewerForm" enctype="multipart/form-data">
+          <a href="/groups"><h1 class="text-xl font-bold text-center pb-6">Nauczycielu, jeśli chcesz zgłosić klasę lub grupę kliknij <span class="text-red-800 font-bold underline">tutaj</span>.</h1></a>
+            <h1 class="text-4xl font-bold text-center pb-4">Zgłoszenia indywidualne</h1>
+            
+          <form method="POST" id="viewerForm" class="dyn-form" data-endpoint="/viewerForm" enctype="multipart/form-data">
               <h2 class="text-3xl font-bold text-center">
                   Dane osobowe
                 </h2>
@@ -921,35 +923,65 @@
               </h2>
               
                <!-- RulesAccept-->
-               <div class="pt-6">
-                <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
-                <!-- real checkbox-->
-                  <input type="checkbox" name="rules_accepted" value="true"
-                  class="peer sr-only"
-                  required>
-                  <!-- visible stylized box-->
-                  
-                   <div class="w-5 h-5 border-2 border-gray-400 rounded-full
-                    transition-all duration-200
-                    peer-checked:border-[#18395d]
-                    peer-checked:bg-[#18395d]
-                    flex items-center justify-center 
-                    text-transparent
-                    peer-checked:text-white">
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="rules_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
-                      size-6
-                      transition-all duation-200
-                      ">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                    </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
 
-                   </div>
-                   <span class="gap-0">
-                    Akceptuję <a href="<regulamin>" class="underline text-blue-700">regulamin</a> wydarzenia. 
-                    </span>
-                </label>
-               </div>
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Regulamin.pdf" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                      </span>
+                  </label>
+                 </div>
+                 <!-- PrivacyPolicy Accept-->
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="privacy_policy_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Polityka prywatności .pdf" class="underline text-blue-700">politykę prywatności</a>. 
+                      </span>
+                  </label>
+                 </div>
               <!-- Submit-->
                <button
                 type="submit"
@@ -962,8 +994,7 @@
         </div>
         <!-- volunteer form-->
         <div id="volunteer" class="form-tab">
-          <h1 class="text-4xl font-bold text-center">Zgłoszenia do wolontariatu zostaną otwarte bliżej wydarzenia.</h1>
-        <form method="POST" id="volunteerForm" class="hidden dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
+        <form method="POST" id="volunteerForm" class="dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
             <h2 class="text-3xl font-bold text-center">
                 Dane osobowe
               </h2>
@@ -1134,7 +1165,7 @@
                  name="facebook_link"
                  placeholder=" "
                  class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
-                 required/>
+                 />
 
                  <label
                     class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
@@ -1151,35 +1182,65 @@
             </h2>
             
              <!-- RulesAccept-->
-             <div class="pt-6">
-              <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
-              <!-- real checkbox-->
-                <input type="checkbox" name="rules_accepted" value="true"
-                class="peer sr-only"
-                required>
-                <!-- visible stylized box-->
-                
-                 <div class="w-5 h-5 border-2 border-gray-400 rounded-full
-                  transition-all duration-200
-                  peer-checked:border-[#18395d]
-                  peer-checked:bg-[#18395d]
-                  flex items-center justify-center 
-                  text-transparent
-                  peer-checked:text-white">
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="rules_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
 
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
-                    size-6
-                    transition-all duation-200
-                    ">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
-                  </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
 
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Regulamin.pdf" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                      </span>
+                  </label>
                  </div>
-                 <span class="gap-0">
-                  Akceptuję <a href="<regulamin>" class="underline text-blue-700">regulamin</a> wydarzenia. 
-                  </span>
-              </label>
-             </div>
+                 <!-- PrivacyPolicy Accept-->
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="privacy_policy_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Polityka prywatności .pdf" class="underline text-blue-700">politykę prywatności</a>. 
+                      </span>
+                  </label>
+                 </div>
             <!-- Submit-->
              <button
               type="submit"
@@ -1466,7 +1527,7 @@
               });
               const result = await response.json();
               if(!response.ok){
-                showToast(result.detail || "Coś poszło nie tak. Spróbuj ponownie.", "error");
+                showToast(result.message || result.detail || "Coś poszło nie tak. Spróbuj ponownie.", "error");
                 return;
               }
               showToast(result.message, "success");

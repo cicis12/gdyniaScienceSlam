@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Rejestracja – Gdynia Science Slam</title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- intl-tel-input stylesheet-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
+</head>
+
+<body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
+
+  <!-- NAVBAR -->
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <a href="/">
+          <img class="max-h-20" src="static/assets/logo.png">
+        </a>
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
+        <a href="/registration"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="/" class="text-lg block">Home</a>
+          <a href="/team" class="text-lg block">Team</a>
+          <a href="/about" class="text-lg block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
+
+  <main class="flex-grow">
+    <div id="toast" class="fixed top-5 right-5 z-50 hidden">
+      <div id="toast-content" class="px-6 py-4 rounded-xl shadow-lg text-white font-medium">
+
+      </div>
+    </div>
+    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
+      <div class="md:w-2/3 mx-auto left-1/6">
+        
+        <!-- viewer Form-->
+        <div id="viewer" class="form-tab">
+            <h1 class="text-6xl font-bold text-center pb-4">Widownia</h1>
+          <a href="/registration#viewer"><h1 class="text-xl font-bold text-center pb-6">Jeśli chcesz zgłosić się indywidualnie, kliknij <span class="text-red-800 font-bold underline">tutaj</span>.</h1></a>
+            <h1 class="text-4xl font-bold text-center pb-4">Zgłoszenia grupowe</h1>
+            <p class="text-center text-lg font-bold pb-2">Wszyscy uczestnicy wydarzenia muszą dostarczyć swój adres E-Mail. Jest on potrzebny do przeprowadzenia głosowania publiczności. Adresy E-Mail będą zbierane od uczniów na stanowisku rejestracji przed rozpoczęciem wydarzenia, dlatego prosimy pojawić się odrobinę wcześniej.</p>
+            <p class="text-center text-lg font-bold pb-2">Alternatywnie, jeśli zależy Państwu na czasie istnieje możliwość dostarczenia listy adresów E-Mail uczniów na stanowisko rejestracji, bądź przesłania jej drogą mailową na adres <span class="text-red-900">gdyniascienceslam@gmail.com</span>.</p>
+            
+          <form method="POST" id="groupForm" class="dyn-form" data-endpoint="/groupForm" enctype="multipart/form-data">
+              
+              <!-- Name and surname-->
+              <div class="flex gap-4">
+                <div class="relative flex-1">
+                  <div class="absolute left-0 top-1/2 -translate-y-[58%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 absolute">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        </svg>
+                        
+                  </div>
+                  <input type="text"
+                   name="supervisor_name"
+                   placeholder=" "
+                   class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                   
+                  <label
+                    class="absolute left-10 top-6 text-gray-600 transition-all duration-200
+                    peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                    Imię opiekuna*</label>
+                </div>
+
+                <div class="relative flex-1">
+                  <input type="text"
+                   name="supervisor_surname"
+                   placeholder=" "
+                   class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" required/>
+                   
+                   
+                  <label
+                     class="absolute left-2 top-6 text-gray-600 transition-all duration-200
+                     peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-valid:top-1 peer-valid:text-sm font-bold">
+                      Nazwisko opiekuna*</label>
+                </div>
+              </div>
+              <!-- Email-->
+              <div class="relative">
+                  <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+                    </svg>
+                  </div>
+                    
+                  <input type="email"
+                   name="email"
+                   placeholder=" "
+                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+                   required/>
+
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Adres E-Mail opiekuna*</label>
+              </div>
+              <!-- School-->
+              <div class="relative autocompleteConatainer">
+                  <div class="absolute left-0 top-6">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0 0 12 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75Z" />
+                      </svg>
+                  </div>
+                    
+                    
+                  <input type="text"
+                   name="school"
+                   autocomplete="off"
+                   placeholder=" "
+                   class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" required/>
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Nazwa szkoły*</label>
+                   <div class="results">
+
+                   </div>
+                   
+              </div>
+              <!-- Class and profile-->
+              <div class="relative">
+                  <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
+                        </svg>
+                        
+                  </div>
+                    
+                  <input type="text"
+                   name="class_and_profile"
+                   placeholder=" "
+                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600" required/>
+
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Klasa (klasy) lub grupa (grupy)*</label>
+              </div>
+              <!-- Number of ppl-->
+              <div class="relative">
+                  <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                        </svg>
+
+                        
+                  </div>
+                    
+                  <input type="number" min="0"
+                   name="number_of_participants"
+                   placeholder=" "
+                   class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600" required/>
+
+                   <label
+                      class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                      peer-placeholder-shown:top-6
+                      peer-placeholder-shown:text-gray-600
+                      peer-placeholder-shown:text-base
+                      peer-focus:top-1
+                      peer-focus:text-sm
+                      peer-focus:text-[#18395d]">
+                    Ilość osób (włącznie z opiekunami)*</label>
+              </div>
+              
+              <h2 class="pt-6 text-3xl font-bold text-center">
+                Zgody
+              </h2>
+              
+               <!-- RulesAccept-->
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="rules_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Regulamin.pdf" class="underline text-blue-700">regulamin</a> wydarzenia. 
+                      </span>
+                  </label>
+                 </div>
+                 <!-- PrivacyPolicy Accept-->
+                 <div class="pt-6">
+                  <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+                  <!-- real checkbox-->
+                    <input type="checkbox" name="privacy_policy_accepted" value="true"
+                    class="peer sr-only"
+                    required>
+                    <!-- visible stylized box-->
+                    
+                     <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+                      transition-all duration-200
+                      peer-checked:border-[#18395d]
+                      peer-checked:bg-[#18395d]
+                      flex items-center justify-center 
+                      text-transparent
+                      peer-checked:text-white">
+
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+                        size-6
+                        transition-all duation-200
+                        ">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                     </div>
+                     <span class="gap-0">
+                      Akceptuję <a href="/static/documents/Polityka prywatności .pdf" class="underline text-blue-700">politykę prywatności</a>. 
+                      </span>
+                  </label>
+                 </div>
+              <!-- Submit-->
+               <button
+                type="submit"
+                class="mt-8 w-full bg-[#18395d] text-white font-bold py-3 rounded-xl
+                transition-all duration-200 ease-in-out
+                hover:shadow-lg hover:-translate-y-0.5">
+                Wyślij Zgłoszenie
+                </button> 
+          </form>
+        </div>
+        
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+    <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
+    <p class="mb-2">📍 Gdynia</p>
+    <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+    <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
+  </footer>
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+  
+    menuBtn.addEventListener('click', () => {
+      if (mobileMenu.classList.contains("max-h-0")){
+        mobileMenu.classList.remove("max-h-0");
+        mobileMenu.classList.add("max-h-96");
+      }else{
+        mobileMenu.classList.add("max-h-0");
+        mobileMenu.classList.remove("max-h-96");
+      }
+    });
+  </script>
+
+
+  <!-- phone number handling-->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+  <!-- school autocompletion -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    document.querySelectorAll(".dyn-form").forEach(form => {
+      //-------------------TOAST HANDLING-----------------------------
+      
+        function showToast(message, type="success"){
+          const toast = document.getElementById("toast");
+          const content = document.getElementById("toast-content")
+          content.textContent=message;
+          content.classList.remove("bg-green-600", "bg-red-600")
+          if(type === "success"){
+            content.classList.add("bg-green-600");
+          } else{
+            content.classList.add("bg-red-600");
+          }
+          toast.classList.remove("hidden")
+          setTimeout(() => {
+            toast.classList.add("hidden");
+          }, 4000);
+        }
+      
+      //---------------------------------------------------------------
+      //----------------SCHOOL AUTOCOMPLETION--------------------------
+      let schools = [];
+        let fuse;
+        function normalize(text){
+          return text
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // remove accents
+            .replace(/ł/g,"l")
+            .replace(/[^\w\s]/g, "")        // remove punctuation
+            .replace(/\s+/g, " ")
+            .trim();
+        }
+        const numberMap ={
+          "1" : "i",
+          "2" : "ii",
+          "3" : "iii",
+          "4" : "iv",
+          "5" : "v",
+          "6" : "vi",
+          "7" : "vii",
+          "8" : "viii",
+          "9" : "ix",
+          "10" : "x",
+          "11" : "xi",
+          "12" : "xii",
+          "13" : "xiii",
+          "14" : "xiv",
+          "15" : "xv",
+          "16" : "xvi",
+          "17" : "xvii",
+          "18" : "xviii",
+          "19" : "xix",
+          "20" : "xx"
+        }
+        function getSchoolNumber(text){
+          const match = text.match(/\b(i|ii|iii|iv|v|vi|vii|viii|ix|x|xi|xii|xiii|xiv|xv|xvi|xvii|xviii|xix|xx)\b/i);
+          if(match) return match[0];
+
+          for(const key in numberMap){
+            if(text.includes(key)){
+              return numberMap[key];
+            }
+          }
+        }
+        
+        fetch("/static/RSPO.json")
+          .then(response => response.json())
+          .then(data => {
+            schools= data.map(s =>{
+              const normalized_name= normalize(s.name);
+              const normalized_city= normalize(s.city);
+              return{
+                name: s.name,
+                city: s.city,
+                normalized_name,
+                normalized_city,
+                school_number: getSchoolNumber(normalized_name)
+              }
+            });
+          });
+         
+          
+
+        const SchoolInput = form.querySelector(".school");
+        const SchoolResults = form.querySelector(".results");
+
+        SchoolInput.addEventListener("input", () => {
+          
+          const query= normalize(SchoolInput.value);
+          const queryNumber = getSchoolNumber(query);
+          const words= query.split(" ").filter(word => word.length > 1 || word===queryNumber);
+          const filtered = schools.filter(s => {
+
+            if(queryNumber && s.school_number!==queryNumber){
+              return false;
+            }
+            return words.every(word =>
+              s.normalized_name.includes(word) || s.normalized_city.includes(word)
+            )
+        });
+
+
+          if(query.length <2){
+            SchoolResults.innerHTML="";
+            return;
+          }
+
+          const results=new Fuse(filtered, {
+              keys:[
+                { name: "normalized_name", weight:0.7},
+                { name: "normalized_city", weight:0.3 }
+              ],
+              threshold: 0.5,
+              ignoreLocation:true,
+              minMatchCharLength: 2,
+              shouldSort: true,
+              findAllMatches:true,
+              includeScore:true
+            }).search(query);
+
+
+          SchoolResults.innerHTML = results
+            .slice(0,5)
+            .map(result => `
+              <div class="result-item font-bold">${result.item.name} - ${result.item.city}</div>
+            `)
+            .join("");
+        });
+        const autocompleteConatainer = form.querySelector(".autocompleteConatainer");
+
+        document.addEventListener("click", (e)=>{
+          if(!autocompleteConatainer.contains(e.target)){
+            SchoolResults.innerHTML="";
+          }
+        });
+        SchoolResults.addEventListener("click", (e)=>{
+          if(!e.target.classList.contains("result-item")) return;
+          SchoolInput.value = e.target.textContent;
+          SchoolResults.innerHTML="";
+        });
+        //---------------------------------------------------------------
+        //-------------LONG TEXT AUTO EXPAND-----------------------------
+        function autoResize(textarea){
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+          }
+          const textareas = form.querySelectorAll(".long-text");
+          textareas.forEach(textarea =>{
+            textarea.addEventListener("input", () => autoResize(textarea));
+          });
+        //---------------------------------------------------------------
+        //-------------FORM HANDLING-------------------------------------
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+
+            const endpoint = form.dataset.endpoint;
+            const formData = new FormData(form);
+
+            try{
+              const response = await fetch(endpoint, {
+                method: "POST",
+                body: formData
+              });
+              const result = await response.json();
+              if(!response.ok){
+                showToast(result.message || result.detail || "Coś poszło nie tak. Spróbuj ponownie.", "error");
+                return;
+              }
+              showToast(result.message, "success");
+              form.reset();
+            } catch(err){
+              showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
+            }
+          });
+    });
+  });
+  </script>
+  <style>
+    .dyn-form label:not(.checkbox-label){
+      z-index: -10;
+    }
+  </style>
+</body>
+</html>

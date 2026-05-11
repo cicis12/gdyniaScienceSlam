@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import Viewer, Contestant, Volunteer, AdminUser
+from models import Viewer, Contestant, Volunteer, AdminUser, Voter, Vote, Group
 import uuid
 from datetime import date
 from video import save_video
@@ -69,10 +69,154 @@ def partners():
 def docs():
     return BASE_DIR/"documents.html"
 
+@app.get("/groups", response_class=FileResponse)
+def groups():
+    return BASE_DIR/"groups.html"
+
 # Handle Post (@app.post)
-@app.post("/contestantForm")
+# @app.post("/contestantForm")
+# @limiter.limit("10/minute")
+# async def handle_contestantform(
+#     request: Request,
+#     background_tasks: BackgroundTasks,
+#     name: str = Form(...),
+#     surname: str = Form(...),
+#     email: str = Form(...),
+#     phone: str = Form(...),
+#     school: str = Form(...),
+#     class_and_profile: str = Form(...),
+#     city: str = Form(...),
+#     birthdate: date = Form(...),
+
+#     supervisor_name: str = Form(...),
+#     supervisor_surname: str = Form(...),
+#     supervisor_info: str = Form(...),
+
+#     previous_accomplishments: str | None = Form(None),
+#     about: str = Form(...),
+#     interests: str = Form(...),
+#     contributions: str = Form(...),
+#     inspiration: str = Form(...),
+
+#     topic: str = Form(...),
+#     whytopic: str = Form(...),
+#     whyinteresting: str = Form(...),
+#     experience: str = Form(...),
+#     ways_of_grabing_interest: str = Form(...),
+
+#     video: UploadFile | None = File(None),
+#     rules_accepted: bool = Form(...),
+#     privacy_policy_accepted: bool = Form(...),
+#     db: Session = Depends(get_db),
+# ):
+#     video_file_path = None
+#     if video and video.filename:
+#         if video.size > 0:
+#             video_file_path = await save_video(video)
+    
+#     new_contestant = Contestant(
+#         name=name.strip(),
+#         surname=surname.strip(),
+#         email=email.lower().strip(),
+#         phone=phone.strip(),
+#         school=school.strip(),
+#         class_and_profile=class_and_profile.strip(),
+#         city=city.strip(),
+#         birthdate=birthdate,
+
+#         supervisor_name=supervisor_name.strip(),
+#         supervisor_surname=supervisor_surname.strip(),
+#         supervisor_info=supervisor_info.strip(),
+
+#         previous_accomplishments=previous_accomplishments,
+#         about = about.strip(),
+#         interests = interests.strip(),
+#         contributions= contributions.strip(),
+#         inspiration = inspiration.strip(),
+
+#         topic=topic.strip(),
+#         whytopic=whytopic.strip(),
+#         whyinteresting=whyinteresting.strip(),
+#         experience=experience.strip(),
+#         ways_of_grabing_interest=ways_of_grabing_interest.strip(),
+
+#         video_file_path=video_file_path,
+#         rules_accepted=rules_accepted,
+#         privacy_policy_accepted=privacy_policy_accepted,
+#     )
+#     try:
+#         db.add(new_contestant)
+#         db.commit()
+#         db.refresh(new_contestant)
+#         background_tasks.add_task(
+#             send_confirmation_email,
+#             new_contestant.email,
+#             new_contestant.name,
+#             "prelegenta"
+#         )
+#     except IntegrityError:
+#         db.rollback()
+#         raise HTTPException(status_code=400, detail="Ten adres E-mail jest już zarejestrowany")
+#     return JSONResponse(
+#         status_code=200,
+#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+#     )
+
+# # UNCOMMENT WHEN OPENING
+
+@app.post("/viewerForm")
 @limiter.limit("10/minute")
-async def handle_contestantform(
+async def handle_viewerform(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    name: str = Form(...),
+    surname: str = Form(...),
+    email: str = Form(...),
+    phone: str = Form(...),
+    school: str | None = Form(None),
+    class_and_profile: str | None = Form(None),
+    is_contestant_close: str = Form(...),
+    rules_accepted: bool = Form(...),
+    privacy_policy_accepted: bool = Form(...),
+    db: Session = Depends(get_db),
+):
+    new_viewer = Viewer(
+        name=name.strip(),
+        surname=surname.strip(),
+        email=email.lower().strip(),
+        phone=phone.strip(),
+        school=school,
+        class_and_profile=class_and_profile,
+        is_contestant_close=is_contestant_close,
+        rules_accepted=rules_accepted,
+        privacy_policy_accepted=privacy_policy_accepted,
+    )
+    new_voter = Voter(
+        email=email.lower().strip(),
+    )
+    try:
+        db.add(new_viewer)
+        db.add(new_voter)
+        db.commit()
+        db.refresh(new_viewer)
+        db.refresh(new_voter)
+        background_tasks.add_task(
+            send_confirmation_email,
+            new_viewer.email,
+            new_viewer.name,
+            "widza"
+        )
+    except IntegrityError as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Ten adres E-mail jest już zarejestrowany")
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+    )
+
+@app.post("/volunteerForm")
+@limiter.limit("10/minute")
+async def handle_volunteerform(
     request: Request,
     background_tasks: BackgroundTasks,
     name: str = Form(...),
@@ -81,154 +225,92 @@ async def handle_contestantform(
     phone: str = Form(...),
     school: str = Form(...),
     class_and_profile: str = Form(...),
-    city: str = Form(...),
     birthdate: date = Form(...),
-
-    supervisor_name: str = Form(...),
-    supervisor_surname: str = Form(...),
-    supervisor_info: str = Form(...),
-
-    previous_accomplishments: str | None = Form(None),
-    about: str = Form(...),
-    interests: str = Form(...),
-    contributions: str = Form(...),
-    inspiration: str = Form(...),
-
-    topic: str = Form(...),
-    whytopic: str = Form(...),
-    whyinteresting: str = Form(...),
-    experience: str = Form(...),
-    ways_of_grabing_interest: str = Form(...),
-
-    video: UploadFile | None = File(None),
+    facebook_link: str | None = Form(None),
     rules_accepted: bool = Form(...),
     privacy_policy_accepted: bool = Form(...),
     db: Session = Depends(get_db),
 ):
-    video_file_path = None
-    if video and video.filename:
-        if video.size > 0:
-            video_file_path = await save_video(video)
-    
-    new_contestant = Contestant(
+    new_volunteer = Volunteer(
         name=name.strip(),
         surname=surname.strip(),
         email=email.lower().strip(),
         phone=phone.strip(),
         school=school.strip(),
         class_and_profile=class_and_profile.strip(),
-        city=city.strip(),
         birthdate=birthdate,
-
-        supervisor_name=supervisor_name.strip(),
-        supervisor_surname=supervisor_surname.strip(),
-        supervisor_info=supervisor_info.strip(),
-
-        previous_accomplishments=previous_accomplishments,
-        about = about.strip(),
-        interests = interests.strip(),
-        contributions= contributions.strip(),
-        inspiration = inspiration.strip(),
-
-        topic=topic.strip(),
-        whytopic=whytopic.strip(),
-        whyinteresting=whyinteresting.strip(),
-        experience=experience.strip(),
-        ways_of_grabing_interest=ways_of_grabing_interest.strip(),
-
-        video_file_path=video_file_path,
+        facebook_link=facebook_link,
         rules_accepted=rules_accepted,
         privacy_policy_accepted=privacy_policy_accepted,
     )
     try:
-        db.add(new_contestant)
+        db.add(new_volunteer)
         db.commit()
-        db.refresh(new_contestant)
+        db.refresh(new_volunteer)
         background_tasks.add_task(
             send_confirmation_email,
-            new_contestant.email,
-            new_contestant.name,
-            "prelegenta"
+            new_volunteer.email,
+            new_volunteer.name,
+            "wolontariusza"
         )
-    except IntegrityError:
+    except IntegrityError as e:
         db.rollback()
-        raise HTTPException(status_code=400, detail="Ten adres E-mail jest już zarejestrowany")
+        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
     return JSONResponse(
         status_code=200,
         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+     )
+
+@app.post("/groupForm")
+@limiter.limit("10/minute")
+async def handle_groupform(
+    request: Request,
+    background_tasks: BackgroundTasks,
+    supervisor_name: str = Form(...),
+    supervisor_surname: str = Form(...),
+    email: str = Form(...),
+    school: str = Form(...),
+    class_and_profile: str = Form(...),
+    number_of_participants: int = Form(...),
+    
+    rules_accepted: bool = Form(...),
+    privacy_policy_accepted: bool = Form(...),
+    db: Session = Depends(get_db),
+):
+    new_group = Group(
+        supervisor_name=supervisor_name.strip(),
+        supervisor_surname=supervisor_surname.strip(),
+        email=email.lower().strip(),
+        school=school.strip(),
+        class_and_profile=class_and_profile.strip(),
+        number_of_participants=number_of_participants,
+        number_of_added_emails=1,
+
+        rules_accepted=rules_accepted,
+        privacy_policy_accepted=privacy_policy_accepted,
     )
-
-# # UNCOMMENT WHEN OPENING
-
-# @app.post("/viewerForm")
-# async def handle_viewerform(
-#     name: str = Form(...),
-#     surname: str = Form(...),
-#     email: str = Form(...),
-#     phone: str = Form(...),
-#     school: str | None = Form(None),
-#     class_and_profile: str | None = Form(None),
-#     rules_accepted: bool = Form(...),
-#     privacy_policy_accepted: bool = Form(...),
-#     db: Session = Depends(get_db),
-# ):
-#     new_viewer = Viewer(
-#         name=name.strip(),
-#         surname=surname.strip(),
-#         email=email.lower().strip(),
-#         phone=phone.strip(),
-#         school=school,
-#         class_and_profile=class_and_profile,
-#         rules_accepted=rules_accepted,
-#         privacy_policy_accepted=privacy_policy_accepted,
-#     )
-#     try:
-#         db.add(new_viewer)
-#         db.commit()
-#         db.refresh(new_viewer)
-#     except IntegrityError:
-#         db.rollback()
-#         return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
-#     return JSONResponse(
-#         status_code=200,
-#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-#     )
-
-# @app.post("/volunteerForm")
-# async def handle_volunteerform(
-#     name: str = Form(...),
-#     surname: str = Form(...),
-#     email: str = Form(...),
-#     phone: str = Form(...),
-#     school: str = Form(...),
-#     class_and_profile: str = Form(...),
-#     birthdate: date = Form(...),
-#     rules_accepted: bool = Form(...),
-#     privacy_policy_accepted: bool = Form(...),
-#     db: Session = Depends(get_db),
-# ):
-#     new_volunteer = Volunteer(
-#         name=name.strip(),
-#         surname=surname.strip(),
-#         email=email.lower().strip(),
-#         phone=phone.strip(),
-#         school=school.strip(),
-#         class_and_profile=class_and_profile.strip(),
-#         birthdate=birthdate,
-#         rules_accepted=rules_accepted,
-#     )
-#     try:
-#         db.add(new_volunteer)
-#         db.commit()
-#         db.refresh(new_volunteer)
-#     except IntegrityError:
-#         db.rollback()
-#         return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
-#     return JSONResponse(
-#         status_code=200,
-#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-#     )
-
+    new_voter = Voter(
+        email = email.lower().strip(),
+    )
+    try:
+        db.add(new_group)
+        db.add(new_voter)
+        db.commit()
+        db.refresh(new_group)
+        db.refresh(new_voter)
+        background_tasks.add_task(
+            send_confirmation_email,
+            new_group.email,
+            new_group.supervisor_name,
+            "opiekuna grupy"
+        )
+    except IntegrityError as e:
+        db.rollback()
+        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
+    return JSONResponse(
+        status_code=200,
+        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+     )
 
 #ADMIN PAGES
 load_dotenv("SECRET_KEY.env")
@@ -306,11 +388,9 @@ def admin_dashboard(
                     Volunteer.email.ilike(f"%{search}%")
                 )
             )
-        if favourites_only and query is not None:
-            query = query.filter(Volunteer.favourite==True)
-        if not show_hidden and query is not None:
-            query = query.filter(Contestant.hidden==False)
-
+    elif tab == "group":
+        query=db.query(Group)
+        query=query.order_by(Group.id.asc())
     else:
         query=None
 
