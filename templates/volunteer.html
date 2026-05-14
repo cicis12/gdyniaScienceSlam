@@ -14,9 +14,9 @@
         <div class="relative flex flex-row w-full justify-between toggle-btn cursor-pointer"
         data-target="personal_data-{{ loop.index }}">
             <h2 class="text-xl font-bold mb-2">Dane osobowe</h2>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
-                  </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 arrow transition-transform duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+            </svg>
         </div>
         <div id="personal_data-{{ loop.index }}" class="hidden">
             <div class="relative flex flex-row gap-4 mb-1">
@@ -58,7 +58,6 @@
                   
                 <span>{{ item.facebook_link }}</span>
             </div>
-        </div>
         </div>
 
     </div>
