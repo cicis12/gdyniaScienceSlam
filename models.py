@@ -52,7 +52,8 @@ class Viewer(Base):
     rules_accepted = Column(Boolean,nullable=False)
     privacy_policy_accepted = Column(Boolean,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
-    
+
+    favourite = Column(Boolean, default=False)
     hidden = Column(Boolean, default=False)
 
 class Volunteer(Base):
@@ -87,6 +88,9 @@ class Group(Base):
     rules_accepted = Column(Boolean,nullable=False)
     privacy_policy_accepted = Column(Boolean,nullable=False)
     created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+
+    favourite = Column(Boolean, default=False)
+    hidden = Column(Boolean, default=False)
 
 class AdminUser(Base):
     __tablename__="admin_users"

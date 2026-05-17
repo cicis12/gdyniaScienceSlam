@@ -71,47 +71,86 @@
     </div>
     <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
       <div class="md:w-2/3 mx-auto left-1/6">
-        <div class="tabs relative bg-white rounded-full p-1 grid grid-cols-4 center mb-8">
+        <div class="tabs relative bg-white rounded-full p-1 grid grid-cols-2 center mb-8">
           <div class="absolute inset-y-1 bg-[#819edb] rounded-full transition-transform duration-300" id="tab-slider"></div>
-          <a href="/admin/dashboard?tab=contestant" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2">
+          <!-- <a href="/admin/dashboard?tab=contestant" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
             </svg>
-            Prelegent</a>
+            Prelegent</a> -->
           <a href="/admin/dashboard?tab=viewer" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
             Widz</a>
-          <a href="/admin/dashboard?tab=volunteer" class="tab relative z-10 py-2 font-bold flex items-center justify-center gap-2">
+          <!-- <a href="/admin/dashboard?tab=volunteer" class="tab relative z-10 py-2 font-bold flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Zm6-10.125a1.875 1.875 0 1 1-3.75 0 1.875 1.875 0 0 1 3.75 0Zm1.294 6.336a6.721 6.721 0 0 1-3.17.789 6.721 6.721 0 0 1-3.168-.789 3.376 3.376 0 0 1 6.338 0Z" />
             </svg>
-            Wolontariusz</a>
+            Wolontariusz</a> -->
             <a href="/admin/dashboard?tab=group" class="tab relative z-10 py-2 font-bold flex items-center justify-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
             </svg>
-
             Grupa</a>
         </div>
         <form method="get" action="/admin/dashboard">
-          <input type="hidden" name="tab" value ="{{ tab }}">
-          
-          <input type="text" name="search" placeholder="Wyszukaj..." value="{{ request.query_params.get('search', '') }}">
-          
-          <label>
-            <input type="checkbox" name="show_hidden" value="true"
-                {% if request.query_params.get('show_hidden') %}checked{% endif %}>
-        </label>
-          <label>
-              <input type="checkbox" name="favourites_only" value="true"
-                  {% if request.query_params.get('favourites_only') %}checked{% endif %}>
-          </label>
+          <div class="relative mb-6 flex items-center gap-4">
+              <input type="hidden" name="tab" value="{{ tab }}">
+               <!-- SEARCH INPUT -->
+               <div class="relative flex-1">
+                 <input
+                   type="text"
+                   name="search"
+                   placeholder="Wyszukaj..."
+                   value="{{ search }}"
+                   class="w-full rounded-2xl border-2 border-[#5e85b8] bg-white px-5 py-3 text-lg shadow-md outline-none focus:border-[#18395d] focus:ring-4 focus:ring-blue-200"
+                 >
+                
+                 <svg xmlns="http://www.w3.org/2000/svg"
+                      class="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor">
+                   <path stroke-linecap="round"
+                         stroke-linejoin="round"
+                         stroke-width="2"
+                         d="m21 21-4.35-4.35M16 10.5a5.5 5.5 0 1 0-11 0 5.5 5.5 0 0 0 11 0Z"/>
+                 </svg>
+               </div>
+             
+               <!-- TOGGLE SWITCH -->
+               <label class="flex items-center gap-3 cursor-pointer select-none">
+
+                <input
+                  type="checkbox"
+                  id="show_hidden"
+                  name="show_hidden"
+                  class="sr-only"
+                  {% if show_hidden %}checked{% endif %}
+                />
+
+                <!-- track -->
+                <div class="w-11 h-6 bg-gray-300 rounded-full relative transition-colors duration-200 track">
+                
+                  <!-- knob -->
+                  <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full knob"></div>
+                </div>
+              
+                <span class="text-sm font-medium">
+                  Pokaż zaznaczone
+                </span>
+              </label>
+        </div>
       </form>
-        {% block content %}
-        {% endblock %}
+        
+        <div id="result-container">
+          <div id="results">
+          {% block content %}
+          {% endblock %}
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -142,57 +181,132 @@
     const slider = document.getElementById("tab-slider");
   </script>
   {% if tab == "contestant" %}
+    <!-- <script>
+      var activeTab = tabs[0];
+      slider.style.width = activeTab.offsetWidth + "px";
+      slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
+    </script> -->
+  {% elif tab == "viewer" %}
     <script>
       var activeTab = tabs[0];
       slider.style.width = activeTab.offsetWidth + "px";
       slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
     </script>
-  {% elif tab == "viewer" %}
-    <script>
-      var activeTab = tabs[1];
-      slider.style.width = activeTab.offsetWidth + "px";
-      slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
-    </script>
   {% elif tab == "volunteer" %}
-    <script>
+    <!-- <script>
       var activeTab = tabs[2];
       slider.style.width = activeTab.offsetWidth + "px";
       slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
-    </script>
+    </script> -->
     {% elif tab == "group" %}
     <script>
-      var activeTab = tabs[3];
+      var activeTab = tabs[1];
       slider.style.width = activeTab.offsetWidth + "px";
       slider.style.transform = `translateX(${activeTab.offsetLeft}px)`;
     </script>
   {% endif %}
 
   <script>
+    const form = document.querySelector("form");
     const searchInput = document.querySelector('input[name="search"]');
+    const resultsContainer = document.getElementById("result-container");
 
-    searchInput.addEventListener("input", debounce(() =>{
-      searchInput.closest('form').submit();
-    }, 400));
+    async function search(){
+      const formData = new FormData(form);
+      const params = new URLSearchParams(formData);
+
+      const response = await fetch(`/admin/dashboard?${params.toString()}`, {
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
+      const html = await response.text();
+      resultsContainer.innerHTML = html;
+    }
+
+    searchInput.addEventListener(
+      "input",
+      debounce(search, 300)
+    );
 
     function debounce(fn, delay){
       let timer;
       return (...args) => {
         clearTimeout(timer);
-        timer = setTimeout(() => fn(...args),delay);
-      }
+        timer = setTimeout(() => fn(...args), delay);
+      };
     }
-    const checkboxH = document.querySelector('input[name="show_hidden"]');
 
-    checkboxH.addEventListener('change', () => {
-      checkboxH.closest('form').submit();
-    })
 
-    const checkbox = document.querySelector('input[name="favourites_only"]');
 
-    checkbox.addEventListener('change', () => {
-      checkbox.closest('form').submit();
-    })
+    document.querySelector('input[name="show_hidden"]').addEventListener("change", search);
+    //document.querySelector('input[name="favourites_only"]').addEventListener("change", search);
 
+
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".toggle-btn");
+
+    if(!btn) return;
+
+    const targetId = btn.dataset.target;
+    const section=document.getElementById(targetId);
+    const arrow = btn.querySelector(".arrow");
+
+    if(!section) return;
+    
+    section.classList.toggle("hidden");
+    arrow.classList.toggle("rotate-180");
+  });
+
+  document.addEventListener("submit", async (e) => {
+        const form = e.target.closest(".toggle-form");
+
+        if(!form) return;
+
+        e.preventDefault();
+        
+        const formData= new FormData(form);
+        const response = await fetch(form.action, {
+            method: "POST",
+            body: formData,
+            headers: {
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        });
+        if (!response.ok) return;
+
+        const button = form.querySelector("button");
+
+        const isHidden = button.querySelector(".bg-green-600") !== null;
+
+        if(isHidden){
+            button.innerHTML = `
+            <div for="show_hidden" class="w-11 h-6 bg-red-600 rounded-full relative transition-colors duration-200">
+              <!-- knob -->
+              <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full"></div>
+            </div>
+            `;
+        } else {
+            button.innerHTML = `
+            <div for="show_hidden" class="w-11 h-6 bg-green-600 rounded-full relative transition-colors duration-200">
+              <!-- knob -->
+              <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full  translate-x-5 "></div>
+            </div>
+            `;
+        }
+        search();
+    });
   </script>
 </body>
+<style>
+/* track color change */
+#show_hidden:checked ~ .track {
+  background-color: #18395d;
+}
+
+/* knob movement */
+#show_hidden:checked ~ .track .knob {
+  transform: translateX(20px);
+}
+</style>
 </html>

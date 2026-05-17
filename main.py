@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Form, File, UploadFile, Depends, Request, HTTPException, BackgroundTasks
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles 
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
@@ -20,8 +20,10 @@ from mail import send_confirmation_email
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
-
-
+from operator import attrgetter
+from jose import JWTError
+from rapidfuzz import fuzz
+from urllib.parse import urlparse, parse_qs
 
 
 #set up needed variables
@@ -284,20 +286,15 @@ async def handle_groupform(
         school=school.strip(),
         class_and_profile=class_and_profile.strip(),
         number_of_participants=number_of_participants,
-        number_of_added_emails=1,
+        number_of_added_emails=0,
 
         rules_accepted=rules_accepted,
         privacy_policy_accepted=privacy_policy_accepted,
     )
-    new_voter = Voter(
-        email = email.lower().strip(),
-    )
     try:
         db.add(new_group)
-        db.add(new_voter)
         db.commit()
         db.refresh(new_group)
-        db.refresh(new_voter)
         background_tasks.add_task(
             send_confirmation_email,
             new_group.email,
@@ -316,9 +313,12 @@ async def handle_groupform(
 load_dotenv("SECRET_KEY.env")
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
-    raise RuntimeError("SECTET_KEY is not set")
+    raise RuntimeError("SECRET_KEY is not set")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+
+ACCESS_TOKEN_EXPIRE_MINUTES = 240
+
+
 templates=Jinja2Templates(directory="templates")
 def get_current_admin(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("admin_session")
@@ -349,70 +349,84 @@ async def auth_exception_handler(request: Request, exc: HTTPException):
 
 @app.get("/admin/dashboard")
 def admin_dashboard(
-    request: Request, tab: str = "contestant",
+    request: Request, tab: str = "viewer",
     search: str = "", favourites_only: bool=False, show_hidden: bool=False,
     admin: AdminUser = Depends(get_current_admin), db: Session = Depends(get_db)
 ):
-    search=search.strip()
-    if tab == "contestant":
-        query=db.query(Contestant)
-        query=query.order_by(Contestant.id.asc())
-        if search and query is not None:
-            query = query.filter(
-                or_(
-                    (Contestant.name + " " + Contestant.surname).ilike(f"%{search}%"),
-                    Contestant.email.ilike(f"%{search}%")
-                )
-            )
-        if favourites_only and query is not None:
-            query = query.filter(Contestant.favourite==True)
-        if not show_hidden and query is not None:
-            query = query.filter(Contestant.hidden==False)
-    elif tab == "viewer":
-        query=db.query(Viewer)
-        query=query.order_by(Viewer.id.asc())
-        if search and query is not None:
-            query = query.filter(
-                or_(
-                    func.concat(Viewer.name, " ", Viewer.surname).ilike(f"%{search}%"),
-                    Viewer.email.ilike(f"%{search}%")
-                )
-            )
-    elif tab == "volunteer":
-        query=db.query(Volunteer)
-        query=query.order_by(Volunteer.id.asc())
-        if search and query is not None:
-            query = query.filter(
-                or_(
-                    (Volunteer.name + " " + Volunteer.surname).ilike(f"%{search}%"),
-                    Volunteer.email.ilike(f"%{search}%")
-                )
-            )
-    elif tab == "group":
-        query=db.query(Group)
-        query=query.order_by(Group.id.asc())
-    else:
-        query=None
+    is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
+    
 
-    data= query.all() if query is not None else []
+    TAB_CONFIG = {
+        "contestant": Contestant,
+        "viewer": Viewer,
+        "volunteer": Volunteer, 
+        "group": Group,
+    }
+    model = TAB_CONFIG.get(tab)
+    if not model:
+        return Response("", status_code=204)
 
-    return templates.TemplateResponse(
-        "admin_dashboard.html",
-        {
+    query = db.query(model).order_by(model.id.asc())
+    search = search.strip()
+
+    if tab=="contestant":
+        if favourites_only:
+            query = query.filter(model.favourite == True)
+        
+    if tab!="group" and not show_hidden:
+            query = query.filter(model.hidden == False)
+    if search:
+        all_items = query.all()
+        
+        def score(item):
+            if tab == "group":
+                text = f"{item.supervisor_name} {item.supervisor_surname} {item.school} {item.email}"
+            else:
+                text = f"{item.name} {item.surname} {item.email}"
+            
+            return fuzz.token_set_ratio(search.lower(), text.lower())
+
+        scored = [(item,score(item)) for item in all_items]
+        scored.sort(key = lambda x:x[1], reverse=True);
+
+        top_3 = [item for item, s in scored[:3]]
+
+        others = [
+            item for item, s in scored[3:]
+            if s > 70
+        ]
+        data = top_3+others
+        
+        query = None
+
+    show_hidden_bool = show_hidden == "on"
+
+    data = data if search else query.all()
+    count = len(data)
+    context = {
             "request": request,
             "tab": tab,
             "data": data,
             "admin": admin,
             "favourites_only": favourites_only,
-            "search": search
+            "show_hidden": show_hidden_bool,
+            "search": search,
+            "count": count
         }
+    if is_ajax:
+        return templates.TemplateResponse(f"{tab}.html",context)
+
+    return templates.TemplateResponse(
+        "admin_dashboard.html",
+        context
     )
 
 @app.post("/admin/toggle-favourite/{item_id}")
 def toggle_favourite(
     item_id: int,
     tab: str = "contestant",
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin: AdminUser = Depends(get_current_admin),
 ):
     model = {
         "contestant": Contestant,
@@ -429,25 +443,67 @@ def toggle_favourite(
     return RedirectResponse(f"/admin/dashboard?tab={tab}", status_code=303)
 
 @app.post("/admin/toggle-hidden/{item_id}")
-def toggle_favourite(
+def toggle_hidden(
+    request: Request,
     item_id: int,
     redirect_url: str = Form(...),
-    tab: str = "contestant",
-    db: Session = Depends(get_db)
+    db: Session = Depends(get_db),
+    admin: AdminUser = Depends(get_current_admin),
 ):
+
+    parsed = urlparse(redirect_url)
+    tab = parse_qs(parsed.query).get("tab", ["contestant"])[0]
+
     model = {
         "contestant": Contestant,
         "viewer": Viewer,
-        "volunteer": Volunteer
+        "volunteer": Volunteer,
+        "group": Group,
     }.get(tab)
 
     if not model:
         return RedirectResponse("/admin/dashboard", status_code=303)
     
-    item = db.query(model).get(item_id)
+    item = db.get(model,item_id)
     item.hidden = not item.hidden
     db.commit()
+
+    if request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return Response(status_code=200)
+
     return RedirectResponse(redirect_url, status_code=303)
+
+@app.post("/admin/group/{group_id}/add-email")
+def add_email(
+    group_id: int,
+    background_tasks: BackgroundTasks,
+    email: str = Form(...),
+    db: Session = Depends(get_db),
+    admin: AdminUser = Depends(get_current_admin),
+):
+    group = db.get(Group, group_id)
+    if not group:
+        return JSONResponse(status_code=404, content={"ok": False, "error": "Nie znaleziono grupy."})
+
+    group.number_of_added_emails += 1
+    new_voter = Voter(
+        email = email.lower().strip(),
+    )
+    try:
+        db.add(new_voter)
+        db.commit()
+        db.refresh(new_voter)
+        background_tasks.add_task(
+            send_confirmation_email,
+            new_voter.email,
+            "",
+            "widza"
+        )
+    except IntegrityError as e:
+        db.rollback()
+        return JSONResponse(status_code=400, content={"ok": False, "error": "Ten adres E-mail jest już zarejestrowany"})
+
+    return {"ok": True, "new_count": group.number_of_added_emails}
 
 @app.get("/admin/login")
 def adminloginpage(request: Request):

@@ -15,3 +15,4 @@ redis==7.2.1
 slowapi==0.1.9
 SQLAlchemy==2.0.46
 uvicorn==0.40.0
+RapidFuzz==3.14.5
