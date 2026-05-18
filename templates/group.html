@@ -70,19 +70,20 @@
             <div class="text-sm text-gray-600 mb-4">
               Aktualna liczba: <span id="modal-email-count">0</span>
             </div>
+            <form id="submit-email-form">
+                <input
+                    id="email-input"
+                    type="email"
+                    class="w-full border rounded-xl p-3 mb-4"
+                    placeholder="email..."/>
 
-            <input
-                id="email-input"
-                type="email"
-                class="w-full border rounded-xl p-3 mb-4"
-                placeholder="email..."/>
+                <div id="modal-error" class="text-red-600 text-sm mb-2 hidden"></div>
 
-            <div id="modal-error" class="text-red-600 text-sm mb-2 hidden"></div>
-
-            <button
-                id="submit-email"
-                class="bg-[#18395d] text-white px-4 py-2 rounded-xl w-full"
-            > Dodaj </button>
+                <button
+                    id="submit-email"
+                    class="bg-[#18395d] text-white px-4 py-2 rounded-xl w-full"
+                > Dodaj </button>
+            </form>
         </div>
     </div>
 </section>
@@ -102,7 +103,8 @@
 
             modal.classList.remove("hidden");
             input.value = "";
-
+            input.focus();
+            
             document.getElementById("modal-email-count").textContent = countEl ? countEl.textContent : "0";
         });
     });
@@ -117,7 +119,9 @@
       }
     });
 
-    document.getElementById("submit-email").addEventListener("click", async ()=>{
+    document.getElementById("submit-email-form").addEventListener("submit", async (e)=>{
+        e.preventDefault();
+
         const email = input.value;
 
         errorBox.classList.add("hidden");

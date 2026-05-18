@@ -10,7 +10,7 @@
                 <span>{{ item.name }}</span>
                 <span>{{ item.surname }}</span>
             </div>
-            <div class="text-4xl text-gray-600"><form method="post" action="/admin/toggle-hidden/{{ item.id }}" class="toggle-form">
+            <div class="text-4xl text-gray-600"><form method="post" action="/admin/toggle-hidden/{{ item.id }}" class="toggle-eye-form">
                 <input type="hidden" name="tab" value = "{{ tab }}">
                 <button type="submit">
                     {% if item.hidden %}
@@ -81,22 +81,3 @@
     {% endfor %}
 
 </section>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        document.querySelectorAll(".toggle-btn").forEach(btn => {
-            btn.addEventListener("click", () => {
-                const targetId = btn.dataset.target;
-                const section = document.getElementById(targetId);
-                const arrow = btn.querySelector(".arrow");
-
-                if(!section) return;
-                
-                section.classList.toggle("hidden");
-
-                arrow.classList.toggle("rotate-180")
-            })
-        })
-    })
-
-    
-</script>

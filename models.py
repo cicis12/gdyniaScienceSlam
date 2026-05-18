@@ -98,6 +98,7 @@ class AdminUser(Base):
     username=Column(String,unique=True,nullable=False,index=True)
     password_hash = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
+    is_superadmin = Column(Boolean, default=False)
 
 class Voter(Base):
     __tablename__="voters"

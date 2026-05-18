@@ -77,22 +77,3 @@
     {% endfor %}
 
 </section>
-<script>
-    document.addEventListener("click", (e) => {
-        const btn = e.target.closest(".toggle-btn");
-
-        if(!btn) return;
-
-        const targetId = btn.dataset.data-target;
-        const section = document.getElementById(targetId);
-        const arrow = btn.querySelector(".arrow");
-
-        if(!section) return;
-
-        section.classList.toggle("hidden");
-        arrow.classList.toggle("rotate-180");
-    });
-
-    
-    
-</script>

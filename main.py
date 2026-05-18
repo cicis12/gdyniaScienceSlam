@@ -355,6 +355,12 @@ def admin_dashboard(
 ):
     is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
     
+    if tab == "contestant" or tab == "volunteer":
+        if not admin.is_superadmin:
+            raise HTTPException(
+                status_code=403,
+                detail="Superadmin access required."
+            )
 
     TAB_CONFIG = {
         "contestant": Contestant,
@@ -365,7 +371,7 @@ def admin_dashboard(
     model = TAB_CONFIG.get(tab)
     if not model:
         return Response("", status_code=204)
-
+    
     query = db.query(model).order_by(model.id.asc())
     search = search.strip()
 
@@ -452,7 +458,7 @@ def toggle_hidden(
 ):
 
     parsed = urlparse(redirect_url)
-    tab = parse_qs(parsed.query).get("tab", ["contestant"])[0]
+    tab = parse_qs(parsed.query).get("tab", ["viewer"])[0]
 
     model = {
         "contestant": Contestant,
