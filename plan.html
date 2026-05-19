@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Gdynia Science Slam</title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+    <!-- NAVBAR -->
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <a href="/">
+          <img class="max-h-20" src="static/assets/logo.png">
+        </a>
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="/plan" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Plan wydarzenia</a>
+        <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
+        <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
+        <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d] hidden">Poprzednie edycje</a>
+        <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
+        <a href="/registration"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          <a href="/plan" class="text-lg font-bold block">Plan wydarzenia</a>
+          <a href="/" class="text-lg block">Home</a>
+          <a href="/team" class="text-lg block">Team</a>
+          <a href="/about" class="text-lg block">About</a>
+          <a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>
+          <a href="/partners" class="text-lg block">Partnerzy</a>
+          <a href="/documents" class="text-lg block">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
+<section class="bg-[#819edb] py-20">
+    <div class="max-w-5xl mx-auto px-6">
+  
+      <h2 class="text-4xl font-bold text-[#18395d] mb-16">
+        Plan wydarzenia
+      </h2>
+  
+      <div class="relative">
+  
+        <!-- linia -->
+        <div class="absolute left-14 md:left-20 top-0 h-full border-l-4 border-dashed border-[#18395d]"></div>
+        
+        <!-- mala kropka -->
+        <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+            </div>
+    
+            <!-- content -->
+            <div class="pt-4">
+              <p class="text-lg text-[#18395d] font-semibold">
+                9:30-10:00 Rejestracja
+              </p>
+            </div>
+    
+          </div>
+        
+          <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+            </div>
+    
+            <!-- content -->
+            <div class="pt-4">
+              <p class="text-lg text-[#18395d] font-semibold">
+                10:00-11:00 Otwarcie wydarzenia
+              </p>
+            </div>
+    
+          </div>
+
+        <!-- 1 blok -->
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+  
+          <div class="relative z-10 flex-shrink-0">
+            <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+              <img
+                src="static/assets/images/contestants/47 Laura.webp"
+                class="w-full h-full object-cover"
+              >
+            </div>
+          </div>
+  
+          <!-- content -->
+          <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+            <p class="text-sm font-bold text-[#18395d] mb-2">
+              11:00-11:45 Pierwszy blok prelekcji
+            </p>
+  
+            <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+              Laura Grafińska - "Dlaczego mężczyzna pomylił żonę z kapeluszem?"
+            </h3>
+  
+            <p class="text-gray-800">
+                Laura zabierze publiczność w świat neurobiologii i historii słynnego „mężczyzny, który pomylił swoją żonę z kapeluszem”. Pokaże, jak mózg interpretuje obrazy, na czym polegają zaburzenia rozpoznawania oraz jak wygląda diagnostyka pacjentów, którzy widzą świat zupełnie inaczej niż większość z nas
+            </p>
+          </div>
+  
+        </div>
+
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                <img
+                  src="static/assets/images/contestants/48 Wojciech.webp"
+                  class="w-full h-full object-cover"
+                >
+              </div>
+            </div>
+    
+            <!-- content -->
+            <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+              <p class="text-sm font-bold text-[#18395d] mb-2">
+                11:00-11:45 Pierwszy blok prelekcji
+              </p>
+    
+              <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                Wojciech Kubik - "Dlaczego jedne dźwięki brzmią dobrze, a inne nie?"
+              </h3>
+    
+              <p class="text-gray-800">
+                Wojtek - miłośnik matematyki, muzyki i odkrywania świata pokaże, skąd bierze się „fałsz” w muzyce i jak liczby opisują dźwięk. Podczas wystąpienia wyjaśni zjawisko dysonansu, wykorzystując matematykę, wykresy i przykłady z codzienności, udowadniając, że nawet słuch można opisać wzorami.
+             </p>
+            </div>
+    
+          </div>
+          <div class="relative flex gap-2 md:gap-8 mb-10">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                <img
+                  src="static/assets/images/contestants/49 Gabriela.webp"
+                  class="w-full h-full object-cover"
+                >
+              </div>
+            </div>
+    
+            <!-- content -->
+            <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+              <p class="text-sm font-bold text-[#18395d] mb-2">
+                11:00-11:45 Pierwszy blok prelekcji
+              </p>
+    
+              <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                Gabriela Żuprańska - "Harmonia mózgu"
+              </h3>
+    
+              <p class="text-gray-800">
+                Gabrysia opowie o niezwykłej relacji między muzyką a mózgiem. W prezentacji „Harmonia mózgu” pokaże, jak dźwięk jest przetwarzany, czym są fale mózgowe i dlaczego muzyka sprawia ludziom przyjemność. Nie zabraknie też tematów związanych z rehabilitacją neurologiczną i pytania: czy dźwięk można zobaczyć?
+                </p>
+            </div>
+    
+          </div>
+  
+        <!-- mala kropka -->
+        <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+          <div class="relative z-10 flex-shrink-0">
+            <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+          </div>
+  
+          <!-- content -->
+          <div class="pt-4">
+            <p class="text-lg text-[#18395d] font-semibold">
+              11:45-12:00 Przerwa
+            </p>
+          </div>
+  
+        </div>
+        
+        <!-- 2 blok-->
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                <img
+                  src="static/assets/images/contestants/50 Krzysztof.webp"
+                  class="w-full h-full object-cover"
+                >
+              </div>
+            </div>
+    
+            <!-- content -->
+            <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+              <p class="text-sm font-bold text-[#18395d] mb-2">
+                12:00-12:45 Drugi blok prelekcji
+              </p>
+    
+              <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                Krzysztof Florek - "Badania próbek konsumenckich a geopolityka"
+              </h3>
+    
+              <p class="text-gray-800">
+                Krzysztof pokaże, jak wygląda analiza próbek konsumenckich pod kątem zanieczyszczeń, szczególnie metalami ciężkimi. Opowie o metodach badawczych i wyjaśni, jak wyniki takich analiz wpływają na ocenę bezpieczeństwa produktów w różnych regionach świata.
+            </p>
+            </div>
+    
+        </div>
+  
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                  <img
+                    src="static/assets/images/contestants/51 Natalia.webp"
+                    class="w-full h-full object-cover"
+                  >
+                </div>
+              </div>
+      
+              <!-- content -->
+              <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+                <p class="text-sm font-bold text-[#18395d] mb-2">
+                    12:00-12:45 Drugi blok prelekcji
+                </p>
+      
+                <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                  Natalia Monkiewicz - "Dlaczego twój układ immunologiczny się nie buntuje - i co by się stało gdyby to zrobił?"
+                </h3>
+      
+                <p class="text-gray-800">
+                    Natalia przybliży działanie układu immunologicznego i odpowie na pytanie, co mogłoby się stać, gdyby organizm zaczął walczyć sam ze sobą. Jej wystąpienie połączy biologię i medycynę w przystępnej formie.</p>
+              </div>
+      
+        </div>
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                  <img
+                    src="static/assets/images/contestants/52 Hanna.webp"
+                    class="w-full h-full object-cover"
+                  >
+                </div>
+              </div>
+      
+              <!-- content -->
+              <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+                <p class="text-sm font-bold text-[#18395d] mb-2">
+                    12:00-12:45 Drugi blok prelekcji
+                </p>
+      
+                <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                  Hanna Grzybek - "Co łączy śmierć ze śmiechu i szalone krowy?"
+                </h3>
+      
+                <p class="text-gray-800">
+                    Hanna opowie o prionach — niezwykłych białkach, które mogą prowadzić do śmiertelnych chorób. Wyjaśni, jak zmieniona struktura białka potrafi wywołać „chorobę szalonych krów”, śmiertelną bezsenność czy inne tajemnicze schorzenia.</p>
+              </div>
+      
+        </div>
+        
+        <!-- mala kropka -->
+        <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+            </div>
+    
+            <!-- content -->
+            <div class="pt-4">
+              <p class="text-lg text-[#18395d] font-semibold">
+                12:45-13:15 Przerwa
+              </p>
+            </div>
+    
+        </div>
+
+        <!-- 3 blok-->
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+  
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                <img
+                  src="static/assets/images/contestants/53 Stanisław.webp"
+                  class="w-full h-full object-cover"
+                >
+              </div>
+            </div>
+    
+            <!-- content -->
+            <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+              <p class="text-sm font-bold text-[#18395d] mb-2">
+                13:15-14:00 Trzeci blok prelekcji
+              </p>
+    
+              <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                Stanisław Matuszewski - "Prąd elektryczny jako ruch cząsteczek elementarnych - czyli wykorzystywanie zjawisk kwantowych w elektrotechnice."
+              </h3>
+    
+              <p class="text-gray-800">
+                Stanisław opowie o tym, jak fizyka kwantowa wpływa na działanie codziennych urządzeń, takich jak komputery czy sprzęty AGD. Jako początkujący elektrotechnik pokaże w prosty sposób, jak działają nowoczesne komponenty elektroniczne i dlaczego są one tak niezwykłe.</p>
+            </div>
+    
+        </div>
+  
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                  <img
+                    src="static/assets/images/contestants/54 Dorota .webp"
+                    class="w-full h-full object-cover"
+                  >
+                </div>
+              </div>
+      
+              <!-- content -->
+              <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+                <p class="text-sm font-bold text-[#18395d] mb-2">
+                    13:15-14:00 Trzeci blok prelekcji
+                </p>
+      
+                <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                  Dorota Słowi - "Psychoza AI - czy chatbot może być Twoim przyjacielem?"
+                </h3>
+      
+                <p class="text-gray-800">
+                    Dorota interesuje się ludzkim umysłem, psychologią oraz sztuczną inteligencją. W swojej prelekcji „Psychoza AI – czy chatbot może być Twoim przyjacielem?” poruszy temat wpływu chatbotów na psychikę człowieka i wyjaśni, jak działają modele AI oraz jakie zagrożenia mogą wynikać ze zbyt emocjonalnego podejścia do nich.</p>
+              </div>
+      
+        </div>
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+              <div class="relative z-10 flex-shrink-0">
+                <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+                  <img
+                    src="static/assets/images/contestants/55 Małgorzata.webp"
+                    class="w-full h-full object-cover"
+                  >
+                </div>
+              </div>
+      
+              <!-- content -->
+              <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+                <p class="text-sm font-bold text-[#18395d] mb-2">
+                    13:15-14:00 Trzeci blok prelekcji
+                </p>
+      
+                <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                  Małgorzata Narożnik - "InfecSense - platforma niewczesnych opatrunków aktywnych"
+                </h3>
+      
+                <p class="text-gray-800">
+                    Małgorzata przedstawi projekt InfecSense – inteligentnego hydrożelu opatrunkowego pomagającego monitorować zakażenia ran. Opowie o procesie tworzenia materiału, jego właściwościach oraz o tym, jak połączenie biologii, chemii i inżynierii materiałowej może wspierać rozwój nowoczesnej medycyny.</p>
+              </div>
+      
+        </div>
+
+        <!-- wykład gościnny -->
+        <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+            <div class="relative z-10 flex-shrink-0">
+              <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8] flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" />
+                  </svg>
+                  
+              </div>
+            </div>
+    
+            <!-- content -->
+            <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+              <p class="text-sm font-bold text-[#18395d] mb-2">
+                  14:00-14:20 Gościnny wykład chemiczny
+              </p>
+    
+              <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+                Igor Siwka - "Efekt motyla w Biedronce - jak kilka gramów chemii zmienia współczesne budownictwo"
+              </h3>
+    
+              <p class="text-gray-800">
+                  Pan Igor Siwka - chemik z firmy Izopanel opowie nam o chemii stojącej za pianami PUR/PIR - materiałem bez którego współczesny świat nie mógłby istnieć.</p>
+            </div>
+    
+      </div>
+      <!-- 4 blok-->
+      <div class="relative flex gap-2 md:gap-8 mb-10">
+    
+        <div class="relative z-10 flex-shrink-0">
+          <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+            <img
+              src="static/assets/images/contestants/56 Malina.webp"
+              class="w-full h-full object-cover"
+            >
+          </div>
+        </div>
+
+        <!-- content -->
+        <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+          <p class="text-sm font-bold text-[#18395d] mb-2">
+              14:20-15:00 Czwarty blok prelekcji
+          </p>
+
+          <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+            Malina Graczyk - "Dobranoc czyli dzień dobry - Selekcja pamięci podczas snu"
+          </h3>
+
+          <p class="text-gray-800">
+            Malina fascynuje się neurobiologią, szczególnie snem, pamięcią i neuroplastycznością. Podczas swojego wystąpienia pokaże, że sen nie jest „wyłączeniem mózgu”, lecz niezwykle ważnym i aktywnym procesem biologicznym.</p>
+        </div>
+
+    </div>
+    <div class="relative flex gap-2 md:gap-8 mb-10">
+
+        <div class="relative z-10 flex-shrink-0">
+          <div class="w-28 h-28 md:w-40 md:h-40 rounded-full overflow-hidden border-4 border-[#18395d] shadow-lg bg-[#5e85b8]">
+            <img
+              src="static/assets/images/contestants/57 Lilia.webp"
+              class="w-full h-full object-cover"
+            >
+          </div>
+        </div>
+
+        <!-- content -->
+        <div class="bg-[#5e85b8] rounded-2xl p-6 shadow-lg flex-1">
+          <p class="text-sm font-bold text-[#18395d] mb-2">
+            14:20-15:00 Czwarty blok prelekcji
+          </p>
+
+          <h3 class="text-xl md:text-2xl font-bold text-[#18395d] mb-3">
+            Lilia Hrynkiewicz - "Jak księżyc zaprowadzi nas na Marsa?"
+          </h3>
+
+          <p class="text-gray-800">
+            Lilia, uczennica klasy o profilu matematyczno-fizycznym, interesuje się m.in. astronomią i filozofią. W swojej prelekcji opowie o planach NASA dotyczących przygotowań do misji na Marsa poprzez program Artemis i wykorzystanie Księżyca jako etapu pośredniego.</p>
+        </div>
+
+    </div>
+    <!-- mala kropka -->
+    <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+        <div class="relative z-10 flex-shrink-0">
+          <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+        </div>
+
+        <!-- content -->
+        <div class="pt-4">
+          <p class="text-lg text-[#18395d] font-semibold">
+            15:00-15:30 Przerwa i głosowanie publiczności
+          </p>
+        </div>
+
+    </div>
+    <div class="relative flex gap-8 mb-12 ml-[46px] md:ml-[70px]">
+  
+        <div class="relative z-10 flex-shrink-0">
+          <div class="w-6 h-6 rounded-full bg-[#18395d] mt-5"></div>
+        </div>
+
+        <!-- content -->
+        <div class="pt-4">
+          <p class="text-lg text-[#18395d] font-semibold">
+            15:30-16:30 Zakończenie i ogłoszenie wyników
+          </p>
+        </div>
+
+    </div>
+
+    </div>
+  </section>
+  </body>
+  <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+    <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
+    <p class="mb-2">📍 Gdynia</p>
+    <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+    <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
+  </footer>
+  <script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains("max-h-0")){
+      mobileMenu.classList.remove("max-h-0");
+      mobileMenu.classList.add("max-h-96");
+    }else{
+      mobileMenu.classList.add("max-h-0");
+      mobileMenu.classList.remove("max-h-96");
+    }
+  });
+</script>

@@ -25,10 +25,11 @@
   
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex space-x-6 items-center">
+        <a href="/plan" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Plan wydarzenia</a>
         <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
         <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
         <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
-        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d] hidden">Poprzednie edycje</a>
         <a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>
         <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
         <a href="/registration"
@@ -51,6 +52,7 @@
       id="mobile-menu"
       class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
+          <a href="/plan" class="text-lg block">Plan wydarzenia</a>
           <a href="/" class="text-lg block">Home</a>
           <a href="/team" class="text-lg block">Team</a>
           <a href="/about" class="text-lg block">About</a>
@@ -819,6 +821,7 @@
                       peer-focus:text-[#18395d]">
                     Adres E-Mail*</label>
               </div>
+              <p class="text-sm font-bold"> Zapamiętaj jaki adres podajesz. Będzie on ci potrzebny podczas wydarzenia.</p>
               <!-- Phone number-->
               <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
                   
@@ -990,11 +993,13 @@
                 hover:shadow-lg hover:-translate-y-0.5">
                 Wyślij Zgłoszenie
                 </button> 
+                <p class="text-sm font-bold">Na podany adres E-Mail dostaniesz wiadomość z potwierdzeniem rejestracji.</p>
           </form>
         </div>
         <!-- volunteer form-->
         <div id="volunteer" class="form-tab">
-        <form method="POST" id="volunteerForm" class="dyn-form" data-endpoint="/volunteerForm" enctype="multipart/form-data">
+          <h1 class="text-4xl font-bold text-center">Czas na aplikacje na wolontariuszy już minął.</h1>
+        <form method="POST" id="volunteerForm" class="dyn-form hidden" data-endpoint="/volunteerForm" enctype="multipart/form-data">
             <h2 class="text-3xl font-bold text-center">
                 Dane osobowe
               </h2>

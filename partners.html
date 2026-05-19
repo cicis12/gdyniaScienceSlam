@@ -21,10 +21,11 @@
   
       <!-- DESKTOP MENU -->
       <div class="hidden md:flex space-x-6 items-center">
+        <a href="/plan" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Plan wydarzenia</a>
         <a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>
         <a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>
         <a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>
-        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Poprzednie edycje</a>
+        <a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d] hidden">Poprzednie edycje</a>
         <a href="/partners" class="hover:text-blue-800 font-extrabold text-lg text-[#18395d]">Partnerzy</a>
         <a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>
         <a href="/registration"
@@ -47,6 +48,7 @@
       id="mobile-menu"
       class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
+          <a href="/plan" class="text-lg block">Plan wydarzenia</a>
           <a href="/" class="text-lg block">Home</a>
           <a href="/team" class="text-lg block">Team</a>
           <a href="/about" class="text-lg block">About</a>
@@ -69,15 +71,18 @@
 </section>
 
 
-<section class="pb-20 hidden">
-  <div class="max-w-4xl mx-auto px-6 text-center">
+<section class="pb-20">
+  <div class="max-w-2xl mx-auto px-6 text-center">
 
-    <h2 class="text-2xl font-bold mb-8">Partner Główny</h2>
+    <h2 class="text-2xl font-bold mb-8">Sponsor Główny</h2>
 
-    <div class="bg-white rounded-3xl shadow-xl p-10 hover:scale-105 transition">
-      <img src="static/assets/images/partner-main.png"
-           alt="Logo partnera głównego"
-           class="mx-auto h-32 object-contain">
+    <div class="bg-white rounded-3xl shadow-xl p-10 hover:scale-105 transition overflow-hidden">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 91.33 43.04">
+        <polyline points="91.33 43.04 0 43.04 0 0 91.33 0" fill="none"></polyline>
+        <path d="M0,13.34H13.56v16.6c0,2.71-.09,2.76-6,8.52l-.67.66L10.57,43l1.2-1.17c6.55-6.36,7.24-7,7.24-12.29V7.89H0Z"></path>
+        <polygon points="79.1 7.89 73.62 7.89 73.62 34.5 79.1 34.5 79.1 7.89"></polygon>
+        <polygon points="44.21 35.14 54.49 8.3 48.45 8.3 38.16 35.14 44.21 35.14"></polygon>
+        <rect class="JitLogo__particle JitLogo__particle--1" x="78.1" y="18.79" width="13.23" height="5.46"></rect></svg>
     </div>
 
   </div>
@@ -154,6 +159,25 @@
         <img src="static/assets/images/partners/trojmiastopl.jpg"
              alt="trojmiasto.pl"
              class="object-contain h-24">
+      </div>
+      
+    </div>
+
+  </div>
+
+</section>
+<section class="pb-24">
+
+  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
+
+    <h2 class="text-3xl font-bold text-center mb-12">
+      Jury
+    </h2>
+    <div class="flex flex-wrap justify-center gap-10">
+      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg h-36 flex items-center justify-center hover:scale-105 transition overflow-hidden">
+        <img src="static/assets/images/partners/iopan.svg"
+             alt="IO PAN"
+             class="w-full h-auto object-cover m-4">
       </div>
       
     </div>

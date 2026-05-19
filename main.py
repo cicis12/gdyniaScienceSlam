@@ -75,6 +75,10 @@ def docs():
 def groups():
     return BASE_DIR/"groups.html"
 
+@app.get("/plan", response_class=FileResponse)
+def groups():
+    return BASE_DIR/"plan.html"
+
 # Handle Post (@app.post)
 # @app.post("/contestantForm")
 # @limiter.limit("10/minute")
@@ -216,52 +220,52 @@ async def handle_viewerform(
         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
     )
 
-@app.post("/volunteerForm")
-@limiter.limit("10/minute")
-async def handle_volunteerform(
-    request: Request,
-    background_tasks: BackgroundTasks,
-    name: str = Form(...),
-    surname: str = Form(...),
-    email: str = Form(...),
-    phone: str = Form(...),
-    school: str = Form(...),
-    class_and_profile: str = Form(...),
-    birthdate: date = Form(...),
-    facebook_link: str | None = Form(None),
-    rules_accepted: bool = Form(...),
-    privacy_policy_accepted: bool = Form(...),
-    db: Session = Depends(get_db),
-):
-    new_volunteer = Volunteer(
-        name=name.strip(),
-        surname=surname.strip(),
-        email=email.lower().strip(),
-        phone=phone.strip(),
-        school=school.strip(),
-        class_and_profile=class_and_profile.strip(),
-        birthdate=birthdate,
-        facebook_link=facebook_link,
-        rules_accepted=rules_accepted,
-        privacy_policy_accepted=privacy_policy_accepted,
-    )
-    try:
-        db.add(new_volunteer)
-        db.commit()
-        db.refresh(new_volunteer)
-        background_tasks.add_task(
-            send_confirmation_email,
-            new_volunteer.email,
-            new_volunteer.name,
-            "wolontariusza"
-        )
-    except IntegrityError as e:
-        db.rollback()
-        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
-    return JSONResponse(
-        status_code=200,
-        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-     )
+# @app.post("/volunteerForm")
+# @limiter.limit("10/minute")
+# async def handle_volunteerform(
+#     request: Request,
+#     background_tasks: BackgroundTasks,
+#     name: str = Form(...),
+#     surname: str = Form(...),
+#     email: str = Form(...),
+#     phone: str = Form(...),
+#     school: str = Form(...),
+#     class_and_profile: str = Form(...),
+#     birthdate: date = Form(...),
+#     facebook_link: str | None = Form(None),
+#     rules_accepted: bool = Form(...),
+#     privacy_policy_accepted: bool = Form(...),
+#     db: Session = Depends(get_db),
+# ):
+#     new_volunteer = Volunteer(
+#         name=name.strip(),
+#         surname=surname.strip(),
+#         email=email.lower().strip(),
+#         phone=phone.strip(),
+#         school=school.strip(),
+#         class_and_profile=class_and_profile.strip(),
+#         birthdate=birthdate,
+#         facebook_link=facebook_link,
+#         rules_accepted=rules_accepted,
+#         privacy_policy_accepted=privacy_policy_accepted,
+#     )
+#     try:
+#         db.add(new_volunteer)
+#         db.commit()
+#         db.refresh(new_volunteer)
+#         background_tasks.add_task(
+#             send_confirmation_email,
+#             new_volunteer.email,
+#             new_volunteer.name,
+#             "wolontariusza"
+#         )
+#     except IntegrityError as e:
+#         db.rollback()
+#         return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
+#     return JSONResponse(
+#         status_code=200,
+#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
+#      )
 
 @app.post("/groupForm")
 @limiter.limit("10/minute")
@@ -355,7 +359,7 @@ def admin_dashboard(
 ):
     is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
     
-    if tab == "contestant" or tab == "volunteer":
+    if tab in ["contestant", "volunteer", "manager"]:
         if not admin.is_superadmin:
             raise HTTPException(
                 status_code=403,
