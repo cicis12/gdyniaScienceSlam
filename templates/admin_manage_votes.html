@@ -1,0 +1,356 @@
+{% extends "admin_header.html" %}
+{% block content %}
+
+<div class="max-w-6xl mx-auto px-6 py-10">
+
+  <h1 class="text-3xl font-bold mb-6">Zarządzanie głosowaniem</h1>
+
+  <!-- STATUS + TOGGLE -->
+  <div class="bg-white p-6 rounded-xl shadow mb-8 flex justify-between items-center">
+
+    <div>
+      <h2 class="text-xl font-bold">Status głosowania</h2>
+      <p class="text-sm text-gray-600">
+        Aktualnie:
+        <span class="font-bold">
+          {{ "AKTYWNE" if voting_enabled else "WYŁĄCZONE" }}
+        </span>
+      </p>
+    </div>
+
+    <form method="POST" action="/admin/toggle-voting">
+      <input type="hidden" name="redirect_url" value="/admin/manage_votes">
+
+      <button class="px-6 py-3 rounded-xl font-bold text-white
+        {{ 'bg-red-600' if voting_enabled else 'bg-green-600' }}">
+        {{ "Wyłącz" if voting_enabled else "Włącz" }}
+      </button>
+    </form>
+
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="mb-6 text-lg font-bold">
+    Łączna liczba głosów: {{ total_votes }}
+  </div>
+
+  <!-- RESULTS -->
+  <div class="space-y-4">
+
+    {% for c in contestants %}
+    <div class="bg-white p-4 rounded-xl shadow">
+
+      <div class="flex justify-between items-center">
+        <span class="font-bold">{{ c.name }}</span>
+
+        <span class="font-semibold text-[#18395d]">
+          {{ c.votes }} głosów
+        </span>
+      </div>
+
+      <div class="w-full bg-gray-200 h-3 rounded mt-2 overflow-hidden">
+        <div class="bg-[#18395d] h-3 rounded"
+             style="width: {{ (c.votes / total_votes * 100) if total_votes > 0 else 0 }}%">
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+
+  </div>
+  <div class="bg-white p-6 rounded-xl shadow mb-8 mt-16">
+
+    <h2 class="text-xl font-bold mb-2">
+      Rejestracja głosujących
+    </h2>
+  
+    <p class="text-sm text-gray-600 mb-4">
+      Dodaj wszystkich widzów do systemu głosowania
+    </p>
+  
+    <div id="bulkPreview" class="mb-4 text-sm font-semibold">
+      Kliknij, aby sprawdzić liczbę osób
+    </div>
+  
+    <div class="flex gap-3">
+  
+      <button onclick="loadPreview()"
+              class="bg-gray-200 px-4 py-2 rounded-xl">
+        Podgląd
+      </button>
+  
+      <button onclick="confirmBulk()"
+              class="bg-red-600 text-white px-4 py-2 rounded-xl">
+        Dodaj wszystkich
+      </button>
+  
+    </div>
+  </div>
+
+  <div class="bg-white p-6 rounded-xl shadow mb-8 mt-16">
+
+    <h2 class="text-xl font-bold mb-2">
+      Filtracja głosujących
+    </h2>
+  
+    <p class="text-sm text-gray-600 mb-4">
+      Usuwa głosujących, którzy nie mają odpowiadającego Viewer z hidden=true
+    </p>
+  
+    <div id="filterPreview" class="mb-4 text-sm font-semibold">
+      Kliknij podgląd
+    </div>
+  
+    <div class="flex gap-3">
+  
+      <button onclick="loadFilterPreview()"
+              class="bg-gray-200 px-4 py-2 rounded-xl">
+        Podgląd
+      </button>
+  
+      <button onclick="confirmFilter()"
+              class="bg-red-600 text-white px-4 py-2 rounded-xl">
+        Filtruj
+      </button>
+  
+    </div>
+  </div>
+  <div class="bg-white p-6 rounded-xl shadow mb-8 mt-16">
+
+    <h2 class="text-xl font-bold text-red-600 mb-2">
+      Danger Zone
+    </h2>
+  
+    <p class="text-sm text-gray-600 mb-4">
+      Usuwa wszystkie oddane głosy w systemie
+    </p>
+  
+    <button onclick="confirmDeleteAllVotes()"
+            class="bg-red-700 text-white px-6 py-3 rounded-xl font-bold">
+      Usuń wszystkie głosy
+    </button>
+  
+  </div>
+</div>
+
+<!-- MODAL BACKDROP -->
+<div id="modalBackdrop"
+     class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50">
+
+  <!-- MODAL -->
+  <div id="modalBox"
+       class="bg-white rounded-3xl shadow-2xl p-8 w-[90%] max-w-md
+              scale-95 opacity-0 transition-all duration-200">
+
+    <h2 id="modalTitle"
+        class="text-2xl font-bold text-[#18395d] mb-4">
+      Title
+    </h2>
+
+    <p id="modalMessage"
+       class="text-gray-700 mb-8">
+      Message
+    </p>
+
+    <div id="modalActions"
+         class="flex justify-center gap-4">
+    </div>
+
+  </div>
+</div>
+
+<script>
+    let bulkData = null;
+
+async function loadPreview() {
+    const res = await fetch("/admin/voters/bulk-preview");
+    bulkData = await res.json();
+
+    document.getElementById("bulkPreview").innerText =
+        `Widzowie: ${bulkData.eligible_viewers}, nowi głosujący: ${bulkData.new_voters}`;
+}
+
+function confirmBulk() {
+    if (!bulkData) {
+        openModal(
+            "Najpierw podgląd",
+            "Kliknij 'Podgląd' aby zobaczyć liczbę osób.",
+            [{ text: "OK" }]
+        );
+        return;
+    }
+
+    openModal(
+        "Potwierdzenie",
+        `Dodać ${bulkData.new_voters} nowych głosujących?`,
+        [
+            { text: "Anuluj" },
+            {
+                text: "Tak, dodaj",
+                type: "danger",
+                keepOpen: true,
+                onClick: async () => {
+
+                    const res = await fetch("/admin/voters/bulk-create", {
+                        method: "POST"
+                    });
+
+                    const data = await res.json();
+
+                    openModal(
+                        "Gotowe",
+                        `Dodano ${data.created} nowych głosujących.`,
+                        [{ text: "OK", type: "success" }],
+                        3000
+                    );
+                }
+            }
+        ]
+    );
+}
+
+const backdrop = document.getElementById("modalBackdrop");
+const modalBox = document.getElementById("modalBox");
+const modalTitle = document.getElementById("modalTitle");
+const modalMessage = document.getElementById("modalMessage");
+const modalActions = document.getElementById("modalActions");
+
+function openModal(title, message, buttons = [], autoCloseMs = null) {
+    modalTitle.innerText = title;
+    modalMessage.innerText = message;
+    modalActions.innerHTML = "";
+
+    buttons.forEach(btn => {
+        const button = document.createElement("button");
+
+        button.innerText = btn.text;
+
+        button.className =
+            "px-5 py-2 rounded-xl font-semibold transition " +
+            (btn.type === "danger"
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : btn.type === "success"
+                ? "bg-green-600 text-white hover:bg-green-700"
+                : "bg-gray-200 hover:bg-gray-300");
+
+        button.onclick = async () => {
+            if (!btn.keepOpen) closeModal();
+            if (btn.onClick) await btn.onClick();
+        };
+
+        modalActions.appendChild(button);
+    });
+
+    backdrop.classList.remove("hidden");
+    backdrop.classList.add("flex");
+
+    setTimeout(() => {
+        modalBox.classList.remove("scale-95", "opacity-0");
+        modalBox.classList.add("scale-100", "opacity-100");
+    }, 10);
+
+    if (autoCloseMs) {
+        setTimeout(closeModal, autoCloseMs);
+    }
+}
+
+function closeModal() {
+    modalBox.classList.remove("scale-100", "opacity-100");
+    modalBox.classList.add("scale-95", "opacity-0");
+
+    setTimeout(() => {
+        backdrop.classList.add("hidden");
+        backdrop.classList.remove("flex");
+    }, 200);
+}
+
+
+let filterData = null;
+
+async function loadFilterPreview() {
+    const res = await fetch("/admin/voters/filter-preview");
+    filterData = await res.json();
+
+    document.getElementById("filterPreview").innerText =
+        `Wszyscy: ${filterData.total_voters}, zostanie: ${filterData.keep}, do usunięcia: ${filterData.to_delete}`;
+}
+
+function confirmFilter() {
+    if (!filterData) {
+        openModal(
+            "Najpierw podgląd",
+            "Kliknij 'Podgląd' aby zobaczyć zmiany.",
+            [{ text: "OK" }]
+        );
+        return;
+    }
+
+    openModal(
+        "Potwierdzenie",
+        `Usunąć ${filterData.to_delete} głosujących?`,
+        [
+            { text: "Anuluj" },
+            {
+                text: "Tak, filtruj",
+                type: "danger",
+                keepOpen: true,
+                onClick: async () => {
+                    const res = await fetch("/admin/voters/filter-by-hidden-viewers", {
+                        method: "POST"
+                    });
+
+                    const data = await res.json();
+
+                    openModal(
+                        "Gotowe",
+                        `Usunięto ${data.deleted}, pozostało ${data.remaining}.`,
+                        [{ text: "OK", type: "success" }],
+                        3000
+                    );
+
+                    loadFilterPreview();
+                }
+            }
+        ]
+    );
+}
+
+
+function confirmDeleteAllVotes() {
+    openModal(
+        "⚠️ Potwierdzenie",
+        "Czy na pewno chcesz USUNĄĆ WSZYSTKIE głosy? Tej operacji nie da się cofnąć.",
+        [
+            { text: "Anuluj" },
+            {
+                text: "Tak, usuń wszystko",
+                type: "danger",
+                keepOpen: true,
+                onClick: async () => {
+
+                    const res = await fetch("/admin/votes/delete-all", {
+                        method: "POST",
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest"
+                        }
+                    });
+
+                    const data = await res.json();
+
+                    openModal(
+                        "Gotowe",
+                        `Usunięto ${data.deleted} głosów.`,
+                        [{ text: "OK", type: "success" }],
+                        3000
+                    );
+
+                    // optional: refresh page to reset counters/UI
+                    setTimeout(() => window.location.reload(), 1000);
+                }
+            }
+        ]
+    );
+}
+</script>
+
+{% endblock %}

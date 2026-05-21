@@ -1,0 +1,57 @@
+{% extends "admin_header.html" %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto px-6 py-16">
+
+  <div class="bg-[#819edb] rounded-3xl shadow-2xl p-8">
+
+    <h1 class="text-3xl font-bold mb-6">
+      Confirm email sending
+    </h1>
+
+    <div class="space-y-4 text-[#18395d]">
+
+      <p><strong>Table:</strong> {{ table }}</p>
+      <p><strong>Subject:</strong> {{ subject }}</p>
+      <p><strong>Mode:</strong> {{ mode }}</p>
+
+      {% if mode == "test" %}
+        <p><strong>Test email:</strong> {{ test_email }}</p>
+      {% endif %}
+
+      <div class="mt-6">
+        <p class="font-bold mb-2">Preview:</p>
+        <div class="bg-white p-4 rounded-xl shadow">
+          {{ body | safe }}
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FINAL SEND FORM -->
+    <form method="POST" action="/admin/send-email" class="mt-8 space-y-4">
+
+      <input type="hidden" name="table" value="{{ table }}">
+      <input type="hidden" name="subject" value="{{ subject }}">
+      <input type="hidden" name="body" value="{{ body }}">
+      <input type="hidden" name="mode" value="{{ mode }}">
+      <input type="hidden" name="test_email" value="{{ test_email }}">
+
+      <button
+        type="submit"
+        class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 rounded-2xl"
+      >
+        YES, SEND EMAILS
+      </button>
+
+      <a href="/admin/emailsender"
+         class="block text-center text-blue-900 font-semibold mt-4 hover:underline">
+        Go back and edit
+      </a>
+
+    </form>
+
+  </div>
+
+</div>
+{% endblock %}

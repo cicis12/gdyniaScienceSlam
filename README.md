@@ -318,10 +318,15 @@ Note: email sending in `mail.py` is set up for `mailersend`, if switching provid
 Please follow steps `Add a secret key`  
 and `Creating an admin user for the admin dashboard`  
 
-### Add a secret key
-Create a file named `SECRET_KEY.env`
+### Add a secret key and a voter secret key
+Create files named `SECRET_KEY.env` and `VOTER_SECRET_KEY.env`
+in `SECRET_KEY.env`:
 ```env
     SECRET_KEY=<random-long-string>
+```
+in `VOTER_SECRET_KEY.env`
+```env
+    VOTER_SECRET_KEY=<random-long-string>
 ```
 You can generate one safely by
 ```bash

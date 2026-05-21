@@ -1,0 +1,400 @@
+{% extends "voting_header.html" %}
+{% block content %}
+<div class="max-w-5xl mx-auto px-6 py-10">
+
+{% if not voter %}
+<div class="flex items-center justify-center">
+  <!-- LOGIN SCREEN -->
+  <div class="max-w-lg">
+    <form onsubmit="loginVoter(event)">
+        <h2 class="text-3xl font-bold text-center">
+            Głosowanie
+          </h2>
+        
+        <!-- Email-->
+        <div class="relative">
+            <div class="absolute left-0 top-1/2 -translate-y-[10%]">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+            </div>
+              
+            <input type="email"
+             name="email"
+             placeholder=" "
+             class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+             required/>
+
+             <label
+                class="absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                peer-placeholder-shown:top-6
+                peer-placeholder-shown:text-gray-600
+                peer-placeholder-shown:text-base
+                peer-focus:top-1
+                peer-focus:text-sm
+                peer-focus:text-[#18395d] -z-10">
+              Adres E-Mail*</label>
+        </div>
+        <p class="text-sm font-bold"> Podaj ten sam adres E-Mail, którego użyłeś/aś przy rejestracji.</p>
+        
+        <!-- Submit-->
+         <button
+          type="submit"
+          class="mt-8 w-full bg-[#18395d] text-white font-bold py-3 rounded-xl
+          transition-all duration-200 ease-in-out
+          hover:shadow-lg hover:-translate-y-0.5">
+          Zatwierdź
+          </button> 
+          <p class="text-sm font-bold">Jeśli potrzebujesz pomocy, zapraszamy na stanowisko rejestracji.</p>
+    </form>
+  </div>
+</div>
+{% else %}
+
+  <!-- VOTING UI -->
+  <h1 class="text-3xl font-bold mb-2">
+    Witaj {{ voter.email }}
+  </h1>
+
+  <p id="votesCounter" class="mb-6 text-gray-600">
+    Pozostały Ci {{ votes_left }} głosy
+  </p>
+
+  <div class="flex flex-wrap justify-center gap-12">
+
+    {% for c in contestants %}
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(20rem,1fr))] gap-8 justify-items-center">
+      <div class="text-center cursor-pointer w-80"
+           onclick="toggleVote({{ c.id }})">
+
+        <div id="c-{{ c.id }}"
+             class="w-64 h-64 mx-auto rounded-full overflow-hidden border-4 bg-[#5e85b8] border-[#18395d] transition">
+
+          <img src="{{ c.img }}"
+               class="w-full h-full object-cover">
+        </div>
+
+        <p class="mt-2 text-2xl font-semibold">
+          {{ c.name }}
+        </p>
+        <p class="mt-2 text-lg font-semibold">
+          {{ c.topic }}
+        </p>
+
+      </div>
+    </div>
+    {% endfor %}
+
+  </div>
+
+  <div class="mt-8 text-center">
+    <button onclick="submitVotes()"
+            class="bg-green-600 text-white px-6 py-3 rounded-xl">
+      Wyślij głosy
+    </button>
+  </div>
+
+{% endif %}
+
+</div>
+<!-- BACKDROP -->
+<div id="modalBackdrop"
+     class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden
+            items-center justify-center z-50">
+
+  <!-- MODAL -->
+  <div id="modalBox"
+       class="bg-white rounded-3xl shadow-2xl p-8 w-[90%] max-w-md
+              scale-95 opacity-0 transition-all duration-200">
+
+    <h2 id="modalTitle"
+        class="text-2xl font-bold text-[#18395d] mb-4">
+      Title
+    </h2>
+
+    <p id="modalMessage"
+       class="text-gray-700 mb-8">
+      Message
+    </p>
+
+    <div id="modalActions"
+         class="flex justify-center gap-4">
+    </div>
+
+  </div>
+</div>
+
+<script>
+let selected = new Set();
+const maxVotes = {{ votes_left if voter else 0 }};
+
+const backdrop = document.getElementById("modalBackdrop");
+const modalBox = document.getElementById("modalBox");
+const modalTitle = document.getElementById("modalTitle");
+const modalMessage = document.getElementById("modalMessage");
+const modalActions = document.getElementById("modalActions");
+
+function openModal(title, message, buttons = [], autoCloseMs = null) {
+    modalTitle.innerText = title;
+    modalMessage.innerText = message;
+
+    modalActions.innerHTML = "";
+
+    buttons.forEach(btn => {
+        const button = document.createElement("button");
+
+        button.innerText = btn.text;
+
+        button.className =
+            "px-5 py-2 rounded-xl font-semibold transition " +
+            (btn.type === "danger"
+                ? "bg-red-600 text-white hover:bg-red-700"
+                : btn.type === "success"
+                ? "bg-green-600 text-white hover:bg-green-700"
+                : "bg-gray-200 hover:bg-gray-300");
+
+        button.onclick = async () => {
+            if (!btn.keepOpen) closeModal();
+            if (btn.onClick) await btn.onClick();
+        };
+
+        modalActions.appendChild(button);
+    });
+
+    backdrop.classList.remove("hidden");
+    backdrop.classList.add("flex");
+
+    setTimeout(() => {
+        modalBox.classList.remove("scale-95", "opacity-0");
+        modalBox.classList.add("scale-100", "opacity-100");
+    }, 10);
+
+    // ✅ AUTO CLOSE SUPPORT
+    if (autoCloseMs) {
+        setTimeout(() => {
+            closeModal();
+        }, autoCloseMs);
+    }
+}
+
+function closeModal() {
+    modalBox.classList.remove("scale-100", "opacity-100");
+    modalBox.classList.add("scale-95", "opacity-0");
+
+    setTimeout(() => {
+        backdrop.classList.add("hidden");
+        backdrop.classList.remove("flex");
+    }, 200);
+}
+
+function toggleVote(id) {
+    const el = document.getElementById("c-" + id);
+    if (votedChoices.has(id)) {
+        openModal(
+            "Zablokowane",
+            "Nie możesz zmienić już oddanego głosu.",
+            [{ text: "OK" }]
+        );
+        return;
+    }
+
+    if (selected.has(id)) {
+        selected.delete(id);
+
+        el.classList.remove("border-green-500");
+        el.classList.remove("border-8");
+        el.classList.add("border-[#18395d]");
+        el.classList.add("border-4");
+        return;
+    }
+
+    if (selected.size >= maxVotes) {
+        openModal(
+            "Brak głosów",
+            "Nie masz już dostępnych głosów.",
+            [
+                {
+                    text: "OK"
+                }
+            ]
+        );
+
+        return;
+    }
+
+    selected.add(id);
+
+    el.classList.remove("border-[#18395d]");
+    el.classList.remove("border-4");
+    el.classList.add("border-green-500");
+    el.classList.add("border-8");
+}
+
+async function submitVotes() {
+
+if (selected.size === 0) {
+
+    openModal(
+        "Brak wyboru",
+        "Wybierz przynajmniej jednego uczestnika.",
+        [
+            {
+                text: "OK"
+            }
+        ]
+    );
+
+    return;
+}
+
+openModal(
+    "Potwierdzenie",
+    `Czy na pewno chcesz wysłać ${selected.size} głos(y)?`,
+    [
+        {
+            text: "Anuluj"
+        },
+        {
+            text: "Wyślij",
+            type: "success",
+            keepOpen: true,
+
+            onClick: async () => {
+
+                try {
+
+                    const response = await fetch("/vote/submit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                            votes: Array.from(selected)
+                        })
+                    });
+
+                    if (response.ok) {
+
+                        // update votes counter
+                        const data = await response.json();
+
+                        document.getElementById("votesCounter").innerText =
+                            `Pozostały Ci ${data.votes_left} głosy`;
+
+                        // clear selections visually
+                        selected.forEach(id => {
+
+                            const el = document.getElementById("c-" + id);
+
+                            el.classList.remove("border-green-500");
+                            el.classList.remove("border-8");
+
+                            el.classList.add("border-[#18395d]");
+                            el.classList.add("border-4");
+                        });
+                        selected.forEach(id => votedChoices.add(id));
+                        selected.clear();
+                        initVotedUI();
+
+                        openModal(
+                            "Sukces",
+                            "Twoje głosy zostały zapisane.",
+                            [
+                                {
+                                    text: "OK",
+                                    type: "success",
+                                }
+                            ],
+                            3000
+                        );
+
+                    } else {
+
+                        openModal(
+                            "Błąd",
+                            "Wystąpił problem podczas wysyłania głosów.",
+                            [
+                                {
+                                    text: "OK",
+                                    type: "danger"
+                                }
+                            ]
+                        );
+                    }
+
+                } catch (err) {
+
+                    openModal(
+                        "Błąd połączenia",
+                        "Nie udało się połączyć z serwerem.",
+                        [
+                            {
+                                text: "OK",
+                                type: "danger"
+                            }
+                        ]
+                    );
+                }
+            }
+        }
+    ]
+);
+}
+
+
+
+const votedChoices = new Set({{ voted_choices | tojson}});
+function initVotedUI(){
+  votedChoices.forEach(id => {
+    const el = document.getElementById("c-" + id);
+    if(!el) return;
+    el.classList.remove("border-[#18395d]");
+    el.classList.remove("border-4");
+    el.classList.add("border-green-500");
+    el.classList.add("border-8");
+    el.classList.add("opacity-60", "cursor-not-allowed");
+  })
+}
+window.addEventListener("DOMContentLoaded", initVotedUI);
+
+
+
+
+async function loginVoter(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+
+    try {
+        const res = await fetch("/vote/login", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: new URLSearchParams({ email })
+        });
+
+        if (res.ok) {
+            window.location.reload();
+            return;
+        }
+
+        const text = await res.text();
+
+        openModal(
+            "Błąd logowania",
+            text.includes("Email not registered")
+                ? "Ten email nie jest zarejestrowany w systemie. Jeśli uważasz że to błąd, podejdź do stanowiska rejestracji."
+                : "Nie udało się zalogować.",
+            [{ text: "OK" }]
+        );
+
+    } catch (err) {
+        openModal(
+            "Błąd",
+            "Problem z połączeniem z serwerem.",
+            [{ text: "OK" }]
+        );
+    }
+}
+</script>
+{% endblock %}

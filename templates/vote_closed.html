@@ -1,0 +1,24 @@
+{% extends "voting_header.html" %}
+{% block content %}
+
+<div class="max-w-2xl mx-auto text-center py-20">
+
+  <div class="text-5xl mb-6">🗳️</div>
+
+  <h1 class="text-3xl font-bold mb-4">
+    Głosowanie jest obecnie zamknięte
+  </h1>
+
+  <p class="text-gray-600 mb-6">
+    Wróć później, gdy organizatorzy je uruchomią.
+  </p>
+
+  {% if voter %}
+    <p class="text-sm text-gray-500">
+      Zalogowany jako: {{ voter.email }}
+    </p>
+  {% endif %}
+
+</div>
+
+{% endblock %}

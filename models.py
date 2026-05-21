@@ -113,3 +113,9 @@ class Vote(Base):
     voter_id=Column(Integer,ForeignKey("voters.id"),nullable=False)
     choice = Column(Integer, nullable=False)
     voter = relationship("Voter", back_populates="votes")
+
+class SystemSetting(Base):
+    __tablename__ = "system_settings"
+
+    key = Column(String, primary_key=True)
+    value = Column(String, nullable=False)

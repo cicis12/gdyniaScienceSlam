@@ -1,6 +1,10 @@
 import os
 import requests
 from dotenv import load_dotenv
+from bs4 import BeautifulSoup
+
+def strip_tags(html):
+    return BeautifulSoup(html, "html.parser").get_text()
 
 load_dotenv("MAIL.env")
 
@@ -59,6 +63,39 @@ def send_confirmation_email(to_email: str, name: str, role: str):
         }
 
         response = requests.post(url, headers=headers, json=data)
+
+        if response.status_code >= 400:
+            print("MailerSend error:", response.text)
+
+    except Exception as e:
+        print("Email sending failed:", e)
+
+
+def send_email(to_email: str, content: str, subject: str,):
+    try:
+        url = "https://api.mailersend.com/v1/email"
+
+        headers = {
+            "Authorization": f"Bearer {API_KEY}",
+            "Content-Type": "application/json"
+        }
+
+        data = {
+            "from": {
+                "email": EMAIL_FROM,
+                "name": "Gdynia Science Slam"
+            },
+            "to": [
+                {
+                    "email": to_email
+                }
+            ],
+            "subject": subject,
+            "html": content,
+            "text": strip_tags(content)
+        }
+
+        response = requests.post(url, headers=headers, json=data, timeout=15)
 
         if response.status_code >= 400:
             print("MailerSend error:", response.text)

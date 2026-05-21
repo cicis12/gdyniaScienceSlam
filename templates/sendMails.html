@@ -1,0 +1,123 @@
+{% extends "admin_header.html" %}
+{% block content %}
+  <div class="max-w-3xl mx-auto px-6 py-16">
+
+    <div class="bg-[#819edb] rounded-3xl shadow-2xl p-8">
+
+      <h1 class="text-4xl font-bold mb-8">
+        Mail sender
+      </h1>
+
+      <form
+        action="/admin/send-email/preview"
+        method="POST"
+        class="space-y-6"
+      >
+
+        <!-- TABLE SELECT -->
+        <div>
+          <label class="block font-bold mb-2">
+            Target table
+          </label>
+
+          <select
+            name="table"
+            class="w-full rounded-xl p-4 bg-white shadow"
+          >
+            <option value="contestants">Contestants</option>
+            <option value="viewers">Viewers</option>
+            <option value="volunteers">Volunteers</option>
+            <option value="groups">Groups</option>
+          </select>
+        </div>
+
+        <!-- SUBJECT -->
+        <div>
+          <label class="block font-bold mb-2">
+            Subject
+          </label>
+
+          <input
+            type="text"
+            name="subject"
+            required
+            class="w-full rounded-xl p-4 bg-white shadow"
+            placeholder="Email subject"
+          >
+        </div>
+
+        <!-- BODY -->
+        <div>
+          <label class="block font-bold mb-2">
+            Email body
+          </label>
+
+          <textarea
+            name="body"
+            rows="12"
+            required
+            class="w-full rounded-2xl p-4 bg-white shadow resize-none"
+            placeholder="Write the email... Use HTML (<br> for new lines)"
+          ></textarea>
+        </div>
+
+        <!-- TEST EMAIL -->
+        <div>
+          <label class="block font-bold mb-2">
+            Test email
+          </label>
+
+          <input
+            type="email"
+            name="test_email"
+            class="w-full rounded-xl p-4 bg-white shadow"
+            placeholder="your@email.com"
+          >
+        </div>
+
+        <!-- MODE -->
+        <div class="flex flex-col gap-3">
+
+          <label class="flex items-center gap-3">
+            <input
+              type="radio"
+              name="mode"
+              value="test"
+              checked
+            >
+
+            <span>
+              Send test email only
+            </span>
+          </label>
+
+          <label class="flex items-center gap-3">
+            <input
+              type="radio"
+              name="mode"
+              value="all"
+            >
+
+            <span>
+              Send to entire table
+            </span>
+          </label>
+
+        </div>
+
+        <!-- BUTTON -->
+        <button
+          type="submit"
+          class="w-full bg-[#18395d] hover:bg-blue-900
+                 text-white font-bold py-4 rounded-2xl
+                 transition"
+        >
+          Send emails
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+{% endblock %}
