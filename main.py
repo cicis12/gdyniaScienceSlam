@@ -32,6 +32,7 @@ app = FastAPI()
 app.mount("/static",StaticFiles(directory="static"), name="static")
 BASE_DIR = Path(__file__).resolve().parent
 
+templates=Jinja2Templates(directory="templates")
 
 #rate limiter
 limiter = Limiter(key_func=get_remote_address, storage_uri="redis://localhost:6379")
@@ -44,41 +45,41 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 
 
 #serve pages (@app.get)
-@app.get("/", response_class=FileResponse)
-def home():
-    return BASE_DIR/ "index.html"
+@app.get("/")
+def home(request: Request):
+    return templates.TemplateResponse("client/index.html", {"request": request, "header_title": "Gdynia Science Slam", "page_name":"home"})
 
-@app.get("/team", response_class=FileResponse)
-def team():
-    return BASE_DIR/"team.html"
+@app.get("/team")
+def team(request: Request):
+    return templates.TemplateResponse("client/team.html", {"request": request, "header_title": "Zespół - Gdynia Science Slam", "page_name":"team"})
 
-@app.get("/registration", response_class=FileResponse)
-def form():
-    return BASE_DIR/"registration.html"
+@app.get("/registration")
+def registration(request: Request):
+    return templates.TemplateResponse("client/registration.html", {"request": request, "header_title": "Rejestracja - Gdynia Science Slam", "page_name":"registration"})
 
-@app.get("/about", response_class=FileResponse)
-def about():
-    return BASE_DIR/"about.html"
+@app.get("/about")
+def about(request: Request):
+    return templates.TemplateResponse("client/about.html", {"request": request, "header_title": "O Nas - Gdynia Science Slam", "page_name":"about"})
 
-@app.get("/previous_editions", response_class=FileResponse)
-def prev():
-    return BASE_DIR/"previous.html"
+@app.get("/previous_editions")
+def previous(request: Request):
+    return templates.TemplateResponse("client/previous.html", {"request": request, "header_title": "Poprzednie edycje - Gdynia Science Slam", "page_name":"previous_editions"})
 
-@app.get("/partners", response_class=FileResponse)
-def partners():
-    return BASE_DIR/"partners.html"
+@app.get("/partners")
+def partners(request: Request):
+    return templates.TemplateResponse("client/partners.html", {"request": request, "header_title": "Partnerzy - Gdynia Science Slam", "page_name":"partners"})
 
-@app.get("/documents", response_class=FileResponse)
-def docs():
-    return BASE_DIR/"documents.html"
+@app.get("/documents")
+def documents(request: Request):
+    return templates.TemplateResponse("client/documents.html", {"request": request, "header_title": "Dokumenty - Gdynia Science Slam", "page_name":"documents"})
 
-@app.get("/groups", response_class=FileResponse)
-def groups():
-    return BASE_DIR/"groups.html"
+# @app.get("/groups")
+# def groups(request: Request):
+#     return templates.TemplateResponse("client/partners.html", {"request": request, "header_title": "Rejestracja - Gdynia Science Slam", "page_name":"groups"})
 
-@app.get("/plan", response_class=FileResponse)
-def groups():
-    return BASE_DIR/"plan.html"
+@app.get("/topics")
+def topics(request: Request):
+    return templates.TemplateResponse("client/topics.html", {"request": request, "header_title": "Tematy - Gdynia Science Slam", "page_name":"topics"})
 
 # Handle Post (@app.post)
 # @app.post("/contestantForm")
@@ -324,7 +325,7 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 240
 
 
-templates=Jinja2Templates(directory="templates")
+
 def get_current_admin(request: Request, db: Session = Depends(get_db)):
     token = request.cookies.get("admin_session")
     if not token:

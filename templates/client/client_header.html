@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>{% if header_title %}
+    {{ header_title }}
+    {% else %}
+    Gdynia Science Slam
+    {% endif %}
+  </title>
+  <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block head_extra %}{% endblock %}
+
+</head>
+
+<body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
+
+  <!-- NAVBAR -->
+  <nav class="bg-[#5e85b8] shadow-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  
+      <!-- LOGO -->
+      <div class="font-bold text-xl max-h-20">
+        <a href="/">
+          <img class="max-h-20" src="static/assets/logo.png">
+        </a>
+      </div>
+  
+      <!-- DESKTOP MENU -->
+      <div class="hidden md:flex space-x-6 items-center">
+        
+        <a href="/" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "home" %} font-extrabold {% else %} font-bold {% endif %}">Home</a>
+        <a href="/team" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "team" %} font-extrabold {% else %} font-bold {% endif %}">Team</a>
+        <a href="/about" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "about" %} font-extrabold {% else %} font-bold {% endif %}">O Nas</a>
+        <a href="/previous_editions" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "previous_editions" %} font-extrabold {% else %} font-bold {% endif %}">Poprzednie edycje</a>
+        <a href="/topics" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "topics" %} font-extrabold {% else %} font-bold {% endif %}">Tematy prelekcji</a>
+        <a href="/partners" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "partners" %} font-extrabold {% else %} font-bold {% endif %}">Partnerzy</a>
+        <a href="/documents" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "documents" %} font-extrabold {% else %} font-bold {% endif %}">Dokumenty</a>
+        <a href="/registration"
+           class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+          Rejestracja
+        </a>
+      </div>
+  
+      <!-- HAMBURGER -->
+      <button
+        id="menu-btn"
+        class="md:hidden text-3xl focus:outline-none">
+        ☰
+      </button>
+  
+    </div>
+  
+    <!-- MOBILE MENU -->
+    <div
+      id="mobile-menu"
+      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+        <div class="px-6 space-y-4 py-4">
+          
+          <a href="/" class="text-lg block {% if page_name == "home" %} font-bold {% endif %}">Home</a>
+          <a href="/team" class="text-lg block {% if page_name == "team" %} font-bold {% endif %}">Team</a>
+          <a href="/about" class="text-lg block {% if page_name == "about" %} font-bold {% endif %}">O Nas</a>
+          <a href="/previous_editions" class="text-lg block {% if page_name == "previous_editions" %} font-bold {% endif %}">Poprzednie edycje</a>
+          <a href="/topics" class="text-lg block {% if page_name == "topics" %} font-bold {% endif %}">Tematy prelekcji</a>
+          <a href="/partners" class="text-lg block {% if page_name == "partners" %} font-bold {% endif %}">Partnerzy</a>
+          <a href="/documents" class="text-lg block {% if page_name == "documents" %} font-bold {% endif %}">Dokumenty</a>
+          <a href="/registration"
+             class="block bg-blue-600 text-white text-center py-2 rounded-full">
+            Rejestracja
+          </a>
+        </div>
+    </div>
+  </nav>
+
+  {% block content %}
+  {% endblock %}
+<!--footer-->
+<footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+  <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
+  <p class="mb-2">📍 Gdynia</p>
+  <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>
+  <p class="text-sm text-gray-500 px-6">Konferencja Gdynia Science Slam jest organizowana przez <a href="https://lo3.gdynia.pl" class="text-blue-600">III Liceum Ogólnokształcące z Oddziałami Dwujęzycznymi im. Marynarki Wojennej RP w Gdyni</a></p>
+</footer>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  menuBtn.addEventListener('click', () => {
+    if (mobileMenu.classList.contains("max-h-0")){
+      mobileMenu.classList.remove("max-h-0");
+      mobileMenu.classList.add("max-h-96");
+    }else{
+      mobileMenu.classList.add("max-h-0");
+      mobileMenu.classList.remove("max-h-96");
+    }
+  });
+</script>
+</body>
+</html>
+
+

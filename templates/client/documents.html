@@ -1,0 +1,65 @@
+{% extends "client/client_header.html" %}
+{% block content %}
+
+<!-- HERO -->
+<section class="relative h-[280px] flex items-center justify-center text-white">
+  <img src="static/assets/images/hero.webp"
+       class="absolute inset-0 w-full h-full object-cover">
+  <div class="absolute inset-0 bg-[#18395d] bg-opacity-60"></div>
+
+  <h1 class="relative text-5xl md:text-6xl font-extrabold tracking-wide">
+    Dokumenty
+  </h1>
+</section>
+
+<!-- TREŚĆ -->
+<section class="py-20">
+
+  <div class="max-w-7xl mx-auto px-6 grid gap-16">
+
+    <!-- KOLUMNA -->
+    <div>
+      <h2 class="text-3xl font-bold mb-8">
+        Dokumenty - Edycja 2026
+      </h2>
+
+      <div class="space-y-4">
+
+        <a href="/static/documents/Regulamin.pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Regulamin wydarzenia (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+
+        <a href="/static/documents/Polityka prywatności .pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Polityka prywatności (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+
+        <a href="/static/documents/Zgłoszenie na opiekuna prelegenta GSS 2026.pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Zgłoszenie na opiekuna prelegenta (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+
+        <a href="/static/documents/Zgoda na wykorzystanie wizerunku (uczestnik niepelnoletni).pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Zgoda na wykorzystanie wizerunku (uczestnik niepełnoletni) (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+
+        <a href="/static/documents/Zgoda na wykorzystanie wizerunku (uczestnik pełnoletni).pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Zgoda na wykorzystanie wizerunku (uczestnik pełnoletni) (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+        <a href="/static/documents/Zgoda rodzica na udzial w GSS2026.pdf" class="flex items-center justify-between bg-white p-6 rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.02] transition">
+          <span class="font-medium">Zgoda rodzica na udział w wydarzeniu (uczestnik niepełnoletni) (2026)</span>
+          <span class="text-2xl text-[#18395d]">⬇</span>
+        </a>
+
+      </div>
+    </div>
+
+
+  </div>
+
+</section>
+<footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+{% endblock %}
