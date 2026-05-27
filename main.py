@@ -35,13 +35,13 @@ BASE_DIR = Path(__file__).resolve().parent
 templates=Jinja2Templates(directory="templates")
 
 #rate limiter
-limiter = Limiter(key_func=get_remote_address, storage_uri="redis://localhost:6379")
+# limiter = Limiter(key_func=get_remote_address, storage_uri="redis://localhost:6379")
 
-app.state.limiter = limiter
+# app.state.limiter = limiter
 
-@app.exception_handler(RateLimitExceeded)
-async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
-    raise HTTPException(status_code=429, detail="Zbyt dużo zapytań. Spróbuj ponownie później")
+# @app.exception_handler(RateLimitExceeded)
+# async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
+#     raise HTTPException(status_code=429, detail="Zbyt dużo zapytań. Spróbuj ponownie później")
 
 
 #serve pages (@app.get)
