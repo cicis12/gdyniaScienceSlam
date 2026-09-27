@@ -1,0 +1,229 @@
+{% macro render_field(field) %}
+
+{% if field.type.startswith('infotext_') %}
+    {% if field.type == 'infotext_large' %}
+        <h1 class="text-4xl font-bold text-center pb-4">{{field.question}}</h1>
+    {% elif field.type == 'infotext_medium' %}
+        <h2 class="text-3xl font-bold text-center">{{field.question}}</h2>
+    {% elif field.type == 'infotext_small' %}
+        <h3 class="text-xl font-bold text-center">{{field.question}}</h3>
+    {% elif field.type == 'infotext_paragraph' %}
+        <p class="text-center font-bold md:text-base text-sm">{{field.question}}</p>
+    {% endif %}
+{% else %}
+    {% if field.type == 'text' %}
+        <div class="relative">
+            <div class="pointer-events-none absolute left-0 bottom-1">
+                {{ field.svg | default('', true) | safe }}
+            </div>
+
+            <input type="text"
+             name="{{ field.name }}"
+             placeholder=" "
+             class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+             {% if field.required %} required {% endif %}/>
+              <label
+                class="pointer-events-none absolute left-10 top-1 transition-all duration-200 font-bold text-gray-600
+                text-sm
+                peer-placeholder-shown:top-6
+                peer-placeholder-shown:text-gray-600
+                md:peer-placeholder-shown:text-base
+                peer-focus:top-1
+                md:peer-focus:text-sm
+                peer-focus:text-[#18395d]">
+              {{ field.question }}{% if field.required %}*{% endif %}</label>
+        
+    {% elif field.type == 'email' %}
+        <div class="relative">
+            <div class="pointer-events-none absolute left-0 bottom-1">
+                {{ field.svg | default('', true) | safe }}
+            </div>
+
+            <input type="email"
+             name="{{ field.name }}"
+             placeholder=" "
+             class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pt-6 pb-1 font-bold placeholder-gray-600"
+             {% if field.required %} required {% endif %}/>
+              <label
+                class="pointer-events-none absolute left-10 top-1 transition-all duration-200 font-bold text-gray-600
+                text-sm
+                peer-placeholder-shown:top-6
+                peer-placeholder-shown:text-gray-600
+                md:peer-placeholder-shown:text-base
+                peer-focus:top-1
+                md:peer-focus:text-sm
+                peer-focus:text-[#18395d]">
+              {{ field.question }}{% if field.required %}*{% endif %}</label>
+        
+    {% elif field.type == 'phone' %}
+        <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
+              <div class="pointer-events-none absolute left-0 bottom-1">
+                {{ field.svg | default('', true) | safe }}
+              </div>
+              <input type="tel"
+               name="{{ field.name }}"
+               placeholder=" "
+               class="phone w-full bg-white/0 focus:border-blue-500 font-bold placeholder-gray-600 iti__input"
+               {% if field.required %} required {% endif %}/>
+               <label
+                  class="pointer-events-none absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
+                {{ field.question }}{% if field.required %}*{% endif %}</label>  
+          
+    {% elif field.type == 'double' %}
+        <div class="flex gap-4">
+            <div class="relative flex-1">
+              <div class="pointer-events-none absolute left-0 bottom-1">
+                  {{ field.svg | default('', true) | safe }}
+              </div>
+              <input type="text"
+               name="{{ field.name }}"
+               placeholder=" "
+               class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" {% if field.required %} required {% endif %}/>
+
+              <label
+                class="pointer-events-none absolute left-10 top-6 text-gray-600 transition-all duration-200
+                peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-sm font-bold">
+                {{ field.question }}{% if field.required %}*{% endif %}</label>
+            </div>
+            <div class="relative flex-1">
+              <input type="text"
+               name="{{ field.name2 }}"
+               placeholder=" "
+               class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pb-1 font-bold placeholder-gray-600" {% if field.required %} required {% endif %}/>
+            
+            
+              <label
+                 class="pointer-events-none absolute left-2 top-6 text-gray-600 transition-all duration-200
+                 peer-focus:top-1 peer-focus:text-sm peer-focus:text-[#18395d] peer-[:not(:placeholder-shown)]:top-1 peer-[:not(:placeholder-shown)]:text-sm font-bold">
+                  {{ field.question2 }}{% if field.required %}*{% endif %}</label>
+            </div>
+        
+    {% elif field.type == 'textarea' %}
+        <div class="relative">
+          <div class="pointer-events-none absolute left-0 bottom-1">
+              {{ field.svg | default('', true) | safe }}
+          </div>
+          <textarea
+            name="{{ field.name }}"
+            rows="1"
+            placeholder=""
+            class="peer pt-6 long-text w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600 resize-none" {% if field.required %} required {% endif %}></textarea>
+            <label
+                class="pointer-events-none absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+                peer-placeholder-shown:top-6
+                peer-placeholder-shown:text-gray-600
+                peer-placeholder-shown:text-sm
+                md:peer-placeholder-shown:text-base
+                peer-focus:top-1
+                peer-focus:text-sm
+                peer-focus:text-[#18395d]
+                md:peer-focus:text-sm">
+             {{ field.question }}{% if field.required %}*{% endif %}</label>
+      
+    {% elif field.type == 'school' %}
+        <div class="relative autocompleteConatainer">
+          <div class="pointer-events-none absolute left-0 bottom-1">
+              {{ field.svg | default('', true) | safe }}
+          </div>
+
+
+          <input type="text"
+           name="{{ field.name }}"
+           autocomplete="off"
+           placeholder=" "
+           class="school peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" {% if field.required %} required {% endif %}/>
+           <label
+              class="pointer-events-none absolute left-10 top-1 text-sm transition-all duration-200 font-bold text-gray-600
+              peer-placeholder-shown:top-6
+              peer-placeholder-shown:text-gray-600
+              peer-placeholder-shown:text-base
+              peer-focus:top-1
+              peer-focus:text-sm
+              peer-focus:text-[#18395d]">
+            {{ field.question }}{% if field.required %}*{% endif %}</label>
+           <div class="results">
+            </div>
+        
+        
+    {% elif field.type == 'file' %}
+        <div class="relative pt-6">
+          <div class="pointer-events-none absolute left-0 bottom-1">
+            {{ field.svg | default('', true) | safe }}
+          </div>
+        
+          <input type="file"
+           name="{{ field.name }}"
+           class="peer w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600" {% if field.required %} required {% endif %}
+           />
+           <label
+              class="pointer-events-none absolute left-10 top-1 text-xs transition-all duration-200 font-bold text-gray-600
+              peer-placeholder-shown:top-6
+              peer-placeholder-shown:text-gray-600
+              peer-placeholder-shown:text-xs
+              md:peer-placeholder-shown:text-sm
+              lg:peer-placeholder-shown:text-base
+              peer-focus:top-1
+              peer-focus:text-xs
+              peer-focus:text-[#18395d]
+              md:peer-focus:text-sm
+              lg:peer-focus:text-sm">
+            {{ field.question }}{% if field.required %}*{% endif %}</label>
+        
+    {% elif field.type == 'list_choice' %}
+        <div class="relative w-full">
+          <div class="pointer-events-none absolute left-0 bottom-1">
+            {{ field.svg | default('', true) | safe }}
+          </div>
+          <div>
+            <select class="peer pt-6 w-full border-b-2 border-white outline-none bg-white/0 focus:border-blue-500 pl-10 pb-1 font-bold placeholder-gray-600"
+              onchange="this.setAttribute('data-filled', this.value !== '')"
+              name="{{ field.name }}" {% if field.required %} required {% endif %}>
+              <option value="" disabled selected hidden></option>
+              {% for opt in field.options or [] %}
+                <option value="{{ opt }}">{{ opt }}</option>
+              {% endfor %}
+            </select>
+            <label
+              class="pointer-events-none absolute left-10 top-6 text-sm transition-all duration-200 font-bold text-gray-600
+              peer-[:not(:placeholder-shown)]:text-sm
+              peer-[:not(:placeholder-shown)]:top-1
+              peer-[[data-filled=true]]:top-1 peer-[[data-filled=true]]:text-sm peer-[[data-filled=true]]:text-[#18395d]">
+              {{ field.question }}{% if field.required %}*{% endif %}
+            </label>
+          </div> 
+      
+    {% elif field.type == 'checkbox' %}
+        <div class="pt-6">
+         <label class="checkbox-label font-bold flex items-start gap-3 relative cursor-pointer">
+         <!-- real checkbox-->
+           <input type="checkbox" name="{{ field.name }}" value="true"
+           class="peer sr-only"
+           {% if field.required %} required {% endif %}>
+           <!-- visible stylized box-->
+        
+            <div class="w-5 h-5 border-2 border-gray-400 rounded-full
+             transition-all duration-200
+             peer-checked:border-[#18395d]
+             peer-checked:bg-[#18395d]
+             flex items-center justify-center 
+             text-transparent
+             peer-checked:text-white">
+             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="
+               size-6
+               transition-all duation-200
+               ">
+               <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+             </svg>
+            </div>
+            <span class="gap-0">
+             {{ field.question }}{% if field.required %}*{% endif %}
+             </span>
+         </label>
+    {% endif %}
+    {% if field.note %}
+        <p class="text-sm font-bold"> {{ field.note }}</p>
+    {% endif %}
+        </div>
+{% endif %}
+
+{% endmacro %}

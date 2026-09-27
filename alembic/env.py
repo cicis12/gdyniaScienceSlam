@@ -7,7 +7,7 @@ from alembic import context
 
 from database import DATABASE_URL
 from database import Base
-from models import Contestant, Viewer, Volunteer, AdminUser
+from models import AdminUser
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config

@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import Viewer, Contestant, Volunteer, AdminUser, Voter, Vote, Group
+from models import AdminUser, Voter, Vote
 import uuid
 from datetime import date
 from sqlalchemy.exc import IntegrityError

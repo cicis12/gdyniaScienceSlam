@@ -13,23 +13,24 @@
 <body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
 
   <!-- NAVBAR -->
-  <nav class="bg-[#5e85b8] shadow-md">
+  <nav class="site-nav bg-[#5e85b8] shadow-md">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
   
       <!-- LOGO -->
-      <div class="font-bold text-xl max-h-20">
+      <div class="site-brand font-bold text-xl max-h-20">
         <a href="/">
           <img class="max-h-20" src="/static/assets/logo.png">
         </a>
       </div>
   
       <!-- DESKTOP MENU -->
-      <div class="hidden md:flex space-x-6 items-center">
+      <div class="site-links hidden md:flex space-x-6 items-center">
         <a href="/admin/manage_votes" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Zarządzaj głosowaniem</a>
         <a href="/admin/emailsender" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Wyślij Maile</a>
         <a href="/admin/dashboard?tab=contestant" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Prelegenci</a>
         <a href="/admin/dashboard?tab=volunteer" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Wolontariusze</a>
         <a href="/admin/dashboard" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Widownia</a>
+        <a href="/admin/form-submissions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Odpowiedzi formularzy</a>
         <a href="/registration"
            class="bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
           Rejestracja
@@ -48,13 +49,14 @@
     <!-- MOBILE MENU -->
     <div
       id="mobile-menu"
-      class="max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb]   text-[#18395d]">
+      class="site-mobile-menu max-h-0 overflow-hidden transition-all duration-300 md:hidden bg-[#819edb] text-[#18395d]">
         <div class="px-6 space-y-4 py-4">
           <a href="/admin/manage_votes" class="text-lg block">Zarządzaj głosowaniem</a>
           <a href="/admin/emailsender" class="text-lg block">Wyślij Maile</a>
           <a href="/admin/dashboard?tab=contestant" class="text-lg block">Prelegenci</a>
           <a href="/admin/dashboard?tab=volunteer" class="text-lg block">Wolontariusze</a>
           <a href="/admin/dashboard" class="text-lg block">Widownia</a>
+          <a href="/admin/form-submissions" class="text-lg block">Odpowiedzi formularzy</a>
           <a href="/registration"
              class="block bg-blue-600 text-white text-center py-2 rounded-full">
             Rejestracja
@@ -162,7 +164,7 @@
   </main>
 
   <!-- FOOTER -->
-  <footer class="bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
+  <footer class="site-footer bottom-0 left-0 w-full bg-gray-900 text-gray-300 py-12 text-center">
     <p class="mb-2">📧 gdyniascienceslam@gmail.com</p>
     <p class="mb-2">📍 Gdynia</p>
     <p class="text-sm text-gray-500">© 2026 Gdynia Science Slam</p>

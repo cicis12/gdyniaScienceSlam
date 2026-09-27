@@ -1,13 +1,14 @@
 from fastapi import FastAPI, Form, File, UploadFile, Depends, Request, HTTPException, BackgroundTasks
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response, PlainTextResponse
 from fastapi.staticfiles import StaticFiles 
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
+import json
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import Viewer, Contestant, Volunteer, AdminUser, Voter, Vote, Group, SystemSetting
+from models import AdminUser, Voter, Vote, SystemSetting, FormInfo, FormVersion, FormSubmission
 import uuid
 from datetime import date
 from video import save_video
@@ -35,9 +36,15 @@ BASE_DIR = Path(__file__).resolve().parent
 templates=Jinja2Templates(directory="templates")
 
 #rate limiter
-limiter = Limiter(key_func=get_remote_address, storage_uri="redis://localhost:6379")
+rate_limit_storage_uri = os.getenv("RATE_LIMIT_STORAGE_URI", "memory://")
+limiter = Limiter(key_func=get_remote_address, storage_uri=rate_limit_storage_uri)
 
 app.state.limiter = limiter
+
+from routers.admin_forms import router as admin_router
+from routers.forms import router as form_router
+
+app.include_router(form_router)
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
@@ -46,16 +53,71 @@ async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
 
 #serve pages (@app.get)
 @app.get("/")
-def home(request: Request):
-    return templates.TemplateResponse("client/index.html", {"request": request, "header_title": "Gdynia Science Slam", "page_name":"home"})
+def home(request: Request, db: Session = Depends(get_db)):
+    return templates.TemplateResponse("client/index.html", {
+        "request": request,
+        "header_title": "Gdynia Science Slam",
+        "page_name": "home",
+        "event_datetime": get_setting(db, "event_datetime", "")
+    })
 
 @app.get("/team")
 def team(request: Request):
     return templates.TemplateResponse("client/team.html", {"request": request, "header_title": "Zespół - Gdynia Science Slam", "page_name":"team"})
 
 @app.get("/registration")
-def registration(request: Request):
-    return templates.TemplateResponse("client/registration.html", {"request": request, "header_title": "Rejestracja - Gdynia Science Slam", "page_name":"registration"})
+def registration(request: Request, db: Session = Depends(get_db)):
+    active_forms = db.query(FormInfo).filter(FormInfo.enabled.is_(True)).order_by(FormInfo.name.asc()).all()
+    setting = db.get(SystemSetting, "registration_form_ids")
+    try:
+        selected_ids = [int(value) for value in (setting.value if setting else "").split(",") if value][:3]
+    except ValueError:
+        selected_ids = []
+
+    active_forms_by_id = {form.id: form for form in active_forms}
+    creator_forms = []
+    selected_form_ids = set()
+    for form_id in selected_ids:
+        form = active_forms_by_id.get(form_id)
+        if not form:
+            continue
+        version = db.query(FormVersion).filter(
+            FormVersion.id == form.cur_version_id,
+            FormVersion.form_id == form.id,
+        ).first()
+        if version:
+            selected_form_ids.add(form.id)
+            creator_forms.append({
+                "id": form.id,
+                "name": version.display_name,
+                "slug": form.slug,
+                "description": version.description,
+                "version_id": version.id,
+                "fields": version.definition.get("fields", []),
+            })
+
+    standalone_forms = []
+    for form in active_forms:
+        if form.id in selected_form_ids:
+            continue
+        version = db.query(FormVersion).filter(
+            FormVersion.id == form.cur_version_id,
+            FormVersion.form_id == form.id,
+        ).first()
+        if version:
+            standalone_forms.append({
+                "name": version.display_name,
+                "slug": form.slug,
+                "description": version.description,
+            })
+
+    return templates.TemplateResponse("client/registration.html", {
+        "request": request,
+        "header_title": "Rejestracja - Gdynia Science Slam",
+        "page_name": "registration",
+        "creator_forms": creator_forms,
+        "standalone_forms": standalone_forms,
+    })
 
 @app.get("/about")
 def about(request: Request):
@@ -81,239 +143,7 @@ def documents(request: Request):
 def topics(request: Request):
     return templates.TemplateResponse("client/topics.html", {"request": request, "header_title": "Tematy - Gdynia Science Slam", "page_name":"topics"})
 
-# Handle Post (@app.post)
-# @app.post("/contestantForm")
-# @limiter.limit("10/minute")
-# async def handle_contestantform(
-#     request: Request,
-#     background_tasks: BackgroundTasks,
-#     name: str = Form(...),
-#     surname: str = Form(...),
-#     email: str = Form(...),
-#     phone: str = Form(...),
-#     school: str = Form(...),
-#     class_and_profile: str = Form(...),
-#     city: str = Form(...),
-#     birthdate: date = Form(...),
 
-#     supervisor_name: str = Form(...),
-#     supervisor_surname: str = Form(...),
-#     supervisor_info: str = Form(...),
-
-#     previous_accomplishments: str | None = Form(None),
-#     about: str = Form(...),
-#     interests: str = Form(...),
-#     contributions: str = Form(...),
-#     inspiration: str = Form(...),
-
-#     topic: str = Form(...),
-#     whytopic: str = Form(...),
-#     whyinteresting: str = Form(...),
-#     experience: str = Form(...),
-#     ways_of_grabing_interest: str = Form(...),
-
-#     video: UploadFile | None = File(None),
-#     rules_accepted: bool = Form(...),
-#     privacy_policy_accepted: bool = Form(...),
-#     db: Session = Depends(get_db),
-# ):
-#     video_file_path = None
-#     if video and video.filename:
-#         if video.size > 0:
-#             video_file_path = await save_video(video)
-    
-#     new_contestant = Contestant(
-#         name=name.strip(),
-#         surname=surname.strip(),
-#         email=email.lower().strip(),
-#         phone=phone.strip(),
-#         school=school.strip(),
-#         class_and_profile=class_and_profile.strip(),
-#         city=city.strip(),
-#         birthdate=birthdate,
-
-#         supervisor_name=supervisor_name.strip(),
-#         supervisor_surname=supervisor_surname.strip(),
-#         supervisor_info=supervisor_info.strip(),
-
-#         previous_accomplishments=previous_accomplishments,
-#         about = about.strip(),
-#         interests = interests.strip(),
-#         contributions= contributions.strip(),
-#         inspiration = inspiration.strip(),
-
-#         topic=topic.strip(),
-#         whytopic=whytopic.strip(),
-#         whyinteresting=whyinteresting.strip(),
-#         experience=experience.strip(),
-#         ways_of_grabing_interest=ways_of_grabing_interest.strip(),
-
-#         video_file_path=video_file_path,
-#         rules_accepted=rules_accepted,
-#         privacy_policy_accepted=privacy_policy_accepted,
-#     )
-#     try:
-#         db.add(new_contestant)
-#         db.commit()
-#         db.refresh(new_contestant)
-#         background_tasks.add_task(
-#             send_confirmation_email,
-#             new_contestant.email,
-#             new_contestant.name,
-#             "prelegenta"
-#         )
-#     except IntegrityError:
-#         db.rollback()
-#         raise HTTPException(status_code=400, detail="Ten adres E-mail jest już zarejestrowany")
-#     return JSONResponse(
-#         status_code=200,
-#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-#     )
-
-# # UNCOMMENT WHEN OPENING
-
-@app.post("/viewerForm")
-@limiter.limit("10/minute")
-async def handle_viewerform(
-    request: Request,
-    background_tasks: BackgroundTasks,
-    name: str = Form(...),
-    surname: str = Form(...),
-    email: str = Form(...),
-    phone: str = Form(...),
-    school: str | None = Form(None),
-    class_and_profile: str | None = Form(None),
-    is_contestant_close: str = Form(...),
-    rules_accepted: bool = Form(...),
-    privacy_policy_accepted: bool = Form(...),
-    db: Session = Depends(get_db),
-):
-    new_viewer = Viewer(
-        name=name.strip(),
-        surname=surname.strip(),
-        email=email.lower().strip(),
-        phone=phone.strip(),
-        school=school,
-        class_and_profile=class_and_profile,
-        is_contestant_close=is_contestant_close,
-        rules_accepted=rules_accepted,
-        privacy_policy_accepted=privacy_policy_accepted,
-    )
-    new_voter = Voter(
-        email=email.lower().strip(),
-    )
-    try:
-        db.add(new_viewer)
-        db.add(new_voter)
-        db.commit()
-        db.refresh(new_viewer)
-        db.refresh(new_voter)
-        background_tasks.add_task(
-            send_confirmation_email,
-            new_viewer.email,
-            new_viewer.name,
-            "widza"
-        )
-    except IntegrityError as e:
-        db.rollback()
-        raise HTTPException(status_code=400, detail="Ten adres E-mail jest już zarejestrowany")
-    return JSONResponse(
-        status_code=200,
-        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-    )
-
-# @app.post("/volunteerForm")
-# @limiter.limit("10/minute")
-# async def handle_volunteerform(
-#     request: Request,
-#     background_tasks: BackgroundTasks,
-#     name: str = Form(...),
-#     surname: str = Form(...),
-#     email: str = Form(...),
-#     phone: str = Form(...),
-#     school: str = Form(...),
-#     class_and_profile: str = Form(...),
-#     birthdate: date = Form(...),
-#     facebook_link: str | None = Form(None),
-#     rules_accepted: bool = Form(...),
-#     privacy_policy_accepted: bool = Form(...),
-#     db: Session = Depends(get_db),
-# ):
-#     new_volunteer = Volunteer(
-#         name=name.strip(),
-#         surname=surname.strip(),
-#         email=email.lower().strip(),
-#         phone=phone.strip(),
-#         school=school.strip(),
-#         class_and_profile=class_and_profile.strip(),
-#         birthdate=birthdate,
-#         facebook_link=facebook_link,
-#         rules_accepted=rules_accepted,
-#         privacy_policy_accepted=privacy_policy_accepted,
-#     )
-#     try:
-#         db.add(new_volunteer)
-#         db.commit()
-#         db.refresh(new_volunteer)
-#         background_tasks.add_task(
-#             send_confirmation_email,
-#             new_volunteer.email,
-#             new_volunteer.name,
-#             "wolontariusza"
-#         )
-#     except IntegrityError as e:
-#         db.rollback()
-#         return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
-#     return JSONResponse(
-#         status_code=200,
-#         content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-#      )
-
-@app.post("/groupForm")
-@limiter.limit("10/minute")
-async def handle_groupform(
-    request: Request,
-    background_tasks: BackgroundTasks,
-    supervisor_name: str = Form(...),
-    supervisor_surname: str = Form(...),
-    email: str = Form(...),
-    school: str = Form(...),
-    class_and_profile: str = Form(...),
-    number_of_participants: int = Form(...),
-    
-    rules_accepted: bool = Form(...),
-    privacy_policy_accepted: bool = Form(...),
-    db: Session = Depends(get_db),
-):
-    new_group = Group(
-        supervisor_name=supervisor_name.strip(),
-        supervisor_surname=supervisor_surname.strip(),
-        email=email.lower().strip(),
-        school=school.strip(),
-        class_and_profile=class_and_profile.strip(),
-        number_of_participants=number_of_participants,
-        number_of_added_emails=0,
-
-        rules_accepted=rules_accepted,
-        privacy_policy_accepted=privacy_policy_accepted,
-    )
-    try:
-        db.add(new_group)
-        db.commit()
-        db.refresh(new_group)
-        background_tasks.add_task(
-            send_confirmation_email,
-            new_group.email,
-            new_group.supervisor_name,
-            "opiekuna grupy"
-        )
-    except IntegrityError as e:
-        db.rollback()
-        return JSONResponse(status_code=400, content={"success": False, "message": "Ten adres E-mail jest już zarejestrowany"})
-    return JSONResponse(
-        status_code=200,
-        content={"success": True, "message": "Pomyślnie zarejestrowano!"}
-     )
 
 #ADMIN PAGES
 load_dotenv("SECRET_KEY.env")
@@ -345,6 +175,94 @@ def get_current_admin(request: Request, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401)
 
     return admin
+
+
+def require_superadmin(admin: AdminUser = Depends(get_current_admin)):
+    if not admin.is_superadmin:
+        raise HTTPException(status_code=403, detail="Superadmin only")
+    return admin
+
+
+@app.middleware("http")
+async def restrict_admin_area(request: Request, call_next):
+    path = request.url.path
+    if path.startswith("/admin/") and path not in {"/admin/login", "/admin/form-submissions"}:
+        with SessionLocal() as db:
+            try:
+                admin = get_current_admin(request, db)
+            except HTTPException:
+                return RedirectResponse("/admin/login", status_code=303)
+
+        if not admin.is_superadmin:
+            if request.method in {"GET", "HEAD"}:
+                return RedirectResponse("/admin/form-submissions", status_code=303)
+            return PlainTextResponse("Superadmin access required.", status_code=403)
+
+    return await call_next(request)
+
+
+@app.get("/admin/form-submissions")
+def admin_form_submissions(
+    request: Request,
+    form_id: int | None = None,
+    admin: AdminUser = Depends(get_current_admin),
+    db: Session = Depends(get_db),
+):
+    forms = db.query(FormInfo).order_by(FormInfo.name.asc()).all()
+    selected_form = db.get(FormInfo, form_id) if form_id is not None else None
+    submissions = []
+
+    if selected_form:
+        saved_submissions = (
+            db.query(FormSubmission)
+            .filter(FormSubmission.form_id == selected_form.id)
+            .order_by(FormSubmission.submitted_at.desc())
+            .all()
+        )
+        versions = {
+            version.id: version
+            for version in db.query(FormVersion)
+            .filter(FormVersion.form_id == selected_form.id)
+            .all()
+        }
+
+        for submission in saved_submissions:
+            version = versions.get(submission.form_version_id)
+            labels = {}
+            if version:
+                for field in version.definition.get("fields", []):
+                    if field.get("name"):
+                        labels[field["name"]] = field.get("question") or field["name"]
+                    if field.get("name2"):
+                        labels[field["name2"]] = field.get("question2") or field["name2"]
+
+            answers = [
+                {
+                    "key": key,
+                    "label": labels.get(key, key),
+                    "value": (
+                        "—" if value in (None, "") else
+                        ("Tak" if value else "Nie") if isinstance(value, bool) else
+                        json.dumps(value, ensure_ascii=False, indent=2)
+                        if isinstance(value, (dict, list)) else str(value)
+                    ),
+                }
+                for key, value in (submission.data or {}).items()
+            ]
+            submissions.append({
+                "id": submission.id,
+                "submitted_at": submission.submitted_at,
+                "version_num": version.version_num if version else None,
+                "answers": answers,
+            })
+
+    return templates.TemplateResponse("admin_form_submissions.html", {
+        "request": request,
+        "admin": admin,
+        "forms": forms,
+        "selected_form": selected_form,
+        "submissions": submissions,
+    })
 
 @app.exception_handler(HTTPException)
 async def auth_exception_handler(request: Request, exc: HTTPException):
@@ -383,7 +301,7 @@ def admin_email_sender(
             status_code=403,
             detail="Superadmin access required."
         )
-    return templates.TemplateResponse("sendMails.html", {"request": request})
+    return templates.TemplateResponse("sendMails.html", {"request": request, "admin": admin})
 
 @app.post("/admin/send-email")
 async def sendemailform(
@@ -436,82 +354,25 @@ async def preview_email(
 
 @app.get("/admin/dashboard")
 def admin_dashboard(
-    request: Request, tab: str = "viewer",
-    search: str = "", favourites_only: bool=False, show_hidden: bool=False,
-    admin: AdminUser = Depends(get_current_admin), db: Session = Depends(get_db)
+    request: Request,
+    admin: AdminUser = Depends(require_superadmin),
+    db: Session = Depends(get_db),
 ):
-    is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
-    
-    if tab in ["contestant", "volunteer", "manager"]:
-        if not admin.is_superadmin:
-            raise HTTPException(
-                status_code=403,
-                detail="Superadmin access required."
-            )
-
-    TAB_CONFIG = {
-        "contestant": Contestant,
-        "viewer": Viewer,
-        "volunteer": Volunteer, 
-        "group": Group,
+    forms = db.query(FormInfo).order_by(FormInfo.name.asc()).all()
+    submission_counts = {
+        form.id: db.query(func.count(FormSubmission.id))
+        .filter(FormSubmission.form_id == form.id)
+        .scalar()
+        for form in forms
     }
-    model = TAB_CONFIG.get(tab)
-    if not model:
-        return Response("", status_code=204)
-    
-    query = db.query(model).order_by(model.id.asc())
-    search = search.strip()
-
-    if tab=="contestant":
-        if favourites_only:
-            query = query.filter(model.favourite == True)
-        
-    if tab!="group" and not show_hidden:
-            query = query.filter(model.hidden == False)
-    if search:
-        all_items = query.all()
-        
-        def score(item):
-            if tab == "group":
-                text = f"{item.supervisor_name} {item.supervisor_surname} {item.school} {item.email}"
-            else:
-                text = f"{item.name} {item.surname} {item.email}"
-            
-            return fuzz.token_set_ratio(search.lower(), text.lower())
-
-        scored = [(item,score(item)) for item in all_items]
-        scored.sort(key = lambda x:x[1], reverse=True);
-
-        top_3 = [item for item, s in scored[:3]]
-
-        others = [
-            item for item, s in scored[3:]
-            if s > 70
-        ]
-        data = top_3+others
-        
-        query = None
-
-    show_hidden_bool = show_hidden == "on"
-
-    data = data if search else query.all()
-    count = len(data)
-    context = {
-            "request": request,
-            "tab": tab,
-            "data": data,
-            "admin": admin,
-            "favourites_only": favourites_only,
-            "show_hidden": show_hidden_bool,
-            "search": search,
-            "count": count
-        }
-    if is_ajax:
-        return templates.TemplateResponse(f"{tab}.html",context)
-
     return templates.TemplateResponse(
-        "admin_dashboard.html",
-        context
+        "admin_dashboard_home.html",
+        {
+            "request": request,
+            "admin": admin,
+            "forms": forms,
+            "submission_counts": submission_counts,
+        },
     )
 
 @app.post("/admin/toggle-favourite/{item_id}")
@@ -636,7 +497,8 @@ async def admin_login(
         algorithm=ALGORITHM
     )
 
-    response = RedirectResponse("/admin/dashboard", status_code=303)
+    landing_page = "/admin/dashboard" if admin.is_superadmin else "/admin/form-submissions"
+    response = RedirectResponse(landing_page, status_code=303)
 
     response.set_cookie(
         key="admin_session",
@@ -815,12 +677,32 @@ def get_setting(db: Session, key: str, default="false"):
     return s.value if s else default
 
 
+app.include_router(admin_router, dependencies=[Depends(require_superadmin)])
 
 
-def require_superadmin(admin: AdminUser = Depends(get_current_admin)):
-    if not admin.is_superadmin:
-        raise HTTPException(status_code=403, detail="Superadmin only")
-    return admin
+@app.post("/admin/event-settings")
+def save_event_settings(
+    event_datetime: str = Form(""),
+    db: Session = Depends(get_db),
+    admin: AdminUser = Depends(require_superadmin),
+):
+    event_datetime = event_datetime.strip()
+    if event_datetime:
+        try:
+            parsed_event_datetime = datetime.fromisoformat(event_datetime)
+        except ValueError:
+            raise HTTPException(status_code=400, detail="Nieprawidłowa data wydarzenia.")
+        event_datetime = parsed_event_datetime.strftime("%Y-%m-%dT%H:%M")
+
+    setting = db.get(SystemSetting, "event_datetime")
+    if setting:
+        setting.value = event_datetime
+    else:
+        setting = SystemSetting(key="event_datetime", value=event_datetime)
+        db.add(setting)
+    db.commit()
+    return RedirectResponse("/admin/manage_votes", status_code=303)
+
 
 @app.get("/admin/manage_votes")
 def manage_votes(
@@ -829,6 +711,7 @@ def manage_votes(
     admin: AdminUser = Depends(require_superadmin),
 ):
     voting_enabled = get_setting(db, "voting_enabled", "false") == "true"
+    event_datetime = get_setting(db, "event_datetime", "")
 
     total_votes = db.query(Vote).count()
 
@@ -862,7 +745,8 @@ def manage_votes(
         "admin": admin,
         "voting_enabled": voting_enabled,
         "contestants": contestants,
-        "total_votes": total_votes
+        "total_votes": total_votes,
+        "event_datetime": event_datetime
     })
 
 

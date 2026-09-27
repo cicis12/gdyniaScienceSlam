@@ -1,96 +1,43 @@
-from sqlalchemy import Column,Integer,String,TIMESTAMP,ForeignKey, Boolean, Date
-from sqlalchemy.orm import relationship
+from datetime import datetime
+from sqlalchemy import Column,Integer,String,TIMESTAMP,ForeignKey, Boolean, Date, DateTime
+from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql import func
 from database import Base
+from sqlalchemy.dialects.postgresql import JSONB
 
-class Contestant(Base):
-    __tablename__ = "contestants"
-    id = Column(Integer,primary_key=True,index=True)
-    name= Column(String,nullable=False)
-    surname= Column(String,nullable=False)
-    email= Column(String,nullable=False,unique=True)
-    phone= Column(String,nullable=False)
-    school= Column(String,nullable=False)
-    class_and_profile = Column(String,nullable=False)
-    city = Column(String,nullable=False)
-    birthdate = Column(Date,nullable=False)
+class FormInfo(Base):
+    __tablename__ = "form_info"
+    id=Column(Integer,primary_key=True,index=True)
+    slug=Column(String,unique=True,nullable=False,index=True)
+    name=Column(String,unique=True,nullable=False,)
+    enabled=Column(Boolean,nullable=False,default=False)
+    cur_version_id=Column(Integer,nullable=False)
 
-    supervisor_name = Column(String,nullable=False)
-    supervisor_surname = Column(String,nullable=False)
-    supervisor_info = Column(String,nullable=False)
+    versions = relationship("FormVersion", back_populates="form", foreign_keys="FormVersion.form_id")
+    submissions = relationship("FormSubmission", back_populates="form")
 
-    previous_accomplishments = Column(String)
-    about = Column(String,nullable=False)
-    interests = Column(String,nullable=False)
-    contributions = Column(String,nullable=False)
-    inspiration = Column(String,nullable=False)
 
-    topic = Column(String,nullable=False)
-    whytopic = Column(String,nullable=False)
-    whyinteresting = Column(String,nullable=False)
-    experience = Column(String,nullable=False)
-    ways_of_grabing_interest = Column(String,nullable=False)
+class FormVersion(Base):
+    __tablename__ = "form_version"
+    id=Column(Integer,primary_key=True,index=True)
+    form_id=Column(Integer,ForeignKey("form_info.id"), nullable=False)
+    version_num=Column(Integer, nullable=False, default=1)
+    display_name=Column(String,nullable=False)
+    description=Column(String,nullable=True)
+    definition=Column(JSONB,nullable=False)
+    created_at=Column(DateTime, default=datetime.utcnow)
 
-    video_file_path = Column(String)
-    rules_accepted = Column(Boolean,nullable=False)
-    privacy_policy_accepted = Column(Boolean,nullable=False)
+    form = relationship("FormInfo", back_populates="versions", foreign_keys=[form_id])
 
-    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
+class FormSubmission(Base):
+    __tablename__ = "form_submission"
+    id=Column(Integer,primary_key=True,index=True)
+    form_id=Column(Integer,ForeignKey("form_info.id"), nullable=False)
+    form_version_id=Column(Integer,ForeignKey("form_version.id"), nullable=False)
+    data = Column(JSONB, nullable=False)
+    submitted_at = Column(DateTime, default=datetime.utcnow)
 
-    favourite = Column(Boolean, default=False)
-    hidden = Column(Boolean, default=False)
-class Viewer(Base):
-    __tablename__ = "viewers"
-    id = Column(Integer,primary_key=True,index=True)
-    name = Column(String,nullable=False)
-    surname = Column(String,nullable=False)
-    school = Column(String)
-    class_and_profile = Column(String)
-    email = Column(String,nullable=False,unique=True)
-    phone = Column(String,nullable=False)
-    is_contestant_close = Column(String, nullable=False)
-    rules_accepted = Column(Boolean,nullable=False)
-    privacy_policy_accepted = Column(Boolean,nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
-
-    favourite = Column(Boolean, default=False)
-    hidden = Column(Boolean, default=False)
-
-class Volunteer(Base):
-    __tablename__ = "volunteers"
-    id = Column(Integer,primary_key=True,index=True)
-    name = Column(String,nullable=False)
-    surname = Column(String,nullable=False)
-    school = Column(String, nullable=False)
-    class_and_profile = Column(String, nullable=False)
-    email = Column(String,nullable=False,unique=True)
-    phone = Column(String,nullable=False)
-    rules_accepted = Column(Boolean,nullable=False)
-    privacy_policy_accepted = Column(Boolean,nullable=False)
-    facebook_link = Column(String,nullable=True)
-    birthdate = Column(Date,nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
-
-    favourite = Column(Boolean, default=False)
-    hidden = Column(Boolean, default=False)
-class Group(Base):
-    __tablename__ = "groups"
-    id = Column(Integer,primary_key=True,index=True)
-
-    supervisor_name = Column(String, nullable=False)
-    supervisor_surname = Column(String, nullable=False)
-    school = Column(String, nullable=False)
-    email = Column(String,nullable=False,unique=True)
-    class_and_profile = Column(String, nullable=False)
-    number_of_participants = Column(Integer, nullable=False)
-    number_of_added_emails = Column(Integer)
-
-    rules_accepted = Column(Boolean,nullable=False)
-    privacy_policy_accepted = Column(Boolean,nullable=False)
-    created_at = Column(TIMESTAMP(timezone=True), server_default=func.now())
-
-    favourite = Column(Boolean, default=False)
-    hidden = Column(Boolean, default=False)
+    form = relationship("FormInfo", back_populates="submissions")
 
 class AdminUser(Base):
     __tablename__="admin_users"

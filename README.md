@@ -339,10 +339,10 @@ Run
 ```
 Enter the username and password.
 
-### Add redis to autostart
-The project uses rate limiting with redis.
-You need to install redis on your machine
-And enable it in systemctl
+### Rate-limit storage
+Local development uses in-process memory storage by default, so Redis is not required.
+For production or multiple application workers, configure Redis with
+`RATE_LIMIT_STORAGE_URI=redis://localhost:6379/0` and enable the Redis service:
 ```bash
 apt install redis-server
 systemctl start redis-server
