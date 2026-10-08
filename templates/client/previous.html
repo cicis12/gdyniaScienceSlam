@@ -1,205 +1,46 @@
 {% extends "client/client_header.html" %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/gallery.css') }}">
+<script src="{{ asset_url('js/gallery.js') }}" defer></script>
+{% endblock %}
 {% block content %}
-<style>
-.lightbox {
-  display: none;
-}
-.lightbox.active {
-  display: flex;
-}
-</style>
-<!-- NAGŁÓWEK -->
-<section class="pt-10 pb-2 text-center">
-  <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide">
-    Poprzednie edycje
-  </h1>
-  <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
-</section>
-
-<!-- GALERIA -->
-<section class="pb-24">
-  <h2 class="text-3xl font-bold my-6 text-center">2025</h2>
-  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-
-    <!-- ZDJĘCIE -->
-    
-    
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery2.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
+<main class="archive-page theme-dark">
+  <header class="archive-intro">
+    <h1>Poprzednie edycje</h1>
+  </header>
+  {% if video.enabled %}
+  <section class="archive-feature" aria-labelledby="archive-film-title">
+    <div class="archive-feature-heading"><h2 id="archive-film-title">{{ video.title }}</h2></div>
+    <div class="archive-player">
+      <iframe src="{{ video.embed_url }}" title="{{ video.title }}" allow="fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
-
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery3.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
+  </section>
+  {% endif %}
+  {% if editions %}
+  <nav class="archive-years" aria-label="Przejdź do edycji"><span>Wybierz edycję</span>{% for year in editions %}<a class="redirect-link" href="#edition-{{ year }}">{{ year }} <span aria-hidden="true">→</span></a>{% endfor %}</nav>
+  {% endif %}
+  {% for year, photos in editions.items() %}
+  <section id="edition-{{ year }}" class="archive-edition" aria-labelledby="year-{{ year }}">
+    <header class="archive-edition-header"><h2 id="year-{{ year }}">{{ year }}</h2><p>{{ photos|length }} zdjęć <span aria-hidden="true">/</span> Gdynia Science Slam</p></header>
+    <div class="archive-grid">
+      {% for photo in photos %}
+      <a class="archive-photo" href="{{ photo.photo }}" data-year="{{ year }}" data-caption="{{ photo.caption or ('Gdynia Science Slam ' ~ year) }}" aria-label="Otwórz zdjęcie: {{ photo.caption or ('Gdynia Science Slam ' ~ year) }}">
+        <img src="{{ photo.photo }}" alt="{{ photo.caption or ('Gdynia Science Slam ' ~ year) }}" loading="lazy" width="900" height="600">
+        <span class="archive-photo-overlay"><span>{{ photo.caption or ('GSS ' ~ year) }}</span><span aria-hidden="true">↗</span></span>
+      </a>
+      {% endfor %}
     </div>
-
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery4.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery5.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery6.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery7.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery8.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery9.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery10.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery11.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery12.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery13.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery14.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery15.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery16.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery17.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery18.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery19.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery20.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery21.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery22.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery23.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery24.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery25.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery26.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery27.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery28.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery29.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery30.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery31.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery32.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery34.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-  </div>
-  <h2 class="text-3xl font-bold my-6 text-center">2024</h2>
-  <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <div class="overflow-hidden rounded-2xl shadow-lg cursor-pointer">
-      <img src="static/assets/images/gallery1.webp"
-           class="gallery-img w-full h-64 object-cover hover:scale-110 transition duration-500">
-    </div>
-  </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div id="lightbox"
-     class="lightbox fixed inset-0 bg-black bg-opacity-80 items-center justify-center z-50">
-
-  <span id="close"
-        class="absolute top-8 right-10 text-white text-4xl cursor-pointer">
-    ✕
-  </span>
-
-  <img id="lightbox-img"
-       class="max-w-[90%] max-h-[85%] rounded-2xl shadow-2xl">
-</div>
-
-<script>
-const galleryImages = document.querySelectorAll(".gallery-img");
-const lightbox = document.getElementById("lightbox");
-const lightboxImg = document.getElementById("lightbox-img");
-const closeBtn = document.getElementById("close");
-
-galleryImages.forEach(img => {
-  img.addEventListener("click", () => {
-    lightbox.classList.add("active");
-    lightboxImg.src = img.src;
-  });
-});
-
-closeBtn.addEventListener("click", () => {
-  lightbox.classList.remove("active");
-});
-
-lightbox.addEventListener("click", (e) => {
-  if (e.target !== lightboxImg) {
-    lightbox.classList.remove("active");
-  }
-});
-</script>
+  </section>
+  {% else %}
+  <p class="archive-empty">Zdjęcia z poprzednich edycji pojawią się tutaj już wkrótce.</p>
+  {% endfor %}
+  <dialog id="gallery-lightbox" class="gallery-lightbox" aria-label="Galeria zdjęć" aria-describedby="gallery-caption">
+    <header class="gallery-lightbox-header"><span id="gallery-year"></span><button type="button" id="gallery-close" aria-label="Zamknij galerię" autofocus>Zamknij <span aria-hidden="true">×</span></button></header>
+    <div class="gallery-stage"><img id="gallery-full-image" alt=""></div>
+    <footer class="gallery-lightbox-footer">
+      <p id="gallery-caption"></p>
+      <div class="gallery-controls"><button type="button" id="gallery-prev" aria-label="Poprzednie zdjęcie">←</button><span id="gallery-counter" aria-live="polite" aria-atomic="true"></span><button type="button" id="gallery-next" aria-label="Następne zdjęcie">→</button></div>
+    </footer>
+  </dialog>
+</main>
 {% endblock %}

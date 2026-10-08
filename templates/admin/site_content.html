@@ -1,0 +1,108 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">
+<script src="{{ asset_url('js/system-settings.js') }}" defer></script>
+{% endblock %}
+{% block content %}
+<main class="content-admin settings-workspace">
+  <h1>Ustawienia systemowe</h1>
+  <div class="settings-page-links" aria-label="Ustawienia stron i konfiguracji">
+    <a href="/admin/content/home">Strona główna</a><a href="/admin/content/team">Zespół</a>
+    <a href="/admin/about">O nas</a><a href="/admin/gallery">Poprzednie edycje</a>
+    <a href="/admin/partners">Partnerzy</a><a href="/admin/documents">Dokumenty</a>
+    <a href="/admin/transfer">Import / eksport</a>
+  </div>
+  <div class="settings-tabs" id="settings-tabs" role="tablist" aria-label="Ustawienia systemowe" hidden>
+    {% for id, title in [('pages', 'Widoczność stron'), ('event', 'Data wydarzenia'), ('colors', 'Kolory'), ('footer', 'Stopka')] %}
+    <button type="button" role="tab" id="tab-{{ id }}" aria-controls="{{ id }}" aria-selected="{{ 'true' if loop.first else 'false' }}" data-settings-tab="{{ id }}">{{ title }}</button>
+    {% endfor %}
+  </div>
+  {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
+  <section id="pages" class="content-panel" data-settings-panel>
+    <h2>Widoczność stron</h2>
+    <p>Wyłączona strona znika z menu i jest niedostępna także pod bezpośrednim adresem. Panel administratora pozostaje dostępny.</p>
+    <form action="/admin/content/pages" method="post">
+      <div class="visibility-grid">
+        {% for key, path, label in pages %}
+        <label class="visibility-option"><input type="checkbox" name="visible" value="{{ key }}" {% if visibility[key] %}checked{% endif %}> <span>{{ label }} <small>{{ path }}</small></span></label>
+        {% endfor %}
+      </div>
+      <p>Wyłączenie rejestracji blokuje również strony formularzy i wysyłanie zgłoszeń. Wyłączenie głosowania blokuje oddawanie głosów.</p>
+      <button type="submit">Zapisz widoczność</button>
+    </form>
+    {% if forms %}
+    <h3 class="mt-8 font-bold">Strony formularzy</h3>
+    {% for form in forms %}
+    <form action="/admin/content/forms/{{ form.id }}" method="post" class="form-visibility">
+      <label><input type="checkbox" name="enabled" value="true" {% if form.enabled %}checked{% endif %}> {{ form.name }} <small>/forms/{{ form.slug }}</small></label>
+      <button type="submit">Zapisz</button>
+    </form>
+    {% endfor %}
+    {% endif %}
+  </section>
+
+  <section id="event" class="content-panel" data-settings-panel>
+    <h2>Data wydarzenia</h2><p>Data steruje odliczaniem na stronie głównej.</p>
+    <form action="/admin/event-settings" method="post" class="member-fields">
+      <label>Data i godzina rozpoczęcia<input type="datetime-local" name="event_datetime" value="{{ event_datetime }}"></label>
+      <button type="submit">Zapisz datę</button>
+    </form>
+  </section>
+  <section id="colors" class="content-panel" data-settings-panel>
+    <h2>Ustawienia kolorów</h2>
+    <form action="/admin/content/page-modes" method="post" id="page-modes-form">
+      <fieldset class="page-modes-group"><legend>Tryb wyświetlania stron</legend>
+        <div class="page-mode-grid">
+        {% for key, path, label in pages if key != 'home' %}
+          <label for="display-mode-{{ key }}">{{ label }}
+            <select id="display-mode-{{ key }}" name="{{ key }}">
+              {% for value, title in [('default', 'Domyślny układ'), ('light', 'Jasny'), ('dark', 'Ciemny')] %}
+              <option value="{{ value }}" {% if site_settings.page_modes[key] == value %}selected{% endif %}>{{ title }}</option>
+              {% endfor %}
+            </select>
+          </label>
+        {% endfor %}
+        </div>
+        <button type="submit">Zapisz tryby stron</button>
+      </fieldset>
+    </form>
+
+    <p>Jasne kolory pochodzą z sekcji O nas na stronie głównej, a ciemne z sekcji zespołu. Podgląd pokazuje zmiany przed zapisaniem.</p>
+    <form action="/admin/content/theme" method="post" id="site-theme-form">
+      {% for group, title, fields in color_groups %}
+      <fieldset class="theme-group"><legend>{{ title }}</legend>
+        <div class="palette-fields">
+        {% for key, label, default in fields %}
+          {% set name = group ~ '_' ~ key %}
+          <label class="palette-field" for="theme-{{ name }}"><span>{{ label }}</span>
+            <span class="palette-control"><input type="color" id="theme-{{ name }}" name="{{ name }}" value="{{ site_settings.theme[name] }}" data-default="{{ default }}">
+            <output for="theme-{{ name }}">{{ site_settings.theme[name] }}</output></span>
+          </label>
+        {% endfor %}
+        </div>
+      </fieldset>
+      {% endfor %}
+      <div class="settings-actions"><button type="button" id="preview-colors">Podgląd strony</button><button type="submit">Zapisz kolory</button></div>
+    </form>
+    <form action="/admin/content/theme/reset" method="post"><button class="palette-reset">Przywróć domyślne kolory</button></form>
+  </section>
+  <section id="footer" class="content-panel" data-settings-panel>
+    <h2>Ustawienia stopki</h2>
+    <p>Pola obsługują HTML: linki, akapity, listy i wyróżnienia tekstu.</p>
+    <form action="/admin/content/footer" method="post" class="member-fields">
+      <label>E-mail kontaktowy<textarea name="email" rows="2" maxlength="10000">{{ site_settings.footer.email }}</textarea></label>
+      <label>Lokalizacja<textarea name="location" rows="2" maxlength="10000">{{ site_settings.footer.location }}</textarea></label>
+      <label>Dodatkowy tekst<textarea name="additional" rows="5" maxlength="10000">{{ site_settings.footer.additional }}</textarea></label>
+      <button type="submit">Zapisz stopkę</button>
+    </form>
+  </section>
+</main>
+<dialog id="site-theme-preview" class="site-preview" aria-labelledby="preview-title">
+  <div class="preview-toolbar"><h2 id="preview-title">Podgląd strony · niezapisane kolory</h2>
+    <label>Szerokość<select id="preview-width"><option value="100%">Komputer</option><option value="768px">Tablet</option><option value="390px">Telefon</option></select></label>
+    <button type="button" id="close-preview" autofocus>Zamknij podgląd</button>
+  </div>
+  <p class="preview-hint">Możesz przechodzić między stronami. Zapisywanie formularzy jest wyłączone w podglądzie.</p>
+  <iframe id="preview-frame" title="Podgląd kolorów witryny" sandbox="allow-same-origin allow-scripts"></iframe>
+</dialog>
+{% endblock %}

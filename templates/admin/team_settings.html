@@ -1,0 +1,90 @@
+{% extends "admin_header.html" %}
+{% from "macros/team_theme.html" import palette_style %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/team.css') }}">
+<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">
+<script src="{{ asset_url('js/team-palette.js') }}" defer></script>
+{% endblock %}
+{% macro member_fields(member=none) %}
+<label>Imię i nazwisko<input name="name" value="{{ member.name if member else '' }}" maxlength="160" required></label>
+<label>Stanowisko<input name="position" value="{{ member.position if member else '' }}" maxlength="160" required></label>
+<label>Zdjęcie (JPG, PNG, WebP; maks. 5 MB)
+  <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" {% if not member %}required{% endif %}>
+  {% if member %}<small>Pozostaw puste, aby zachować obecne zdjęcie.</small>{% endif %}
+</label>
+<label>Opis<textarea name="description" rows="5" maxlength="10000" required>{{ member.description if member else '' }}</textarea></label>
+{% endmacro %}
+{% block content %}
+<main class="content-admin"><h1>Zespół</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+{% with settings_page_key='team' %}{% include 'macros/page_mode.html' %}{% endwith %}
+
+{% if request.query_params.get("saved") %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
+  <section id="team" class="content-panel">
+    <h2>Zespół · {{ members|length }} osób</h2>
+    <form action="/admin/content/team-settings" method="post" class="team-settings-form">
+      <label class="visibility-option">
+        <input type="checkbox" name="details_enabled" value="true" {% if team_details_enabled %}checked{% endif %}>
+        <span>Pokaż więcej — otwieranie profili na pełnym ekranie</span>
+      </label>
+      <p>Po wyłączeniu pozostaną zdjęcia, imiona i stanowiska. Opisy nie będą widoczne, ale zachowamy je do ponownego włączenia.</p>
+      <button type="submit">Zapisz ustawienia zespołu</button>
+    </form>
+    <details class="member-editor" open>
+      <summary>Dodaj nową osobę</summary>
+      <form action="/admin/content/team" method="post" enctype="multipart/form-data" class="member-fields">
+        {{ member_fields() }}
+        <button type="submit">Dodaj do zespołu</button>
+      </form>
+    </details>
+    {% for member in members %}
+    <details class="member-editor">
+      <summary><img src="{{ member.photo }}" alt="" width="56" height="56"> <span>{{ member.name }} <small>{{ member.position }}</small></span></summary>
+      <form action="/admin/content/team/{{ member.id }}" method="post" enctype="multipart/form-data" class="member-fields">
+        {{ member_fields(member) }}
+        <button type="submit">Zapisz zmiany</button>
+      </form>
+      <form action="/admin/content/team/{{ member.id }}/delete" method="post" onsubmit="return confirm('Usunąć tę osobę z zespołu?')">
+        <button type="submit" class="delete-member">Usuń osobę</button>
+      </form>
+    </details>
+    {% endfor %}
+  </section>
+  <section id="colors" class="content-panel">
+    <h2>Kolory kart zespołu</h2>
+    <p>Dobierz tekst i cztery naprzemienne kolory kart. Tło strony i nagłówki korzystają z kolorów systemowych. Podgląd aktualizuje się od razu; na stronie kolory zmienią się po zapisaniu.</p>
+    <form action="/admin/content/palette" method="post" id="palette-form">
+      <div class="palette-fields">
+        {% for key, label, default in color_fields %}
+        {% if key.startswith("card_") %}
+        <label class="palette-field" for="color-{{ key }}">
+          <span>{{ label }}</span>
+          <span class="palette-control">
+            <input id="color-{{ key }}" type="color" name="{{ key }}" value="{{ team_palette[key] }}" data-color-key="{{ key|replace('_', '-') }}">
+            <output for="color-{{ key }}">{{ team_palette[key] }}</output>
+          </span>
+        </label>
+        {% else %}<input type="hidden" name="{{ key }}" value="{{ team_palette[key] }}">{% endif %}
+        {% endfor %}
+      </div>
+      <div id="palette-preview" class="team-page palette-preview" style="{{ palette_style(team_palette) }}" aria-label="Podgląd kolorów strony zespołu">
+        <header class="team-intro">
+          <h2>Nasz zespół</h2>
+        </header>
+        <div class="palette-preview-cards">
+          {% for role in ['Leader', 'Media', 'Partnerships', 'IT Specialist'] %}
+          <div class="team-card"><div class="team-card-info">
+            <span class="team-position">{{ role }}</span>
+            <span class="team-name">Imię i nazwisko</span>
+            <span class="team-discover">Poznaj mnie <span aria-hidden="true">+</span></span>
+          </div></div>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="submit">Zapisz kolory</button>
+    </form>
+    <form action="/admin/content/palette/reset" method="post">
+      <button type="submit" class="palette-reset">Przywróć domyślne kolory</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

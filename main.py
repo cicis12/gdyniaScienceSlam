@@ -1,14 +1,22 @@
 from fastapi import FastAPI, Form, File, UploadFile, Depends, Request, HTTPException, BackgroundTasks
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse, Response, PlainTextResponse
 from fastapi.staticfiles import StaticFiles 
-from fastapi.templating import Jinja2Templates
+from templating import create_templates
 from pathlib import Path
 import json
 from sqlalchemy.orm import Session
 from sqlalchemy import or_, func
 from database import SessionLocal, engine, Base, get_db
 import shutil, os
-from models import AdminUser, Voter, Vote, SystemSetting, FormInfo, FormVersion, FormSubmission
+from models import AdminUser, Voter, Vote, SystemSetting, FormInfo, FormVersion, FormSubmission, TeamMember, GalleryPhoto
+from gallery import get_featured_video
+from site_pages import page_visibility, page_for_path
+from system_settings import load_public_settings
+from partner_content import get_partners
+from home_images import get_home_images
+from document_content import get_documents, document_path
+from team_theme import get_team_palette, team_details_enabled
+from starlette.concurrency import run_in_threadpool
 import uuid
 from datetime import date
 from video import save_video
@@ -33,7 +41,7 @@ app = FastAPI()
 app.mount("/static",StaticFiles(directory="static"), name="static")
 BASE_DIR = Path(__file__).resolve().parent
 
-templates=Jinja2Templates(directory="templates")
+templates=create_templates()
 
 #rate limiter
 rate_limit_storage_uri = os.getenv("RATE_LIMIT_STORAGE_URI", "memory://")
@@ -45,6 +53,23 @@ from routers.admin_forms import router as admin_router
 from routers.forms import router as form_router
 
 app.include_router(form_router)
+
+
+@app.middleware("http")
+async def public_page_visibility(request: Request, call_next):
+    path = request.url.path
+    if not path.startswith("/static"):
+        def load_visibility():
+            with SessionLocal() as db:
+                return page_visibility(db), load_public_settings(db)
+        request.state.page_visibility, request.state.site_settings = await run_in_threadpool(load_visibility)
+        page = page_for_path(path)
+        if page and not request.state.page_visibility[page]:
+            return templates.TemplateResponse("client/unavailable.html", {
+                "request": request, "page_name": "unavailable",
+                "header_title": "Strona niedostępna - Gdynia Science Slam",
+            }, status_code=404)
+    return await call_next(request)
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
@@ -58,12 +83,20 @@ def home(request: Request, db: Session = Depends(get_db)):
         "request": request,
         "header_title": "Gdynia Science Slam",
         "page_name": "home",
-        "event_datetime": get_setting(db, "event_datetime", "")
+        "carousel_partners": get_partners(db).carousel_partners,
+        "home_images": get_home_images(db),
+        "event_datetime": get_setting(db, "event_datetime", ""),
+        "members": db.query(TeamMember).order_by(TeamMember.id).all(),
     })
 
 @app.get("/team")
-def team(request: Request):
-    return templates.TemplateResponse("client/team.html", {"request": request, "header_title": "Zespół - Gdynia Science Slam", "page_name":"team"})
+def team(request: Request, db: Session = Depends(get_db)):
+    return templates.TemplateResponse("client/team.html", {
+        "request": request, "header_title": "Zespół - Gdynia Science Slam", "page_name": "team",
+        "members": db.query(TeamMember).order_by(TeamMember.id).all(),
+        "team_palette": get_team_palette(db),
+        "team_details_enabled": team_details_enabled(db),
+    })
 
 @app.get("/registration")
 def registration(request: Request, db: Session = Depends(get_db)):
@@ -120,20 +153,50 @@ def registration(request: Request, db: Session = Depends(get_db)):
     })
 
 @app.get("/about")
-def about(request: Request):
-    return templates.TemplateResponse("client/about.html", {"request": request, "header_title": "O Nas - Gdynia Science Slam", "page_name":"about"})
+def about(request: Request, db: Session = Depends(get_db)):
+    from about_content import get_timeline
+    return templates.TemplateResponse("client/about.html", {"request": request, "header_title": "O Nas - Gdynia Science Slam", "page_name":"about", "entries": get_timeline(db)})
 
 @app.get("/previous_editions")
-def previous(request: Request):
-    return templates.TemplateResponse("client/previous.html", {"request": request, "header_title": "Poprzednie edycje - Gdynia Science Slam", "page_name":"previous_editions"})
+def previous(request: Request, db: Session = Depends(get_db)):
+    photos = db.query(GalleryPhoto).order_by(GalleryPhoto.year.desc(), GalleryPhoto.sort_order, GalleryPhoto.id).all()
+    editions = {}
+    for photo in photos:
+        editions.setdefault(photo.year, []).append(photo)
+    return templates.TemplateResponse("client/previous.html", {
+        "request": request, "header_title": "Poprzednie edycje - Gdynia Science Slam", "page_name": "previous_editions",
+        "editions": editions, "photo_count": len(photos), "video": get_featured_video(db),
+    })
 
 @app.get("/partners")
-def partners(request: Request):
-    return templates.TemplateResponse("client/partners.html", {"request": request, "header_title": "Partnerzy - Gdynia Science Slam", "page_name":"partners"})
+def partners(request: Request, db: Session = Depends(get_db)):
+    return templates.TemplateResponse("client/partners.html", {"request": request, "header_title": "Partnerzy - Gdynia Science Slam", "page_name":"partners", "partner_config": get_partners(db)})
 
 @app.get("/documents")
-def documents(request: Request):
-    return templates.TemplateResponse("client/documents.html", {"request": request, "header_title": "Dokumenty - Gdynia Science Slam", "page_name":"documents"})
+def documents(request: Request, db: Session = Depends(get_db)):
+    editions = {}
+    for document in get_documents(db):
+        if document.enabled:
+            editions.setdefault(document.year, []).append(document)
+    return templates.TemplateResponse("client/documents.html", {
+        "request": request, "header_title": "Dokumenty - Gdynia Science Slam", "page_name": "documents",
+        "document_editions": editions,
+    })
+
+
+@app.get("/documents/download/{document_id}")
+def download_document(document_id: str, db: Session = Depends(get_db)):
+    document = next((item for item in get_documents(db) if item.id == document_id and item.enabled), None)
+    if document is None:
+        raise HTTPException(404)
+    try:
+        path = document_path(document)
+    except ValueError:
+        raise HTTPException(404) from None
+    if not path.is_file():
+        raise HTTPException(404)
+    return FileResponse(path, filename=document.filename, media_type="application/pdf",
+                        content_disposition_type="attachment", headers={"X-Content-Type-Options": "nosniff"})
 
 # @app.get("/groups")
 # def groups(request: Request):
@@ -183,6 +246,20 @@ def require_superadmin(admin: AdminUser = Depends(get_current_admin)):
     return admin
 
 
+from routers.site_content import build_router
+app.include_router(build_router(require_superadmin))
+from routers.gallery_admin import build_router as build_gallery_router
+from routers.about_admin import build_router as build_about_router
+from routers.site_transfer import build_router as build_transfer_router
+app.include_router(build_gallery_router(require_superadmin))
+app.include_router(build_about_router(require_superadmin))
+from routers.partners_admin import build_router as build_partners_router
+app.include_router(build_partners_router(require_superadmin))
+from routers.documents_admin import build_router as build_documents_router
+app.include_router(build_documents_router(require_superadmin))
+app.include_router(build_transfer_router(require_superadmin, SECRET_KEY))
+
+
 @app.middleware("http")
 async def restrict_admin_area(request: Request, call_next):
     path = request.url.path
@@ -192,6 +269,8 @@ async def restrict_admin_area(request: Request, call_next):
                 admin = get_current_admin(request, db)
             except HTTPException:
                 return RedirectResponse("/admin/login", status_code=303)
+
+        request.state.admin = admin
 
         if not admin.is_superadmin:
             if request.method in {"GET", "HEAD"}:
@@ -459,6 +538,19 @@ def add_email(
 
     return {"ok": True, "new_count": group.number_of_added_emails}
 
+@app.get("/admin", include_in_schema=False)
+@app.get("/admin/", include_in_schema=False)
+def admin_entry(request: Request, db: Session = Depends(get_db)):
+    try:
+        admin = get_current_admin(request, db)
+    except HTTPException as error:
+        if error.status_code != 401:
+            raise
+        return RedirectResponse("/admin/login", status_code=303)
+    destination = "/admin/dashboard" if admin.is_superadmin else "/admin/form-submissions"
+    return RedirectResponse(destination, status_code=303)
+
+
 @app.get("/admin/login")
 def adminloginpage(request: Request):
     return templates.TemplateResponse(
@@ -701,7 +793,7 @@ def save_event_settings(
         setting = SystemSetting(key="event_datetime", value=event_datetime)
         db.add(setting)
     db.commit()
-    return RedirectResponse("/admin/manage_votes", status_code=303)
+    return RedirectResponse("/admin/content?saved=1#event", status_code=303)
 
 
 @app.get("/admin/manage_votes")
@@ -711,8 +803,6 @@ def manage_votes(
     admin: AdminUser = Depends(require_superadmin),
 ):
     voting_enabled = get_setting(db, "voting_enabled", "false") == "true"
-    event_datetime = get_setting(db, "event_datetime", "")
-
     total_votes = db.query(Vote).count()
 
     raw_results = (
@@ -745,8 +835,7 @@ def manage_votes(
         "admin": admin,
         "voting_enabled": voting_enabled,
         "contestants": contestants,
-        "total_votes": total_votes,
-        "event_datetime": event_datetime
+        "total_votes": total_votes
     })
 
 

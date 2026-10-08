@@ -1,0 +1,121 @@
+/* Shared semantic colors; theme groups inherit through page sections. */
+.public-site, .theme-light {
+  --section-background: var(--theme-light-background);
+  --section-text: var(--theme-light-text);
+  --section-heading: var(--theme-light-heading);
+  --section-secondary-heading: var(--theme-light-secondary-heading);
+  --section-overline: var(--theme-light-overline);
+  --section-button: var(--theme-light-button);
+  --section-button-text: var(--theme-light-button-text);
+  --section-link: var(--theme-light-link);
+  --section-surface: var(--theme-light-surface);
+  --section-border: var(--theme-light-border);
+}
+.theme-dark {
+  --section-background: var(--theme-dark-background);
+  --section-text: var(--theme-dark-text);
+  --section-heading: var(--theme-dark-heading);
+  --section-secondary-heading: var(--theme-dark-secondary-heading);
+  --section-overline: var(--theme-dark-overline);
+  --section-button: var(--theme-dark-button);
+  --section-button-text: var(--theme-dark-button-text);
+  --section-link: var(--theme-dark-link);
+  --section-surface: var(--theme-dark-surface);
+  --section-border: var(--theme-dark-border);
+}
+body.public-site, body.public-site.registration-page { background: var(--section-background) !important; color: var(--section-text) !important; }
+body.public-site :is(main, section).theme-dark,
+body.public-site :is(main, section).theme-light,
+body.public-site > section { background-color: var(--section-background) !important; color: var(--section-text) !important; }
+body.public-site h1 { color: var(--section-heading) !important; }
+body.public-site :is(h2, h3, h4) { color: var(--section-secondary-heading) !important; }
+body.public-site :is(main, section) :is(p, label, [class*="text-gray-"], [class*="text-[#"], [class*="text-white"], [class*="text-blue-"]):not(h1, h2, h3, h4, [class*="text-red-"], [class*="text-green-"]) { color: var(--section-text) !important; }
+body.public-site :is(main, section) a { color: var(--section-link) !important; }
+body.public-site :is(.home-eyebrow, .home-hero-kicker, .archive-eyebrow, .timeline-label, .registration-eyebrow) { color: var(--section-overline) !important; }
+body.public-site :is(main, section) :is(button[type=submit], .about-join, a[class*="bg-"]) { background: var(--section-button) !important; color: var(--section-button-text) !important; }
+body.public-site :is(input:not([type=checkbox]):not([type=radio]):not([type=file]), textarea, select) { background: var(--section-surface) !important; color: var(--section-text) !important; border-color: var(--section-border) !important; }
+body.public-site :is(.bg-white, .creator-dyn-form, .dyn-form) { background: var(--section-surface) !important; color: var(--section-text) !important; border-color: var(--section-border) !important; }
+body.public-site .homepage-flow > section:not(.countdown-hero) { background: var(--section-background) !important; color: var(--section-text) !important; }
+body.public-site .homepage-flow :is(.home-team-section, .home-section-wisteria) :is(p, a) { color: var(--section-text) !important; }
+body.public-site .homepage-flow :is(.home-team-section, .home-section-wisteria) a { color: var(--section-link) !important; }
+body.public-site .homepage-flow :is(.home-team-section, .home-section-wisteria) .home-eyebrow { color: var(--section-overline) !important; }
+body.public-site .countdown-unit span { color: var(--section-overline); }
+body.public-site .countdown-unit small { color: var(--section-text); }
+body.public-site .countdown-hero::before { background: color-mix(in srgb, var(--section-background) 80%, transparent); }
+body.public-site :is(.creator-registration-list, .creator-registration-link, .registration-page .tabs) { background: var(--section-surface) !important; color: var(--section-text) !important; border-color: var(--section-border) !important; }
+body.public-site .registration-page .tabs .tab,
+body.public-site .tabs .tab { color: var(--section-link) !important; }
+body.public-site #tab-slider { background: var(--section-border) !important; }
+body.public-site .creator-registration-link :is(strong, span) { color: inherit !important; }
+/* Team card colors remain editable in the team-specific settings. */
+body.public-site .team-page {
+  --team-background: var(--section-background) !important;
+  --team-text: var(--section-text) !important;
+  --team-highlight: var(--section-heading) !important;
+}
+body.public-site .team-card { color: var(--team-card-text); }
+body.public-site .team-dialog h2 { color: var(--team-card-text) !important; }
+body.public-site .team-page :is(.team-card, .team-dialog) p { color: var(--team-card-text, #132e46) !important; }
+body .site-nav, body .site-mobile-menu { background: var(--theme-header-background) !important; color: var(--theme-header-text) !important; }
+body .site-nav :is(.site-links a, .site-mobile-menu a, .site-menu-toggle) { color: var(--theme-header-text) !important; }
+body .site-nav :is(.site-links, .site-mobile-menu) a.site-registration { background: var(--theme-header-button) !important; color: var(--theme-header-button-text) !important; }
+.site-logo { display: block; background: var(--theme-header-logo); mask: url('/static/assets/logo.png') center / contain no-repeat; }
+.site-logo img { visibility: hidden; filter: none; }
+body .site-footer { background: var(--theme-footer-background) !important; color: var(--theme-footer-text) !important; border-color: var(--theme-footer-border) !important; }
+body .site-footer :is(.footer-contact, .footer-location) { color: var(--theme-footer-text) !important; }
+body .site-footer .footer-small { color: var(--theme-footer-small-text) !important; }
+body .site-footer a { color: var(--theme-footer-link) !important; text-decoration: underline; }
+body .site-footer :is(p, span, li) { color: inherit !important; }
+
+/* Legacy utility colors inherit semantic page colors as well. */
+body.public-site :is(main, section) :is([class~="bg-[#5e85b8]"], [class~="bg-gray-50"], [class~="bg-gray-100"], [class~="bg-gray-200"]) { background-color: var(--section-surface) !important; }
+body.public-site :is(main, section) :is([class~="border-[#18395d]"], [class~="border-white"]) { border-color: var(--section-border) !important; }
+body.public-site :is(main, section) :is(.text-sm.font-bold, .home-eyebrow) { color: var(--section-overline) !important; }
+body.public-site :is(main, section) input::placeholder,
+body.public-site :is(main, section) textarea::placeholder { color: var(--section-text) !important; opacity: .7; }
+body.public-site .about-join { background: var(--section-button) !important; color: var(--section-button-text) !important; }
+body.public-site .archive-years a:hover { background: var(--section-button) !important; color: var(--section-button-text) !important; }
+/* Heading roles must win over inherited legacy text utilities. */
+body.public-site :is(main, section) h1 { color: var(--section-heading) !important; }
+body.public-site :is(main, section) :is(h2, h3, h4) { color: var(--section-secondary-heading) !important; }
+body.public-site .homepage-flow .home-editorial-title { color: var(--section-heading) !important; }
+body.public-site :is(main, section) :is(.home-hero-kicker, .archive-eyebrow, .timeline-label, .registration-eyebrow) { color: var(--section-overline) !important; }
+body.public-site .team-dialog h2 { color: var(--team-card-text) !important; }
+
+/* Feedback retains its existing status colors pending separate configuration. */
+body.public-site #toast-content { color: #ffffff !important; }
+
+/* Partner logos on the homepage retain white display cards. */
+body.public-site .homepage-flow .home-partners-section .slider-track .bg-white { background: #ffffff !important; }
+
+body.public-site[data-display-mode="light"],
+body.public-site[data-display-mode="light"] :is(.theme-light, .theme-dark) {
+  --section-background: var(--theme-light-background);
+  --section-text: var(--theme-light-text);
+  --section-heading: var(--theme-light-heading);
+  --section-secondary-heading: var(--theme-light-secondary-heading);
+  --section-overline: var(--theme-light-overline);
+  --section-button: var(--theme-light-button);
+  --section-button-text: var(--theme-light-button-text);
+  --section-link: var(--theme-light-link);
+  --section-surface: var(--theme-light-surface);
+  --section-border: var(--theme-light-border);
+  color-scheme: light;
+}
+
+body.public-site[data-display-mode="dark"],
+body.public-site[data-display-mode="dark"] :is(.theme-light, .theme-dark) {
+  --section-background: var(--theme-dark-background);
+  --section-text: var(--theme-dark-text);
+  --section-heading: var(--theme-dark-heading);
+  --section-secondary-heading: var(--theme-dark-secondary-heading);
+  --section-overline: var(--theme-dark-overline);
+  --section-button: var(--theme-dark-button);
+  --section-button-text: var(--theme-dark-button-text);
+  --section-link: var(--theme-dark-link);
+  --section-surface: var(--theme-dark-surface);
+  --section-border: var(--theme-dark-border);
+  color-scheme: dark;
+}
+
+body.public-site .archive-years a.redirect-link:hover { background: transparent !important; color: var(--section-link) !important; }

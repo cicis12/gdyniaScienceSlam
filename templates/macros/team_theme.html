@@ -1,0 +1,3 @@
+{% macro palette_style(palette) -%}
+{% for key, value in palette.items() %}--team-{{ key|replace('_', '-') }}: {{ value }}; {% endfor %}
+{%- endmacro %}

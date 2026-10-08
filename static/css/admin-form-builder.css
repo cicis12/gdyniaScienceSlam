@@ -1,0 +1,12 @@
+.form-builder { width: 100%; min-width: 0; }
+.form-builder *, .form-builder *::before, .form-builder *::after { box-sizing: border-box; }
+.form-builder :is(input, select, textarea), .form-builder .grid > * { min-width: 0; max-width: 100%; }
+.form-builder .flex { flex-wrap: wrap; }
+.form-version-table { max-width: 100%; overflow-x: auto; }
+.form-version-table table { min-width: 520px; }
+.form-builder :is(h1, h2, h3, label, span, p) { overflow-wrap: anywhere; }
+@media (max-width: 540px) {
+  .form-builder .grid-cols-2 { grid-template-columns: minmax(0, 1fr); }
+  .form-builder > section { padding: 1rem; }
+  .form-builder > .grid > div { min-width: 0; }
+}

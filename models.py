@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column,Integer,String,TIMESTAMP,ForeignKey, Boolean, Date, DateTime
+from sqlalchemy import Column,Integer,String,TIMESTAMP,ForeignKey, Boolean, Date, DateTime, Text
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql import func
 from database import Base
@@ -66,3 +66,23 @@ class SystemSetting(Base):
 
     key = Column(String, primary_key=True)
     value = Column(String, nullable=False)
+
+
+class TeamMember(Base):
+    __tablename__ = "team_members"
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(160), nullable=False)
+    position = Column(String(160), nullable=False)
+    description = Column(Text, nullable=False)
+    photo = Column(String(500), nullable=False)
+
+
+class GalleryPhoto(Base):
+    __tablename__ = "gallery_photos"
+
+    id = Column(Integer, primary_key=True)
+    year = Column(Integer, nullable=False)
+    caption = Column(String(300), nullable=False, default="")
+    photo = Column(String(500), nullable=False)
+    sort_order = Column(Integer, nullable=False, default=0)

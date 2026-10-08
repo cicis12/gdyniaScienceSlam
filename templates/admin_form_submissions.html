@@ -1,0 +1,68 @@
+{% extends "admin_header.html" %}
+
+{% block content %}
+<main class="max-w-7xl mx-auto w-full px-6 py-10">
+  <header class="mb-8 border-b border-[#bacade] pb-6">
+    <p class="text-sm font-bold uppercase tracking-wide text-[#2d519f]">Panel administratora</p>
+    <h1 class="mt-2 text-3xl font-bold text-[#06101d]">Odpowiedzi formularzy</h1>
+    <p class="mt-2 text-[#324a67]">Wybierz formularz, aby przejrzeć jego zgłoszenia.</p>
+  </header>
+
+  <form method="get" action="/admin/form-submissions" class="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end">
+    <label for="form-select" class="flex-1 text-sm font-bold text-[#06101d]">
+      Formularz
+      <select id="form-select" name="form_id" onchange="this.form.submit()"
+              class="mt-1 block w-full rounded border border-[#7595bd] bg-white px-3 py-3 text-[#06101d]">
+        <option value="" disabled selected hidden>Wybierz formularz</option>
+        {% for form in forms %}
+          <option value="{{ form.id }}" {% if selected_form and selected_form.id == form.id %}selected{% endif %}>
+            {{ form.name }} · /forms/{{ form.slug }}
+          </option>
+        {% endfor %}
+      </select>
+    </label>
+    <noscript><button type="submit" class="bg-[#122c54] px-5 py-3 font-bold text-white">Pokaż odpowiedzi</button></noscript>
+  </form>
+
+  {% if not forms %}
+    <p class="border-l-4 border-[#3865c7] bg-[#eaf1fa] p-5 text-[#122c54]">Nie ma jeszcze utworzonych formularzy.</p>
+  {% elif selected_form %}
+    <div class="mb-5 flex flex-wrap items-baseline justify-between gap-3">
+      <h2 class="text-xl font-bold text-[#06101d]">{{ selected_form.name }}</h2>
+      <p class="text-sm font-semibold text-[#324a67]">{{ submissions|length }} zgłoszeń</p>
+    </div>
+
+    {% if submissions %}
+      <div class="space-y-5">
+        {% for submission in submissions %}
+          <article class="border border-[#bacade] bg-white shadow-sm">
+            <header class="flex flex-wrap items-center justify-between gap-2 border-b border-[#bacade] bg-[#eef2f7] px-5 py-3">
+              <h3 class="font-bold text-[#06101d]">Zgłoszenie #{{ submission.id }}</h3>
+              <div class="flex flex-wrap gap-x-4 text-sm text-[#324a67]">
+                <span>{{ submission.submitted_at.strftime('%Y-%m-%d %H:%M') if submission.submitted_at else 'Brak daty' }}</span>
+                {% if submission.version_num %}<span>Wersja {{ submission.version_num }}</span>{% endif %}
+              </div>
+            </header>
+            {% if submission.answers %}
+              <dl class="divide-y divide-[#dde5ee]">
+                {% for answer in submission.answers %}
+                  <div class="grid gap-1 px-5 py-3 sm:grid-cols-[minmax(10rem,0.35fr)_minmax(0,1fr)] sm:gap-6">
+                    <dt class="text-sm font-bold text-[#213145]">{{ answer.label }}</dt>
+                    <dd class="min-w-0 whitespace-pre-wrap break-words text-[#06101d]">{{ answer.value }}</dd>
+                  </div>
+                {% endfor %}
+              </dl>
+            {% else %}
+              <p class="px-5 py-4 text-[#324a67]">To zgłoszenie nie zawiera odpowiedzi.</p>
+            {% endif %}
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="border-l-4 border-[#3865c7] bg-[#eaf1fa] p-5 text-[#122c54]">Ten formularz nie ma jeszcze zgłoszeń.</p>
+    {% endif %}
+  {% else %}
+    <p class="border-l-4 border-[#3865c7] bg-[#eaf1fa] p-5 text-[#122c54]">Wybierz formularz, aby zobaczyć jego odpowiedzi.</p>
+  {% endif %}
+</main>
+{% endblock %}

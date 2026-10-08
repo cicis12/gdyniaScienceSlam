@@ -1,410 +1,256 @@
 {% extends "client/client_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
+{% from 'macros/partner_logo.html' import partner_logo %}
 {% block content %}
+{% set home_content = (request.state.site_settings|default(default_site_settings)).home %}
 
-<main class="flex-grow">
+<main class="homepage-flow flex-grow">
     <!-- HERO -->
    <section
-    class="relative bg-cover bg-center min-h-screen flex items-center justify-center"
-    style="background-image: url('static/assets/images/hero.webp');"
+    class="countdown-hero theme-dark home-scroll-section relative bg-cover bg-center flex items-center"
+    style="background-image: url('{{ home_images.hero.photo }}'); background-position: {{ home_images.hero.position }};"
   >
-    <!-- ciemna nakładka -->
-    <div class="absolute inset-0 bg-black/60"></div>
-
-    <!-- blue overlay in the middle-->
-    <div class="absolute top-0 bottom-0 lg:left-1/4 lg:w-1/2 h-full mx-auto bg-[#18395d]/60 backdrop-blur-sm flex items-center justify-center">
-      <div class="relative max-w-5xl mx-auto px-6 text-center text-white">
-        <h1 class="text-5xl font-bold mb-4">
-          Gdynia Science Slam
-        </h1>
-
-        <p class="text-2xl font-extrabold mb-6">
-          Dziękujemy!
+      <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 py-12 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started }}">
+        <p class="home-hero-kicker mb-5">{{ home_content.hero_overline }}</p>
+        <h1 class="countdown-title mb-4">{{ home_content.hero_title }}</h1>
+        <p id="event-date-label" class="mb-7 text-base md:text-lg text-white/90">
+          {% if event_datetime %}{{ home_content.hero_date }} <span id="event-date-value"></span>{% else %}{{ home_content.hero_no_date }}{% endif %}
         </p>
-        <p class="text-xl mb-6">
-          Trzecia edycja Gdynia Science Slam dobiegła już końca. Do zobaczenia za rok!
+        <div id="event-countdown" class="countdown-grid mx-auto mb-8" aria-live="polite" aria-label="Odliczanie do wydarzenia">
+          <div class="countdown-unit"><span data-countdown="days">--</span><small>{{ home_content.days }}</small></div>
+          <div class="countdown-unit"><span data-countdown="hours">--</span><small>{{ home_content.hours }}</small></div>
+          <div class="countdown-unit"><span data-countdown="minutes">--</span><small>{{ home_content.minutes }}</small></div>
+          <div class="countdown-unit"><span data-countdown="seconds">--</span><small>{{ home_content.seconds }}</small></div>
+        </div>
+        <p id="countdown-status" class="mb-8 text-white/90" role="status">
+          {% if event_datetime %}{{ home_content.hero_status }}{% else %}{{ home_content.hero_waiting }}{% endif %}
         </p>
-
-        <div class="flex flex-col sm:flex-row gap-4 justify-center hidden">
-          <a href="/registration#contestant"
-             class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700">
-            Rejestracja uczestnika
-          </a>
-          <a href="/registration#viewer"
-             class="bg-green-600 px-6 py-3 rounded-lg hover:bg-green-700">
-            Rejestracja widza
-          </a>
-          <a href="/registration#volunteer"
-             class="bg-purple-600 px-6 py-3 rounded-lg hover:bg-purple-700">
-             Wolontariat
-           </a>
+        <div class="flex flex-wrap justify-center gap-x-8 gap-y-3">
+          {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link" href="/registration">{{ home_content.registration_link }} <span aria-hidden="true">→</span></a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('topics', true) %}<a class="redirect-link" href="/topics">{{ home_content.topics_link }} <span aria-hidden="true">→</span></a>{% endif %}
         </div>
       </div>
-    </div>
   </section>
+
+  <script>
+    (() => {
+      const hero = document.querySelector(".countdown-hero-content");
+      const targetValue = hero?.dataset.eventDate;
+      if (!targetValue) return;
+
+      const target = new Date(targetValue);
+      if (Number.isNaN(target.getTime())) return;
+
+      const units = {
+        days: document.querySelector('[data-countdown="days"]'),
+        hours: document.querySelector('[data-countdown="hours"]'),
+        minutes: document.querySelector('[data-countdown="minutes"]'),
+        seconds: document.querySelector('[data-countdown="seconds"]')
+      };
+      const status = document.getElementById("countdown-status");
+
+      function updateCountdown() {
+        const remaining = Math.max(0, target.getTime() - Date.now());
+        const seconds = Math.floor(remaining / 1000);
+        units.days.textContent = String(Math.floor(seconds / 86400)).padStart(2, "0");
+        units.hours.textContent = String(Math.floor((seconds % 86400) / 3600)).padStart(2, "0");
+        units.minutes.textContent = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
+        units.seconds.textContent = String(seconds % 60).padStart(2, "0");
+        if (remaining === 0) status.textContent = hero.dataset.startedText;
+      }
+
+      document.getElementById("event-date-value").textContent = new Intl.DateTimeFormat("pl-PL", {
+        dateStyle: "long", timeStyle: "short"
+      }).format(target);
+      updateCountdown();
+      window.setInterval(updateCountdown, 1000);
+    })();
+  </script>
 
   <!--about-->
-   <section class="py-20 bg-[#819edb] text-[#18395d]">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+  <section class="home-scroll-section home-editorial home-editorial-about theme-light home-section-blue-light py-20 bg-[#819edb] text-[#18395d]">
+    <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
-        <h2 class="text-4xl font-bold mb-4">O nas</h2>
+        <p class="home-eyebrow">{{ home_content.about_overline }}</p>
+        <h2 class="home-editorial-title mb-5">{{ home_content.about_title }}</h2>
         <p class="text-gray-600 text-lg mb-6">
-          Gdynia Science Slam to konkurs popularyzujący naukę,
-          w którym pasjonaci prezentują wybrane przez siebie tematy
-          w przystępnej i kreatywnej formie.
+          {{ home_content.about_description }}
         </p>
 
-        <a href="/about"
-           class="text-blue-600 text-lg font-semibold hover:underline">
-          Dowiedz się więcej →
-        </a>
+        {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about"
+           class="redirect-link">
+          {{ home_content.about_link }} <span aria-hidden="true">→</span>
+        </a>{% endif %}
       </div>
 
       <div>
-        <img src="static/assets/images/gallery6.webp" class="w-full h-auto rounded-xl shadow-xl object-cover">
+        <img src="{{ home_images.about.photo }}" alt="{{ home_images.about.alt }}" style="object-position: {{ home_images.about.position }}" class="w-full h-auto rounded-xl shadow-xl object-cover">
       </div>
 
     </div>
   </section>
+  {% if (request.state.page_visibility|default({})).get('team', true) and members %}
   <!--zespol-->
- <section class="pt-20 pb-15 bg-[#5e85b8]">
-  <h2 class="text-3xl font-bold mb-4 text-center">Nasz zespół</h2>
-  <p class="text-xl mb-10 text-center px-8 text-gray-700">
-    Zobacz kto pracował nad tym wydarzeniem.
-  </p>
+ <section class="home-scroll-section home-section-blue-deep home-team-section theme-dark pt-20 pb-15 bg-[#5e85b8]">
+  <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
+    <div>
+      <p class="home-eyebrow">{{ home_content.team_overline }}</p>
+      <h2 class="home-editorial-title">{{ home_content.team_title }}</h2>
+    </div>
+    <div>
+      <p class="text-lg">{{ home_content.team_description }}</p>
+      {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="redirect-link">{{ home_content.team_link }} <span aria-hidden="true">→</span></a>{% endif %}
+    </div>
+  </div>
 
   <div class="w-full overflow-hidden">
 
     <div class="slider-track">
-
-      <!-- ZESTAW 1 -->
-      <div class="flex gap-8 md:gap-16 px-8">
-
+      {% for copy in range(2) %}
+      <div class="flex gap-8 md:gap-16 px-8" {% if copy %}aria-hidden="true"{% endif %}>
+        {% for member in members %}
         <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/28.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Natasza Sudoł</p>
+          <img src="{{ member.photo }}" alt="" width="128" height="128" loading="lazy" class="w-32 h-32 rounded-full object-cover mb-3">
+          <p class="font-semibold">{{ member.name }}</p>
         </div>
-
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/29.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Antonina Podgórska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/27.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kuba Kamiński</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/30.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Hania Sajdak</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/31.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kacper Górski</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/32.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Maciej Miłosz</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/33.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Marcel Muzyczuk</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/34.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Oliwia Gatz</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/35.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Julia Willma</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/36.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Lena Borowska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/37.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Konstanty Konopka</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/39.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Stefan Sadkowski</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/40.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Michał Bochentyn</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/41.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kinga Nowak</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/42.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Natalia Sikorska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/43.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Ignacy Salitra</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/44.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Izabela Radziuk-Śliwińska</p>
-        </div>
-
+        {% endfor %}
       </div>
-
-      <!-- ZESTAW 2 (IDENTYCZNA KOPIA!) -->
-      <div class="flex gap-8 md:gap-16 px-8">
-
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/28.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Natasza Sudoł</p>
-        </div>
-
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/29.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Antonina Podgórska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/27.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kuba Kamiński</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/30.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Hania Sajdak</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/31.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kacper Górski</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/32.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Maciej Miłosz</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/33.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Marcel Muzyczuk</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/34.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Oliwia Gatz</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/35.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Julia Willma</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/36.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Lena Borowska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/37.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Konstanty Konopka</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/39.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Stefan Sadkowski</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/40.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Michał Bochentyn</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/41.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Kinga Nowak</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/42.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Natalia Sikorska</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/43.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Ignacy Salitra</p>
-        </div>
-        <div class="flex flex-col items-center min-w-[150px]">
-          <img src="static/assets/images/team/44.webp"
-               class="w-32 h-32 rounded-full object-cover mb-3 bg-[#819edb]">
-          <p class="font-semibold">Izabela Radziuk-Śliwińska</p>
-        </div>
-
-      </div>
-
+      {% endfor %}
     </div>
   </div>
-   <a href="/team"
-           class="text-blue-900 font-semibold hover:underline">
-          <p class="text-center pt-10 pb-5">Dowiedz się więcej →
-            </p>
-        </a>
-</section>
-
-
-
+ </section>
+ {% endif %}
 
   <!--poprzednia edycja-->
-  <section class="py-20 bg-[#819edb] text-[#18395d]">
-    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+  <section class="home-scroll-section home-editorial home-editorial-archive theme-light home-section-blue-mid py-20 bg-[#819edb] text-[#18395d]">
+    <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
-        <h2 class="text-4xl font-bold mb-4">Poprzednie edycje</h2>
+        <p class="home-eyebrow">{{ home_content.archive_overline }}</p>
+        <h2 class="home-editorial-title mb-5">{{ home_content.archive_title }}</h2>
         <p class="text-gray-600 text-lg mb-6">
-         Za nami już 3 edycje. Zobacz jak wyglądały.
+         {{ home_content.archive_description }}
         </p>
 
-        <a href="/previous_editions"
-           class="text-blue-600 text-lg font-semibold hover:underline">
-          Przejdź do galerii →
-        </a>
+        {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions"
+           class="redirect-link">
+          {{ home_content.archive_link }} <span aria-hidden="true">→</span>
+        </a>{% endif %}
       </div>
 
       <div>
-        <img src="static/assets/images/gallery5.webp" class="w-full h-auto rounded-xl shadow-xl object-cover">
+        <img src="{{ home_images.archive.photo }}" alt="{{ home_images.archive.alt }}" style="object-position: {{ home_images.archive.position }}" class="w-full h-auto rounded-xl shadow-xl object-cover">
       </div>
 
     </div>
   </section>
-  <!--partnerzy-->
- <section class="py-20 bg-[#5e85b8]">
-  <h2 class="text-3xl font-bold mb-4 text-center text-[#18395d]">
-    Partnerzy
-  </h2>
-  <p class="text-xl mb-10 text-center px-8 text-gray-700">
-    To dzięki Nim to wydarzenie mogło się odbyć.
-  </p>
-  
-  <div class="w-full overflow-hidden">
-
-    <div class="slider-track">
-
-      <!-- ZESTAW 1 -->
-      <div class="flex gap-12 px-8">
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/izopanel.png"
-               class="max-h-16 object-contain  scale-125">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center overflow-hidden">
-          <img src="static/assets/images/partners/RG logo.svg"
-               class="object-cover w-full h-full scale-[2]">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/milomi.png"
-               class="max-h-16 object-contain scale-150">
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/muzeumemigracji.png"
-               class="max-h-16 object-contain">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/helion.png"
-               class="max-h-16 object-contain">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/talent.jpg"
-               class="max-h-16 object-contain scale-[0.8]">
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/3lo.png"
-               class="max-h-16 object-contain">
-        </div>
-
-      </div>
-      <!-- ZESTAW 2 (IDENTYCZNA KOPIA) -->
-      <div class="flex gap-12 px-8">
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/izopanel.png"
-               class="max-h-16 object-contain  scale-125">
-        </div>
-
-      <div class="flex gap-12 px-8">
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center overflow-hidden">
-          <img src="static/assets/images/partners/RG logo.svg"
-               class="object-cover w-full h-full scale-[2]">
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/milomi.png"
-               class="max-h-16 object-contain scale-150">
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/muzeumemigracji.png"
-               class="max-h-16 object-contain">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/helion.png"
-               class="max-h-16 object-contain">
-        </div>
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/talent.jpg"
-               class="max-h-16 object-contain scale-[0.8]">
-        </div>
-
-        <div class="bg-white rounded-xl shadow-md w-48 h-24 flex items-center justify-center">
-          <img src="static/assets/images/partners/3lo.png"
-               class="max-h-16 object-contain">
-        </div>
-
-      </div>
-
+  {% if carousel_partners %}
+  <section class="home-scroll-section home-section-wisteria home-partners-section theme-dark py-20">
+    <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
+      <div><p class="home-eyebrow">{{ home_content.partners_overline }}</p><h2 class="home-editorial-title">{{ home_content.partners_title }}</h2></div>
+      <p class="text-lg">{{ home_content.partners_description }}</p>
     </div>
-  </div>
-  <a href="/partners"
-           class="text-blue-900 font-semibold hover:underline">
-          <p class="text-center pt-10">Dowiedz się więcej →
-            </p>
-        </a>
-</section>
+    <div class="partner-carousel w-full overflow-hidden" aria-label="Partnerzy wydarzenia">
+      <div class="slider-track">
+        {% for copy in range(2) %}
+        <div class="partner-carousel-group flex gap-8 md:gap-16 px-8" {% if copy %}aria-hidden="true"{% endif %}>
+          {% for partner in carousel_partners %}<div class="partner-carousel-card">{{ partner_logo(partner, copy == 1) }}</div>{% endfor %}
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if (request.state.page_visibility|default({})).get('partners', true) %}<div class="max-w-7xl mx-auto px-6 pt-10"><a href="/partners" class="redirect-link">{{ home_content.partners_link }} <span aria-hidden="true">→</span></a></div>{% endif %}
+  </section>
+  {% endif %}
 
   <!--dolacz do nas-->
   <section class="py-20 bg-blue-600 text-white text-center hidden">
-    <h2 class="text-3xl font-bold mb-6">Dołącz do nas</h2>
+    <h2 class="text-3xl font-bold mb-6">{{ home_content.join_title }}</h2>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="/registration#contestant" class="bg-white text-blue-600 px-6 py-3 rounded">
-        Uczestnik
-      </a>
-      <a href="/registration#viewer" class="bg-white text-blue-600 px-6 py-3 rounded">
-        Widz
-      </a>
-      <a href="/registration#volunteer" class="bg-white text-blue-600 px-6 py-3 rounded">
-        Wolontariusz
-      </a>
+      {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration#contestant" class="bg-white text-blue-600 px-6 py-3 rounded">
+        {{ home_content.join_contestant }}
+      </a>{% endif %}
+      {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration#viewer" class="bg-white text-blue-600 px-6 py-3 rounded">
+        {{ home_content.join_viewer }}
+      </a>{% endif %}
+      {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration#volunteer" class="bg-white text-blue-600 px-6 py-3 rounded">
+        {{ home_content.join_volunteer }}
+      </a>{% endif %}
     </div>
   </section>
+  <script>
+    (() => {
+      const sections = document.querySelectorAll(".home-scroll-section");
+      if (!("IntersectionObserver" in window)) return;
+
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+
+      sections.forEach((section, index) => {
+        if (index > 0) {
+          section.classList.add("scroll-reveal");
+          observer.observe(section);
+        }
+      });
+    })();
+  </script>
+  <script>
+    (() => {
+      if (!document.documentElement.classList.contains("homepage-scroll-snap")) return;
+
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const navHeight = () => Number.parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height")
+      ) || 0;
+      const snapTargets = () => [
+        ...document.querySelectorAll(".home-scroll-section, .site-footer")
+      ];
+
+      let settleTimer;
+      let settling = false;
+
+      function settleToNearestSection() {
+        settleTimer = null;
+        if (reducedMotion.matches || settling) return;
+
+        const currentY = window.scrollY;
+        const offset = navHeight();
+        const nearest = snapTargets().reduce((best, target) => {
+          const targetY = Math.max(0, target.getBoundingClientRect().top + currentY - offset);
+          return Math.abs(targetY - currentY) < Math.abs(best - currentY) ? targetY : best;
+        }, currentY);
+
+        if (Math.abs(nearest - currentY) < 2) return;
+        settling = true;
+        window.scrollTo({ top: nearest, behavior: "smooth" });
+        window.setTimeout(() => { settling = false; }, 900);
+      }
+
+      window.addEventListener("scroll", () => {
+        if (settling || reducedMotion.matches) return;
+        window.clearTimeout(settleTimer);
+        settleTimer = window.setTimeout(settleToNearestSection, 180);
+      }, { passive: true });
+
+      window.addEventListener("wheel", () => {
+        if (settling) settling = false;
+      }, { passive: true });
+      window.addEventListener("touchstart", () => {
+        if (settling) settling = false;
+      }, { passive: true });
+      reducedMotion.addEventListener?.("change", () => {
+        window.clearTimeout(settleTimer);
+        settling = false;
+      });
+    })();
+  </script>
 </main>
 <!--footer-->
 <style>

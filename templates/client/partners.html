@@ -1,118 +1,18 @@
 {% extends "client/client_header.html" %}
+{% from "macros/partner_logo.html" import partner_logo %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
 {% block content %}
-<!-- NAGŁÓWEK -->
-<section class="pt-10 pb-12 text-center">
-  <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide">
-    Nasi Partnerzy
-  </h1>
-  <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
-</section>
-
-
-<section class="pb-20">
-  <div class="max-w-2xl mx-auto px-6 text-center">
-
-    <h2 class="text-2xl font-bold mb-8">Sponsor Główny</h2>
-
-    <div class="bg-white rounded-3xl shadow-xl p-10 hover:scale-105 transition overflow-hidden p-12">
-      <img src="static/assets/images/partners/izopanel.png"
-             alt="Izopanel"
-             class="object-contain scale-125">
+<main class="partners-page">
+  <header class="partners-intro"><h1>Partnerzy</h1></header>
+  {% for section in partner_config.visible_sections %}
+  <section class="partners-section{% if section.highlighted %} partners-section-highlighted{% endif %}" aria-labelledby="partners-{{ section.id }}">
+    <header class="partners-section-heading"><h2 id="partners-{{ section.id }}">{{ section.title }}</h2></header>
+    <div class="partners-grid">
+      {% for partner in section.partners %}
+      <article class="partner-card">{{ partner_logo(partner) }}<p class="partner-name">{{ partner.name }}</p></article>
+      {% endfor %}
     </div>
-
-  </div>
-</section>
-<!-- Sponsorzy -->
-<section class="pb-24">
-
-  <div class="max-w-md md:max-w-6xl mx-auto px-6">
-
-    <h2 class="text-3xl font-bold text-center mb-12">
-      Sponsorzy
-    </h2>
-
-    <div class="flex flex-wrap justify-center gap-12">
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partners/helion.png"
-             alt="Helion"
-             class="object-contain h-24">
-      </div>
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partners/milomi.png"
-             alt="MIŁO.MI"
-             class="object-contain h-24 scale-125">
-      </div>
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partners/muzeumemigracji.png"
-             alt="Muzeum Emigracji w Gdyni"
-             class="object-contain h-24">
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-<section class="pb-24">
-
-  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
-
-    <h2 class="text-3xl font-bold text-center mb-12">
-      Partner
-    </h2>
-    <div class="flex flex-wrap justify-center gap-10">
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partners/talent.jpg"
-             alt="Stowarzyszenie Talent"
-             class="h-24 object-contain">
-      </div>
-      
-    </div>
-
-  </div>
-
-</section>
-<section class="pb-24">
-
-  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
-
-    <h2 class="text-3xl font-bold text-center mb-12">
-      Patroni Medialni
-    </h2>
-    <div class="flex flex-wrap justify-center gap-10">
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg h-36 flex items-center justify-center hover:scale-105 transition overflow-hidden">
-        <img src="static/assets/images/partners/RG logo.svg"
-             alt="Radio Gdańsk"
-             class="h-full w-full object-cover scale-[2]">
-      </div>
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg p-6 flex items-center justify-center hover:scale-105 transition">
-        <img src="static/assets/images/partners/trojmiastopl.jpg"
-             alt="trojmiasto.pl"
-             class="object-contain h-24">
-      </div>
-      
-    </div>
-
-  </div>
-
-</section>
-<section class="pb-24">
-
-  <div class="max-w-md md:max-w-6xl mx-auto px-6 ">
-
-    <h2 class="text-3xl font-bold text-center mb-12">
-      Jury
-    </h2>
-    <div class="flex flex-wrap justify-center gap-10">
-      <div class="w-80 h-36 bg-white rounded-2xl shadow-lg h-36 flex items-center justify-center hover:scale-105 transition overflow-hidden">
-        <img src="static/assets/images/partners/iopan.svg"
-             alt="IO PAN"
-             class="w-full h-auto object-cover m-4">
-      </div>
-      
-    </div>
-
-  </div>
-
-</section>
+  </section>
+  {% else %}<p class="partners-empty">Partnerzy zostaną ogłoszeni wkrótce.</p>{% endfor %}
+</main>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<main class="content-admin"><h1>Dokumenty</h1>
+<p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+{% with settings_page_key=placeholder_page %}{% include 'macros/page_mode.html' %}{% endwith %}
+
+<section class="content-panel"><h2>Planowany edytor</h2><p>To podgląd układu przyszłego panelu. Dodawanie i usuwanie zostaną uruchomione podczas przebudowy strony.</p>
+
+<fieldset disabled class="member-fields"><legend>Dodaj dokument</legend><label>Nazwa dokumentu<input type="text"></label>
+<label>Plik PDF<input type="file" accept="application/pdf"></label><button type="button">Dodaj dokument</button></fieldset>
+{% for document in documents %}<div class="placeholder-row"><span>{{ document.name }}</span><button type="button" disabled>Usuń dokument</button></div>{% endfor %}
+</section></main>{% endblock %}

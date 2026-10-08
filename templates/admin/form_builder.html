@@ -1,0 +1,490 @@
+{% extends "admin_header.html" %}
+
+{% block head_extra %}
+  <link rel="stylesheet" href="{{ asset_url('css/admin-form-builder.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
+{% endblock %}
+
+{% block content %}
+<div class="form-builder max-w-7xl mx-auto py-8 px-4">
+  
+  <!-- Version Switcher & Forms List -->
+  <section class="bg-white rounded-xl shadow p-6 mb-8">
+    <h2 class="text-2xl font-bold text-[#18395d] mb-4">Wszystkie Formularze i Wersje</h2>
+    <div class="space-y-6">
+      {% for f in forms %}
+        <div class="border rounded-lg p-4 bg-gray-50">
+          <div class="flex justify-between items-center mb-3">
+            <div>
+              <span class="font-bold text-lg text-gray-800">{{ f.name }}</span>
+              <span class="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded font-mono ml-2">/forms/{{ f.slug }}</span>
+            </div>
+            <span class="text-xs font-semibold px-2.5 py-1 rounded {{ 'bg-green-100 text-green-800' if f.enabled else 'bg-red-100 text-red-800' }}">
+              {{ 'Aktywny' if f.enabled else 'Wyłączony' }}
+            </span>
+          </div>
+
+          <div class="form-version-table"><table class="w-full text-left text-sm mt-2">
+            <thead>
+              <tr class="text-gray-500 border-b border-gray-200 text-xs uppercase">
+                <th class="py-2">Wersja</th>
+                <th>Nazwa wyświetlana</th>
+                <th>Data utworzenia</th>
+                <th>Aktywna</th>
+                <th class="text-right">Akcje</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              {% for v in f.versions %}
+                <tr>
+                  <td class="py-2 font-mono font-bold">v{{ v.version_num }}</td>
+                  <td>{{ v.display_name }}</td>
+                  <td class="text-gray-500 text-xs">{{ v.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                  <td>
+                    <input type="radio" name="active_version_{{ f.id }}" 
+                           onchange="setActiveVersion({{ f.id }}, {{ v.id }})" 
+                           {{ 'checked' if f.cur_version_id == v.id else '' }} 
+                           class="cursor-pointer">
+                  </td>
+                  <td class="text-right">
+                    <div class="flex justify-end gap-2">
+                      <button onclick="loadVersion({{ f.id }}, {{ v.id }})" class="text-xs font-semibold bg-blue-100 hover:bg-blue-200 text-blue-900 px-3 py-1 rounded">
+                        Edytuj kopię
+                      </button>
+                      <button onclick="previewSavedVersion({{ v.id }})" class="text-xs font-semibold bg-gray-200 hover:bg-gray-300 text-gray-800 px-3 py-1 rounded">
+                        Podgląd
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table></div>
+        </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="bg-white rounded-xl shadow p-6 mb-8">
+    <div class="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div>
+        <h2 class="text-xl font-bold text-[#18395d]">Formularze na stronie Rejestracja</h2>
+        <p class="mt-1 text-sm text-gray-700">Wybierz maksymalnie 3 aktywne formularze. Pozostałe nadal będą dostępne pod /forms/slug.</p>
+      </div>
+      <span id="registration-form-count" class="text-sm font-bold text-[#122c54]">{{ selected_registration_form_ids|length }} / 3 wybrane</span>
+    </div>
+    <form method="post" action="/admin/forms/registration-selection" id="registration-form-selection" class="space-y-3">
+      {% for f in forms %}
+        <label class="flex items-center gap-3 border border-[#bacade] bg-[#eef2f7] px-4 py-3 {% if not f.enabled %}opacity-50{% endif %}">
+          <input type="checkbox" name="form_ids" value="{{ f.id }}"
+                 {% if f.id in selected_registration_form_ids %}checked{% endif %}
+                 {% if not f.enabled %}disabled{% endif %}
+                 class="registration-form-choice h-5 w-5 accent-[#3865c7]">
+          <span class="min-w-0 flex-1">
+            <span class="block font-bold text-[#09162a]">{{ f.name }}</span>
+            <span class="block text-sm text-[#324a67]">/forms/{{ f.slug }}{% if not f.enabled %} · wyłączony{% endif %}</span>
+          </span>
+        </label>
+      {% else %}
+        <p class="bg-[#eaf1fa] p-4 text-[#122c54]">Najpierw utwórz formularz w kreatorze.</p>
+      {% endfor %}
+      <button type="submit" class="bg-[#122c54] px-5 py-3 font-bold text-white hover:bg-[#223d77]">Zapisz wybór</button>
+    </form>
+  </section>
+
+  <!-- Split Screen Editor & Live Preview -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    
+    <!-- LEFT: Controls -->
+    <div>
+      <div class="bg-white rounded-xl shadow p-6 mb-6">
+        <h3 id="creator-title" class="text-xl font-bold text-[#18395d] mb-4">Kreator Nowego Formularza / Wersji</h3>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Nazwa wewnętrzna (name)</label>
+            <input type="text" id="meta-name" class="w-full border p-2 rounded text-sm" placeholder="np. science_slam_2026">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">URL Slug</label>
+            <input type="text" id="meta-slug" class="w-full border p-2 rounded text-sm" placeholder="np. science-slam-2026">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Nazwa wyświetlana (Title)</label>
+            <input type="text" id="meta-display" class="w-full border p-2 rounded text-sm" placeholder="np. Zgłoszenie Prelegenta">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Opis</label>
+            <input type="text" id="meta-desc" class="w-full border p-2 rounded text-sm" placeholder="Krótki tekst nagłówka">
+          </div>
+        </div>
+      </div>
+
+      <!-- Field Cards Container -->
+      <div id="fields-container" class="space-y-4 mb-6"></div>
+
+      <div class="flex gap-3">
+        <button type="button" onclick="addField('input')" class="bg-gray-800 hover:bg-black text-white text-sm font-bold py-2 px-4 rounded">
+          + Dodaj Pole
+        </button>
+        <button type="button" onclick="addField('info')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-bold py-2 px-4 rounded">
+          + Dodaj Tekst / Nagłówek
+        </button>
+        <button type="button" id="cancel-edit-button" onclick="cancelEdit()" class="hidden bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-bold py-2 px-4 rounded">
+          Anuluj edycję
+        </button>
+        <button type="button" id="save-form-button" onclick="saveForm()" class="ml-auto bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2 px-6 rounded shadow">
+          Zapisz i Opublikuj
+        </button>
+      </div>
+    </div>
+
+    <!-- RIGHT: Live Form Preview -->
+    <div class="lg:sticky lg:top-8 h-fit">
+      <div class="flex justify-between items-center mb-2">
+        <span class="text-xs uppercase font-bold tracking-wider text-gray-500">Podgląd na żywo</span>
+        <span class="text-xs text-green-600 font-semibold flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-green-500 inline-block"></span> Synchronizacja
+        </span>
+      </div>
+      <div id="live-preview-box" class="bg-white border rounded-xl overflow-visible shadow">
+        <!-- Rendered preview loads here -->
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal for Previewing Saved Versions -->
+<div id="preview-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+  <div class="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden">
+    <div class="p-4 border-b flex justify-between items-center bg-gray-50">
+      <h3 class="font-bold text-gray-800">Podgląd Zapisanej Wersji</h3>
+      <button onclick="closeModal()" class="text-gray-400 hover:text-black font-bold text-lg">&times;</button>
+    </div>
+    <div id="modal-preview-content" class="p-4 max-h-[80vh] overflow-y-auto"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+<script>
+let fields = [];
+let debounceTimer;
+let editingFormId = null;
+
+const registrationFormChoices = [...document.querySelectorAll(".registration-form-choice")];
+const registrationFormCount = document.getElementById("registration-form-count");
+
+function updateRegistrationFormLimit() {
+  const selectedCount = registrationFormChoices.filter(choice => choice.checked).length;
+  if (registrationFormCount) registrationFormCount.textContent = `${selectedCount} / 3 wybrane`;
+  registrationFormChoices.forEach(choice => {
+    choice.disabled = !choice.checked && selectedCount >= 3;
+  });
+}
+
+registrationFormChoices.forEach(choice => choice.addEventListener("change", updateRegistrationFormLimit));
+updateRegistrationFormLimit();
+
+function renderFieldsList() {
+  const container = document.getElementById("fields-container");
+  container.innerHTML = "";
+
+  fields.forEach((field, index) => {
+    const isInfo = field.type.startsWith("infotext_");
+    const isChoice = field.type === "list_choice";
+    const isDouble = field.type === "double";
+
+    const card = document.createElement("div");
+    card.className = "bg-white border rounded-lg p-4 shadow-sm space-y-3";
+    card.innerHTML = `
+      <div class="flex justify-between items-center border-b pb-2">
+        <span class="text-xs font-bold text-gray-400">#${index + 1} &bull; ${field.type}</span>
+        <div class="flex gap-2 text-xs">
+          <button onclick="moveField(${index}, -1)" ${index === 0 ? 'disabled' : ''} class="text-gray-600 hover:text-black">▲</button>
+          <button onclick="moveField(${index}, 1)" ${index === fields.length - 1 ? 'disabled' : ''} class="text-gray-600 hover:text-black">▼</button>
+          <button onclick="removeField(${index})" class="text-red-600 font-bold ml-2">Usuń</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Typ</label>
+          <select onchange="updateField(${index}, 'type', this.value)" class="w-full border p-1.5 rounded text-sm">
+            <optgroup label="Pola wejściowe">
+              <option value="text" ${field.type==='text'?'selected':''}>Tekst</option>
+              <option value="email" ${field.type==='email'?'selected':''}>Email</option>
+              <option value="phone" ${field.type==='phone'?'selected':''}>Telefon</option>
+              <option value="textarea" ${field.type==='textarea'?'selected':''}>Długi tekst</option>
+              <option value="list_choice" ${field.type==='list_choice'?'selected':''}>Lista wyboru</option>
+              <option value="checkbox" ${field.type==='checkbox'?'selected':''}>Checkbox</option>
+              <option value="school" ${field.type==='school'?'selected':''}>Szkoła</option>
+              <option value="double" ${field.type==='double'?'selected':''}>Podwójne pole</option>
+            </optgroup>
+            <optgroup label="Teksty informacyjne">
+              <option value="infotext_large" ${field.type==='infotext_large'?'selected':''}>Nagłówek 1</option>
+              <option value="infotext_medium" ${field.type==='infotext_medium'?'selected':''}>Nagłówek 2</option>
+              <option value="infotext_paragraph" ${field.type==='infotext_paragraph'?'selected':''}>Paragraf</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Pytanie / Etykieta</label>
+          <input type="text" value="${field.question || ''}" oninput="updateField(${index}, 'question', this.value)" class="w-full border p-1.5 rounded text-sm">
+        </div>
+
+        ${!isInfo ? `
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Klucz w bazie (name)</label>
+          <input type="text" value="${field.name || ''}" oninput="updateField(${index}, 'name', this.value)" class="w-full border p-1.5 rounded text-sm">
+        </div>
+        <div class="flex items-center pt-5">
+          <label class="text-xs font-bold flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" ${field.required ? 'checked' : ''} onchange="updateField(${index}, 'required', this.checked)"> Wymagane
+          </label>
+        </div>` : ''}
+
+        ${!isInfo ? `
+        <div class="col-span-2">
+          <label class="block text-xs font-bold text-gray-600 mb-1">SVG HTML (opcjonalnie)</label>
+          <textarea data-svg-index="${index}" rows="3" placeholder="&lt;svg ...&gt;...&lt;/svg&gt;" class="w-full border p-1.5 rounded text-sm font-mono"></textarea>
+        </div>` : ''}
+
+        ${isChoice ? `
+        <div class="col-span-2">
+          <label class="block text-xs font-bold text-gray-600 mb-1">Opcje (oddzielone przecinkami)</label>
+          <input type="text" value="${(field.options || []).join(', ')}" oninput="updateOptions(${index}, this.value)" class="w-full border p-1.5 rounded text-sm">
+        </div>` : ''}
+
+        ${isDouble ? `
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Drugi Klucz (name2)</label>
+          <input type="text" value="${field.name2 || ''}" oninput="updateField(${index}, 'name2', this.value)" class="w-full border p-1.5 rounded text-sm">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Druga Etykieta (question2)</label>
+          <input type="text" value="${field.question2 || ''}" oninput="updateField(${index}, 'question2', this.value)" class="w-full border p-1.5 rounded text-sm">
+        </div>` : ''}
+      </div>
+    `;
+    container.appendChild(card);
+    const svgInput = card.querySelector(`[data-svg-index="${index}"]`);
+    if (svgInput) {
+      svgInput.value = field.svg || '';
+      svgInput.addEventListener('input', () => updateField(index, 'svg', svgInput.value));
+    }
+  });
+
+  triggerLivePreview();
+}
+
+function updateField(idx, key, val) {
+  fields[idx][key] = val;
+  if (key === 'type') renderFieldsList();
+  else triggerLivePreview();
+}
+
+function updateOptions(idx, val) {
+  fields[idx].options = val.split(",").map(s => s.trim()).filter(Boolean);
+  triggerLivePreview();
+}
+
+function moveField(idx, dir) {
+  const target = idx + dir;
+  if (target < 0 || target >= fields.length) return;
+  const temp = fields[idx];
+  fields[idx] = fields[target];
+  fields[target] = temp;
+  renderFieldsList();
+}
+
+function removeField(idx) {
+  fields.splice(idx, 1);
+  renderFieldsList();
+}
+
+function addField(kind) {
+  if (kind === 'input') {
+    fields.push({
+      name: "pole_" + (fields.length + 1),
+      type: "text",
+      question: "Nowe Pytanie",
+      required: false,
+      options: []
+    });
+  } else {
+    fields.push({
+      name: "info_" + (fields.length + 1),
+      type: "infotext_paragraph",
+      question: "Przykładowy tekst informacyjny.",
+      required: false
+    });
+  }
+  renderFieldsList();
+}
+
+// Live preview polling
+function triggerLivePreview() {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(async () => {
+    const res = await fetch("/admin/forms/preview-draft", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ fields })
+    });
+    if (res.ok) {
+      document.getElementById("live-preview-box").innerHTML = await res.text();
+      initializePreviewPhoneInputs(document.getElementById("live-preview-box"));
+    }
+  }, 250);
+}
+
+function initializePreviewPhoneInputs(container) {
+  if (!window.intlTelInput) return;
+
+  container.querySelectorAll(".phone").forEach(input => {
+    if (window.intlTelInputGlobals?.getInstance(input)) return;
+
+    window.intlTelInput(input, {
+      initialCountry: "pl",
+      countryOrder: ["pl"],
+      separateDialCode: true,
+      dropdownContainer: document.body
+    });
+
+    const phoneLabel = input.closest(".tailwind-phone-input")?.querySelector(".phone-label");
+    if (phoneLabel) {
+      input.addEventListener("focus", () => phoneLabel.classList.add("active"));
+      input.addEventListener("blur", () => {
+        if (!input.value.trim()) phoneLabel.classList.remove("active");
+      });
+      if (input.value.trim()) phoneLabel.classList.add("active");
+    }
+  });
+}
+
+// Active version radio handler
+async function setActiveVersion(formId, versionId) {
+  const res = await fetch(`/admin/forms/${formId}/set-active/${versionId}`, { method: "POST" });
+  if (!res.ok) alert("Nie udało się zmienić aktywnej wersji.");
+}
+
+// Modal for saved version preview
+async function previewSavedVersion(versionId) {
+  const res = await fetch(`/admin/forms/preview-version/${versionId}`);
+  if (res.ok) {
+    document.getElementById("modal-preview-content").innerHTML = await res.text();
+    document.getElementById("preview-modal").classList.remove("hidden");
+    initializePreviewPhoneInputs(document.getElementById("modal-preview-content"));
+  }
+}
+
+async function loadVersion(formId, versionId) {
+  const res = await fetch(`/admin/forms/${formId}/version/${versionId}`);
+  if (!res.ok) {
+    alert("Nie udało się wczytać wersji formularza.");
+    return;
+  }
+
+  const version = await res.json();
+  editingFormId = version.form_id;
+  fields = version.fields.map(field => ({ ...field }));
+  document.getElementById("meta-name").value = version.name;
+  document.getElementById("meta-slug").value = version.slug;
+  document.getElementById("meta-display").value = version.display_name || "";
+  document.getElementById("meta-desc").value = version.description || "";
+  document.getElementById("meta-name").disabled = true;
+  document.getElementById("meta-slug").disabled = true;
+  document.getElementById("creator-title").textContent = `Nowa wersja formularza: ${version.name}`;
+  document.getElementById("save-form-button").textContent = "Zapisz nową wersję";
+  document.getElementById("cancel-edit-button").classList.remove("hidden");
+  renderFieldsList();
+  document.getElementById("creator-title").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function cancelEdit() {
+  editingFormId = null;
+  fields = [];
+  document.getElementById("meta-name").value = "";
+  document.getElementById("meta-slug").value = "";
+  document.getElementById("meta-display").value = "";
+  document.getElementById("meta-desc").value = "";
+  document.getElementById("meta-name").disabled = false;
+  document.getElementById("meta-slug").disabled = false;
+  document.getElementById("creator-title").textContent = "Kreator Nowego Formularza / Wersji";
+  document.getElementById("save-form-button").textContent = "Zapisz i Opublikuj";
+  document.getElementById("cancel-edit-button").classList.add("hidden");
+  addField("input");
+}
+
+function closeModal() {
+  document.getElementById("preview-modal").classList.add("hidden");
+}
+
+async function saveForm() {
+  const payload = {
+    name: document.getElementById("meta-name").value.trim(),
+    slug: document.getElementById("meta-slug").value.trim(),
+    display_name: document.getElementById("meta-display").value.trim(),
+    description: document.getElementById("meta-desc").value.trim(),
+    enabled: true,
+    fields
+  };
+
+  if ((!editingFormId && (!payload.name || !payload.slug)) || !payload.display_name) {
+    alert(editingFormId
+      ? "Wypełnij tytuł nowej wersji formularza."
+      : "Wypełnij nazwę, slug oraz tytuł formularza.");
+    return;
+  }
+
+  const url = editingFormId
+    ? `/admin/forms/${editingFormId}/new-version`
+    : "/admin/forms/create";
+  const body = editingFormId
+    ? { display_name: payload.display_name, description: payload.description, fields }
+    : payload;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body)
+  });
+
+  if (res.ok) {
+    location.reload();
+  } else {
+    const err = await res.json();
+    alert("Błąd: " + (err.detail || "Nie udało się zapisać formularza"));
+  }
+}
+
+// Init
+addField('input');
+</script>
+<style>
+  #live-preview-box .tailwind-phone-input .iti,
+  #modal-preview-content .tailwind-phone-input .iti {
+    width: calc(100% - 2.5rem) !important;
+    left: 2.5rem !important;
+    top: 50% !important;
+    font-weight: bold;
+    box-sizing: border-box !important;
+  }
+
+  .iti__dropdown-content {
+    z-index: 60;
+  }
+
+  .phone-label {
+    top: 1.5rem;
+    left: 8rem;
+    transition: all 0.2s;
+  }
+
+  .phone-label.active {
+    top: 0.25rem;
+    left: 2.5rem;
+    font-size: 0.9rem;
+  }
+</style>
+{% endblock %}

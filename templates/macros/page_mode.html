@@ -1,0 +1,14 @@
+{% set modes = (request.state.site_settings|default(default_site_settings)).page_modes %}
+<section class="content-panel page-mode-panel">
+  <h2>Tryb wyświetlania</h2>
+  <form action="/admin/content/page-mode/{{ settings_page_key }}" method="post" class="page-mode-form">
+    <label for="mode-{{ settings_page_key }}">Wygląd strony</label>
+    <select name="mode" id="mode-{{ settings_page_key }}">
+      {% for value, label in [('default', 'Domyślny układ'), ('light', 'Jasny'), ('dark', 'Ciemny')] %}
+      <option value="{{ value }}" {% if modes[settings_page_key] == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Zapisz tryb</button>
+  </form>
+  <p class="page-mode-hint">Jasny i ciemny tryb korzystają z odpowiednich kolorów systemowych. Domyślny układ zachowuje dotychczasowy wygląd strony.</p>
+</section>

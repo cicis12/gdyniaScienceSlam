@@ -1,0 +1,7 @@
+{% set footer = (request.state.site_settings|default(default_site_settings)).footer %}
+<footer class="site-footer bottom-0 left-0 w-full py-12 text-center">
+  {% if footer.email %}<div class="footer-contact mb-2">📧 {{ footer.email|safe }}</div>{% endif %}
+  {% if footer.location %}<div class="footer-location mb-2">📍 {{ footer.location|safe }}</div>{% endif %}
+  <p class="footer-small text-sm">© 2026 Gdynia Science Slam</p>
+  {% if footer.additional %}<div class="footer-small text-sm px-6">{{ footer.additional|safe }}</div>{% endif %}
+</footer>

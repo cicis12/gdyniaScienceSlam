@@ -1,0 +1,40 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% macro entry_fields(entry=none) %}
+<label>Etap / rok<input name="label" value="{{ entry.label if entry else '' }}" maxlength="80" placeholder="Np. Początki lub 2024" required></label>
+<label>Tytuł<input name="title" value="{{ entry.title if entry else '' }}" maxlength="160" required></label>
+<label>Opis<textarea name="description" rows="6" maxlength="10000" required>{{ entry.description if entry else '' }}</textarea></label>
+<label>Zdjęcie<input type="file" name="photo" accept="image/jpeg,image/png,image/webp" {% if not entry %}required{% endif %}><small>JPG, PNG lub WebP; maks. 10 MB i 20 megapikseli.{% if entry %} Pozostaw puste, aby zachować obecne zdjęcie.{% endif %}</small></label>
+<label>Kolejność<input type="number" name="sort_order" value="{{ entry.sort_order if entry else ((entries|map(attribute='sort_order')|max + 1) if entries else 0) }}" min="0" max="100000" required><small>Niższe wartości wyświetlają się jako pierwsze.</small></label>
+{% endmacro %}
+{% block content %}
+<main class="content-admin">
+  <h1>O nas · oś czasu</h1>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+{% with settings_page_key='about' %}{% include 'macros/page_mode.html' %}{% endwith %}
+
+  {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
+  {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
+  <section class="content-panel">
+    <h2>Etapy · {{ entries|length }}</h2>
+    <p>Edytuj zdjęcia, opisy i kolejność etapów. Pełny eksport konfiguracji zawiera całą oś czasu wraz ze zdjęciami.</p>
+    {% for entry in entries %}
+    <details class="member-editor" id="entry-{{ entry.id }}">
+      <summary><img src="{{ entry.photo }}" alt="" width="56" height="56" loading="lazy"><span>{{ entry.label }} · {{ entry.title }}</span></summary>
+      <form action="/admin/about/entries/{{ entry.id }}" method="post" enctype="multipart/form-data" class="member-fields">
+        {{ entry_fields(entry) }}
+        <button type="submit">Zapisz etap</button>
+      </form>
+      <form action="/admin/about/entries/{{ entry.id }}/delete" method="post" onsubmit="return confirm('Usunąć ten etap z osi czasu?')"><button class="delete-member" type="submit">Usuń etap</button></form>
+    </details>
+    {% else %}<p>Dodaj pierwszy etap poniżej.</p>{% endfor %}
+  </section>
+  <section class="content-panel">
+    <h2>Dodaj etap</h2>
+    <form action="/admin/about/entries" method="post" enctype="multipart/form-data" class="member-fields">
+      {{ entry_fields() }}
+      <button type="submit">Dodaj etap</button>
+    </form>
+  </section>
+</main>
+{% endblock %}

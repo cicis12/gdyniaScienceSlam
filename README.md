@@ -14,6 +14,11 @@ If running for the first time: `python -m venv venv`
 
 `source venv/bin/activate`
 
+Install the project dependencies before starting the app or running migrations:
+```bash
+python -m pip install -r requirements.txt
+```
+
 ### Running an uvicorn server (Development)
 ```bash
     uvicorn main:app --reload
@@ -171,9 +176,26 @@ ENV_FILE="admin_DBcreds.env" alembic upgrade head
 ## Production
 ### Initial deployment:
 #### 0. Enter venv and install dependencies
-Install postgre.
+Install PostgreSQL on the host device (outside Flatpak or another app sandbox).
+
+Debian/Ubuntu:
 ```bash
-apt install postgresql
+sudo apt update
+sudo apt install postgresql postgresql-client
+sudo systemctl enable --now postgresql
+```
+
+Fedora:
+```bash
+sudo dnf install postgresql-server postgresql
+# Run only for a new installation with no initialized database cluster:
+sudo postgresql-setup --initdb
+sudo systemctl enable --now postgresql
+```
+
+Check that the server is available before continuing:
+```bash
+pg_isready -h 127.0.0.1 -p 5432
 ```
 After pulling the repository,enter the pulled folder   
 Install venv by
@@ -211,7 +233,15 @@ local   all     all                     peer
 host    all     all     127.0.0.1/32    peer
 ```
 
-Replace `peer` or `ident` with `scram-sha-256`. Save and exit.   
+Keep the local `postgres` administrative connection on `peer` so that
+`sudo -u postgres psql` continues to work. Configure the app's TCP connections
+on `127.0.0.1/32` and `::1/128` to use `scram-sha-256`. Do not change unrelated
+access rules. Set `password_encryption` to `scram-sha-256` before creating the
+roles below (for example, `SET password_encryption = 'scram-sha-256';` in that
+psql session). Save the configuration and reload the service:
+```bash
+sudo systemctl reload postgresql
+```
 
 Restart Postgre by
 ```bash
@@ -228,7 +258,8 @@ or
 `psql -U postgres`
 
 Create an admin user:  
-**ATTENTION: Set the <adminUsername> to the linux username on your system!!!**
+Use separate migration and application roles. The migration role does not need
+to match your Linux username when connecting with a password over TCP.
 
 ```sql
 CREATE USER <adminUsername> WITH PASSWORD '<adminPassword>';
@@ -243,7 +274,7 @@ In `DBcreds.env` hold:
 DB_NAME=<DBname>
 DB_USER=<appUsername>   
 DB_PASSWORD=<appPassword>   
-DB_HOST=localhost   
+DB_HOST=127.0.0.1
 DB_PORT=5432
 ```
 And in `admin_DBcreds.env` hold:
@@ -251,7 +282,7 @@ And in `admin_DBcreds.env` hold:
 DB_NAME=<DBname>
 DB_USER=<adminUsername>   
 DB_PASSWORD=<adminPassword>   
-DB_HOST=localhost   
+DB_HOST=127.0.0.1
 DB_PORT=5432
 ```
 
@@ -265,6 +296,15 @@ Exit by typing
 ```sql
 \q
 ```
+Protect both credential files and verify the migration connection first:
+```bash
+chmod 600 DBcreds.env admin_DBcreds.env
+psql -h 127.0.0.1 -U <adminUsername> -d <DBname> -W -c "SELECT current_user;"
+```
+Run commands from the repository root with the virtual environment active.
+Do not recreate an existing database or overwrite credentials without checking
+its contents. If roles already exist, inspect them before changing passwords.
+
 #### 4. Run migrations (add tables to db)
 Do:
 ```bash
@@ -358,3 +398,29 @@ Update the database (run a migration) by:
 ```bash
 ENV_FILE="admin_DBcreds.env" alembic upgrade head
 ```
+
+### Automated local database setup
+On a host with PostgreSQL already running and sudo access, use the existing
+`DBcreds.env` and `admin_DBcreds.env` settings:
+```bash
+venv/bin/python scripts/setup_local_database.py
+```
+Run this in your device's terminal so sudo can prompt for authentication.
+The script creates missing roles and the database, preserves existing role
+passwords and data, applies migrations, grants application access, and verifies
+the seeded tables. Existing credentials must already match any existing roles.
+It restricts the credential files to their owner. Install dependencies first.
+
+### Verify database setup
+After migrations and grants, check the migration revision and application access:
+```bash
+ENV_FILE=admin_DBcreds.env venv/bin/alembic current
+venv/bin/alembic heads
+psql -h 127.0.0.1 -U <appUsername> -d <DBname> -W -c "SELECT count(*) FROM team_members;"
+```
+The current revision should match the head. After future migrations, reapply
+existing-table grants if needed; default privileges must be assigned for the
+migration role that actually creates tables. For an application smoke check,
+configure the mail and token secrets described above, then run
+`venv/bin/uvicorn main:app --reload`.
+

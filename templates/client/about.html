@@ -1,159 +1,43 @@
 {% extends "client/client_header.html" %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/about.css') }}">
+<script src="{{ asset_url('js/about-timeline.js') }}" defer></script>
+{% endblock %}
 {% block content %}
-<!-- NAGŁÓWEK -->
-<section class="pt-10 pb-12 text-center">
-  <h1 class="text-5xl md:text-6xl font-extrabold tracking-wide">
-    O konkursie
-  </h1>
-  <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
-</section>
-
-<!-- SEKCJA 1 – INFORMACJE -->
-<section class="pb-20">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-
-    <!-- TEKST -->
-    <div class="bg-white rounded-3xl shadow-xl p-10">
-      <h2 class="text-3xl font-bold mb-6">Czym jest Science Slam?</h2>
-
-      <p class="text-gray-700 mb-4 leading-relaxed">
-        <bold class="font-bold text-[#18395d]">Gdynia Science Slam</bold> to wyjątkowa konferencja dająca przestrzeń młodym ludziom marzących o samorozwoju na zaprezentowanie siebie! Prelegenci mają 10 minut na wystąpienie podczas którego każdy ma dowolność przedstawienie swojego dowolnie wybranego tematu.
-      </p>
-    </div>
-
-    <!-- OBRAZ -->
-    <div>
-      <img src="static/assets/images/gallery15.webp"
-           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
-    </div>
-
-  </div>
-</section>
-<section class="pb-20">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-    <!-- OBRAZ -->
-    <div>
-      <img src="static/assets/images/gallery1.webp"
-           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
-    </div>
-    <!-- TEKST -->
-    <div class="bg-white rounded-3xl shadow-xl p-10">
-      <h2 class="text-3xl font-bold mb-6">Jak to się zaczeło?</h2>
-
-      <p class="text-gray-700 mb-4 leading-relaxed">
-        Pierwsza edycja odbyła się już dwa lata temu z inicjatywy <span class="font-bold text-blue-600">Kornelii Wieczorek.</span><br>
-        Gdynia Science Slam miał być odpowiedzią na trójmiejską potrzebę przestrzeni wypowiedzi dla młodych naukowców z całego regionu.
-      </p>
-    </div>
-    
-  </div>
-</section>
-<section class="pb-20">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-    <!-- TEKST -->
-    <div class="bg-white rounded-3xl shadow-xl p-10">
-      <h2 class="text-3xl font-bold mb-6">Co dalej?</h2>
-
-      <p class="text-gray-700 mb-4 leading-relaxed">
-        Po ogromnym sukcesie konferencji, w pełni zorganizowanej przez uczniów <span class="font-bold text-blue-600">Gdyńskiej Trójki</span>
-        jasnym stało się to, że projekt jest strzałem w dziesiątkę.<br>
-        Funkcję lidera przejął <span class="font-bold text-blue-600">Oskar Kotela</span> dzięki któremu idea została popchnięta dalej - przeniósł projekt ze szkolnej auli do
-        <span class="font-bold text-blue-600">Pomorskiego Parku Naukowo Technologicznego</span>, oraz zwiększając nie tylko ilość prelegentów ale również jakość wystąpień nadał wydarzeniu odpowiednią miarę.<br>
-        To głównie dzięki niemu możemy teraz rozwijać już trzecią edycję Gdynia Science Slam oraz kontynuować wsparcie młodych osób, nie tylko z Gdyni, nie tylko z Trójmiasta ale również z całej Polski. 
-       </p>
-    </div>
-    <!-- OBRAZ -->
-    <div>
-      <img src="static/assets/images/gallery2.webp"
-           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
+<main class="about-page theme-dark">
+  <header class="about-intro"><h1>O nas</h1></header>
+  {% if entries %}
+  <div class="about-timeline" data-timeline>
+    <nav class="timeline-nav" aria-label="Etapy naszej historii">
+      <ol>{% for entry in entries %}<li><a href="#stage-{{ entry.id }}" {% if loop.first %}aria-current="step"{% endif %}><span class="timeline-nav-number" aria-hidden="true">{{ '%02d'|format(loop.index) }}</span><span>{{ entry.label }}</span></a></li>{% endfor %}</ol>
+    </nav>
+    <div class="timeline-stages">
+      {% for entry in entries %}
+      <section class="timeline-stage{% if loop.first %} is-active{% endif %}" id="stage-{{ entry.id }}" aria-labelledby="title-{{ entry.id }}">
+        <div class="timeline-stage-content">
+          <div class="timeline-photo"><img src="{{ entry.photo }}" alt="{{ entry.title }}" width="1000" height="750" {% if not loop.first %}loading="lazy"{% endif %}></div>
+          <div class="timeline-copy">
+            <p class="timeline-label"><span aria-hidden="true">{{ '%02d'|format(loop.index) }}</span> {{ entry.label }}</p>
+            <h2 id="title-{{ entry.id }}">{{ entry.title }}</h2>
+            <p class="timeline-description">{{ entry.description }}</p>
+          </div>
+        </div>
+      </section>
+      {% endfor %}
     </div>
   </div>
-</section>
-<section class="pb-20">
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-
-    <!-- OBRAZ -->
-    <div>
-      <img src="static/assets/images/gallery14.webp"
-           class="w-full h-[420px] object-cover rounded-3xl shadow-xl">
+  {% else %}<p class="about-empty">Nasza historia pojawi się tutaj już wkrótce.</p>{% endif %}
+  <section class="about-benefits" aria-labelledby="benefits-title">
+    <h2 id="benefits-title">Dlaczego warto wziąć udział?</h2>
+    <div class="about-benefits-grid">
+      <article><span aria-hidden="true">01</span><h3>Zgłebisz interesujące tematy</h3><p>Będziesz mieć idealną okazje, aby dogłębnie przeanalizować interesujący Cię temat.</p></article>
+      <article><span aria-hidden="true">02</span><h3>Wystąpisz przed dużą publicznością</h3><p>Poprawisz swoje umiejętności występowania przed publicznością. Nie codziennie ma się okazje wystąpić na scenie, przed dużą widownią.</p></article>
+      <article><span aria-hidden="true">03</span><h3>Przełamiesz tremę</h3><p>Występ przed dużą publicznością dla wielu łączy sie ze stresem. Dlatego w tym roku, planujemy zorganizować warsztaty na temat radzenia sobie ze stresem dla prelegentów.</p></article>
+      <article><span aria-hidden="true">04</span><h3>Wzbogacisz swoje CV</h3><p>Udział w ogólnopolskiej konferencji naukowej, to bezdyskusyjnie solidny wpis do CV.</p></article>
+      <article><span aria-hidden="true">05</span><h3>Zobaczysz inną perspektywę</h3><p>Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.</p></article>
+      <article><span aria-hidden="true">06</span><h3>Czekają na Ciebie nagrody</h3><p>Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p></article>
     </div>
-    <!-- TEKST -->
-    <div class="bg-white rounded-3xl shadow-xl p-10">
-      <h2 class="text-3xl font-bold mb-6">Czy to dla ciebie?</h2>
-
-      <p class="text-gray-700 mb-4 leading-relaxed">
-        Szukasz okazji, aby się wykazać?<br>
-        Lubisz wyzwania?<br>
-        A może szukasz miejsca w którym ktoś Cię w końcu usłyszy?<br>
-        Jeśli tak, nie czekaj i wypełnij <a href="/registration" class="text-blue-500 underline">formularz zgłoszeniowy</a>!<br>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- SEKCJA 2 – DLACZEGO WARTO -->
-<section class="py-20 bg-[#5e85b8]">
-
-  <div class="max-w-6xl mx-auto px-6 text-center mb-16">
-    <h2 class="text-4xl font-bold text-[#18395d]">
-      Dlaczego warto wziąć udział?
-    </h2>
-    <div class="w-24 h-1 bg-[#18395d] mx-auto mt-4 rounded-full"></div>
-  </div>
-
-  <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-3 gap-10">
-
-    <!-- KARTA 1 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🕵️</div>
-      <h3 class="text-xl font-bold mb-4">Zgłebisz interesujące tematy</h3>
-      <p class="text-gray-600">
-        Będziesz mieć idealną okazje, aby dogłębnie przeanalizować interesujący Cię temat.
-      </p>
-    </div>
-
-    <!-- KARTA 2 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">👀</div>
-      <h3 class="text-xl font-bold mb-4">Wystąpisz przed dużą publicznością</h3>
-      <p class="text-gray-600">
-        Poprawisz swoje umiejętności występowania przed publicznością. Nie codziennie ma się okazje wystąpić na scenie, przed dużą widownią.
-      </p>
-    </div>
-
-    <!-- KARTA 3 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🫣</div>
-      <h3 class="text-xl font-bold mb-4">Przełamiesz tremę</h3>
-      <p class="text-gray-600">
-        Występ przed dużą publicznością dla wielu łączy sie ze stresem. Dlatego w tym roku, planujemy zorganizować warsztaty na temat radzenia sobie ze stresem dla prelegentów.
-      </p>
-    </div>
-    <!-- KARTA 4 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">📄</div>
-      <h3 class="text-xl font-bold mb-4">Wzbogacisz swoje CV</h3>
-      <p class="text-gray-600">
-        Udział w ogólnopolskiej konferencji naukowej, to bezdyskusyjnie solidny wpis do CV.
-      </p>
-    </div>
-    <!-- KARTA 5 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🪪</div>
-      <h3 class="text-xl font-bold mb-4">Zobaczysz inną perspektywę</h3>
-      <p class="text-gray-600">
-        Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.
-      </p>
-    </div>
-    <!-- KARTA 6 -->
-    <div class="bg-white rounded-3xl shadow-xl p-8 text-center hover:scale-105 transition">
-      <div class="text-4xl mb-4">🏆</div>
-      <h3 class="text-xl font-bold mb-4">Czekają na Ciebie nagrody</h3>
-      <p class="text-gray-600">
-        Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p>
-    </div>
-
-  </div>
-
-</section>
+    {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link about-registration-link" href="/registration">Zgłoś się <span aria-hidden="true">→</span></a>{% endif %}
+  </section>
+</main>
 {% endblock %}

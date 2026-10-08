@@ -1,0 +1,34 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<main class="content-admin"><h1>Strona główna</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+
+{% if error %}<p class="content-error" role="alert">{{ error }}</p>{% endif %}
+{% if request.query_params.get('saved') %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
+<section class="content-panel"><h2>Zdjęcia strony głównej</h2>
+<p>Zdjęcia zespołu i logotypy partnerów pochodzą z ich osobnych edytorów.</p>
+{% for slot, title in image_slots %}
+{% set image = home_images[slot] %}
+<details class="member-editor" id="home-image-{{ slot }}" {% if request.query_params.get('image') == slot %}open{% endif %}>
+<summary>{{ title }}</summary>
+<img class="home-image-preview" src="{{ image.photo }}" alt="" style="object-position: {{ image.position }}" loading="lazy">
+<form action="/admin/content/home/images/{{ slot }}" method="post" enctype="multipart/form-data" class="member-fields">
+<label>Nowe zdjęcie<input type="file" name="photo" accept="image/jpeg,image/png,image/webp"><small>JPG, PNG lub WebP; maks. 10 MB i 20 megapikseli. Pozostaw puste, aby zachować obecne zdjęcie.</small></label>
+{% if slot != 'hero' %}<label>Opis alternatywny<input name="alt" value="{{ image.alt }}" maxlength="300"><small>Opis zdjęcia dla czytników ekranu; pozostaw puste dla zdjęcia dekoracyjnego.</small></label>{% endif %}
+<label>Kadrowanie<select name="position">{% for value, label in image_positions %}<option value="{{ value }}" {% if image.position == value %}selected{% endif %}>{{ label }}</option>{% endfor %}</select></label>
+<button type="submit">Zapisz zdjęcie</button>
+</form>
+<form action="/admin/content/home/images/{{ slot }}/reset" method="post"><button class="palette-reset" type="submit">Przywróć domyślne zdjęcie</button></form>
+</details>
+{% endfor %}
+</section>
+<form action="/admin/content/home" method="post">
+{% for section, title, fields in home_fields %}
+<section class="content-panel"><h2>{{ title }}</h2><div class="member-fields">
+{% for key, label, default in fields %}
+<label>{{ label }}<textarea name="{{ key }}" rows="{{ 4 if key.endswith('description') else 2 }}" maxlength="10000">{{ home_content[key] }}</textarea></label>
+{% endfor %}
+</div></section>
+{% endfor %}
+<button type="submit">Zapisz treści strony głównej</button>
+</form></main>{% endblock %}

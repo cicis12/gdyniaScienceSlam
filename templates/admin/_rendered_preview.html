@@ -1,0 +1,16 @@
+{% import "macros/fields.html" as ui %}
+
+<div class="bg-[#819edb] text-[#18395d] p-6 rounded-xl shadow-inner min-h-[300px]">
+  {% if display_name %}
+    <h2 class="text-2xl font-bold text-center mb-1">{{ display_name }}</h2>
+  {% endif %}
+  {% if description %}
+    <p class="text-center font-medium text-sm mb-6 text-gray-700">{{ description }}</p>
+  {% endif %}
+
+  <div class="space-y-4 max-w-lg mx-auto">
+    {% for field in fields %}
+      {{ ui.render_field(field) }}
+    {% endfor %}
+  </div>
+</div>

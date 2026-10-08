@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, status
 from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
+from templating import create_templates
 from sqlalchemy.orm import Session
 
 from database import get_db
@@ -9,7 +9,7 @@ from forms import FormDefinition, FormPayload, build_submission_model
 
 router = APIRouter()
 # Create Jinja2Templates locally to avoid circular imports with main.py
-templates = Jinja2Templates(directory="templates")
+templates = create_templates()
 
 
 @router.post("/api/forms/submit")

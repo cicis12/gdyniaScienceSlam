@@ -1,0 +1,161 @@
+{% import "macros/fields.html" as ui %}
+
+{% extends "client/client_header.html" %}
+
+  {% block head_extra %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
+  {% endblock %}
+
+{% block content %}
+<main class="flex-grow">
+    <div id="toast" class="fixed top-5 right-5 z-50 hidden">
+      <div id="toast-content" class="px-6 py-4 rounded-lg shadow-lg text-white font-medium" role="status" aria-live="polite"></div>
+    </div>
+    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
+      <div class="md:w-2/3 mx-auto">
+        <form class="dyn-form space-y-6">
+            <input type="hidden" name="form_id" value="{{ form.id }}">
+            <input type="hidden" name="form_version_id" value="{{ version.id }}">
+
+            {% for field in version.definition.fields %}
+                {{ ui.render_field(field) }}
+            {% endfor %}
+
+            <div class="pt-4 text-center">
+              <button type="submit" class="bg-[#18395d] text-white font-bold px-8 py-3 rounded-full hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#819edb]">
+                Wyślij formularz
+              </button>
+            </div>
+        </form>
+      </div>
+    </section>
+</main>
+
+  <!-- phone number handling-->
+  <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+  <!-- school autocompletion -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  <script src="/static/js/school-autocomplete.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", ()=>{
+    document.querySelectorAll(".dyn-form").forEach(form => {
+      window.initializeSchoolAutocomplete?.(form);
+      //-------------------TOAST HANDLING-----------------------------
+      
+        function showToast(message, type="success"){
+          const toast = document.getElementById("toast");
+          const content = document.getElementById("toast-content")
+          content.textContent=message;
+          content.classList.remove("bg-green-600", "bg-red-600")
+          if(type === "success"){
+            content.classList.add("bg-green-600");
+          } else{
+            content.classList.add("bg-red-600");
+          }
+          toast.classList.remove("hidden")
+          setTimeout(() => {
+            toast.classList.add("hidden");
+          }, 4000);
+        }
+      //--------------------------------------------------------------
+      //-------------------PHONE HANDLING-----------------------------
+      const phoneInput = form.querySelector(".phone");
+      let iti = null;
+      if (phoneInput){
+        iti = window.intlTelInput(phoneInput, {
+          initialCountry: "pl",
+          countryOrder: ["pl"],
+          customContainer: "tailwind-phone-input",
+          separateDialCode: true,
+          loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
+        });
+        // rising label (peer gets broken by iti)
+        const phoneLabel = form.querySelector(".phone-label");
+        if(phoneLabel) {
+          phoneInput.addEventListener("focus", ()=> phoneLabel.classList.add("active"));
+          phoneInput.addEventListener("blur", ()=> {
+            if(!phoneInput.value.trim()) phoneLabel.classList.remove("active");
+          });
+          if(phoneInput.value.trim()) phoneLabel.classList.add("active");
+        }
+      }
+      
+      //---------------------------------------------------------------
+      //----------------SCHOOL AUTOCOMPLETION--------------------------
+        //---------------------------------------------------------------
+        //-------------LONG TEXT AUTO EXPAND-----------------------------
+        function autoResize(textarea){
+          textarea.style.height = "auto";
+          textarea.style.height = textarea.scrollHeight + "px";
+        }
+        const textareas = form.querySelectorAll(".long-text");
+        textareas.forEach(textarea =>{
+          textarea.addEventListener("input", () => autoResize(textarea));
+        });
+        //---------------------------------------------------------------
+        //-------------FORM HANDLING-------------------------------------
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const form_id = parseInt(formData.get('form_id'));
+            const form_version_id = parseInt(formData.get('form_version_id'))
+            
+            if(iti && phoneInput){
+              formData.set("phone", iti.getNumber());
+            }
+
+            formData.delete('form_id');
+            formData.delete('form_version_id');
+
+            const answers = Object.fromEntries(formData.entries());
+            try{
+              const response = await fetch('/api/forms/submit', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json'},
+                body: JSON.stringify({form_id, form_version_id, answers})
+              });
+              const result = await response.json();
+              if(!response.ok){
+                showToast(result.message || result.detail || JSON.stringify(result.detail) || "Coś poszło nie tak. Spróbuj ponownie.", "error");
+                return;
+              }
+              showToast(result.message || "Formularz wysłany pomyślnie!", "success");
+              form.reset();
+            } catch(err){
+              showToast("Coś poszło nie tak. Spróbuj ponownie.", "error");
+            }
+          });
+    });
+  });
+  </script>
+
+  <!-- Phone styling-->
+  <style>
+    .tailwind-phone-input .iti {
+        width: calc(100% - 2.5rem) !important;
+        left: 2.5rem !important;
+        top:50% !important;
+        font-weight: bold;
+        box-sizing: border-box !important;
+    }
+    .phone-label {
+      position: absolute;
+      top: 1.5rem;
+      left:8rem;
+      transition: all 0.2s;
+      font-size: 1rem;
+    }
+    .phone-label.active{
+      top: 0.25rem;
+      left:2.5rem;
+      font-size: 0.90rem;
+    }
+    .dyn-form label:not(.checkbox-label){
+      z-index: -10;
+    }
+    html, body{
+      overflow-x: hidden;
+    }
+  </style>
+{% endblock %}

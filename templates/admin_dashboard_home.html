@@ -1,0 +1,55 @@
+{% extends "admin_header.html" %}
+
+{% block content %}
+<main class="mx-auto w-full max-w-7xl px-6 py-10">
+  <header class="mb-8 border-b border-[#bacade] pb-6">
+    <p class="text-sm font-bold uppercase tracking-wide text-[#2d519f]">Panel administratora</p>
+    <h1 class="mt-2 text-3xl font-bold text-[#06101d]">Formularze</h1>
+    <p class="mt-2 text-[#324a67]">Zarządzaj formularzami i przeglądaj zgłoszenia.</p>
+  </header>
+
+  <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+    <h2 class="text-xl font-bold text-[#06101d]">Utworzone formularze</h2>
+    <a href="/admin/forms" class="redirect-link">
+      Otwórz kreator formularzy <span aria-hidden="true">→</span>
+    </a>
+  </div>
+
+  {% if forms %}
+    <div class="overflow-x-auto border border-[#bacade] bg-white">
+      <table class="w-full min-w-[620px] text-left">
+        <thead class="bg-[#eef2f7] text-sm text-[#213145]">
+          <tr>
+            <th class="px-5 py-3 font-bold">Formularz</th>
+            <th class="px-5 py-3 font-bold">Adres</th>
+            <th class="px-5 py-3 font-bold">Status</th>
+            <th class="px-5 py-3 text-right font-bold">Odpowiedzi</th>
+            <th class="px-5 py-3 text-right font-bold">Akcja</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-[#dde5ee]">
+          {% for form in forms %}
+            <tr>
+              <td class="px-5 py-4 font-bold text-[#06101d]">{{ form.name }}</td>
+              <td class="px-5 py-4 font-mono text-sm text-[#324a67]">/forms/{{ form.slug }}</td>
+              <td class="px-5 py-4">
+                <span class="font-semibold {{ 'text-[#036363]' if form.enabled else 'text-[#324a67]' }}">
+                  {{ 'Aktywny' if form.enabled else 'Wyłączony' }}
+                </span>
+              </td>
+              <td class="px-5 py-4 text-right tabular-nums text-[#06101d]">{{ submission_counts.get(form.id, 0) }}</td>
+              <td class="px-5 py-4 text-right">
+                <a href="/admin/form-submissions?form_id={{ form.id }}" class="font-bold text-[#2d519f] underline decoration-[#2d519f] underline-offset-4 hover:text-[#122c54]">
+                  Zobacz odpowiedzi
+                </a>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  {% else %}
+    <p class="border-l-4 border-[#3865c7] bg-[#eaf1fa] p-5 text-[#122c54]">Nie ma jeszcze formularzy. Utwórz pierwszy w kreatorze.</p>
+  {% endif %}
+</main>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">
+<link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">
+<script src="{{ asset_url('js/partners-admin.js') }}" defer></script>
+{% endblock %}
+{% macro partner_fields(partner=none, section=none) %}
+<label>Nazwa partnera<input name="name" value="{{ partner.name if partner else '' }}" maxlength="160" required></label>
+<label>Logo<input type="file" name="logo" accept="image/png,image/jpeg,image/webp,image/svg+xml" {% if not partner %}required{% endif %}><small>JPG, PNG, WebP lub statyczne SVG; maks. 10 MB. {% if partner %}Pozostaw puste, aby zachować obecne logo.{% endif %}</small></label>
+<label>Adres strony (opcjonalnie)<input type="url" name="website" value="{{ partner.website if partner else '' }}" maxlength="1000" placeholder="https://"></label>
+<label>Rozmiar logo<input type="number" name="logo_scale" value="{{ partner.logo_scale if partner else 1 }}" min="0.5" max="3" step="0.1" data-logo-scale required><small>1 = standardowy rozmiar. Zwiększ, jeśli plik ma duże białe marginesy.</small></label>
+<label>Kolejność<input type="number" name="sort_order" value="{{ partner.sort_order if partner else ((section.partners|map(attribute='sort_order')|max + 1) if section.partners else 0) }}" min="0" max="100000" required></label>
+{% if partner %}<label>Sekcja<select name="destination_section">{% for target in partner_config.sections %}<option value="{{ target.id }}" {% if target.id == section.id %}selected{% endif %}>{{ target.title }}</option>{% endfor %}</select></label>{% endif %}
+{% endmacro %}
+{% block content %}
+<main class="content-admin partners-admin">
+  <h1>Partnerzy</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+  {% if error %}<p class="content-error" role="alert">{{ error }}</p>{% endif %}
+  {% if request.query_params.get('saved') %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
+  {% with settings_page_key='partners' %}{% include 'macros/page_mode.html' %}{% endwith %}
+  <section class="content-panel">
+    <h2>Widoczność partnerów</h2>
+    <form action="/admin/partners/settings" method="post">
+      <label class="visibility-option"><input type="checkbox" name="enabled" value="true" {% if partner_config.enabled %}checked{% endif %}><span>Pokaż partnerów na stronie partnerów i w karuzeli strony głównej</span></label>
+      <p class="page-mode-hint">Wyłączenie zachowuje wszystkie wpisy. Puste i wyłączone sekcje nie są wyświetlane. Karuzela zawiera partnerów ze wszystkich widocznych sekcji.</p>
+      <button type="submit">Zapisz widoczność</button>
+    </form>
+  </section>
+  <section class="content-panel">
+    <h2>Dodaj sekcję</h2>
+    <form action="/admin/partners/sections" method="post" class="member-fields">
+      <label>Nazwa sekcji<input name="title" maxlength="160" placeholder="Np. Sponsor główny lub Patroni medialni" required></label>
+      <label>Kolejność<input type="number" name="sort_order" min="0" max="100000" value="{{ (partner_config.sections|map(attribute='sort_order')|max + 1) if partner_config.sections else 0 }}" required></label>
+      <label class="visibility-option"><input type="checkbox" name="highlighted" value="true">Wyróżniona sekcja — większe karty logo</label>
+      <label class="visibility-option"><input type="checkbox" name="enabled" value="true" checked>Pokaż sekcję</label>
+      <button type="submit">Dodaj sekcję</button>
+    </form>
+  </section>
+  {% for section in partner_config.sections %}
+  <section class="content-panel" id="section-{{ section.id }}">
+    <h2>{{ section.title }} <small>{{ section.partners|length }} partnerów · {{ 'wyróżniona' if section.highlighted else 'standardowa' }}{% if not section.enabled %} · ukryta{% endif %}</small></h2>
+    <details class="member-editor"><summary>Ustawienia sekcji</summary>
+      <form action="/admin/partners/sections/{{ section.id }}" method="post" class="member-fields">
+        <label>Nazwa sekcji<input name="title" maxlength="160" value="{{ section.title }}" required></label>
+        <label>Kolejność<input type="number" name="sort_order" min="0" max="100000" value="{{ section.sort_order }}" required></label>
+        <label class="visibility-option"><input type="checkbox" name="highlighted" value="true" {% if section.highlighted %}checked{% endif %}>Wyróżniona sekcja — większe karty logo</label>
+        <label class="visibility-option"><input type="checkbox" name="enabled" value="true" {% if section.enabled %}checked{% endif %}>Pokaż sekcję</label>
+        <button type="submit">Zapisz sekcję</button>
+      </form>
+      <form action="/admin/partners/sections/{{ section.id }}/delete" method="post" onsubmit="return confirm('Usunąć sekcję wraz ze wszystkimi partnerami?')"><button type="submit" class="delete-member">Usuń sekcję i jej partnerów</button></form>
+    </details>
+    {% for partner in section.partners %}
+    <details class="member-editor partner-editor" id="partner-{{ partner.id }}">
+      <summary><span class="admin-partner-logo"><img src="{{ partner.logo }}" alt="" loading="lazy" style="--logo-scale: {{ partner.logo_scale }}"></span><span>{{ partner.name }}</span></summary>
+      <form action="/admin/partners/sections/{{ section.id }}/partners/{{ partner.id }}" method="post" enctype="multipart/form-data" class="member-fields">
+        {{ partner_fields(partner, section) }}<button type="submit">Zapisz partnera</button>
+      </form>
+      <form action="/admin/partners/sections/{{ section.id }}/partners/{{ partner.id }}/delete" method="post" onsubmit="return confirm('Usunąć partnera?')"><button type="submit" class="delete-member">Usuń partnera</button></form>
+    </details>
+    {% endfor %}
+    <details class="member-editor" {% if not section.partners %}open{% endif %}><summary>Dodaj partnera do sekcji</summary>
+      <form action="/admin/partners/sections/{{ section.id }}/partners" method="post" enctype="multipart/form-data" class="member-fields">
+        {{ partner_fields(none, section) }}<button type="submit">Dodaj partnera</button>
+      </form>
+    </details>
+  </section>
+  {% endfor %}
+</main>
+{% endblock %}

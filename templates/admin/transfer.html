@@ -1,0 +1,50 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<div class="content-admin">
+  <h1>Przenieś konfigurację strony</h1>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+  <p>Przygotuj treści na środowisku deweloperskim, pobierz pakiet ZIP i wgraj go na produkcji. Pakiet zawiera również zdjęcia.</p>
+  {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
+  {% if request.query_params.get('imported') %}<p role="status" class="content-notice">Import zakończony. Nowe treści są już dostępne.</p>{% endif %}
+  {% if preview is defined %}
+  <section class="content-panel">
+    <h2>Podgląd importu</h2>
+    <p>Zakres: <strong>{{ 'Galeria i film' if scope == 'gallery' else 'Cała konfiguracja' }}</strong></p>
+    <ul class="transfer-summary">
+      <li>Galeria: {{ current_photos }} obecnych zdjęć zostanie zastąpionych przez {{ preview.gallery|length }} zdjęć z pakietu.</li>
+      <li>Film: {{ preview.video.title if preview.video.enabled else 'wyłączony' }}.</li>
+      {% if scope == 'all' %}
+      <li>O nas: {% if preview.about is not none %}oś czasu zostanie zastąpiona przez {{ preview.about|length }} etapów wraz ze zdjęciami.{% else %}starszy pakiet nie zawiera osi czasu; obecna treść zostanie zachowana.{% endif %}</li>
+      <li>Partnerzy: {% if preview.partners is not none %}sekcje, wpisy, logotypy i ich widoczność zostaną zastąpione konfiguracją z pakietu.{% else %}starszy pakiet nie zawiera partnerów; obecna konfiguracja zostanie zachowana.{% endif %}</li>
+      <li>Dokumenty i zdjęcia strony głównej: {% if preview.documents is not none %}pliki i ustawienia zostaną przeniesione z pakietu.{% else %}starszy pakiet ich nie zawiera; obecna zawartość zostanie zachowana.{% endif %}</li>
+      <li>Zespół: {{ current_team }} obecnych profili zostanie zastąpionych przez {{ preview.team|length }} profili.</li>
+      <li>Kolory, widoczność stron, rozwijanie profili, data wydarzenia i stan głosowania zostaną zastąpione.</li>
+      <li>Kolory systemowe, stopka i teksty strony głównej: {% if 'site_theme' in preview.settings %}ustawienia z pakietu zostaną przeniesione.{% else %}starszy pakiet ich nie zawiera; obecne ustawienia zostaną zachowane.{% endif %}</li>
+      <li>{{ preview.forms|length }} formularzy zostanie dodanych lub zaktualizowanych według adresu. Dotychczasowe wersje i zgłoszenia pozostaną zachowane. Formularze spoza pakietu pozostaną bez zmian.</li>
+      <li>Wybór formularzy rejestracji zostanie przeniesiony według adresów formularzy.</li>
+      {% endif %}
+    </ul>
+    <p>Konta, hasła, zgłoszenia, głosujący i oddane głosy nie są importowane. Przed zastąpieniem treści możesz pobrać obecną konfigurację w sekcji Eksport poniżej.</p>
+    <div class="settings-actions"><form action="/admin/transfer/apply" method="post"><input type="hidden" name="token" value="{{ token }}"><button type="submit">Zastosuj import</button></form><form action="/admin/transfer" method="get"><button type="submit" class="palette-reset">Anuluj</button></form></div>
+    <small>Podgląd jest ważny przez 30 minut.</small>
+  </section>
+  {% endif %}
+  <section class="content-panel">
+    <h2>Eksport</h2>
+    <p>Ustawienia strony, wspólne kolory, stopka, teksty strony głównej, partnerzy i ich logotypy, dokumenty PDF, zdjęcia strony głównej, oś czasu O nas, zespół, galeria, film, bieżące definicje formularzy i zdjęcia. Pakiet nie zawiera kodu strony, kont, sekretów, zgłoszeń ani głosów.</p>
+    <form action="/admin/transfer/export" method="get"><button type="submit">Pobierz konfigurację ZIP ↓</button></form>
+  </section>
+  <section class="content-panel">
+    <h2>Import</h2>
+    <form action="/admin/transfer/preview" method="post" enctype="multipart/form-data" class="member-fields">
+      <label>Pakiet konfiguracji<input type="file" name="bundle" accept=".zip,application/zip" required><small>Maksymalnie 150 MB. Oba środowiska muszą mieć aktualne migracje i obsługiwać ten format pakietu.</small></label>
+      <fieldset class="transfer-scope"><legend>Co przenieść?</legend>
+        <label><input type="radio" name="scope" value="gallery" checked> Tylko galeria i film</label>
+        <label><input type="radio" name="scope" value="all"> Cała konfiguracja</label>
+      </fieldset>
+      <button type="submit">Sprawdź pakiet i pokaż podgląd</button>
+    </form>
+  </section>
+</div>
+{% endblock %}

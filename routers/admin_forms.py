@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import List, Optional, Any, Dict, Literal
 from fastapi import APIRouter, Depends, Form, HTTPException, Request, status
 from fastapi.responses import HTMLResponse, RedirectResponse
-from fastapi.templating import Jinja2Templates
+from templating import create_templates
 from pydantic import BaseModel, EmailStr, create_model
 from sqlalchemy.orm import Session
 
@@ -12,7 +12,7 @@ from forms import FormField, FormDefinition, FieldType
 from fastapi.responses import FileResponse, HTMLResponse
 
 router = APIRouter(prefix="/admin/forms", tags=["Admin Forms"])
-templates = Jinja2Templates(directory="templates")
+templates = create_templates()
 
 class CreateFormPayload(BaseModel):
     slug: str
@@ -41,6 +41,7 @@ def admin_forms_dashboard(request: Request, db: Session = Depends(get_db)):
     return templates.TemplateResponse("admin/form_builder.html", {
         "request": request,
         "forms": forms,
+        "admin": getattr(request.state, "admin", None),
         "selected_registration_form_ids": selected_registration_form_ids,
     })
 

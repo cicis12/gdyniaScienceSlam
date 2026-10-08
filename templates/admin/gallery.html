@@ -1,0 +1,45 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<div class="content-admin">
+  <h1>Poprzednie edycje</h1>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+{% with settings_page_key='previous_editions' %}{% include 'macros/page_mode.html' %}{% endwith %}
+
+  {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
+  {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
+  <section id="video" class="content-panel">
+    <h2>Film na pierwszym planie</h2>
+    <form action="/admin/gallery/video" method="post" class="member-fields">
+      <label class="visibility-option"><input type="checkbox" name="enabled" value="true" {% if video.enabled %}checked{% endif %}> Pokaż film nad galerią</label>
+      <label>Link do filmu<input type="url" name="url" value="{{ video.url }}" maxlength="1000" placeholder="https://www.youtube.com/watch?v=…"><small>YouTube lub Vimeo. Film musi zezwalać na osadzanie na innych stronach.</small></label>
+      <label>Nazwa filmu<input name="title" value="{{ video.title }}" maxlength="160"><small>Wyświetlana jako nagłówek nad filmem.</small></label>
+      <button type="submit">Zapisz film</button>
+    </form>
+  </section>
+  <section id="photos" class="content-panel">
+    <h2>Zdjęcia · {{ photos|length }}</h2>
+    <form action="/admin/gallery/photos" method="post" enctype="multipart/form-data" class="member-fields">
+      <label>Rok edycji<input type="number" name="year" min="2000" max="2100" value="2026" required></label>
+      <label>Podpis / opis zdjęcia<input name="caption" maxlength="300" placeholder="Np. Finał Gdynia Science Slam"></label>
+      <label>Zdjęcia<input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple required><small>Do 30 zdjęć naraz; JPG, PNG, WebP; maks. 10 MB i 20 megapikseli na zdjęcie. Wspólny podpis możesz później zmienić dla każdej fotografii.</small></label>
+      <button type="submit">Dodaj zdjęcia</button>
+    </form>
+    <p class="gallery-admin-hint">Nowsze edycje wyświetlamy jako pierwsze. W obrębie edycji zdjęcia są sortowane rosnąco według kolejności, a potem daty dodania.</p>
+    <div class="gallery-admin-grid">
+      {% for photo in photos %}
+      <article class="gallery-admin-photo">
+        <img src="{{ photo.photo }}" alt="{{ photo.caption or ('GSS ' ~ photo.year) }}" loading="lazy" width="480" height="320">
+        <form action="/admin/gallery/photos/{{ photo.id }}" method="post" class="member-fields">
+          <label>Rok<input type="number" name="year" value="{{ photo.year }}" min="2000" max="2100" required></label>
+          <label>Podpis<input name="caption" value="{{ photo.caption }}" maxlength="300"></label>
+          <label>Kolejność<input type="number" name="sort_order" value="{{ photo.sort_order }}" min="0" max="100000" required></label>
+          <button type="submit">Zapisz zdjęcie</button>
+        </form>
+        <form action="/admin/gallery/photos/{{ photo.id }}/delete" method="post" onsubmit="return confirm('Usunąć zdjęcie z galerii?')"><button type="submit" class="delete-member">Usuń zdjęcie</button></form>
+      </article>
+      {% else %}<p>Dodaj pierwsze zdjęcia do galerii.</p>{% endfor %}
+    </div>
+  </section>
+</div>
+{% endblock %}

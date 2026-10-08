@@ -1,0 +1,3 @@
+{% set public_settings = request.state.site_settings|default(default_site_settings) %}
+<style id="site-theme-variables">:root { {% for key, value in public_settings.theme.items() %}--theme-{{ key|replace('_', '-') }}: {{ value }}; {% endfor %} }</style>
+<link rel="stylesheet" href="{{ asset_url('css/system-theme.css') }}">

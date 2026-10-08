@@ -1,0 +1,5 @@
+{% macro partner_logo(partner, duplicate=false) %}
+{% if partner.website %}<a class="partner-logo-shell" href="{{ partner.website }}" target="_blank" rel="noopener noreferrer" {% if duplicate %}tabindex="-1"{% endif %} aria-label="{{ partner.name }} — strona partnera">{% else %}<div class="partner-logo-shell">{% endif %}
+<img src="{{ partner.logo }}" alt="{{ partner.name }}" loading="lazy" width="480" height="240" style="--logo-scale: {{ partner.logo_scale }}">
+{% if partner.website %}</a>{% else %}</div>{% endif %}
+{% endmacro %}

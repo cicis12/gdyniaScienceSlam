@@ -1,23 +1,67 @@
 {% extends "client/client_header.html" %}
+{% import "macros/fields.html" as ui %}
 
   {% block head_extra %}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
   {% endblock %}
 
 {% block content %}
-<body class="bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
-
-  
-  <h1 class="text-4xl font-bold text-center flex-grow items-center justify-center flex p-8">Gdynia Science Slam 2026 już się zakończyło.<br> Zapraszamy do udziału w przyszłym roku!</h1>
-
-  <main class="flex-grow hidden">
+  <main class="flex-grow">
     <div id="toast" class="fixed top-5 right-5 z-50 hidden">
       <div id="toast-content" class="px-6 py-4 rounded-xl shadow-lg text-white font-medium">
 
       </div>
     </div>
-    <section class="max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
+    <section class="registration-shell max-w-7xl mx-auto px-6 py-20 items-center justify-center w-full">
       <div class="md:w-2/3 mx-auto left-1/6">
+        {% if creator_forms %}
+        <div class="tabs registration-form-tabs relative bg-white rounded-full p-1 grid center mb-8" style="grid-template-columns: repeat({{ creator_forms|length }}, minmax(0, 1fr))">
+          <div class="absolute inset-y-1 bg-[#819edb] rounded-full transition-transform duration-300" id="tab-slider"></div>
+          {% for form in creator_forms %}
+            <a href="#creator-form-{{ form.id }}" class="tab relative z-10 py-2 px-2 font-bold flex items-center justify-center text-center text-xs md:text-base">
+              {{ form.name }}
+            </a>
+          {% endfor %}
+        </div>
+
+        {% for form in creator_forms %}
+          <div id="creator-form-{{ form.id }}" class="form-tab {% if not loop.first %}hidden{% endif %}">
+            <form class="creator-dyn-form space-y-6" data-form-id="{{ form.id }}" data-version-id="{{ form.version_id }}">
+              <h2 class="text-3xl font-bold text-center">{{ form.name }}</h2>
+              {% if form.description %}<p class="text-center">{{ form.description }}</p>{% endif %}
+              {% for field in form.fields %}
+                {{ ui.render_field(field) }}
+              {% endfor %}
+              <button type="submit" class="mt-8 w-full bg-[#18395d] text-white font-bold py-3 rounded-xl transition-all duration-200 ease-in-out hover:shadow-lg hover:-translate-y-0.5">
+                Wyślij formularz
+              </button>
+            </form>
+          </div>
+        {% endfor %}
+
+        {% if standalone_forms %}
+          <section class="creator-registration-list mt-12" aria-labelledby="standalone-forms-title">
+            <h2 id="standalone-forms-title" class="mb-4 text-xl font-bold text-white">Pozostałe formularze</h2>
+            <div class="creator-registration-links">
+              {% for form in standalone_forms %}
+                <a class="creator-registration-link" href="/forms/{{ form.slug }}">
+                  <span class="creator-registration-link-copy">
+                    <strong>{{ form.name }} <span aria-hidden="true">→</span></strong>
+                    {% if form.description %}<span>{{ form.description }}</span>{% endif %}
+                  </span>
+                </a>
+              {% endfor %}
+            </div>
+          </section>
+        {% endif %}
+        {% else %}
+        <section class="creator-registration-list" aria-labelledby="no-active-forms-title">
+          <p class="registration-eyebrow">Rejestracja online</p>
+          <h1 id="no-active-forms-title" class="text-3xl font-bold text-white">Brak aktywnych formularzy</h1>
+          <p class="mt-3 text-[#d5e2f6]">Nowe formularze rejestracyjne pojawią się tutaj, gdy będą dostępne.</p>
+        </section>
+        {% endif %}
+        {% if false %}
         <div class="tabs relative bg-white rounded-full p-1 grid grid-cols-3 center mb-8">
           <div class="absolute inset-y-1 bg-[#819edb] rounded-full transition-transform duration-300" id="tab-slider"></div>
           <a href="#contestant" class="tab relative z-10  py-2 font-bold flex items-center justify-center gap-2 text-sm md:text-base">
@@ -39,8 +83,7 @@
         </div>
         <!-- contestant Form-->
         <div id="contestant" class="form-tab">
-            <h1 class="text-4xl font-bold text-center">Czas na składanie zgłoszeń na prelegenta już minął.</h1>
-            <form method="POST" id="contestantForm" class="hidden dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
+            <form method="POST" id="contestantForm" class="dyn-form" data-endpoint="/contestantForm" enctype="multipart/form-data">
                 <h2 class="text-3xl font-bold text-center">
                     Dane osobowe
                   </h2>
@@ -767,10 +810,6 @@
               <p class="text-sm font-bold"> Zapamiętaj jaki adres podajesz. Będzie on ci potrzebny podczas wydarzenia.</p>
               <!-- Phone number-->
               <div class="relative tailwind-phone-input w-full w-full border-b-2 border-white outline-none pr-0 pt-6">
-                  
-                  
-                    
-                  
                     <div class="absolute">
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 absolute">
                         <path d="M10.5 18.75a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
@@ -784,8 +823,7 @@
                      required/>
                      <label
                         class="absolute left-32 top-6 text-gray-600 transition-all duration-200 font-bold phone-label">
-                      Numer telefonu*</label>
-                  
+                      Numer telefonu*</label>  
               </div>
               <!-- School-->
               <div class="relative autocompleteConatainer">
@@ -1199,6 +1237,7 @@
               </button> 
         </form>
         </div>
+        {% endif %}
       </div>
     </section>
   </main>
@@ -1208,6 +1247,7 @@
     document.addEventListener("DOMContentLoaded", ()=>{
       function openTab(tabID){
         const newTab = document.getElementById(tabID);
+        if (!newTab) return;
         document.querySelectorAll(".form-tab").forEach(t => {
           t.classList.add("hidden");
         });
@@ -1218,6 +1258,7 @@
       function updateTabSlider() {
         const tabs=document.querySelectorAll(".tab");
         const slider = document.getElementById("tab-slider");
+        if (!slider || !tabs.length) return;
 
         const activeIndex = [...tabs].findIndex(tab =>
           tab.getAttribute("href") === window.location.hash
@@ -1237,7 +1278,7 @@
       if(hash){
         openTab(hash);
       }else{
-        openTab("contestant")
+        openTab("{% if creator_forms %}creator-form-{{ creator_forms[0].id }}{% else %}contestant{% endif %}")
       }
       window.addEventListener("hashchange", () => {
         updateTabSlider();
@@ -1245,7 +1286,7 @@
         if(hash){
           openTab(hash);
         }else{
-          openTab("contestant")
+          openTab("{% if creator_forms %}creator-form-{{ creator_forms[0].id }}{% else %}contestant{% endif %}")
         }
       });
       window.addEventListener("resize", ()=>{
@@ -1262,8 +1303,78 @@
 
   <!-- phone number handling-->
   <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/intlTelInput.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".creator-dyn-form").forEach(form => {
+        window.initializeSchoolAutocomplete?.(form);
+        const phoneInput = form.querySelector(".phone");
+        let phoneWidget = null;
+        if (phoneInput && window.intlTelInput) {
+          phoneWidget = window.intlTelInput(phoneInput, {
+            initialCountry: "pl",
+            countryOrder: ["pl"],
+            separateDialCode: true,
+            loadUtils: () => import("https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/js/utils.js"),
+          });
+          const phoneLabel = form.querySelector(".phone-label");
+          phoneInput.addEventListener("focus", () => phoneLabel?.classList.add("active"));
+          phoneInput.addEventListener("blur", () => {
+            if (!phoneInput.value.trim()) phoneLabel?.classList.remove("active");
+          });
+        }
+
+        form.querySelectorAll(".long-text").forEach(textarea => {
+          textarea.addEventListener("input", () => {
+            textarea.style.height = "auto";
+            textarea.style.height = `${textarea.scrollHeight}px`;
+          });
+        });
+
+        form.addEventListener("submit", async event => {
+          event.preventDefault();
+          const formData = new FormData(form);
+          if (phoneWidget && phoneInput) formData.set(phoneInput.name, phoneWidget.getNumber());
+          const answers = Object.fromEntries(formData.entries());
+
+          try {
+            const response = await fetch("/api/forms/submit", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                form_id: Number(form.dataset.formId),
+                form_version_id: Number(form.dataset.versionId),
+                answers,
+              }),
+            });
+            const result = await response.json();
+            const toast = document.getElementById("toast");
+            const content = document.getElementById("toast-content");
+            content.textContent = response.ok
+              ? (result.message || "Formularz wysłany pomyślnie!")
+              : (result.message || result.detail || "Coś poszło nie tak. Sprawdź formularz.");
+            content.classList.remove("bg-green-600", "bg-red-600");
+            content.classList.add(response.ok ? "bg-green-600" : "bg-red-600");
+            toast.classList.remove("hidden");
+            window.setTimeout(() => toast.classList.add("hidden"), 4000);
+            if (response.ok) {
+              form.reset();
+              phoneWidget?.setNumber("");
+            }
+          } catch {
+            const toast = document.getElementById("toast");
+            const content = document.getElementById("toast-content");
+            content.textContent = "Coś poszło nie tak. Spróbuj ponownie.";
+            content.classList.remove("bg-green-600");
+            content.classList.add("bg-red-600");
+            toast.classList.remove("hidden");
+          }
+        });
+      });
+    });
+  </script>
   <!-- school autocompletion -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.1.0"></script>
+  <script src="/static/js/school-autocomplete.js"></script>
   <script>
   document.addEventListener("DOMContentLoaded", ()=>{
     document.querySelectorAll(".dyn-form").forEach(form => {
@@ -1485,9 +1596,6 @@
       top: 0.25rem;
       left:2.5rem;
       font-size: 0.90rem;
-    }
-    .dyn-form label:not(.checkbox-label){
-      z-index: -10;
     }
     html, body{
       overflow-x: hidden;

@@ -1,0 +1,28 @@
+{% extends "admin_header.html" %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% macro fields(document=none) %}
+<label>Nazwa dokumentu<input name="title" maxlength="160" value="{{ document.title if document else '' }}" required></label>
+<label>Rok edycji<input type="number" name="year" min="2000" max="2100" value="{{ document.year if document else 2026 }}" required></label>
+<label>Plik PDF<input type="file" name="pdf" accept="application/pdf,.pdf" {% if not document %}required{% endif %}><small>Maks. 20 MB. {% if document %}Pozostaw puste, aby zachować {{ document.filename }}.{% endif %}</small></label>
+<label>Kolejność<input type="number" name="sort_order" min="0" max="100000" value="{{ document.sort_order if document else ((documents|map(attribute='sort_order')|max + 1) if documents else 0) }}" required></label>
+<label class="visibility-option"><input type="checkbox" name="enabled" value="true" {% if not document or document.enabled %}checked{% endif %}>Pokaż dokument</label>
+{% endmacro %}
+{% block content %}
+<main class="content-admin">
+  <h1>Dokumenty</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+  {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
+  {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
+  {% with settings_page_key='documents' %}{% include 'macros/page_mode.html' %}{% endwith %}
+  <section class="content-panel"><h2>Dodaj dokument</h2>
+    <form action="/admin/documents" method="post" enctype="multipart/form-data" class="member-fields">{{ fields() }}<button type="submit">Dodaj dokument</button></form>
+  </section>
+  <section class="content-panel"><h2>Dokumenty · {{ documents|length }}</h2>
+    {% for document in documents %}
+    <details class="member-editor"><summary>{{ document.title }} <small>{{ document.year }} · {{ document.filename }}{% if not document.enabled %} · ukryty{% endif %}</small></summary>
+      <form action="/admin/documents/{{ document.id }}" method="post" enctype="multipart/form-data" class="member-fields">{{ fields(document) }}<button type="submit">Zapisz dokument</button></form>
+      <form action="/admin/documents/{{ document.id }}/delete" method="post" onsubmit="return confirm('Usunąć dokument z listy?')"><button type="submit" class="delete-member">Usuń dokument</button></form>
+    </details>
+    {% else %}<p>Nie dodano jeszcze dokumentów.</p>{% endfor %}
+  </section>
+</main>
+{% endblock %}
