@@ -1,5 +1,7 @@
 # Run ./deploy.sh for initial setup and updates.
 # Only the HTTPS proxy publishes ports; app, database, and Redis remain private.
+name: ${GSS_COMPOSE_PROJECT:-gdynia-science-slam}
+
 x-app-image: &app-image
   image: ${GSS_APP_IMAGE:-gdynia-science-slam:local}
   build: .

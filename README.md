@@ -245,6 +245,19 @@ You can collect settings without starting services, or validate an existing setu
 ./deploy.sh --check
 ```
 
+For the default `.deploy/` configuration, setup creates a project-root `.env`
+symlink to `.deploy/site.env`, allowing plain `docker compose ps` and
+`docker compose logs` to load the settings automatically. The Compose file fixes
+the default project name to `gdynia-science-slam`, matching the deploy script.
+Existing `.env` files are preserved. If one already exists, or you use a custom
+configuration/project, use `./deploy.sh status` or the explicit command:
+```bash
+docker compose --project-name gdynia-science-slam --env-file .deploy/site.env ps
+```
+For an installation created before this fix, update the source then run
+`./deploy.sh --configure-only` once. This adds environment discovery without
+regenerating credentials, changing the database, or restarting containers.
+
 Subsequent maintenance:
 ```bash
 ./deploy.sh          # Build current source, migrate, and recreate app/proxy

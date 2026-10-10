@@ -60,20 +60,24 @@ def build_router(require_superadmin):
     @router.get('')
     def content(request: Request, db: Session = Depends(get_db), admin=Depends(require_superadmin)):
         event = db.get(SystemSetting, 'event_datetime')
+        date_only = db.get(SystemSetting, 'event_date_only')
         return templates.TemplateResponse('admin/site_content.html', {
             'request': request, 'admin': admin, 'pages': PUBLIC_PAGES,
             'visibility': page_visibility(db),
             'forms': db.query(FormInfo).order_by(FormInfo.name).all(),
             'site_settings': load_public_settings(db), 'color_groups': COLOR_GROUPS,
             'event_datetime': event.value if event else '',
+            'event_date_only': bool(date_only and date_only.value == 'true'),
         })
 
     @router.get('/preview')
     def preview(request: Request, db: Session = Depends(get_db)):
         event = db.get(SystemSetting, 'event_datetime')
+        date_only = db.get(SystemSetting, 'event_date_only')
         return templates.TemplateResponse('client/index.html', {
             'request': request, 'page_name': 'home', 'header_title': 'Podgląd strony',
             'event_datetime': event.value if event else '',
+            'event_date_only': bool(date_only and date_only.value == 'true'),
             'carousel_partners': get_partners(db).carousel_partners,
             'home_images': get_home_images(db),
             'members': db.query(TeamMember).order_by(TeamMember.id).all(),

@@ -73,9 +73,25 @@ def env_text(values):
     return ''.join(f'{key}={json.dumps(str(value))}\n' for key, value in values.items())
 
 
+def ensure_compose_env(directory, project_directory=None):
+    """Let plain Compose commands discover the default deployment's public settings."""
+    project = project_directory or ROOT
+    if directory.resolve() != (project / '.deploy').resolve():
+        return  # Alternative configurations must keep using explicit --env-file.
+    destination = project / '.env'
+    if destination.is_symlink() and os.readlink(destination) == '.deploy/site.env':
+        return
+    if destination.exists() or destination.is_symlink():
+        print('Existing .env preserved. Use ./deploy.sh status or Compose with --env-file .deploy/site.env.')
+        return
+    destination.symlink_to('.deploy/site.env')
+    print('Plain docker compose commands now load .deploy/site.env through .env.')
+
+
 def configure(directory, bootstrap_password=False):
     if (directory / 'config.json').exists():
         check(directory)
+        ensure_compose_env(directory)
         if bootstrap_password:
             path = directory / 'secrets/bootstrap_admin.json'
             account = json.loads(path.read_text())
@@ -133,6 +149,7 @@ def configure(directory, bootstrap_password=False):
         if staging.exists():
             import shutil
             shutil.rmtree(staging)
+    ensure_compose_env(directory)
     print('Configuration saved. Secrets are kept outside the application image.')
 
 

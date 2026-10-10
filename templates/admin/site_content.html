@@ -45,6 +45,7 @@
     <h2>Data wydarzenia</h2><p>Data steruje odliczaniem na stronie głównej.</p>
     <form action="/admin/event-settings" method="post" class="member-fields">
       <label>Data i godzina rozpoczęcia<input type="datetime-local" name="event_datetime" value="{{ event_datetime }}"></label>
+      <label><input type="checkbox" name="event_date_only" value="true" {% if event_date_only %}checked{% endif %}> Pokaż tylko datę nad odliczaniem (bez godziny)</label>
       <button type="submit">Zapisz datę</button>
     </form>
   </section>

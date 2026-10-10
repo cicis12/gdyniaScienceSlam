@@ -77,6 +77,25 @@ class DeploymentTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             deployment.check(self.directory)
 
+    def test_default_compose_env_link_is_created_and_existing_env_is_preserved(self):
+        project = Path(self.temp.name) / 'project'
+        deployment_directory = project / '.deploy'
+        deployment_directory.mkdir(parents=True)
+        (deployment_directory / 'site.env').write_text('SITE_DOMAIN="example.com"\n')
+        deployment.ensure_compose_env(deployment_directory, project)
+        link = project / '.env'
+        self.assertTrue(link.is_symlink())
+        self.assertEqual(link.read_text(), 'SITE_DOMAIN="example.com"\n')
+        deployment.ensure_compose_env(deployment_directory, project)
+        link.unlink()
+        link.write_text('EXISTING=value\n')
+        deployment.ensure_compose_env(deployment_directory, project)
+        self.assertFalse(link.is_symlink())
+        self.assertEqual(link.read_text(), 'EXISTING=value\n')
+        link.unlink()
+        deployment.ensure_compose_env(self.directory, project)
+        self.assertFalse(link.exists())
+
     def test_noninteractive_first_run_stops_for_human_input(self):
         with patch('sys.stdin.isatty', return_value=False), self.assertRaises(RuntimeError):
             deployment.configure(self.directory)

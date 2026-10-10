@@ -60,7 +60,7 @@
       }
 
       document.getElementById("event-date-value").textContent = new Intl.DateTimeFormat("pl-PL", {
-        dateStyle: "long", timeStyle: "short"
+        dateStyle: "long"{% if not event_date_only %}, timeStyle: "short"{% endif %}
       }).format(target);
       updateCountdown();
       window.setInterval(updateCountdown, 1000);

@@ -86,6 +86,7 @@ def home(request: Request, db: Session = Depends(get_db)):
         "carousel_partners": get_partners(db).carousel_partners,
         "home_images": get_home_images(db),
         "event_datetime": get_setting(db, "event_datetime", ""),
+        "event_date_only": get_setting(db, "event_date_only", "false") == "true",
         "members": db.query(TeamMember).order_by(TeamMember.id).all(),
     })
 
@@ -775,6 +776,7 @@ app.include_router(admin_router, dependencies=[Depends(require_superadmin)])
 @app.post("/admin/event-settings")
 def save_event_settings(
     event_datetime: str = Form(""),
+    event_date_only: bool = Form(False),
     db: Session = Depends(get_db),
     admin: AdminUser = Depends(require_superadmin),
 ):
@@ -792,6 +794,11 @@ def save_event_settings(
     else:
         setting = SystemSetting(key="event_datetime", value=event_datetime)
         db.add(setting)
+    display_setting = db.get(SystemSetting, "event_date_only")
+    if display_setting:
+        display_setting.value = "true" if event_date_only else "false"
+    else:
+        db.add(SystemSetting(key="event_date_only", value="true" if event_date_only else "false"))
     db.commit()
     return RedirectResponse("/admin/content?saved=1#event", status_code=303)
 
