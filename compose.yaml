@@ -1,0 +1,138 @@
+# Run ./deploy.sh for initial setup and updates.
+# Only the HTTPS proxy publishes ports; app, database, and Redis remain private.
+x-app-image: &app-image
+  image: ${GSS_APP_IMAGE:-gdynia-science-slam:local}
+  build: .
+
+services:
+  db:
+    image: postgres:17-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    secrets:
+      - postgres_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks: [backend]
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 24
+
+  redis:
+    image: redis:7.4-alpine
+    restart: unless-stopped
+    command: [redis-server, --appendonly, "yes"]
+    volumes:
+      - redis_data:/data
+    networks: [backend]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 24
+
+  # One-off job: creates separate DB roles, applies migrations, grants access,
+  # and creates the first superadmin. The deploy script runs this before app startup.
+  bootstrap:
+    <<: *app-image
+    profiles: [tools]
+    command: [python, scripts/deploy_support.py, bootstrap]
+    environment:
+      ENV_FILE: /run/secrets/app_database
+    secrets:
+      - postgres_password
+      - app_database
+      - migration_database
+      - bootstrap_admin
+    networks: [backend]
+    depends_on:
+      db:
+        condition: service_healthy
+
+  app:
+    <<: *app-image
+    restart: unless-stopped
+    init: true
+    command: [uvicorn, "main:app", --host, "0.0.0.0", --port, "8000", --workers, "${APP_WORKERS:-2}", --proxy-headers, --forwarded-allow-ips, "*"]
+    environment:
+      ENV_FILE: /run/secrets/app_database
+      RATE_LIMIT_STORAGE_URI: redis://redis:6379/0
+    secrets:
+      - app_database
+      - source: secret_key
+        target: /app/SECRET_KEY.env
+      - source: voter_key
+        target: /app/VOTER_SECRET_KEY.env
+      - source: mail
+        target: /app/MAIL.env
+    volumes:
+      - static_uploads:/app/static/uploads
+      - private_uploads:/app/uploads
+    networks: [web, backend]
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      # Login remains available when public pages are disabled; this also checks DB access.
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/admin/login', timeout=5)"]
+      interval: 10s
+      timeout: 7s
+      start_period: 20s
+      retries: 12
+
+  proxy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?Run ./deploy.sh --configure-only first}
+      ACME_EMAIL: ${ACME_EMAIL:?Certificate contact email required}
+    ports:
+      - "${BIND_ADDRESS:-0.0.0.0}:${HTTP_PORT:-80}:80"
+      - "${BIND_ADDRESS:-0.0.0.0}:${HTTPS_PORT:-443}:443"
+    volumes:
+      - ./deployment/Caddyfile:/etc/caddy/Caddyfile:ro,Z
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [web]
+    depends_on:
+      app:
+        condition: service_healthy
+
+networks:
+  web:
+  backend:
+    internal: true
+
+volumes:
+  postgres_data:
+  redis_data:
+  static_uploads:
+  private_uploads:
+  caddy_data:
+  caddy_config:
+
+# Host secrets live behind a 0700 directory. Files are readable inside the
+# authorized containers, including the non-root app, and never enter the image.
+secrets:
+  postgres_password:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/postgres_password
+  app_database:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/DBcreds.env
+  migration_database:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/admin_DBcreds.env
+  secret_key:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/SECRET_KEY.env
+  voter_key:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/VOTER_SECRET_KEY.env
+  mail:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/MAIL.env
+  bootstrap_admin:
+    file: ${GSS_DEPLOY_DIR:-.deploy}/secrets/bootstrap_admin.json

@@ -25,3 +25,9 @@ static/uploads/partners/
 
 static/uploads/home/
 uploads/documents/
+
+# Deployment credentials and private backups
+.deploy/
+.deploy-*/
+.deployment-test-*/
+backups/

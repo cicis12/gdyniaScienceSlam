@@ -1,0 +1,14 @@
+{
+    email {$ACME_EMAIL}
+}
+
+{$SITE_DOMAIN} {
+    encode zstd gzip
+
+    # Application ZIP imports allow 150 MB; leave room for multipart overhead.
+    request_body {
+        max_size 160MB
+    }
+
+    reverse_proxy app:8000
+}
