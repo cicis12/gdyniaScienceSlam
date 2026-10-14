@@ -17,7 +17,9 @@
 .archive-photo:first-child { grid-column: span 2; grid-row: span 2; }
 .archive-photo img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .45s cubic-bezier(.22,1,.36,1); }
 .archive-photo:hover img { transform: scale(1.04); }
-.archive-photo-overlay { position: absolute; inset: auto 0 0; padding: 2rem 1rem 1rem; display: flex; justify-content: space-between; gap: 1rem; background: linear-gradient(transparent, color-mix(in srgb, var(--section-background, #06101d) 87%, transparent)); color: var(--section-text, #fff); font-size: .85rem; }
+.archive-photo-overlay { position: absolute; inset: auto 0 0; padding: 2rem 1rem 1rem; display: flex; justify-content: space-between; gap: 1rem; background: linear-gradient(transparent, rgba(0, 0, 0, .87)); color: #fff; font-size: .85rem; }
+body.public-site .archive-page .archive-photo .archive-photo-overlay,
+body.public-site .archive-page .archive-photo .archive-photo-overlay * { color: #fff !important; }
 .archive-photo-overlay > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .archive-photo:focus-visible { outline: 3px solid var(--section-overline, #99dccb); outline-offset: 4px; }
 .archive-empty { padding: 4rem 0; }

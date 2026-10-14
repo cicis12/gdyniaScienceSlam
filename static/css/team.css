@@ -9,7 +9,8 @@
 .team-card:nth-child(4n+4) { --card-color: var(--team-card-4, #efb6bc); }
 .team-card summary { cursor: pointer; list-style: none; }
 .team-card summary::-webkit-details-marker { display: none; }
-.team-card summary:focus-visible { outline: 4px solid var(--team-card-text, #132e46); outline-offset: -6px; }
+.team-card:has(:focus-visible) { outline: 3px solid var(--team-highlight, #ffc58c); outline-offset: 4px; }
+.team-card :is(summary, .team-name, .team-position):focus-visible { outline: none; }
 .team-card summary > img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; background: var(--card-color); }
 .team-card-info { display: block; padding: 1.25rem; }
 .team-position { display: block; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
