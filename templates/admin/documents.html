@@ -12,7 +12,6 @@
   <h1>Dokumenty</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
   {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
   {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
-  {% with settings_page_key='documents' %}{% include 'macros/page_mode.html' %}{% endwith %}
   <section class="content-panel"><h2>Dodaj dokument</h2>
     <form action="/admin/documents" method="post" enctype="multipart/form-data" class="member-fields">{{ fields() }}<button type="submit">Dodaj dokument</button></form>
   </section>

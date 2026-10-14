@@ -116,35 +116,27 @@ class SystemSettingsTests(unittest.TestCase):
             self.client.cookies.clear()
             if username:
                 self.fixture.login(username)
-            for path in ('/admin/content/theme', '/admin/content/theme/reset', '/admin/content/footer', '/admin/content/home', '/admin/content/page-modes', '/admin/content/page-mode/team'):
+            for path in ('/admin/content/theme', '/admin/content/theme/reset', '/admin/content/footer', '/admin/content/home'):
                 self.assertEqual(self.client.post(path, follow_redirects=False).status_code, expected)
             response = self.client.get('/admin/content/preview', follow_redirects=False)
             self.assertEqual(response.status_code, 303)
 
-    def test_page_modes_save_independently_and_validate(self):
-        response = self.client.post('/admin/content/page-mode/team', data={'mode': 'light'}, follow_redirects=False)
-        self.assertEqual(response.status_code, 303)
-        self.assertEqual(response.headers['location'], '/admin/content/team?saved=1')
-        soup = BeautifulSoup(self.client.get('/team').text, 'html.parser')
-        self.assertEqual(soup.body['data-display-mode'], 'light')
-        self.assertEqual(soup.body['data-display-page'], 'team')
-        self.assertEqual(BeautifulSoup(self.client.get('/about').text, 'html.parser').body['data-display-mode'], 'default')
-        for path, mode in (('/admin/content/page-mode/team', 'invalid'), ('/admin/content/page-mode/unknown', 'light'), ('/admin/content/page-mode/home', 'dark')):
-            self.assertEqual(self.client.post(path, data={'mode': mode}).status_code, 422)
+    def test_visitor_theme_defaults_and_retired_admin_controls(self):
+        # Existing configuration must not override visitor-controlled themes.
         with self.sessions() as db:
-            self.assertEqual(json.loads(db.get(SystemSetting, PAGE_MODES_KEY).value), {**DEFAULT_PAGE_MODES, 'team': 'light'})
-        self.assertEqual(self.client.post('/admin/content/page-modes', data={**DEFAULT_PAGE_MODES, 'about': 'invalid'}).status_code, 422)
-        self.assertEqual(self.client.post('/admin/content/page-modes', data={'about': 'dark'}).status_code, 422)
-        modes = {key: 'dark' for key in DEFAULT_PAGE_MODES}
-        self.assertEqual(self.client.post('/admin/content/page-modes', data=modes).status_code, 200)
+            db.merge(SystemSetting(key=PAGE_MODES_KEY, value=json.dumps({key: 'light' for key in DEFAULT_PAGE_MODES})))
+            db.commit()
         for key, path, _ in PUBLIC_PAGES:
-            body = BeautifulSoup(self.client.get(path).text, 'html.parser').body
-            self.assertEqual(body['data-display-mode'], 'default' if key == 'home' else 'dark')
-            self.assertEqual(body['data-display-page'], key)
-        self.assertNotIn('display-mode-home', self.client.get('/admin/content').text)
-        self.assertNotIn('page-mode/home', self.client.get('/admin/content/home').text)
-        self.client.post('/admin/content/page-mode/team', data={'mode': 'default'})
-        self.assertEqual(BeautifulSoup(self.client.get('/team').text, 'html.parser').body['data-display-mode'], 'default')
+            soup = BeautifulSoup(self.client.get(path).text, 'html.parser')
+            self.assertEqual(soup.body['data-display-mode'], 'default' if key == 'home' else 'dark')
+            self.assertEqual(bool(soup.select('.theme-switch')), key != 'home')
+            self.assertEqual(bool(soup.select('script[src*="theme-switch.js"]')), key != 'home')
+        for path in ('/admin/content', '/admin/content/team', '/admin/about', '/admin/gallery', '/admin/documents', '/admin/partners'):
+            html = self.client.get(path).text
+            self.assertNotIn('Tryb wyświetlania', html)
+            self.assertNotIn('/admin/content/page-mode', html)
+        for path in ('/admin/content/page-modes', '/admin/content/page-mode/team'):
+            self.assertEqual(self.client.post(path).status_code, 404)
 
     def test_preview_works_when_homepage_hidden(self):
         self.client.post('/admin/content/pages')

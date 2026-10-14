@@ -16,7 +16,6 @@
 {% endmacro %}
 {% block content %}
 <main class="content-admin"><h1>Zespół</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
-{% with settings_page_key='team' %}{% include 'macros/page_mode.html' %}{% endwith %}
 
 {% if request.query_params.get("saved") %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
   <section id="team" class="content-panel">

@@ -32,8 +32,7 @@ def public_page_key(request, page_name=''):
 
 
 def page_display_mode(request, page_name=''):
-    settings = getattr(getattr(request, 'state', None), 'site_settings', {})
-    return settings.get('page_modes', DEFAULT_PAGE_MODES).get(public_page_key(request, page_name), 'default')
+    return 'default' if public_page_key(request, page_name) == 'home' else 'dark'
 
 
 def create_templates():

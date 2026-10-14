@@ -48,9 +48,6 @@
   const applyPreview = () => {
     const doc = frame.contentDocument;
     if (!doc || !doc.body) return;
-    const modes = document.getElementById('page-modes-form');
-    const mode = modes?.elements.namedItem(doc.body.dataset.displayPage);
-    if (mode) doc.body.dataset.displayMode = mode.value;
     fields.forEach(field => doc.documentElement.style.setProperty(`--theme-${field.name.replaceAll('_', '-')}`, field.value));
     const previewWindow = frame.contentWindow;
     if (!previewWindow.previewWritesBlocked) {

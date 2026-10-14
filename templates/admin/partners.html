@@ -17,12 +17,11 @@
   <h1>Partnerzy</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
   {% if error %}<p class="content-error" role="alert">{{ error }}</p>{% endif %}
   {% if request.query_params.get('saved') %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
-  {% with settings_page_key='partners' %}{% include 'macros/page_mode.html' %}{% endwith %}
   <section class="content-panel">
     <h2>Widoczność partnerów</h2>
     <form action="/admin/partners/settings" method="post">
       <label class="visibility-option"><input type="checkbox" name="enabled" value="true" {% if partner_config.enabled %}checked{% endif %}><span>Pokaż partnerów na stronie partnerów i w karuzeli strony głównej</span></label>
-      <p class="page-mode-hint">Wyłączenie zachowuje wszystkie wpisy. Puste i wyłączone sekcje nie są wyświetlane. Karuzela zawiera partnerów ze wszystkich widocznych sekcji.</p>
+      <p class="content-hint">Wyłączenie zachowuje wszystkie wpisy. Puste i wyłączone sekcje nie są wyświetlane. Karuzela zawiera partnerów ze wszystkich widocznych sekcji.</p>
       <button type="submit">Zapisz widoczność</button>
     </form>
   </section>

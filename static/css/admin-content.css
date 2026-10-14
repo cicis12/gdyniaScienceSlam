@@ -100,19 +100,9 @@ body.settings-preview-open { overflow: hidden; }
   .settings-page-links a { padding: .5rem .7rem; }
 }
 
-.page-mode-form { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
-.page-mode-form label { font-weight: 600; }
-.page-mode-form select, .page-mode-grid select { padding: .6rem .75rem; border: 1px solid #98b0cd; border-radius: .4rem; background: #edf5f7; color: #132e46; max-width: 100%; }
-.page-mode-form button { margin-top: 0; }
-.page-mode-hint { font-size: .85rem; margin-top: 1rem; color: #324a67; }
-.page-modes-group { border-bottom: 1px solid #98b0cd; padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
-.page-modes-group legend { font-size: 1.15rem; font-weight: 700; }
-.page-mode-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
-.page-mode-grid label { display: grid; gap: .4rem; font-weight: 600; }
-@media (max-width: 750px) { .page-mode-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 450px) { .page-mode-grid { grid-template-columns: minmax(0, 1fr); } }
 
 .settings-back a.redirect-link { display: inline-block; color: var(--theme-light-link, #2d519f); }
 .settings-back a.redirect-link:hover { color: var(--theme-light-link, #2d519f); }
 
 .home-image-preview { display: block; width: min(100%, 480px); aspect-ratio: 16 / 9; object-fit: cover; margin: 1rem 0; border-radius: .4rem; }
+.content-hint { font-size: .85rem; margin-top: 1rem; color: #324a67; }

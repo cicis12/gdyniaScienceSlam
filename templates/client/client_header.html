@@ -21,6 +21,7 @@
 </head>
 
 <body data-display-page="{{ public_page_key(request, page_name|default('')) }}" data-display-mode="{{ page_display_mode(request, page_name|default('')) }}" class="public-site bg-[#819edb] text-[#18395d] flex flex-col min-h-screen {% if page_name == 'registration' %}registration-page{% endif %}">
+{% if public_page_key(request, page_name|default('')) != 'home' %}<script src="{{ asset_url('js/theme-switch.js') }}"></script>{% endif %}
 
   <!-- NAVBAR -->
   <nav class="site-nav bg-[#5e85b8] shadow-md">
@@ -49,6 +50,8 @@
         </a>{% endif %}
       </div>
   
+      <div class="site-nav-actions">
+      {% include 'macros/theme_switch.html' %}
       <!-- HAMBURGER -->
       <button
         id="menu-btn"
@@ -58,6 +61,7 @@
           <path d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
+      </div>
   
     </div>
   

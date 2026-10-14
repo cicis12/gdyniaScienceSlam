@@ -11,7 +11,6 @@
 <main class="content-admin">
   <h1>O nas · oś czasu</h1>
   <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
-{% with settings_page_key='about' %}{% include 'macros/page_mode.html' %}{% endwith %}
 
   {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
   {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}

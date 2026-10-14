@@ -130,8 +130,6 @@ class PartnersTests(unittest.TestCase):
             self.assertEqual(get_partners(db).sections[0].partners, [])
 
     def test_permissions_mode_and_back_link(self):
-        response = self.client.post('/admin/content/page-mode/partners', data={'mode': 'dark'}, follow_redirects=False)
-        self.assertEqual(response.headers['location'], '/admin/partners?saved=1')
         body = BeautifulSoup(self.client.get('/partners').text, 'html.parser').body
         self.assertEqual(body['data-display-mode'], 'dark')
         links = BeautifulSoup(self.client.get('/admin/partners').text, 'html.parser').select('.content-admin a')

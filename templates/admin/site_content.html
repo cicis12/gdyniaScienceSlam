@@ -51,23 +51,6 @@
   </section>
   <section id="colors" class="content-panel" data-settings-panel>
     <h2>Ustawienia kolorów</h2>
-    <form action="/admin/content/page-modes" method="post" id="page-modes-form">
-      <fieldset class="page-modes-group"><legend>Tryb wyświetlania stron</legend>
-        <div class="page-mode-grid">
-        {% for key, path, label in pages if key != 'home' %}
-          <label for="display-mode-{{ key }}">{{ label }}
-            <select id="display-mode-{{ key }}" name="{{ key }}">
-              {% for value, title in [('default', 'Domyślny układ'), ('light', 'Jasny'), ('dark', 'Ciemny')] %}
-              <option value="{{ value }}" {% if site_settings.page_modes[key] == value %}selected{% endif %}>{{ title }}</option>
-              {% endfor %}
-            </select>
-          </label>
-        {% endfor %}
-        </div>
-        <button type="submit">Zapisz tryby stron</button>
-      </fieldset>
-    </form>
-
     <p>Jasne kolory pochodzą z sekcji O nas na stronie głównej, a ciemne z sekcji zespołu. Podgląd pokazuje zmiany przed zapisaniem.</p>
     <form action="/admin/content/theme" method="post" id="site-theme-form">
       {% for group, title, fields in color_groups %}

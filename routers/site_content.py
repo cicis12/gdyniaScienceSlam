@@ -21,7 +21,7 @@ from home_images import HomeImage, HomeImages, IMAGE_SLOTS, IMAGE_POSITIONS, get
 from image_uploads import normalize_image, MAX_IMAGE_BYTES
 from starlette.concurrency import run_in_threadpool
 from system_settings import (COLOR_GROUPS, DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, HOME_FIELDS,
-                             THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, DEFAULT_PAGE_MODES, DISPLAY_MODES, load_public_settings, validate_settings)
+                             THEME_KEY, FOOTER_KEY, HOME_KEY, load_public_settings, validate_settings)
 from team_theme import COLOR_FIELDS, DEFAULT_PALETTE, PALETTE_KEY, DETAILS_KEY, get_team_palette, valid_color, team_details_enabled
 
 PHOTO_DIR = Path(__file__).resolve().parents[1] / 'static' / 'uploads' / 'team'
@@ -113,26 +113,6 @@ def build_router(require_superadmin):
         db.merge(SystemSetting(key=key, value=json.dumps(values, ensure_ascii=False)))
         db.commit()
         return RedirectResponse(destination, 303)
-
-    @router.post('/page-modes')
-    async def save_page_modes(request: Request, db: Session = Depends(get_db)):
-        return await save_setting(request, db, PAGE_MODES_KEY, DEFAULT_PAGE_MODES, '/admin/content?saved=1#colors')
-
-    @router.post('/page-mode/{page}')
-    def save_page_mode(page: str, mode: str = Form(...), db: Session = Depends(get_db)):
-        if page not in DEFAULT_PAGE_MODES or mode not in DISPLAY_MODES:
-            raise HTTPException(422, 'Nieprawidłowa strona lub tryb wyświetlania.')
-        modes = load_public_settings(db)['page_modes']
-        modes[page] = mode
-        db.merge(SystemSetting(key=PAGE_MODES_KEY, value=json.dumps(modes)))
-        db.commit()
-        destination = {
-            'team': '/admin/content/team',
-            'about': '/admin/about', 'previous_editions': '/admin/gallery',
-            'partners': '/admin/partners',
-            'documents': '/admin/documents',
-        }.get(page, '/admin/content')
-        return RedirectResponse(destination + '?saved=1' + ('#colors' if destination == '/admin/content' else ''), 303)
 
     @router.post('/theme')
     async def save_theme(request: Request, db: Session = Depends(get_db)):
