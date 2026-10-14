@@ -3,11 +3,14 @@
 {% from 'macros/partner_logo.html' import partner_logo %}
 {% block content %}
 {% set home_content = (request.state.site_settings|default(default_site_settings)).home %}
+{% set home_sections = (request.state.site_settings|default(default_site_settings)).home_sections %}
 
+{% set section_theme = cycler('theme-dark', 'theme-light') %}
 <main class="homepage-flow flex-grow">
+    {% if home_sections.hero %}
     <!-- HERO -->
    <section
-    class="countdown-hero theme-dark home-scroll-section relative bg-cover bg-center flex items-center"
+    class="countdown-hero {{ section_theme.next() }} home-scroll-section relative bg-cover bg-center flex items-center"
     style="background-image: url('{{ home_images.hero.photo }}'); background-position: {{ home_images.hero.position }};"
   >
       <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 py-12 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started | clean_html }}">
@@ -30,6 +33,7 @@
         </div>
       </div>
   </section>
+  {% endif %}
 
   <script>
     (() => {
@@ -66,8 +70,9 @@
     })();
   </script>
 
+  {% if home_sections.about %}
   <!--about-->
-  <section class="home-scroll-section home-editorial home-editorial-about theme-light home-section-blue-light py-20 bg-[#819edb] text-[#18395d]">
+  <section class="home-scroll-section home-editorial home-editorial-about {{ section_theme.next() }} home-section-blue-light py-20 bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -89,9 +94,10 @@
 
     </div>
   </section>
-  {% if (request.state.page_visibility|default({})).get('team', true) and members %}
+  {% endif %}
+  {% if home_sections.team and (request.state.page_visibility|default({})).get('team', true) and members %}
   <!--zespol-->
- <section class="home-scroll-section home-section-blue-deep home-team-section theme-dark pt-20 pb-15 bg-[#5e85b8]">
+ <section class="home-scroll-section home-section-blue-deep home-team-section {{ section_theme.next() }} pt-20 pb-15 bg-[#5e85b8]">
   <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
     <div>
       <p class="home-eyebrow">{{ home_content.team_overline }}</p>
@@ -121,8 +127,9 @@
  </section>
  {% endif %}
 
+  {% if home_sections.archive %}
   <!--poprzednia edycja-->
-  <section class="home-scroll-section home-editorial home-editorial-archive theme-light home-section-blue-mid py-20 bg-[#819edb] text-[#18395d]">
+  <section class="home-scroll-section home-editorial home-editorial-archive {{ section_theme.next() }} home-section-blue-mid py-20 bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -144,8 +151,9 @@
 
     </div>
   </section>
-  {% if carousel_partners %}
-  <section class="home-scroll-section home-section-wisteria home-partners-section theme-dark py-20">
+  {% endif %}
+  {% if home_sections.partners and carousel_partners %}
+  <section class="home-scroll-section home-section-wisteria home-partners-section {{ section_theme.next() }} py-20">
     <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
       <div><p class="home-eyebrow">{{ home_content.partners_overline }}</p><h2 class="home-editorial-title">{{ home_content.partners_title }}</h2></div>
       <div class="text-lg">{{ home_content.partners_description | safe_html }}</div>
@@ -204,50 +212,13 @@
     (() => {
       if (!document.documentElement.classList.contains("homepage-scroll-snap")) return;
 
-      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-      const navHeight = () => Number.parseFloat(
-        getComputedStyle(document.documentElement).getPropertyValue("--site-nav-height")
-      ) || 0;
-      const snapTargets = () => [
-        ...document.querySelectorAll(".home-scroll-section, .site-footer")
-      ];
-
-      let settleTimer;
-      let settling = false;
-
-      function settleToNearestSection() {
-        settleTimer = null;
-        if (reducedMotion.matches || settling) return;
-
-        const currentY = window.scrollY;
-        const offset = navHeight();
-        const nearest = snapTargets().reduce((best, target) => {
-          const targetY = Math.max(0, target.getBoundingClientRect().top + currentY - offset);
-          return Math.abs(targetY - currentY) < Math.abs(best - currentY) ? targetY : best;
-        }, currentY);
-
-        if (Math.abs(nearest - currentY) < 2) return;
-        settling = true;
-        window.scrollTo({ top: nearest, behavior: "smooth" });
-        window.setTimeout(() => { settling = false; }, 900);
-      }
-
-      window.addEventListener("scroll", () => {
-        if (settling || reducedMotion.matches) return;
-        window.clearTimeout(settleTimer);
-        settleTimer = window.setTimeout(settleToNearestSection, 180);
-      }, { passive: true });
-
-      window.addEventListener("wheel", () => {
-        if (settling) settling = false;
-      }, { passive: true });
-      window.addEventListener("touchstart", () => {
-        if (settling) settling = false;
-      }, { passive: true });
-      reducedMotion.addEventListener?.("change", () => {
-        window.clearTimeout(settleTimer);
-        settling = false;
-      });
+      const nav = document.querySelector('.site-nav');
+      if (!nav) return;
+      const updateOffset = () => {
+        document.documentElement.style.setProperty('--site-nav-height', `${nav.getBoundingClientRect().height}px`);
+      };
+      updateOffset();
+      new ResizeObserver(updateOffset).observe(nav);
     })();
   </script>
 </main>

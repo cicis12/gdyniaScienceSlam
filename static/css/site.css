@@ -70,7 +70,7 @@ html {
 }
 
 html.homepage-scroll-snap {
-  scroll-snap-type: none;
+  scroll-snap-type: y mandatory;
   scroll-behavior: auto;
 }
 
@@ -188,6 +188,16 @@ body .site-nav {
   width: 24px;
   height: 24px;
 }
+
+.site-menu-icon path {
+  transform-origin: 12px 12px;
+  transition: transform 220ms ease, opacity 150ms ease;
+}
+.site-menu-icon .menu-line-top { transform: translateY(-6px); }
+.site-menu-icon .menu-line-bottom { transform: translateY(6px); }
+.site-menu-toggle[aria-expanded="true"] .menu-line-top { transform: rotate(45deg); }
+.site-menu-toggle[aria-expanded="true"] .menu-line-middle { opacity: 0; transform: scaleX(0); }
+.site-menu-toggle[aria-expanded="true"] .menu-line-bottom { transform: rotate(-45deg); }
 
 .site-logout-form {
   display: flex;
@@ -357,11 +367,11 @@ body .site-nav {
 
 .homepage-flow > .home-scroll-section {
   display: flex;
-  min-height: calc(100svh - var(--site-nav-height));
+  min-height: calc(100dvh - var(--site-nav-height));
   flex-direction: column;
   justify-content: center;
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
 }
 
 .homepage-scroll-snap .site-footer {
@@ -464,7 +474,7 @@ body .site-nav {
 }
 
 .homepage-flow > .countdown-hero {
-  min-height: calc(100svh - var(--site-nav-height));
+  min-height: calc(100dvh - var(--site-nav-height));
 }
 
 .home-editorial-grid > div:first-child {
@@ -512,6 +522,11 @@ body .site-nav {
 .scroll-reveal.is-visible {
   animation: section-arrive 900ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
+
+/* Keep snap targets stationary; their contents retain the entrance motion. */
+.homepage-flow > .scroll-reveal { transform: none; }
+.homepage-flow > .scroll-reveal.is-visible { animation-name: section-fade-in; }
+@keyframes section-fade-in { from { opacity: 0; } to { opacity: 1; } }
 
 .scroll-reveal .home-section-intro > *,
 .scroll-reveal .home-editorial-grid > * {
@@ -893,7 +908,7 @@ img {
   .countdown-unit small { font-size: 0.68rem; }
   :root { --site-nav-height: 87px; }
   .homepage-flow > .home-scroll-section {
-    min-height: calc(100svh - var(--site-nav-height));
+    min-height: calc(100dvh - var(--site-nav-height));
   }
   .scroll-reveal { transform: translate3d(0, 20px, 0) scale(0.99); }
   .home-editorial-title { font-size: 2.75rem; }

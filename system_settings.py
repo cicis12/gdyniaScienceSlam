@@ -8,6 +8,10 @@ from team_theme import valid_color
 THEME_KEY = 'site_theme'
 FOOTER_KEY = 'site_footer'
 HOME_KEY = 'home_content'
+HOME_SECTIONS_KEY = 'home_sections'
+HOME_SECTIONS = (('hero', 'Wprowadzenie i odliczanie'), ('about', 'O nas'),
+                 ('team', 'Zespół'), ('archive', 'Poprzednie edycje'), ('partners', 'Partnerzy'))
+DEFAULT_HOME_SECTIONS = {key: True for key, _ in HOME_SECTIONS}
 PAGE_MODES_KEY = 'page_display_modes'
 DEFAULT_PAGE_MODES = {key: 'default' for key, _, _ in PUBLIC_PAGES if key != 'home'}
 DISPLAY_MODES = {'default', 'light', 'dark'}
@@ -71,9 +75,13 @@ def validate_settings(key, saved):
     # Ignore retired labels when importing older configuration bundles.
     if key == HOME_KEY and isinstance(saved, dict):
         saved = {name: value for name, value in saved.items() if name not in {'hero_overline', 'hero_date', 'hero_status'}}
-    defaults = {THEME_KEY: DEFAULT_THEME, FOOTER_KEY: DEFAULT_FOOTER, HOME_KEY: DEFAULT_HOME, PAGE_MODES_KEY: DEFAULT_PAGE_MODES}[key]
+    defaults = {THEME_KEY: DEFAULT_THEME, FOOTER_KEY: DEFAULT_FOOTER, HOME_KEY: DEFAULT_HOME, PAGE_MODES_KEY: DEFAULT_PAGE_MODES, HOME_SECTIONS_KEY: DEFAULT_HOME_SECTIONS}[key]
     if not isinstance(saved, dict) or set(saved) != set(defaults):
         raise ValueError('Nieprawidłowy zestaw ustawień.')
+    if key == HOME_SECTIONS_KEY:
+        if not all(type(value) is bool for value in saved.values()):
+            raise ValueError('Widoczność sekcji musi mieć wartość prawda lub fałsz.')
+        return saved
     if not all(isinstance(value, str) for value in saved.values()):
         raise ValueError('Wartości ustawień muszą być tekstem.')
     if key == PAGE_MODES_KEY:
@@ -106,4 +114,5 @@ def load_public_settings(db):
         'theme': get_settings(db, THEME_KEY, DEFAULT_THEME),
         'footer': get_settings(db, FOOTER_KEY, DEFAULT_FOOTER),
         'home': get_settings(db, HOME_KEY, DEFAULT_HOME),
+        'home_sections': get_settings(db, HOME_SECTIONS_KEY, DEFAULT_HOME_SECTIONS),
     }

@@ -21,7 +21,7 @@ from home_images import HomeImage, HomeImages, IMAGE_SLOTS, IMAGE_POSITIONS, get
 from image_uploads import normalize_image, MAX_IMAGE_BYTES
 from starlette.concurrency import run_in_threadpool
 from system_settings import (COLOR_GROUPS, DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, HOME_FIELDS,
-                             THEME_KEY, FOOTER_KEY, HOME_KEY, load_public_settings, validate_settings)
+                             THEME_KEY, FOOTER_KEY, HOME_KEY, HOME_SECTIONS_KEY, HOME_SECTIONS, DEFAULT_HOME_SECTIONS, load_public_settings, validate_settings)
 from team_theme import COLOR_FIELDS, DEFAULT_PALETTE, PALETTE_KEY, DETAILS_KEY, get_team_palette, valid_color, team_details_enabled
 
 PHOTO_DIR = Path(__file__).resolve().parents[1] / 'static' / 'uploads' / 'team'
@@ -96,6 +96,7 @@ def build_router(require_superadmin):
         return templates.TemplateResponse(request, 'admin/home_settings.html', {
             'request': request, 'admin': admin, 'home_fields': HOME_FIELDS,
             'home_content': load_public_settings(db)['home'],
+            'home_sections': load_public_settings(db)['home_sections'], 'section_choices': HOME_SECTIONS,
             'home_images': get_home_images(db), 'image_slots': IMAGE_SLOTS, 'image_positions': IMAGE_POSITIONS,
             'error': error,
         }, status_code=status_code)
@@ -133,6 +134,17 @@ def build_router(require_superadmin):
     @router.post('/home')
     async def save_home(request: Request, db: Session = Depends(get_db)):
         return await save_setting(request, db, HOME_KEY, DEFAULT_HOME, '/admin/content/home?saved=1')
+
+    @router.post('/home/sections')
+    async def save_home_sections(request: Request, db: Session = Depends(get_db)):
+        form = await request.form()
+        visible = set(form.getlist('visible'))
+        if visible - DEFAULT_HOME_SECTIONS.keys():
+            raise HTTPException(422, 'Nieprawidłowa sekcja strony głównej.')
+        values = {key: key in visible for key in DEFAULT_HOME_SECTIONS}
+        db.merge(SystemSetting(key=HOME_SECTIONS_KEY, value=json.dumps(values)))
+        db.commit()
+        return RedirectResponse('/admin/content/home?saved=1#home-sections', 303)
 
     @router.get('/{page}/placeholder')
     def placeholder(page: str, request: Request, admin=Depends(require_superadmin)):

@@ -269,13 +269,13 @@ class GalleryTransferTests(unittest.TestCase):
         self.assertEqual(self.client.get('/admin/transfer/export', follow_redirects=False).status_code, 303)
 
     def test_shared_settings_transfer_and_older_packages(self):
-        from system_settings import DEFAULT_THEME, DEFAULT_HOME, THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, DEFAULT_PAGE_MODES
+        from system_settings import DEFAULT_THEME, DEFAULT_HOME, THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, DEFAULT_PAGE_MODES, HOME_SECTIONS_KEY, DEFAULT_HOME_SECTIONS
         from site_transfer import SiteBundle
         theme = {**DEFAULT_THEME, 'light_background': '#abcdef'}
         home = {**DEFAULT_HOME, 'hero_title': 'Transfer title'}
         footer = {'email': '<a href="mailto:hello@example.com">Hello</a>', 'location': 'Gdynia', 'additional': '<strong>Footer</strong>'}
         with self.sessions() as db:
-            for key, value in ((THEME_KEY, theme), (HOME_KEY, home), (FOOTER_KEY, footer), (PAGE_MODES_KEY, {**DEFAULT_PAGE_MODES, 'team': 'light'})):
+            for key, value in ((HOME_SECTIONS_KEY, {**DEFAULT_HOME_SECTIONS, 'team': False}), (THEME_KEY, theme), (HOME_KEY, home), (FOOTER_KEY, footer), (PAGE_MODES_KEY, {**DEFAULT_PAGE_MODES, 'team': 'light'})):
                 db.merge(SystemSetting(key=key, value=json.dumps(value)))
             db.commit()
             bundle, media = inspect_bundle(export_bundle(db))
@@ -286,6 +286,7 @@ class GalleryTransferTests(unittest.TestCase):
             self.assertEqual(json.loads(db.get(SystemSetting, HOME_KEY).value)['hero_title'], DEFAULT_HOME['hero_title'])
             self.assertEqual(json.loads(db.get(SystemSetting, PAGE_MODES_KEY).value)['team'], 'default')
             apply_bundle(db, bundle, media, 'all')
+            self.assertFalse(json.loads(db.get(SystemSetting, HOME_SECTIONS_KEY).value)['team'])
             self.assertEqual(json.loads(db.get(SystemSetting, PAGE_MODES_KEY).value)['team'], 'light')
             self.assertEqual(json.loads(db.get(SystemSetting, HOME_KEY).value)['hero_title'], 'Transfer title')
             self.assertEqual(json.loads(db.get(SystemSetting, THEME_KEY).value)['light_background'], '#abcdef')
@@ -297,7 +298,7 @@ class GalleryTransferTests(unittest.TestCase):
                 old.pop('home_images', None)
                 if version == 1:
                     old.pop('about')
-                for key in (THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY):
+                for key in (THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, HOME_SECTIONS_KEY):
                     old['settings'].pop(key)
                 apply_bundle(db, SiteBundle.model_validate(old), media, 'all')
                 self.assertEqual(json.loads(db.get(SystemSetting, HOME_KEY).value)['hero_title'], 'Transfer title')

@@ -7,7 +7,7 @@ from fastapi.templating import Jinja2Templates
 from html_content import clean_html, safe_html
 from admin_sessions import csrf_token
 from file_types import file_accept, file_category_labels, FILE_CATEGORIES
-from system_settings import DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, DEFAULT_PAGE_MODES
+from system_settings import DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, DEFAULT_PAGE_MODES, DEFAULT_HOME_SECTIONS
 
 from site_pages import PUBLIC_PAGES, page_for_path
 
@@ -46,5 +46,5 @@ def create_templates():
     templates.env.globals['asset_url'] = asset_url
     templates.env.globals['public_page_key'] = public_page_key
     templates.env.globals['page_display_mode'] = page_display_mode
-    templates.env.globals['default_site_settings'] = {'theme': DEFAULT_THEME, 'footer': DEFAULT_FOOTER, 'home': DEFAULT_HOME, 'page_modes': DEFAULT_PAGE_MODES}
+    templates.env.globals['default_site_settings'] = {'theme': DEFAULT_THEME, 'footer': DEFAULT_FOOTER, 'home': DEFAULT_HOME, 'page_modes': DEFAULT_PAGE_MODES, 'home_sections': DEFAULT_HOME_SECTIONS}
     return templates

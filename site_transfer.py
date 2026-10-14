@@ -23,7 +23,7 @@ from gallery import FeaturedVideo, VIDEO_KEY, get_featured_video
 from image_uploads import MAX_IMAGE_BYTES, normalize_image
 from models import FormInfo, FormVersion, GalleryPhoto, SystemSetting, TeamMember
 from site_pages import PUBLIC_PAGES, page_visibility
-from system_settings import THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, load_public_settings, validate_settings
+from system_settings import THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, HOME_SECTIONS_KEY, load_public_settings, validate_settings
 from partner_content import (Partner, PartnerSection, PartnersConfig, MAX_PARTNERS,
                              get_partners, save_partners, normalize_svg)
 import document_content
@@ -38,7 +38,7 @@ MAX_ARCHIVE_BYTES = 150 * 1024 * 1024
 MEDIA_PATTERN = r'media/[a-f0-9]{64}\.(?:webp|png|jpg)'
 LOGO_MEDIA_PATTERN = r'media/[a-f0-9]{64}\.(?:webp|png|jpg|svg)'
 DOCUMENT_MEDIA_PATTERN = r'documents/[a-f0-9]{64}\.pdf'
-ADDITIONAL_SETTING_KEYS = {THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY}
+ADDITIONAL_SETTING_KEYS = {THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, HOME_SECTIONS_KEY}
 OPTIONAL_SETTING_KEYS = {'event_date_only'}
 SETTING_KEYS = {PALETTE_KEY, DETAILS_KEY, 'event_datetime', 'voting_enabled'} | {'page_visible:' + key for key, _, _ in PUBLIC_PAGES}
 
@@ -210,7 +210,7 @@ def export_bundle(db):
     settings = {'event_datetime': '', 'voting_enabled': 'true', **settings}
     public = load_public_settings(db)
     settings.update({key: json.dumps(public[section], ensure_ascii=False)
-                     for key, section in ((THEME_KEY, 'theme'), (FOOTER_KEY, 'footer'), (HOME_KEY, 'home'), (PAGE_MODES_KEY, 'page_modes'))})
+                     for key, section in ((THEME_KEY, 'theme'), (FOOTER_KEY, 'footer'), (HOME_KEY, 'home'), (PAGE_MODES_KEY, 'page_modes'), (HOME_SECTIONS_KEY, 'home_sections'))})
     settings[PALETTE_KEY] = json.dumps(get_team_palette(db))
     settings[DETAILS_KEY] = 'true' if team_details_enabled(db) else 'false'
     settings.update({'page_visible:' + key: 'true' if visible else 'false' for key, visible in page_visibility(db).items()})

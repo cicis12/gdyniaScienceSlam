@@ -5,6 +5,17 @@
 
 {% if error %}<p class="content-error" role="alert">{{ error }}</p>{% endif %}
 {% if request.query_params.get('saved') %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
+<section class="content-panel" id="home-sections">
+  <h2>Widoczność sekcji</h2>
+  <p>Wybierz sekcje widoczne na stronie głównej. Ukrycie sekcji zachowuje jej treść i nie wyłącza osobnej podstrony. Kolory pozostałych sekcji automatycznie się przeplatają.</p>
+  <form action="/admin/content/home/sections" method="post" class="member-fields">
+    {% for key, title in section_choices %}
+    <label class="visibility-option"><input type="checkbox" name="visible" value="{{ key }}" {% if home_sections[key] %}checked{% endif %}> <span>{{ title }}</span></label>
+    {% endfor %}
+    <p class="content-hint">Zespół i partnerzy pojawiają się tylko wtedy, gdy mają wpisy do wyświetlenia. Wyłączenie strony zespołu nadal ukrywa też jej sekcję.</p>
+    <button type="submit">Zapisz widoczność sekcji</button>
+  </form>
+</section>
 <section class="content-panel"><h2>Zdjęcia strony głównej</h2>
 <p>Zdjęcia zespołu i logotypy partnerów pochodzą z ich osobnych edytorów.</p>
 {% for slot, title in image_slots %}

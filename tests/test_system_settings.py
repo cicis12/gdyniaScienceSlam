@@ -53,6 +53,31 @@ class SystemSettingsTests(unittest.TestCase):
             links = [link['href'].split('#')[0] for link in soup.select('a[href]')]
             self.assertNotIn(path, links)
 
+    def test_home_section_visibility_is_independent_and_keeps_alternation(self):
+        from itertools import product
+        from system_settings import HOME_SECTIONS_KEY, DEFAULT_HOME_SECTIONS
+        keys = list(DEFAULT_HOME_SECTIONS)
+        for flags in product((False, True), repeat=len(keys)):
+            visible = [key for key, enabled in zip(keys, flags) if enabled]
+            response = self.client.post('/admin/content/home/sections', data={'visible': visible}, follow_redirects=False)
+            self.assertEqual(response.status_code, 303)
+            soup = BeautifulSoup(self.client.get('/').text, 'html.parser')
+            sections = soup.select('.homepage-flow > .home-scroll-section')
+            self.assertEqual(len(sections), len(visible))
+            for index, section in enumerate(sections):
+                self.assertIn('theme-dark' if index % 2 == 0 else 'theme-light', section['class'])
+            checked = BeautifulSoup(self.client.get('/admin/content/home').text, 'html.parser').select('#home-sections input:checked')
+            self.assertEqual([item['value'] for item in checked], visible)
+        self.client.post('/admin/content/home/sections')
+        self.assertEqual(self.client.get('/team').status_code, 200)
+        self.assertEqual(self.client.get('/about').status_code, 200)
+        self.assertEqual(self.client.post('/admin/content/home/sections', data={'visible': 'unknown'}).status_code, 422)
+        with self.sessions() as db:
+            self.assertEqual(json.loads(db.get(SystemSetting, HOME_SECTIONS_KEY).value), dict.fromkeys(keys, False))
+        self.client.cookies.clear()
+        self.fixture.login('regular')
+        self.assertEqual(self.client.post('/admin/content/home/sections').status_code, 403)
+
     def test_theme_validates_atomically_renders_and_resets(self):
         palette = {**DEFAULT_THEME, 'dark_background': '#123456', 'header_logo': '#ABCDEF'}
         self.assertEqual(self.client.post('/admin/content/theme', data=palette).status_code, 200)
