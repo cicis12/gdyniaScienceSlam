@@ -597,3 +597,63 @@ migration role that actually creates tables. For an application smoke check,
 configure the mail and token secrets described above, then run
 `venv/bin/uvicorn main:app --reload`.
 
+
+### Admin accounts, sessions, and form uploads
+
+Install the updated dependencies and apply the new migration before starting this
+version. The migration adds `admin_users.is_sysadmin` and `admin_sessions`; existing
+accounts and submissions are preserved. Existing admin cookies become invalid,
+so administrators must log in again.
+
+```bash
+venv/bin/python -m pip install -r requirements.txt
+ENV_FILE=admin_DBcreds.env venv/bin/alembic upgrade head
+venv/bin/python make_sysadmin.py
+```
+
+Apply the usual application-role grants to new tables after a manual migration.
+`deploy.sh` handles migrations and grants during its normal bootstrap step.
+`make_sysadmin.py` prompts for an existing username and toggles system administrator
+access, just like `make_superadmin.py` toggles superadmin access. To use it inside
+an existing Docker deployment, run `docker compose --env-file .deploy/site.env exec app python make_sysadmin.py`.
+
+System administrators inherit superadmin access and can use **Zarządzaj
+administratorami** at `/admin/admins` to create/delete accounts, enable/disable
+accounts, change superadmin status, and reset passwords. Sysadmin status itself is
+managed by the script. The page prevents self-deletion/self-disabling and removal
+of the last active sysadmin. Account changes revoke existing sessions. Password
+changes made through other scripts also invalidate sessions automatically. Logout
+revokes the current session. Session cookies contain random tokens; only token
+digests and credential fingerprints are stored in the database. Sessions expire
+after four hours.
+
+Admin-authored HTML is sanitized when rendered, including existing/imported copy
+and previews. Text formatting, links, images, basic SVG shapes and Tailwind classes
+are supported. Scripts, event handlers, unsafe link schemes, embedded documents,
+and inline CSS are removed from rendered content. Stored source remains editable.
+
+Public forms support private video, PDF, and image attachments. Add a **Plik**
+field in the form builder and choose one or more accepted categories: videos, images,
+documents, or archives. Each field accepts one file. The selected categories are
+enforced by both the file picker and server and saved with each form version.
+Uploads are limited to 100 MiB per file, three files per
+submission, and 110 MiB for the entire multipart request. Videos include MP4, MOV, WebM and MKV; images include PNG, JPG/JPEG, WebP and GIF;
+documents include PDF, Office/OpenDocument files, TXT, CSV and RTF; archives include
+ZIP, RAR, 7z, TAR and GZ. Basic signature checks apply. Archives are never extracted
+and are served as downloads. Existing fields default to videos, images and documents.
+Files are stored under `uploads/forms/`, outside `/static`, and are served only to
+active logged-in admins. Videos support authenticated byte-range playback and
+all attachments can be downloaded. Playback depends on the browser's support for
+the video's codec; the download link remains available. Include the private
+uploads volume/directory in backups alongside the database. Site configuration
+ZIP exports do not contain private submissions or their attachments.
+
+Form requests are limited before parsing to **10 per minute and 100 per hour per
+IP**. Configure `FORM_SUBMISSION_RATE_LIMIT` with a `limits` expression such as
+`10/minute;100/hour` to account for shared networks at an event. The existing
+`RATE_LIMIT_STORAGE_URI` selects shared Redis storage in Docker; local development
+uses memory. `FORM_UPLOAD_STORAGE_LIMIT_MB` defaults to `10240` (10 GiB total saved
+form attachments). Exceeding the storage budget rejects new uploads without
+deleting existing files. JSON-only submissions are limited to 256 KiB, individual
+text answers to 10,000 characters, and outdated form versions are rejected with a
+request to refresh. The admin viewer loads 50 submissions per page.

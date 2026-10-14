@@ -1,0 +1,85 @@
+/* Shared by registration, standalone forms and the builder preview. */
+.public-form {
+  --form-text: var(--section-heading, #122c54);
+  --form-surface: var(--section-surface, #eaf1fa);
+  --form-accent: var(--section-button, #2d519f);
+  --form-accent-text: var(--section-button-text, #fff);
+  padding: 0; border: 0; border-radius: 0; box-shadow: none;
+  background: transparent; color: var(--form-text);
+}
+.public-form .form-field { min-width: 0; }
+.public-form .form-control { position: relative; min-width: 0; }
+.public-form .form-control :is(input, textarea, select) {
+  display: block; width: 100%; min-height: 3.125rem; box-sizing: border-box;
+  padding: 1.5rem 0 .25rem 2.5rem; border: 0; border-bottom: 2px solid currentColor; border-radius: 0;
+  font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.5; outline: none;
+}
+body.public-site form.public-form .form-field .form-control :is(input, textarea, select),
+.public-form .form-control :is(input, textarea, select) {
+  background: transparent !important;
+  color: var(--form-text) !important;
+  border-color: color-mix(in srgb, var(--form-text) 65%, var(--form-surface)) !important;
+}
+body.public-site form.public-form .form-field .form-control :is(input, textarea, select):focus,
+.public-form .form-control :is(input, textarea, select):focus {
+  border-bottom-color: var(--form-accent) !important;
+}
+.public-form .form-floating-label {
+  position: absolute; left: 2.5rem; top: 1.5rem; pointer-events: none;
+  max-width: calc(100% - 2.5rem); line-height: 1.5; font-weight: 700; font-size: 1rem;
+  transition: top .15s, font-size .15s; z-index: 1;
+}
+body.public-site .public-form :is(.form-floating-label, .checkbox-label, .form-note),
+.public-form :is(.form-floating-label, .checkbox-label, .form-note) { color: var(--form-text) !important; }
+.public-form .form-control:focus-within > .form-floating-label,
+.public-form .form-control :is(input, textarea):not(:placeholder-shown) ~ .form-floating-label,
+.public-form .form-control select[data-filled="true"] ~ .form-floating-label,
+.public-form .form-control:has(.phone:not(:placeholder-shown)) > .form-floating-label,
+.public-form .form-floating-label.always-raised {
+  top: .25rem; font-size: .875rem;
+}
+.public-form .has-icon :is(input:not(.phone), textarea, select) { padding-left: 2.5rem; }
+.public-form .has-icon > .form-floating-label { left: 2.5rem; max-width: calc(100% - 2.5rem); }
+.public-form .form-field-icon { position: absolute; left: 0; top: 1.5rem; width: 1.5rem; height: 1.5rem; z-index: 2; pointer-events: none; }
+.public-form .form-field-icon svg { display: block; width: 100%; height: 100%; }
+.public-form .form-double { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.public-form .form-double > .form-control:last-child input { padding-left: .5rem; }
+.public-form .form-double > .form-control:last-child .form-floating-label { left: .5rem; max-width: calc(100% - .5rem); }
+.public-form textarea { resize: vertical; }
+.public-form select option { background: var(--form-surface); color: var(--form-text); }
+.public-form .form-note { margin-top: .4rem; font-size: .875rem; line-height: 1.5; }
+.public-form .checkbox-label { display: flex; align-items: flex-start; gap: .75rem; position: relative; cursor: pointer; line-height: 1.5; }
+.public-form .checkbox-label > input { position: absolute; width: 1.25rem; height: 1.25rem; top: .125rem; left: 0; opacity: 0; }
+.public-form .checkbox-box { display: grid; place-items: center; width: 1.25rem; height: 1.25rem; flex: 0 0 1.25rem; margin-top: .125rem; border: 2px solid var(--form-text); border-radius: .25rem; color: transparent; }
+.public-form .checkbox-box svg { display: block; position: static; width: 1rem; height: 1rem; transform: none; }
+.public-form .checkbox-label > input:checked + .checkbox-box { background: var(--form-accent); border-color: var(--form-accent); color: var(--form-accent-text); }
+.public-form .checkbox-label > input:focus-visible + .checkbox-box { outline: 2px solid var(--form-accent); outline-offset: 3px; }
+.public-form .checkbox-copy { min-width: 0; overflow-wrap: anywhere; }
+.public-form .checkbox-copy > :first-child { margin-top: 0; }
+.public-form a { text-decoration: underline; text-underline-offset: .15em; }
+.registration-form-tabs .tab { gap: .5rem; }
+.form-tab-icon { display: inline-flex; flex: 0 0 1.5rem; width: 1.5rem; height: 1.5rem; }
+.form-tab-icon svg { display: block; width: 100%; height: 100%; }
+.public-form .iti { width: 100%; --iti-dropdown-bg: var(--form-surface); --iti-text-gray: var(--form-text); }
+.public-form .iti__country-container { top: 1.5rem; bottom: calc(.25rem + 2px); }
+.public-form .form-control:has(.iti) > .form-floating-label { left: 7rem; }
+.public-form .form-control:has(.iti) .form-field-icon { display: none; }
+.public-form .results { z-index: 5; background: var(--form-surface); color: var(--form-text); }
+.public-form .result-item:hover { background: var(--section-background, #d5e2f6); }
+body.public-site form.public-form .form-field .form-control [aria-invalid="true"],
+.public-form .form-control [aria-invalid="true"] { border-bottom-color: #c73939 !important; }
+.public-form .checkbox-label > input[aria-invalid="true"] + .checkbox-box { outline: 2px solid #c73939; outline-offset: 2px; }
+#toast { max-width: min(36rem, calc(100vw - 2rem)); }
+#toast-content { overflow-wrap: anywhere; }
+body.public-site #toast-content.bg-red-600 { background: #a51d2d; color: #fff !important; }
+body.public-site #toast-content.bg-green-600 { background: #14633c; color: #fff !important; }
+
+
+body.public-site form.public-form button[type=submit] {
+  background: var(--form-accent) !important; color: var(--form-accent-text) !important;
+  min-height: 3rem;
+}
+body.public-site form.public-form button[type=submit]:focus-visible { outline: 3px solid var(--form-accent); outline-offset: 3px; }
+body.public-site form.public-form button[type=submit]:disabled { opacity: .65; cursor: wait; }
+
+.public-form .form-content-heading { padding-top: 1.25rem; }

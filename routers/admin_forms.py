@@ -8,13 +8,27 @@ from sqlalchemy.orm import Session
 
 from database import get_db, Base
 from models import FormInfo, FormVersion, SystemSetting
-from forms import FormField, FormDefinition, FieldType
+from form_icons import check_svg
+from pydantic import model_validator
+from forms import FormField, FormDefinition, FieldType, empty_to_none
 from fastapi.responses import FileResponse, HTMLResponse
 
 router = APIRouter(prefix="/admin/forms", tags=["Admin Forms"])
 templates = create_templates()
 
-class CreateFormPayload(BaseModel):
+class IconPayload(BaseModel):
+    svg: Optional[str] = None
+    fields: List[FormField]
+
+    @model_validator(mode='after')
+    def validate_icons(self):
+        self.svg = empty_to_none(self.svg)
+        check_svg(self.svg)
+        for field in self.fields:
+            check_svg(field.svg)
+        return self
+
+class CreateFormPayload(IconPayload):
     slug: str
     name: str
     display_name: str
@@ -22,7 +36,7 @@ class CreateFormPayload(BaseModel):
     enabled: bool = True
     fields: List[FormField]
 
-class CreateVersionPayload(BaseModel):
+class CreateVersionPayload(IconPayload):
     display_name: str
     description: Optional[str] = None
     fields: List[FormField]
@@ -38,7 +52,7 @@ def admin_forms_dashboard(request: Request, db: Session = Depends(get_db)):
             selected_registration_form_ids = [int(value) for value in setting.value.split(",") if value]
         except ValueError:
             selected_registration_form_ids = []
-    return templates.TemplateResponse("admin/form_builder.html", {
+    return templates.TemplateResponse(request, "admin/form_builder.html", {
         "request": request,
         "forms": forms,
         "admin": getattr(request.state, "admin", None),
@@ -103,6 +117,7 @@ def get_form_version(form_id: int, version_id: int, db: Session = Depends(get_db
         "slug": form.slug,
         "display_name": version.display_name,
         "description": version.description,
+        "svg": version.definition.get("svg"),
         "fields": version.definition.get("fields", [])
     }
 
@@ -126,7 +141,7 @@ def create_form(payload: CreateFormPayload, db: Session = Depends(get_db)):
         version_num=1,
         display_name=payload.display_name,
         description=payload.description,
-        definition={"fields": [f.model_dump() for f in payload.fields]}
+        definition={"svg": payload.svg, "fields": [f.model_dump() for f in payload.fields]}
     )
     db.add(first_ver)
     db.flush()
@@ -150,7 +165,7 @@ def create_new_version(form_id: int, payload: CreateVersionPayload, db: Session 
         version_num=next_num,
         display_name=payload.display_name,
         description=payload.description,
-        definition={"fields": [f.model_dump() for f in payload.fields]}
+        definition={"svg": payload.svg, "fields": [f.model_dump() for f in payload.fields]}
     )
     db.add(new_ver)
     db.flush()
@@ -161,8 +176,9 @@ def create_new_version(form_id: int, payload: CreateVersionPayload, db: Session 
 # preview a draft
 @router.post("/preview-draft", response_class=HTMLResponse)
 def preview_draft(request: Request, payload: FormDefinition):
-    return templates.TemplateResponse("admin/_rendered_preview.html", {
+    return templates.TemplateResponse(request, "admin/_rendered_preview.html", {
         "request": request,
+        "svg": payload.svg,
         "fields": payload.fields
     })
 
@@ -174,8 +190,9 @@ def preview_saved_version(version_id: int, request: Request, db: Session = Depen
         raise HTTPException(status_code=404, detail="Wersja nie znaleziona.")
     
     definition = FormDefinition.model_validate(version.definition)
-    return templates.TemplateResponse("admin/_rendered_preview.html", {
+    return templates.TemplateResponse(request, "admin/_rendered_preview.html", {
         "request": request,
+        "svg": definition.svg,
         "fields": definition.fields,
         "display_name": version.display_name,
         "description": version.description

@@ -31,14 +31,25 @@
   
       <!-- DESKTOP MENU -->
       <div class="site-links hidden md:flex space-x-6 items-center">
-        {% if admin is defined and admin.is_superadmin %}
+        {% if admin is defined and (admin.is_superadmin or admin.is_sysadmin) %}
         <a href="/admin/manage_votes" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Zarządzaj głosowaniem</a>
         <a href="/admin/content" class="font-bold text-lg">Ustawienia systemowe</a>
         <a href="/admin/dashboard" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Formularze</a>
         {% endif %}
+        {% if admin is defined and admin.is_sysadmin %}<a href="/admin/admins" class="font-bold text-lg">Zarządzaj administratorami</a>{% endif %}
         <a href="/admin/form-submissions" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Odpowiedzi formularzy</a>
       </div>
   
+      <form method="post" action="/admin/logout" class="site-logout-form site-logout-desktop">
+        <input type="hidden" name="csrf" value="{{ csrf_token(request) }}">
+        <button type="submit" class="site-logout-button" aria-label="Wyloguj" title="Wyloguj">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="9" cy="7" r="3" />
+            <path d="M3 20v-2a6 6 0 0 1 9-5.2M15 16h7m-3-3 3 3-3 3" />
+          </svg>
+        </button>
+      </form>
+
       <!-- HAMBURGER -->
       <button
         id="menu-btn"
@@ -56,12 +67,23 @@
       id="mobile-menu"
       class="site-mobile-menu" hidden>
         <div class="site-mobile-links">
-            {% if admin is defined and admin.is_superadmin %}
+            {% if admin is defined and (admin.is_superadmin or admin.is_sysadmin) %}
           <a href="/admin/manage_votes" class="text-lg block">Zarządzaj głosowaniem</a>
           <a href="/admin/content" class="text-lg block">Ustawienia systemowe</a>
           <a href="/admin/dashboard" class="text-lg block">Formularze</a>
             {% endif %}
+          {% if admin is defined and admin.is_sysadmin %}<a href="/admin/admins" class="text-lg block">Zarządzaj administratorami</a>{% endif %}
           <a href="/admin/form-submissions" class="text-lg block">Odpowiedzi formularzy</a>
+      <form method="post" action="/admin/logout" class="site-logout-form site-logout-mobile">
+        <input type="hidden" name="csrf" value="{{ csrf_token(request) }}">
+        <button type="submit" class="site-logout-button" aria-label="Wyloguj" title="Wyloguj">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+            <circle cx="9" cy="7" r="3" />
+            <path d="M3 20v-2a6 6 0 0 1 9-5.2M15 16h7m-3-3 3 3-3 3" />
+          </svg>
+          <span>Wyloguj</span>
+        </button>
+      </form>
         </div>
     </div>
   </nav>

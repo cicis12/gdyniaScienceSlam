@@ -46,6 +46,15 @@ class AdminUser(Base):
     password_hash = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
     is_superadmin = Column(Boolean, default=False)
+    is_sysadmin = Column(Boolean, nullable=False, default=False, server_default='false')
+
+
+class AdminSession(Base):
+    __tablename__ = 'admin_sessions'
+    token_hash = Column(String(64), primary_key=True)
+    admin_id = Column(Integer, ForeignKey('admin_users.id', ondelete='CASCADE'), nullable=False, index=True)
+    password_fingerprint = Column(String(64), nullable=False)
+    expires_at = Column(DateTime, nullable=False, index=True)
 
 class Voter(Base):
     __tablename__="voters"

@@ -1,8 +1,6 @@
 """Shared public colors, footer markup, and editable homepage copy."""
 import json
-from urllib.parse import urlsplit
 
-from bs4 import BeautifulSoup, Comment
 from models import SystemSetting
 from site_pages import PUBLIC_PAGES
 from team_theme import valid_color
@@ -42,11 +40,8 @@ DEFAULT_FOOTER = {
 }
 HOME_FIELDS = (
     ('hero', 'Wprowadzenie', (
-        ('hero_overline', 'Nadtytuł', 'Gdynia · Młodzi naukowcy · Wielkie idee'),
         ('hero_title', 'Tytuł', 'Gdynia Science Slam'),
-        ('hero_date', 'Tekst przed ogłoszoną datą', 'Następne spotkanie nauki'),
         ('hero_no_date', 'Tekst bez daty', 'Data kolejnego wydarzenia wkrótce'),
-        ('hero_status', 'Tekst pod odliczaniem', 'Do zobaczenia na żywo.'),
         ('hero_waiting', 'Tekst przed uruchomieniem odliczania', 'Odliczanie rozpocznie się po ogłoszeniu daty wydarzenia.'),
         ('hero_started', 'Tekst po rozpoczęciu wydarzenia', 'Wydarzenie już się rozpoczęło.'),
         ('days', 'Etykieta dni', 'dni'), ('hours', 'Etykieta godzin', 'godz.'),
@@ -72,26 +67,10 @@ HOME_FIELDS = (
 DEFAULT_HOME = {key: default for _, _, fields in HOME_FIELDS for key, _, default in fields}
 
 
-def sanitize_html(value):
-    soup = BeautifulSoup(value, 'html.parser')
-    for node in soup.find_all(string=lambda text: isinstance(text, Comment)):
-        node.extract()
-    for tag in list(soup.find_all(True)):
-        if tag.name in {'script', 'style', 'iframe', 'object', 'embed', 'svg', 'math', 'template'}:
-            tag.decompose()
-    for tag in list(soup.find_all(True)):
-        if tag.name not in {'a', 'p', 'br', 'strong', 'b', 'em', 'i', 'span', 'ul', 'ol', 'li'}:
-            tag.unwrap()
-            continue
-        href = tag.get('href', '') if tag.name == 'a' else ''
-        tag.attrs.clear()
-        if href and urlsplit(href.strip()).scheme.lower() in {'http', 'https', 'mailto', 'tel'}:
-            tag['href'] = href.strip()
-            tag['rel'] = 'noopener noreferrer'
-    return str(soup)
-
-
 def validate_settings(key, saved):
+    # Ignore retired labels when importing older configuration bundles.
+    if key == HOME_KEY and isinstance(saved, dict):
+        saved = {name: value for name, value in saved.items() if name not in {'hero_overline', 'hero_date', 'hero_status'}}
     defaults = {THEME_KEY: DEFAULT_THEME, FOOTER_KEY: DEFAULT_FOOTER, HOME_KEY: DEFAULT_HOME, PAGE_MODES_KEY: DEFAULT_PAGE_MODES}[key]
     if not isinstance(saved, dict) or set(saved) != set(defaults):
         raise ValueError('Nieprawidłowy zestaw ustawień.')
@@ -107,8 +86,6 @@ def validate_settings(key, saved):
         return {name: value.lower() for name, value in saved.items()}
     if any(len(value) > 10000 for value in saved.values()):
         raise ValueError('Pole może mieć maksymalnie 10000 znaków.')
-    if key == FOOTER_KEY:
-        return {name: sanitize_html(value) for name, value in saved.items()}
     return saved
 
 

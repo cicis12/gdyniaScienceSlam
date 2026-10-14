@@ -65,6 +65,8 @@ services:
     environment:
       ENV_FILE: /run/secrets/app_database
       RATE_LIMIT_STORAGE_URI: redis://redis:6379/0
+      FORM_SUBMISSION_RATE_LIMIT: "${FORM_SUBMISSION_RATE_LIMIT:-10/minute;100/hour}"
+      FORM_UPLOAD_STORAGE_LIMIT_MB: "${FORM_UPLOAD_STORAGE_LIMIT_MB:-10240}"
     secrets:
       - app_database
       - source: secret_key

@@ -20,12 +20,13 @@ VOTER_KEY = os.getenv("VOTER_SECRET_KEY")
 if not VOTER_KEY:
     raise RuntimeError("VOTER_SECRET_KEY is not set")
 ALGORITHM = "HS256"
+VOTER_TOKEN_EXPIRE_SECONDS = 12 * 60 * 60
 
 
 def create_voter_token(voter_id: int, email: str):
     payload = {
         "sub": str(voter_id),
-        "exp": datetime.utcnow() + timedelta(hours=12)
+        "exp": datetime.utcnow() + timedelta(seconds=VOTER_TOKEN_EXPIRE_SECONDS)
     }
     return jwt.encode(payload,VOTER_KEY,algorithm=ALGORITHM)
 

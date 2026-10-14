@@ -20,7 +20,7 @@ def build_router(require_superadmin):
     router = APIRouter(prefix='/admin/gallery', dependencies=[Depends(require_superadmin)])
 
     def render(request, db, admin, error=None, video=None, status_code=200):
-        return templates.TemplateResponse('admin/gallery.html', {
+        return templates.TemplateResponse(request, 'admin/gallery.html', {
             'request': request, 'admin': admin, 'error': error,
             'photos': db.query(GalleryPhoto).order_by(GalleryPhoto.year.desc(), GalleryPhoto.sort_order, GalleryPhoto.id).all(),
             'video': video or get_featured_video(db),

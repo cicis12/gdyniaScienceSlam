@@ -1,5 +1,6 @@
 {% extends "client/client_header.html" %}
 {% block head_extra %}
+<script src="{{ asset_url('js/fit-text.js') }}" defer></script>
 <link rel="stylesheet" href="{{ asset_url('css/gallery.css') }}">
 <script src="{{ asset_url('js/gallery.js') }}" defer></script>
 {% endblock %}
@@ -9,8 +10,7 @@
     <h1>Poprzednie edycje</h1>
   </header>
   {% if video.enabled %}
-  <section class="archive-feature" aria-labelledby="archive-film-title">
-    <div class="archive-feature-heading"><h2 id="archive-film-title">{{ video.title }}</h2></div>
+  <section class="archive-feature" aria-label="Film z wydarzenia">
     <div class="archive-player">
       <iframe src="{{ video.embed_url }}" title="{{ video.title }}" allow="fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
@@ -24,9 +24,9 @@
     <header class="archive-edition-header"><h2 id="year-{{ year }}">{{ year }}</h2><p>{{ photos|length }} zdjęć <span aria-hidden="true">/</span> Gdynia Science Slam</p></header>
     <div class="archive-grid">
       {% for photo in photos %}
-      <a class="archive-photo" href="{{ photo.photo }}" data-year="{{ year }}" data-caption="{{ photo.caption or ('Gdynia Science Slam ' ~ year) }}" aria-label="Otwórz zdjęcie: {{ photo.caption or ('Gdynia Science Slam ' ~ year) }}">
+      <a class="archive-photo" href="{{ photo.photo }}" data-year="{{ year }}" data-caption="{{ (photo.caption or ('Gdynia Science Slam ' ~ year)) | clean_html }}" aria-label="Otwórz zdjęcie: {{ photo.caption or ('Gdynia Science Slam ' ~ year) }}">
         <img src="{{ photo.photo }}" alt="{{ photo.caption or ('Gdynia Science Slam ' ~ year) }}" loading="lazy" width="900" height="600">
-        <span class="archive-photo-overlay"><span>{{ photo.caption or ('GSS ' ~ year) }}</span><span aria-hidden="true">↗</span></span>
+        <span class="archive-photo-overlay"><span>{{ (photo.caption or ('GSS ' ~ year)) | safe_html }}</span><span aria-hidden="true">↗</span></span>
       </a>
       {% endfor %}
     </div>
@@ -38,7 +38,7 @@
     <header class="gallery-lightbox-header"><span id="gallery-year"></span><button type="button" id="gallery-close" aria-label="Zamknij galerię" autofocus>Zamknij <span aria-hidden="true">×</span></button></header>
     <div class="gallery-stage"><img id="gallery-full-image" alt=""></div>
     <footer class="gallery-lightbox-footer">
-      <p id="gallery-caption"></p>
+      <div id="gallery-caption"></div>
       <div class="gallery-controls"><button type="button" id="gallery-prev" aria-label="Poprzednie zdjęcie">←</button><span id="gallery-counter" aria-live="polite" aria-atomic="true"></span><button type="button" id="gallery-next" aria-label="Następne zdjęcie">→</button></div>
     </footer>
   </dialog>

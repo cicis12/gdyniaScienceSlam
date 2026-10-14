@@ -22,6 +22,8 @@ from datetime import date
 from video import save_video
 from sqlalchemy.exc import IntegrityError
 from security import verify_password
+from admin_sessions import create_admin_session, session_admin, check_csrf, fingerprint
+from models import AdminSession
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 from jose import jwt
@@ -32,7 +34,8 @@ from slowapi.errors import RateLimitExceeded
 from operator import attrgetter
 from jose import JWTError
 from rapidfuzz import fuzz
-from urllib.parse import urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, quote
+from form_uploads import attachment_path, FILE_TYPES
 from pydantic import BaseModel
 
 
@@ -55,31 +58,20 @@ from routers.forms import router as form_router
 app.include_router(form_router)
 
 
-@app.middleware("http")
-async def public_page_visibility(request: Request, call_next):
-    path = request.url.path
-    if not path.startswith("/static"):
-        def load_visibility():
-            with SessionLocal() as db:
-                return page_visibility(db), load_public_settings(db)
-        request.state.page_visibility, request.state.site_settings = await run_in_threadpool(load_visibility)
-        page = page_for_path(path)
-        if page and not request.state.page_visibility[page]:
-            return templates.TemplateResponse("client/unavailable.html", {
-                "request": request, "page_name": "unavailable",
-                "header_title": "Strona niedostępna - Gdynia Science Slam",
-            }, status_code=404)
-    return await call_next(request)
+def load_public_context():
+    with SessionLocal() as db:
+        return page_visibility(db), load_public_settings(db)
+
 
 @app.exception_handler(RateLimitExceeded)
 async def rate_limit_handler(request: Request, exc: RateLimitExceeded):
-    raise HTTPException(status_code=429, detail="Zbyt dużo zapytań. Spróbuj ponownie później")
+    return JSONResponse(status_code=429, content={"detail": "Zbyt dużo zapytań. Spróbuj ponownie później."}, headers={"Retry-After": "60"})
 
 
 #serve pages (@app.get)
 @app.get("/")
 def home(request: Request, db: Session = Depends(get_db)):
-    return templates.TemplateResponse("client/index.html", {
+    return templates.TemplateResponse(request, "client/index.html", {
         "request": request,
         "header_title": "Gdynia Science Slam",
         "page_name": "home",
@@ -92,7 +84,7 @@ def home(request: Request, db: Session = Depends(get_db)):
 
 @app.get("/team")
 def team(request: Request, db: Session = Depends(get_db)):
-    return templates.TemplateResponse("client/team.html", {
+    return templates.TemplateResponse(request, "client/team.html", {
         "request": request, "header_title": "Zespół - Gdynia Science Slam", "page_name": "team",
         "members": db.query(TeamMember).order_by(TeamMember.id).all(),
         "team_palette": get_team_palette(db),
@@ -127,6 +119,7 @@ def registration(request: Request, db: Session = Depends(get_db)):
                 "slug": form.slug,
                 "description": version.description,
                 "version_id": version.id,
+                "svg": version.definition.get("svg"),
                 "fields": version.definition.get("fields", []),
             })
 
@@ -145,7 +138,7 @@ def registration(request: Request, db: Session = Depends(get_db)):
                 "description": version.description,
             })
 
-    return templates.TemplateResponse("client/registration.html", {
+    return templates.TemplateResponse(request, "client/registration.html", {
         "request": request,
         "header_title": "Rejestracja - Gdynia Science Slam",
         "page_name": "registration",
@@ -156,7 +149,7 @@ def registration(request: Request, db: Session = Depends(get_db)):
 @app.get("/about")
 def about(request: Request, db: Session = Depends(get_db)):
     from about_content import get_timeline
-    return templates.TemplateResponse("client/about.html", {"request": request, "header_title": "O Nas - Gdynia Science Slam", "page_name":"about", "entries": get_timeline(db)})
+    return templates.TemplateResponse(request, "client/about.html", {"request": request, "header_title": "O Nas - Gdynia Science Slam", "page_name":"about", "entries": get_timeline(db)})
 
 @app.get("/previous_editions")
 def previous(request: Request, db: Session = Depends(get_db)):
@@ -164,14 +157,14 @@ def previous(request: Request, db: Session = Depends(get_db)):
     editions = {}
     for photo in photos:
         editions.setdefault(photo.year, []).append(photo)
-    return templates.TemplateResponse("client/previous.html", {
+    return templates.TemplateResponse(request, "client/previous.html", {
         "request": request, "header_title": "Poprzednie edycje - Gdynia Science Slam", "page_name": "previous_editions",
         "editions": editions, "photo_count": len(photos), "video": get_featured_video(db),
     })
 
 @app.get("/partners")
 def partners(request: Request, db: Session = Depends(get_db)):
-    return templates.TemplateResponse("client/partners.html", {"request": request, "header_title": "Partnerzy - Gdynia Science Slam", "page_name":"partners", "partner_config": get_partners(db)})
+    return templates.TemplateResponse(request, "client/partners.html", {"request": request, "header_title": "Partnerzy - Gdynia Science Slam", "page_name":"partners", "partner_config": get_partners(db)})
 
 @app.get("/documents")
 def documents(request: Request, db: Session = Depends(get_db)):
@@ -179,7 +172,7 @@ def documents(request: Request, db: Session = Depends(get_db)):
     for document in get_documents(db):
         if document.enabled:
             editions.setdefault(document.year, []).append(document)
-    return templates.TemplateResponse("client/documents.html", {
+    return templates.TemplateResponse(request, "client/documents.html", {
         "request": request, "header_title": "Dokumenty - Gdynia Science Slam", "page_name": "documents",
         "document_editions": editions,
     })
@@ -205,7 +198,7 @@ def download_document(document_id: str, db: Session = Depends(get_db)):
 
 @app.get("/topics")
 def topics(request: Request):
-    return templates.TemplateResponse("client/topics.html", {"request": request, "header_title": "Tematy - Gdynia Science Slam", "page_name":"topics"})
+    return templates.TemplateResponse(request, "client/topics.html", {"request": request, "header_title": "Tematy - Gdynia Science Slam", "page_name":"topics"})
 
 
 
@@ -221,32 +214,23 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 240
 
 
 def get_current_admin(request: Request, db: Session = Depends(get_db)):
-    token = request.cookies.get("admin_session")
-    if not token:
-        raise HTTPException(status_code=401)
-    
-    try:
-        payload = jwt.decode(token,SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get("sub")
-    except JWTError:
-        raise HTTPException(status_code=401)
-    
-    admin = db.query(AdminUser).filter(
-        AdminUser.username == username
-    ).first()
-
-    if not admin:
-        raise HTTPException(status_code=401)
-
-    return admin
+    return session_admin(db, request.cookies.get("admin_session"))
 
 
 def require_superadmin(admin: AdminUser = Depends(get_current_admin)):
-    if not admin.is_superadmin:
+    if not (admin.is_superadmin or admin.is_sysadmin):
         raise HTTPException(status_code=403, detail="Superadmin only")
     return admin
 
 
+def require_sysadmin(admin: AdminUser = Depends(get_current_admin)):
+    if not admin.is_sysadmin:
+        raise HTTPException(403, 'Tylko administrator systemowy może zarządzać kontami.')
+    return admin
+
+
+from routers.admin_accounts import build_router as build_accounts_router
+app.include_router(build_accounts_router(require_sysadmin))
 from routers.site_content import build_router
 app.include_router(build_router(require_superadmin))
 from routers.gallery_admin import build_router as build_gallery_router
@@ -261,42 +245,32 @@ app.include_router(build_documents_router(require_superadmin))
 app.include_router(build_transfer_router(require_superadmin, SECRET_KEY))
 
 
-@app.middleware("http")
-async def restrict_admin_area(request: Request, call_next):
-    path = request.url.path
-    if path.startswith("/admin/") and path not in {"/admin/login", "/admin/form-submissions"}:
-        with SessionLocal() as db:
-            try:
-                admin = get_current_admin(request, db)
-            except HTTPException:
-                return RedirectResponse("/admin/login", status_code=303)
-
-        request.state.admin = admin
-
-        if not admin.is_superadmin:
-            if request.method in {"GET", "HEAD"}:
-                return RedirectResponse("/admin/form-submissions", status_code=303)
-            return PlainTextResponse("Superadmin access required.", status_code=403)
-
-    return await call_next(request)
+def load_admin_context(request):
+    with SessionLocal() as db:
+        return get_current_admin(request, db)
 
 
 @app.get("/admin/form-submissions")
 def admin_form_submissions(
     request: Request,
     form_id: int | None = None,
+    page: int = 1,
     admin: AdminUser = Depends(get_current_admin),
     db: Session = Depends(get_db),
 ):
     forms = db.query(FormInfo).order_by(FormInfo.name.asc()).all()
     selected_form = db.get(FormInfo, form_id) if form_id is not None else None
     submissions = []
+    page = max(1, page)
+    total = 0
 
     if selected_form:
+        total = db.query(FormSubmission).filter_by(form_id=selected_form.id).count()
         saved_submissions = (
             db.query(FormSubmission)
             .filter(FormSubmission.form_id == selected_form.id)
-            .order_by(FormSubmission.submitted_at.desc())
+            .order_by(FormSubmission.submitted_at.desc(), FormSubmission.id.desc())
+            .offset((page - 1) * 50).limit(50)
             .all()
         )
         versions = {
@@ -316,10 +290,13 @@ def admin_form_submissions(
                     if field.get("name2"):
                         labels[field["name2"]] = field.get("question2") or field["name2"]
 
+            file_fields = {f['name'] for f in version.definition.get('fields', []) if f.get('type') == 'file'} if version else set()
             answers = [
                 {
                     "key": key,
                     "label": labels.get(key, key),
+                    "attachment": value if key in file_fields and isinstance(value, dict) and value.get('kind') == 'attachment' else None,
+                    "upload_url": f"/admin/uploads/{submission.id}/{quote(key, safe='')}",
                     "value": (
                         "—" if value in (None, "") else
                         ("Tak" if value else "Nie") if isinstance(value, bool) else
@@ -336,17 +313,33 @@ def admin_form_submissions(
                 "answers": answers,
             })
 
-    return templates.TemplateResponse("admin_form_submissions.html", {
+    return templates.TemplateResponse(request, "admin_form_submissions.html", {
         "request": request,
         "admin": admin,
         "forms": forms,
         "selected_form": selected_form,
-        "submissions": submissions,
+        "submissions": submissions, "page": page, "total": total, "has_next": page * 50 < total,
     })
+
+@app.get('/admin/uploads/{submission_id}/{field_name}')
+def download_submission_file(submission_id: int, field_name: str, download: bool = False,
+                             admin: AdminUser = Depends(get_current_admin), db: Session = Depends(get_db)):
+    submission = db.get(FormSubmission, submission_id)
+    record = submission.data.get(field_name) if submission else None
+    if not isinstance(record, dict) or record.get('kind') != 'attachment':
+        raise HTTPException(404)
+    path = attachment_path(record)
+    media_type = FILE_TYPES[path.suffix]
+    inline = media_type.startswith('video/') and not download
+    return FileResponse(path, media_type=media_type, filename=record.get('filename', path.name),
+                        content_disposition_type='inline' if inline else 'attachment',
+                        headers={'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store',
+                                 'Content-Security-Policy': "default-src 'none'; sandbox"})
+
 
 @app.exception_handler(HTTPException)
 async def auth_exception_handler(request: Request, exc: HTTPException):
-    if exc.status_code == 401 and request.url.path.startswith("/admin"):
+    if exc.status_code == 401 and request.scope["path"].startswith("/admin"):
         return RedirectResponse("/admin/login")
     return JSONResponse(status_code=exc.status_code, content={"detail":exc.detail})
 
@@ -376,15 +369,16 @@ def admin_email_sender(
     request: Request,
     admin: AdminUser = Depends(get_current_admin),
 ):
-    if not admin.is_superadmin:
+    if not (admin.is_superadmin or admin.is_sysadmin):
         raise HTTPException(
             status_code=403,
             detail="Superadmin access required."
         )
-    return templates.TemplateResponse("sendMails.html", {"request": request, "admin": admin})
+    return templates.TemplateResponse(request, "sendMails.html", {"request": request, "admin": admin})
 
 @app.post("/admin/send-email")
 async def sendemailform(
+    admin: AdminUser = Depends(require_superadmin),
     table: str = Form(...),
     subject: str = Form(...),
     body: str = Form(...),
@@ -414,6 +408,8 @@ async def sendemailform(
 
 @app.post("/admin/send-email/preview")
 async def preview_email(
+    request: Request,
+    admin: AdminUser = Depends(require_superadmin),
     table: str = Form(...),
     subject: str = Form(...),
     body: str = Form(...),
@@ -421,9 +417,9 @@ async def preview_email(
     test_email: str = Form(None),
 ):
     return templates.TemplateResponse(
-        "email_confirm.html",
+        request, "email_confirm.html",
         {
-            "request": {},
+            "request": request,
             "table": table,
             "subject": subject,
             "body": body,
@@ -446,7 +442,7 @@ def admin_dashboard(
         for form in forms
     }
     return templates.TemplateResponse(
-        "admin_dashboard_home.html",
+        request, "admin_dashboard_home.html",
         {
             "request": request,
             "admin": admin,
@@ -548,14 +544,14 @@ def admin_entry(request: Request, db: Session = Depends(get_db)):
         if error.status_code != 401:
             raise
         return RedirectResponse("/admin/login", status_code=303)
-    destination = "/admin/dashboard" if admin.is_superadmin else "/admin/form-submissions"
+    destination = "/admin/dashboard" if (admin.is_superadmin or admin.is_sysadmin) else "/admin/form-submissions"
     return RedirectResponse(destination, status_code=303)
 
 
 @app.get("/admin/login")
 def adminloginpage(request: Request):
     return templates.TemplateResponse(
-        "admin_login.html",
+        request, "admin_login.html",
         {"request": request}
     )
 
@@ -573,24 +569,18 @@ async def admin_login(
         AdminUser.username == username
     ).first()
     
-    if not admin or not verify_password(password,admin.password_hash):
+    if not admin or not admin.is_active or not verify_password(password,admin.password_hash):
         return templates.TemplateResponse(
-            "admin_login.html",
+            request, "admin_login.html",
             {
                 "request": request,
                 "error": "Błedna nazwa użytkownika lub hasło."
             }
         )
     
-    expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    token = create_admin_session(db, admin)
 
-    token = jwt.encode(
-        {"sub": admin.username, "exp": expire},
-        SECRET_KEY,
-        algorithm=ALGORITHM
-    )
-
-    landing_page = "/admin/dashboard" if admin.is_superadmin else "/admin/form-submissions"
+    landing_page = "/admin/dashboard" if (admin.is_superadmin or admin.is_sysadmin) else "/admin/form-submissions"
     response = RedirectResponse(landing_page, status_code=303)
 
     response.set_cookie(
@@ -598,10 +588,24 @@ async def admin_login(
         value=token,
         httponly=True,
         secure=True,
-        samesite="strict"
+        samesite="strict",
+        max_age=ACCESS_TOKEN_EXPIRE_MINUTES * 60,
+        expires=ACCESS_TOKEN_EXPIRE_MINUTES * 60
     )
 
     return response
+
+@app.post("/admin/logout")
+def admin_logout(request: Request, csrf: str = Form(...), db: Session = Depends(get_db)):
+    check_csrf(request, csrf)
+    token = request.cookies.get('admin_session', '')
+    db.query(AdminSession).filter_by(token_hash=fingerprint(token)).delete()
+    db.commit()
+    response = RedirectResponse('/admin/login', status_code=303)
+    response.delete_cookie('admin_session', secure=True, httponly=True, samesite='strict')
+    response.headers['Cache-Control'] = 'no-store'
+    return response
+
 
 CONTESTANT_VID_DIR = BASE_DIR / "uploads" / "filmikuczestnik"
 
@@ -619,7 +623,7 @@ def get_video(filename: str, admin: AdminUser = Depends(get_current_admin)):
 
 
 # VOTING
-from vote import create_voter_token, get_current_voter, decode_voter
+from vote import create_voter_token, get_current_voter, decode_voter, VOTER_TOKEN_EXPIRE_SECONDS
 @app.post("/vote/login")
 def vote_login(
     email: str = Form(...),
@@ -639,7 +643,9 @@ def vote_login(
         value=token,
         httponly=True,
         secure=True,
-        samesite="lax"
+        samesite="lax",
+        max_age=VOTER_TOKEN_EXPIRE_SECONDS,
+        expires=VOTER_TOKEN_EXPIRE_SECONDS
     )
 
     return response
@@ -655,7 +661,7 @@ def vote_page(
     voter = decode_voter(request,db)
 
     if not voting_enabled:
-        return templates.TemplateResponse("vote_closed.html",{"request": request, "voter": voter})
+        return templates.TemplateResponse(request, "vote_closed.html",{"request": request, "voter": voter})
 
     votes_left = 0
     voted_choices = set()
@@ -683,7 +689,7 @@ def vote_page(
 
     
 
-    return templates.TemplateResponse("vote.html", {
+    return templates.TemplateResponse(request, "vote.html", {
         "request": request,
         "voter": voter,
         "votes_left": votes_left,
@@ -837,7 +843,7 @@ def manage_votes(
     for c in contestants:
         c["votes"] = results_map.get(c["id"], 0)
 
-    return templates.TemplateResponse("admin_manage_votes.html", {
+    return templates.TemplateResponse(request, "admin_manage_votes.html", {
         "request": request,
         "admin": admin,
         "voting_enabled": voting_enabled,
@@ -992,3 +998,11 @@ def delete_all_votes(
         return {"ok": True, "deleted": deleted}
 
     return RedirectResponse("/admin/manage_votes", status_code=303)
+
+
+# Run body/rate checks before route parsing and database middleware.
+from http_middleware import PublicContextMiddleware, AdminAccessMiddleware
+from request_limits import RequestLimitsMiddleware
+app.add_middleware(PublicContextMiddleware, load_context=load_public_context, templates=templates)
+app.add_middleware(AdminAccessMiddleware, load_admin=load_admin_context)
+app.add_middleware(RequestLimitsMiddleware)

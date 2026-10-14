@@ -1,0 +1,40 @@
+{% extends "admin_header.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto px-6 py-10 text-slate-900">
+  <h1 class="text-3xl font-bold break-words mb-3">Zarządzaj administratorami</h1>
+  <p class="mb-6">Administrator przegląda zgłoszenia. Superadmin zarządza także stroną i formularzami. Administrator systemowy ma dodatkowo dostęp do zarządzania kontami.</p>
+  {% if error %}<p role="alert" class="border border-red-700 bg-red-50 text-red-900 p-4 mb-6">{{ error }}</p>{% endif %}
+  <section class="bg-white border border-slate-400 rounded-xl p-5 mb-8">
+    <h2 class="text-xl font-bold mb-4">Utwórz konto</h2>
+    <form method="post" action="/admin/admins/create" class="flex flex-wrap items-end gap-4">
+      <input type="hidden" name="csrf" value="{{ csrf_token(request) }}">
+      <label class="flex-1 min-w-48">Nazwa użytkownika<input name="username" required maxlength="100" autocomplete="off" class="block w-full border border-slate-500 rounded p-2 mt-1"></label>
+      <label class="flex-1 min-w-48">Hasło (co najmniej 12 znaków)<input type="password" name="password" required minlength="12" autocomplete="new-password" class="block w-full border border-slate-500 rounded p-2 mt-1"></label>
+      <label class="flex items-center gap-2 py-2"><input type="checkbox" name="is_superadmin" value="true">Superadmin</label>
+      <button class="rounded bg-slate-900 text-white font-bold px-5 py-2">Utwórz konto</button>
+    </form>
+  </section>
+  <div class="space-y-5">
+    {% for account in accounts %}
+    <article class="bg-white border border-slate-400 rounded-xl p-5">
+      <h2 class="font-bold text-xl mb-3">{{ account.username }}{% if account.id == admin.id %} (Twoje konto){% endif %}</h2>
+      {% if account.is_sysadmin %}<p class="text-indigo-800 font-bold mb-3">Administrator systemowy</p>{% endif %}
+      <form method="post" action="/admin/admins/{{ account.id }}/update" class="flex flex-wrap items-end gap-4">
+        <input type="hidden" name="csrf" value="{{ csrf_token(request) }}">
+        <label class="flex items-center gap-2 py-2"><input type="checkbox" name="is_active" value="true" {% if account.is_active %}checked{% endif %}>Konto aktywne</label>
+        <label class="flex items-center gap-2 py-2"><input type="checkbox" name="is_superadmin" value="true" {% if account.is_superadmin %}checked{% endif %}>Superadmin</label>
+        <label class="flex-1 min-w-48">Nowe hasło (opcjonalnie)<input type="password" name="password" minlength="12" autocomplete="new-password" class="block w-full border border-slate-500 rounded p-2 mt-1"></label>
+        <button class="rounded bg-slate-900 text-white font-bold px-5 py-2">Zapisz</button>
+      </form>
+      {% if account.id != admin.id %}
+      <form method="post" action="/admin/admins/{{ account.id }}/delete" class="mt-4" onsubmit="return confirm('Usunąć to konto administratora? Tej operacji nie można cofnąć.')">
+        <input type="hidden" name="csrf" value="{{ csrf_token(request) }}">
+        <button class="text-red-800 underline font-bold">Usuń konto</button>
+      </form>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </div>
+  <p class="mt-6 text-sm">Zmiana uprawnień, wyłączenie konta lub zmiana hasła kończy dotychczasowe sesje tego konta.</p>
+</div>
+{% endblock %}

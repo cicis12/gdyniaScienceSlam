@@ -19,7 +19,7 @@
           <div class="timeline-copy">
             <p class="timeline-label"><span aria-hidden="true">{{ '%02d'|format(loop.index) }}</span> {{ entry.label }}</p>
             <h2 id="title-{{ entry.id }}">{{ entry.title }}</h2>
-            <p class="timeline-description">{{ entry.description }}</p>
+            <div class="timeline-description">{{ entry.description | safe_html }}</div>
           </div>
         </div>
       </section>
@@ -30,12 +30,12 @@
   <section class="about-benefits" aria-labelledby="benefits-title">
     <h2 id="benefits-title">Dlaczego warto wziąć udział?</h2>
     <div class="about-benefits-grid">
-      <article><span aria-hidden="true">01</span><h3>Zgłebisz interesujące tematy</h3><p>Będziesz mieć idealną okazje, aby dogłębnie przeanalizować interesujący Cię temat.</p></article>
-      <article><span aria-hidden="true">02</span><h3>Wystąpisz przed dużą publicznością</h3><p>Poprawisz swoje umiejętności występowania przed publicznością. Nie codziennie ma się okazje wystąpić na scenie, przed dużą widownią.</p></article>
-      <article><span aria-hidden="true">03</span><h3>Przełamiesz tremę</h3><p>Występ przed dużą publicznością dla wielu łączy sie ze stresem. Dlatego w tym roku, planujemy zorganizować warsztaty na temat radzenia sobie ze stresem dla prelegentów.</p></article>
-      <article><span aria-hidden="true">04</span><h3>Wzbogacisz swoje CV</h3><p>Udział w ogólnopolskiej konferencji naukowej, to bezdyskusyjnie solidny wpis do CV.</p></article>
-      <article><span aria-hidden="true">05</span><h3>Zobaczysz inną perspektywę</h3><p>Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.</p></article>
-      <article><span aria-hidden="true">06</span><h3>Czekają na Ciebie nagrody</h3><p>Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p></article>
+      <article><h3>Zgłebisz interesujące tematy</h3><p>Będziesz mieć idealną okazje, aby dogłębnie przeanalizować interesujący Cię temat.</p></article>
+      <article><h3>Wystąpisz przed dużą publicznością</h3><p>Poprawisz swoje umiejętności występowania przed publicznością. Nie codziennie ma się okazje wystąpić na scenie, przed dużą widownią.</p></article>
+      <article><h3>Przełamiesz tremę</h3><p>Występ przed dużą publicznością dla wielu łączy sie ze stresem. Dlatego w tym roku, planujemy zorganizować warsztaty na temat radzenia sobie ze stresem dla prelegentów.</p></article>
+      <article><h3>Wzbogacisz swoje CV</h3><p>Udział w ogólnopolskiej konferencji naukowej, to bezdyskusyjnie solidny wpis do CV.</p></article>
+      <article><h3>Zobaczysz inną perspektywę</h3><p>Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.</p></article>
+      <article><h3>Czekają na Ciebie nagrody</h3><p>Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p></article>
     </div>
     {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link about-registration-link" href="/registration">Zgłoś się <span aria-hidden="true">→</span></a>{% endif %}
   </section>

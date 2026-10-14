@@ -4,6 +4,9 @@ from hashlib import sha256
 from pathlib import Path
 
 from fastapi.templating import Jinja2Templates
+from html_content import clean_html, safe_html
+from admin_sessions import csrf_token
+from file_types import file_accept, file_category_labels, FILE_CATEGORIES
 from system_settings import DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, DEFAULT_PAGE_MODES
 
 from site_pages import PUBLIC_PAGES, page_for_path
@@ -35,6 +38,12 @@ def page_display_mode(request, page_name=''):
 
 def create_templates():
     templates = Jinja2Templates(directory=str(BASE_DIR / 'templates'))
+    templates.env.filters['safe_html'] = safe_html
+    templates.env.filters['clean_html'] = clean_html
+    templates.env.globals['csrf_token'] = csrf_token
+    templates.env.globals['file_accept'] = file_accept
+    templates.env.globals['file_category_labels'] = file_category_labels
+    templates.env.globals['file_category_choices'] = [(key, value[0]) for key, value in FILE_CATEGORIES.items()]
     templates.env.globals['asset_url'] = asset_url
     templates.env.globals['public_page_key'] = public_page_key
     templates.env.globals['page_display_mode'] = page_display_mode

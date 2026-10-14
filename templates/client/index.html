@@ -1,5 +1,5 @@
 {% extends "client/client_header.html" %}
-{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
+{% block head_extra %}<script src="{{ asset_url('js/home-sliders.js') }}" defer></script><link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
 {% from 'macros/partner_logo.html' import partner_logo %}
 {% block content %}
 {% set home_content = (request.state.site_settings|default(default_site_settings)).home %}
@@ -10,21 +10,20 @@
     class="countdown-hero theme-dark home-scroll-section relative bg-cover bg-center flex items-center"
     style="background-image: url('{{ home_images.hero.photo }}'); background-position: {{ home_images.hero.position }};"
   >
-      <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 py-12 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started }}">
-        <p class="home-hero-kicker mb-5">{{ home_content.hero_overline }}</p>
+      <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 py-12 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started | clean_html }}">
         <h1 class="countdown-title mb-4">{{ home_content.hero_title }}</h1>
-        <p id="event-date-label" class="mb-7 text-base md:text-lg text-white/90">
-          {% if event_datetime %}{{ home_content.hero_date }} <span id="event-date-value"></span>{% else %}{{ home_content.hero_no_date }}{% endif %}
-        </p>
+        <div id="event-date-label" class="mb-7 text-base md:text-lg text-white/90">
+          {% if event_datetime %}<span id="event-date-value"></span>{% else %}{{ home_content.hero_no_date | safe_html }}{% endif %}
+        </div>
         <div id="event-countdown" class="countdown-grid mx-auto mb-8" aria-live="polite" aria-label="Odliczanie do wydarzenia">
           <div class="countdown-unit"><span data-countdown="days">--</span><small>{{ home_content.days }}</small></div>
           <div class="countdown-unit"><span data-countdown="hours">--</span><small>{{ home_content.hours }}</small></div>
           <div class="countdown-unit"><span data-countdown="minutes">--</span><small>{{ home_content.minutes }}</small></div>
           <div class="countdown-unit"><span data-countdown="seconds">--</span><small>{{ home_content.seconds }}</small></div>
         </div>
-        <p id="countdown-status" class="mb-8 text-white/90" role="status">
-          {% if event_datetime %}{{ home_content.hero_status }}{% else %}{{ home_content.hero_waiting }}{% endif %}
-        </p>
+        <div id="countdown-status" class="mb-8 text-white/90" role="status" {% if event_datetime %}hidden{% endif %}>
+          {% if not event_datetime %}{{ home_content.hero_waiting | safe_html }}{% endif %}
+        </div>
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-3">
           {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link" href="/registration">{{ home_content.registration_link }} <span aria-hidden="true">→</span></a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('topics', true) %}<a class="redirect-link" href="/topics">{{ home_content.topics_link }} <span aria-hidden="true">→</span></a>{% endif %}
@@ -56,7 +55,7 @@
         units.hours.textContent = String(Math.floor((seconds % 86400) / 3600)).padStart(2, "0");
         units.minutes.textContent = String(Math.floor((seconds % 3600) / 60)).padStart(2, "0");
         units.seconds.textContent = String(seconds % 60).padStart(2, "0");
-        if (remaining === 0) status.textContent = hero.dataset.startedText;
+        if (remaining === 0) { status.innerHTML = hero.dataset.startedText; status.hidden = false; }
       }
 
       document.getElementById("event-date-value").textContent = new Intl.DateTimeFormat("pl-PL", {
@@ -74,9 +73,9 @@
       <div>
         <p class="home-eyebrow">{{ home_content.about_overline }}</p>
         <h2 class="home-editorial-title mb-5">{{ home_content.about_title }}</h2>
-        <p class="text-gray-600 text-lg mb-6">
-          {{ home_content.about_description }}
-        </p>
+        <div class="text-gray-600 text-lg mb-6">
+          {{ home_content.about_description | safe_html }}
+        </div>
 
         {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about"
            class="redirect-link">
@@ -99,7 +98,7 @@
       <h2 class="home-editorial-title">{{ home_content.team_title }}</h2>
     </div>
     <div>
-      <p class="text-lg">{{ home_content.team_description }}</p>
+      <div class="text-lg">{{ home_content.team_description | safe_html }}</div>
       {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="redirect-link">{{ home_content.team_link }} <span aria-hidden="true">→</span></a>{% endif %}
     </div>
   </div>
@@ -129,9 +128,9 @@
       <div>
         <p class="home-eyebrow">{{ home_content.archive_overline }}</p>
         <h2 class="home-editorial-title mb-5">{{ home_content.archive_title }}</h2>
-        <p class="text-gray-600 text-lg mb-6">
-         {{ home_content.archive_description }}
-        </p>
+        <div class="text-gray-600 text-lg mb-6">
+         {{ home_content.archive_description | safe_html }}
+        </div>
 
         {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions"
            class="redirect-link">
@@ -149,7 +148,7 @@
   <section class="home-scroll-section home-section-wisteria home-partners-section theme-dark py-20">
     <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
       <div><p class="home-eyebrow">{{ home_content.partners_overline }}</p><h2 class="home-editorial-title">{{ home_content.partners_title }}</h2></div>
-      <p class="text-lg">{{ home_content.partners_description }}</p>
+      <div class="text-lg">{{ home_content.partners_description | safe_html }}</div>
     </div>
     <div class="partner-carousel w-full overflow-hidden" aria-label="Partnerzy wydarzenia">
       <div class="slider-track">
@@ -266,7 +265,11 @@
   .slider-track {
     display: flex;
     width: max-content;
-    animation: scrollLoop 40s linear infinite;
+    animation: scrollLoop var(--slider-duration, 40s) linear infinite;
+  }
+  .slider-track > div { flex-shrink: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .slider-track { animation: none; }
   }
   </style>
 

@@ -1,6 +1,7 @@
 from database import SessionLocal
 from models import AdminUser
 from security import hash_password
+from admin_sessions import revoke_admin_sessions
 import getpass
 from passlib.context import CryptContext
 db = SessionLocal()
@@ -18,6 +19,7 @@ if user.is_superadmin:
         print("Action aborted.")
         exit()
     user.is_superadmin = False
+    revoke_admin_sessions(db, user.id)
     db.commit()
     db.close()
     print("Disabled superadmin presmissions for this user.")
@@ -27,6 +29,7 @@ else:
         print("Action aborted.")
         exit()
     user.is_superadmin = True
+    revoke_admin_sessions(db, user.id)
     db.commit()
     db.close()
     print("Enabled superadmin presmissions for this user.")

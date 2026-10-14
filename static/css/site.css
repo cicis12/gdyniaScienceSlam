@@ -189,6 +189,41 @@ body .site-nav {
   height: 24px;
 }
 
+.site-logout-form {
+  display: flex;
+  align-items: center;
+  align-self: center;
+  flex-shrink: 0;
+  margin: 0 0 0 1rem;
+}
+
+.site-logout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid rgba(148, 194, 209, 0.3);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--powder-100);
+  cursor: pointer;
+  transition: color 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.site-logout-button svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.site-logout-button:hover,
+.site-logout-button:focus-visible {
+  color: var(--teal-300);
+  background: rgba(148, 194, 209, 0.1);
+  border-color: currentColor;
+}
+
 .site-mobile-menu {
   display: none;
   position: absolute;
@@ -416,6 +451,7 @@ body .site-nav {
 .home-editorial-grid {
   width: 100%;
   grid-template-columns: minmax(0, 1fr);
+  align-content: center;
   gap: clamp(3rem, 7vw, 7rem);
 }
 
@@ -525,8 +561,7 @@ body .site-nav {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   width: min(100%, 780px);
-  border-top: 1px solid rgba(221, 235, 240, 0.4);
-  border-bottom: 1px solid rgba(221, 235, 240, 0.4);
+  border: 0;
 }
 
 .countdown-unit {
@@ -538,7 +573,7 @@ body .site-nav {
 }
 
 .countdown-unit + .countdown-unit {
-  border-left: 1px solid rgba(221, 235, 240, 0.3);
+  border: 0;
 }
 
 .countdown-unit span {
@@ -876,8 +911,11 @@ img {
 }
 
 @media (min-width: 768px) {
-  .home-editorial-grid {
+  .homepage-flow .home-editorial-grid {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  }
+  .homepage-flow .home-editorial-archive .home-editorial-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
   }
 }
 
@@ -921,3 +959,16 @@ img {
 .redirect-link:hover { text-decoration: underline; text-underline-offset: .15em; }
 .redirect-link span[aria-hidden] { font-size: inherit; font-weight: inherit; }
 .about-registration-link { display: inline-block; margin-top: 2rem; }
+
+/* Logout follows the same breakpoint as the admin hamburger navigation. */
+.site-logout-mobile { margin: 0; }
+.site-logout-mobile .site-logout-button {
+  width: 100%; justify-content: flex-start; gap: .75rem;
+  padding: .65rem .75rem; border: 0; border-radius: 4px;
+  font: inherit;
+}
+@media (max-width: 1280px) {
+  .site-logout-desktop { display: none; }
+}
+
+.footer-icon { display: inline-block; width: 1em; height: 1em; margin-right: .4em; vertical-align: -.125em; fill: currentColor; }

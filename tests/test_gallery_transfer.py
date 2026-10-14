@@ -72,8 +72,8 @@ class GalleryTransferTests(unittest.TestCase):
             self.assertEqual([photo.sort_order for photo in photos], [0, 1])
             photo_id = photos[0].id
         self.assertIn('New shot', self.client.get('/previous_editions').text)
-        self.assertEqual(self.client.post(f'/admin/gallery/photos/{photo_id}', data={'year': 2024, 'caption': '<script>no</script>', 'sort_order': 5}).status_code, 200)
-        self.assertIn('&lt;script&gt;', self.client.get('/previous_editions').text)
+        self.assertEqual(self.client.post(f'/admin/gallery/photos/{photo_id}', data={'year': 2024, 'caption': '<strong>Stage</strong>', 'sort_order': 5}).status_code, 200)
+        self.assertTrue(BeautifulSoup(self.client.get('/previous_editions').text, 'html.parser').select_one('.archive-photo-overlay strong'))
         count_before = len(list(self.gallery_dir.iterdir()))
         response = self.client.post('/admin/gallery/photos', data={'year': 2026},
                                     files=[('photos', self.photo()), ('photos', ('bad.png', b'not an image', 'image/png'))])
@@ -305,9 +305,35 @@ class GalleryTransferTests(unittest.TestCase):
             invalid['settings'][THEME_KEY] = json.dumps({**theme, 'dark_text': 'red;evil'})
             with self.assertRaises(ValueError):
                 SiteBundle.model_validate(invalid)
-            unsafe = bundle.model_dump(mode='json')
-            unsafe['settings'][FOOTER_KEY] = json.dumps({**footer, 'additional': '<script>alert(1)</script><b>Safe</b>'})
-            self.assertNotIn('<script', SiteBundle.model_validate(unsafe).settings[FOOTER_KEY])
+            rich_copy = bundle.model_dump(mode='json')
+            rich_copy['settings'][FOOTER_KEY] = json.dumps({**footer, 'additional': '<details class=custom><summary>More</summary><b>Content</b></details>'})
+            self.assertIn('<details class=custom>', SiteBundle.model_validate(rich_copy).settings[FOOTER_KEY])
+
+    def test_form_icons_export_import_with_optional_empty_icons(self):
+        self.login()
+        icon = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>'
+        for index, value in enumerate((None, '', ' \n ', icon)):
+            response = self.client.post('/admin/forms/create', json={
+                'slug': f'icon-{index}', 'name': f'Icon {index}', 'display_name': 'Form',
+                'svg': value,
+                'fields': [{'name': 'email', 'type': 'email', 'question': 'Email', 'svg': value}],
+            })
+            self.assertEqual(response.status_code, 200)
+        bundle, media = inspect_bundle(self.bundle())
+        self.assertEqual([form.definition.svg for form in bundle.forms], [None, None, None, icon])
+        with self.sessions() as db:
+            apply_bundle(db, bundle, media, 'all')
+            for form in db.query(FormInfo).order_by(FormInfo.id):
+                definition = db.get(FormVersion, form.cur_version_id).definition
+                self.assertEqual(definition.get('svg'), icon if form.slug == 'icon-3' else None)
+        # Historic definitions can contain whitespace even when the current editor normalizes it.
+        with self.sessions() as db:
+            form = db.query(FormInfo).filter_by(slug='icon-0').one()
+            version = db.get(FormVersion, form.cur_version_id)
+            version.definition = {'fields': [{'name': 'email', 'type': 'email', 'question': 'Email', 'svg': '  \n'}]}
+            db.commit()
+        bundle, _ = inspect_bundle(self.bundle())
+        self.assertIsNone(bundle.forms[0].definition.fields[0].svg)
 
     def test_gallery_seed_migration(self):
         spec = importlib.util.spec_from_file_location('gallery_migration', 'alembic/versions/c92d03e54f21_add_gallery.py')

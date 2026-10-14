@@ -23,7 +23,7 @@ def build_router(require_superadmin, secret_key):
     router = APIRouter(prefix='/admin/transfer', dependencies=[Depends(require_superadmin)])
 
     def render(request, admin, error=None, status_code=200, **context):
-        return templates.TemplateResponse('admin/transfer.html', {
+        return templates.TemplateResponse(request, 'admin/transfer.html', {
             'request': request, 'admin': admin, 'error': error, **context,
         }, status_code=status_code)
 

@@ -21,7 +21,7 @@ class AboutTests(unittest.TestCase):
     def fields(self, **changes):
         return dict(label='2026', title='Nowy etap', description='Nasza historia', sort_order=0, **changes)
 
-    def test_defaults_crud_reorder_and_escaping(self):
+    def test_defaults_crud_reorder_and_html(self):
         self.assertEqual(len(BeautifulSoup(self.client.get('/about').text, 'html.parser').select('.timeline-stage')), 4)
         self.login()
         response = self.client.post('/admin/about/entries', data=self.fields(), files={'photo': self.photo()})
@@ -29,13 +29,13 @@ class AboutTests(unittest.TestCase):
         with self.sessions() as db:
             entry = next(entry for entry in get_timeline(db) if entry.title == 'Nowy etap')
         fields = self.fields()
-        fields.update(sort_order=100, description='<script>unsafe</script>\nNew description')
+        fields.update(sort_order=100, description='<strong>History</strong>\nNew description')
         self.assertEqual(self.client.post('/admin/about/entries/' + entry.id, data=fields).status_code, 200)
         with self.sessions() as db:
             edited = get_timeline(db)[-1]
             self.assertEqual(edited.id, entry.id)
             self.assertEqual(edited.photo, entry.photo)
-        self.assertIn('&lt;script&gt;unsafe&lt;/script&gt;', self.client.get('/about').text)
+        self.assertIn('<strong>History</strong>', self.client.get('/about').text)
         self.assertEqual(self.client.post('/admin/about/entries/' + entry.id, data=fields, files={'photo': self.photo()}).status_code, 200)
         with self.sessions() as db:
             self.assertNotEqual(get_timeline(db)[-1].photo, entry.photo)

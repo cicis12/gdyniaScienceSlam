@@ -1,5 +1,6 @@
 {% extends "client/client_header.html" %}
 {% block head_extra %}
+<script src="{{ asset_url('js/fit-text.js') }}" defer></script>
 <link rel="stylesheet" href="{{ asset_url('css/team.css') }}">
 {% if team_details_enabled %}<script src="{{ asset_url('js/team-profiles.js') }}" defer></script>{% endif %}
 {% endblock %}
@@ -22,7 +23,7 @@
     {% if team_details_enabled %}
     <details class="team-card">
       <summary>{{ card_face(member, true) }}</summary>
-      <div class="team-description">{{ member.description }}</div>
+      <div class="team-description">{{ member.description | safe_html }}</div>
     </details>
     {% else %}
     <article class="team-card">{{ card_face(member, false) }}</article>
@@ -46,7 +47,7 @@
         <div class="team-dialog-copy">
           <p class="team-position" id="team-profile-position"></p>
           <h2 id="team-profile-name"></h2>
-          <p class="team-dialog-description" id="team-profile-description"></p>
+          <div class="team-dialog-description" id="team-profile-description"></div>
         </div>
       </div>
     </div>

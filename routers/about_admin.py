@@ -18,7 +18,7 @@ def build_router(require_superadmin):
     router = APIRouter(prefix='/admin/about', dependencies=[Depends(require_superadmin)])
 
     def render(request, db, admin, error=None, status_code=200):
-        return templates.TemplateResponse('admin/about.html', {
+        return templates.TemplateResponse(request, 'admin/about.html', {
             'request': request, 'admin': admin, 'entries': get_timeline(db), 'error': error,
         }, status_code=status_code)
 

@@ -41,7 +41,7 @@
     photo.alt = sourcePhoto.alt;
     dialog.querySelector('#team-profile-name').textContent = card.querySelector('.team-name').textContent;
     dialog.querySelector('#team-profile-position').textContent = card.querySelector('.team-position').textContent;
-    dialog.querySelector('#team-profile-description').textContent = card.querySelector('.team-description').textContent;
+    dialog.querySelector('#team-profile-description').innerHTML = card.querySelector('.team-description').innerHTML;
     dialog.style.setProperty('--profile-color', getComputedStyle(card).backgroundColor);
     document.documentElement.classList.add('team-profile-open');
     dialog.showModal();

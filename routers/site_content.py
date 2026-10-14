@@ -61,7 +61,7 @@ def build_router(require_superadmin):
     def content(request: Request, db: Session = Depends(get_db), admin=Depends(require_superadmin)):
         event = db.get(SystemSetting, 'event_datetime')
         date_only = db.get(SystemSetting, 'event_date_only')
-        return templates.TemplateResponse('admin/site_content.html', {
+        return templates.TemplateResponse(request, 'admin/site_content.html', {
             'request': request, 'admin': admin, 'pages': PUBLIC_PAGES,
             'visibility': page_visibility(db),
             'forms': db.query(FormInfo).order_by(FormInfo.name).all(),
@@ -74,7 +74,7 @@ def build_router(require_superadmin):
     def preview(request: Request, db: Session = Depends(get_db)):
         event = db.get(SystemSetting, 'event_datetime')
         date_only = db.get(SystemSetting, 'event_date_only')
-        return templates.TemplateResponse('client/index.html', {
+        return templates.TemplateResponse(request, 'client/index.html', {
             'request': request, 'page_name': 'home', 'header_title': 'Podgląd strony',
             'event_datetime': event.value if event else '',
             'event_date_only': bool(date_only and date_only.value == 'true'),
@@ -85,7 +85,7 @@ def build_router(require_superadmin):
 
     @router.get('/team')
     def team_editor(request: Request, db: Session = Depends(get_db), admin=Depends(require_superadmin)):
-        return templates.TemplateResponse('admin/team_settings.html', {
+        return templates.TemplateResponse(request, 'admin/team_settings.html', {
             'request': request, 'admin': admin,
             'members': db.query(TeamMember).order_by(TeamMember.id).all(),
             'team_palette': get_team_palette(db), 'color_fields': COLOR_FIELDS,
@@ -93,7 +93,7 @@ def build_router(require_superadmin):
         })
 
     def render_home(request, db, admin, error=None, status_code=200):
-        return templates.TemplateResponse('admin/home_settings.html', {
+        return templates.TemplateResponse(request, 'admin/home_settings.html', {
             'request': request, 'admin': admin, 'home_fields': HOME_FIELDS,
             'home_content': load_public_settings(db)['home'],
             'home_images': get_home_images(db), 'image_slots': IMAGE_SLOTS, 'image_positions': IMAGE_POSITIONS,

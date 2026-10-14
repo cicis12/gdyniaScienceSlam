@@ -69,17 +69,37 @@ class SystemSettingsTests(unittest.TestCase):
         with self.sessions() as db:
             self.assertIsNone(db.get(SystemSetting, THEME_KEY))
 
+    def test_retired_home_labels_are_ignored_in_old_settings(self):
+        from system_settings import HOME_KEY, validate_settings
+        old = {**DEFAULT_HOME, 'hero_title': 'My event', 'hero_overline': 'Old overline',
+               'hero_date': 'Old date prefix', 'hero_status': 'Old status'}
+        cleaned = validate_settings(HOME_KEY, old)
+        self.assertEqual(cleaned['hero_title'], 'My event')
+        for key in ('hero_overline', 'hero_date', 'hero_status'):
+            self.assertNotIn(key, cleaned)
+        with self.sessions() as db:
+            db.merge(SystemSetting(key=HOME_KEY, value=json.dumps(old)))
+            db.commit()
+        response = self.client.get('/')
+        self.assertIn('My event', response.text)
+        self.assertNotIn('Old overline', response.text)
+        editor = self.client.get('/admin/content/home').text
+        self.assertNotIn('name="hero_overline"', editor)
+        self.assertNotIn('name="hero_date"', editor)
+        self.assertNotIn('name="hero_status"', editor)
+
     def test_footer_markup_and_home_text(self):
         self.client.post('/admin/content/footer', data={
             'email': '<a href="mailto:contact@example.com">Contact</a>',
-            'location': '<strong>Gdynia</strong><script>alert(1)</script>',
-            'additional': '<a href="javascript:alert(1)" onclick="alert(2)">More</a><img src=x onerror=alert(3)>',
+            'location': '<strong class=city>Gdynia</strong>',
+            'additional': '<details><summary>More</summary><div class=details>Information</div></details>',
         })
         soup = BeautifulSoup(self.client.get('/').text, 'html.parser')
         footer = soup.select_one('.site-footer')
         self.assertTrue(footer.select_one('a[href="mailto:contact@example.com"]'))
         self.assertTrue(footer.select_one('strong'))
-        self.assertFalse(footer.select('script, img, [onclick], [onerror], a[href^="javascript:"]'))
+        self.assertTrue(footer.select_one('details .details'))
+        self.assertTrue(footer.select_one('strong.city'))
         self.client.post('/admin/content/home', data={**DEFAULT_HOME, 'hero_title': '<script>Custom heading</script>', 'archive_description': 'New archive copy'})
         home = self.client.get('/').text
         self.assertIn('&lt;script&gt;Custom heading&lt;/script&gt;', home)

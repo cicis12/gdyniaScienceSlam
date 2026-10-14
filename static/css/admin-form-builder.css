@@ -10,3 +10,5 @@
   .form-builder > section { padding: 1rem; }
   .form-builder > .grid > div { min-width: 0; }
 }
+
+.form-builder > section > h2 { padding-top: .5rem; }

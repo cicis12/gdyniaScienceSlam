@@ -29,7 +29,7 @@
   {% elif selected_form %}
     <div class="mb-5 flex flex-wrap items-baseline justify-between gap-3">
       <h2 class="text-xl font-bold text-[#06101d]">{{ selected_form.name }}</h2>
-      <p class="text-sm font-semibold text-[#324a67]">{{ submissions|length }} zgłoszeń</p>
+      <p class="text-sm font-semibold text-[#324a67]">{{ total }} zgłoszeń</p>
     </div>
 
     {% if submissions %}
@@ -48,7 +48,17 @@
                 {% for answer in submission.answers %}
                   <div class="grid gap-1 px-5 py-3 sm:grid-cols-[minmax(10rem,0.35fr)_minmax(0,1fr)] sm:gap-6">
                     <dt class="text-sm font-bold text-[#213145]">{{ answer.label }}</dt>
-                    <dd class="min-w-0 whitespace-pre-wrap break-words text-[#06101d]">{{ answer.value }}</dd>
+                    <dd class="min-w-0 break-words text-[#06101d]">
+                      {% if answer.attachment %}
+                        {% if answer.attachment.media_type.startswith('video/') %}
+                          <video controls preload="metadata" class="w-full max-w-xl max-h-80 mb-2" src="{{ answer.upload_url }}">
+                            Przeglądarka nie obsługuje tego filmu. Pobierz plik, aby go obejrzeć.
+                          </video>
+                        {% endif %}
+                        <a href="{{ answer.upload_url }}?download=true" class="font-bold underline">Pobierz {{ answer.attachment.filename }}</a>
+                        <span class="text-sm">({{ '%.1f'|format(answer.attachment.size / 1048576) }} MB)</span>
+                      {% else %}<span class="whitespace-pre-wrap">{{ answer.value }}</span>{% endif %}
+                    </dd>
                   </div>
                 {% endfor %}
               </dl>
@@ -64,5 +74,12 @@
   {% else %}
     <p class="border-l-4 border-[#3865c7] bg-[#eaf1fa] p-5 text-[#122c54]">Wybierz formularz, aby zobaczyć jego odpowiedzi.</p>
   {% endif %}
+{% if selected_form and (page > 1 or has_next) %}
+  <nav aria-label="Strony zgłoszeń" class="flex justify-between gap-4 mt-6 font-bold">
+    {% if page > 1 %}<a href="?form_id={{ selected_form.id }}&page={{ page - 1 }}">← Poprzednia strona</a>{% endif %}
+    <span>Strona {{ page }}</span>
+    {% if has_next %}<a href="?form_id={{ selected_form.id }}&page={{ page + 1 }}">Następna strona →</a>{% endif %}
+  </nav>
+{% endif %}
 </main>
 {% endblock %}

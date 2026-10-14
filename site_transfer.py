@@ -11,7 +11,8 @@ import re
 import shutil
 import stat
 import zlib
-import xml.etree.ElementTree as ET
+
+from form_icons import check_svg
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 from sqlalchemy import func
@@ -64,21 +65,6 @@ class TimelineRecord(TimelineEntry):
     photo: str = Field(pattern='^' + MEDIA_PATTERN + '$')
 
 
-def check_svg(svg):
-    if not svg:
-        return
-    try:
-        root = ET.fromstring(svg)
-    except ET.ParseError:
-        raise ValueError('Nieprawidłowa ikona SVG formularza.') from None
-    tags = {'svg', 'g', 'path', 'circle', 'ellipse', 'rect', 'line', 'polyline', 'polygon', 'title', 'desc'}
-    attrs = {'class', 'viewBox', 'width', 'height', 'fill', 'fill-rule', 'clip-rule', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin', 'stroke-dasharray', 'stroke-dashoffset', 'stroke-miterlimit', 'opacity', 'fill-opacity', 'stroke-opacity', 'd', 'cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'x1', 'x2', 'y1', 'y2', 'points', 'transform', 'aria-hidden', 'role', 'focusable'}
-    for node in root.iter():
-        if node.tag.split('}')[-1] not in tags:
-            raise ValueError('Niedozwolony element w ikonie SVG.')
-        for key, value in node.attrib.items():
-            if key not in attrs or 'url(' in value.lower():
-                raise ValueError('Niedozwolony atrybut w ikonie SVG.')
 
 
 class FormRecord(Record):
@@ -94,8 +80,12 @@ class FormRecord(Record):
     def safe_definition(cls, value):
         if len(value.fields) > 200:
             raise ValueError('Za dużo pól formularza.')
+        check_svg(value.svg)
         for field in value.fields:
-            check_svg(field.svg)
+            try:
+                check_svg(field.svg)
+            except ValueError as error:
+                raise ValueError(f'Pole „{field.name}”: {error} Usuń ikonę lub wklej poprawny kod SVG.') from None
         return value
 
 

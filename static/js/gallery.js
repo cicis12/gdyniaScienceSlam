@@ -16,8 +16,8 @@
     const photo = photos[index];
     animation?.cancel();
     image.src = photo.href;
-    image.alt = photo.dataset.caption;
-    document.getElementById('gallery-caption').textContent = photo.dataset.caption;
+    image.alt = photo.querySelector("img").alt;
+    document.getElementById('gallery-caption').innerHTML = photo.dataset.caption;
     document.getElementById('gallery-year').textContent = `Gdynia Science Slam / ${photo.dataset.year}`;
     document.getElementById('gallery-counter').textContent = `${index + 1} / ${photos.length}`;
     previous.disabled = next.disabled = photos.length < 2;

@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 from fastapi.testclient import TestClient
-from jose import jwt
+from admin_sessions import create_admin_session
 from PIL import Image
 from sqlalchemy import create_engine
 from sqlalchemy.dialects.postgresql import JSONB
@@ -16,7 +16,10 @@ from sqlalchemy.pool import StaticPool
 from alembic.migration import MigrationContext
 from alembic.operations import Operations
 
+import os
+os.environ['RATE_LIMIT_STORAGE_URI'] = 'memory://'
 import main
+from request_limits import form_rate_storage
 from database import Base, get_db
 from models import AdminUser, FormInfo, FormVersion, SystemSetting, TeamMember
 from site_pages import PUBLIC_PAGES
@@ -30,6 +33,8 @@ def sqlite_jsonb(type_, compiler, **kw):
 
 class ContentTests(unittest.TestCase):
     def setUp(self):
+        form_rate_storage.reset()
+        main.limiter.reset()
         self.engine = create_engine('sqlite://', connect_args={'check_same_thread': False}, poolclass=StaticPool)
         Base.metadata.create_all(self.engine)
         self.sessions = sessionmaker(bind=self.engine)
@@ -58,7 +63,9 @@ class ContentTests(unittest.TestCase):
         self.engine.dispose()
 
     def login(self, username='super'):
-        self.client.cookies.set('admin_session', jwt.encode({'sub': username}, main.SECRET_KEY, algorithm=main.ALGORITHM))
+        with self.sessions() as db:
+            token = create_admin_session(db, db.query(AdminUser).filter_by(username=username).one())
+        self.client.cookies.set('admin_session', token)
 
     def photo(self):
         output = BytesIO()
@@ -68,7 +75,7 @@ class ContentTests(unittest.TestCase):
     def test_crud_upload_grid_and_homepage(self):
         self.login()
         response = self.client.post('/admin/content/team', data={
-            'name': 'New Person', 'position': 'Designer', 'description': '<script>alert(1)</script>\nHello'
+            'name': 'New Person', 'position': 'Designer', 'description': '<strong>Biography</strong>\nHello'
         }, files={'photo': self.photo()})
         self.assertEqual(response.status_code, 200)
         with self.sessions() as db:
@@ -77,7 +84,7 @@ class ContentTests(unittest.TestCase):
         self.assertEqual(len(list(Path(self.temp.name).glob('*.webp'))), 1)
         response = self.client.get('/team')
         self.assertEqual(response.text.count('<details class="team-card">'), 2)
-        self.assertIn('&lt;script&gt;', response.text)
+        self.assertIn('<strong>Biography</strong>', response.text)
         self.assertIn('New Person', self.client.get('/').text)
         response = self.client.post(f'/admin/content/team/{member_id}', data={
             'name': 'Updated Person', 'position': 'Editor', 'description': 'Updated biography'

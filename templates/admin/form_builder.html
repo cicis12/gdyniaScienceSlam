@@ -1,6 +1,7 @@
 {% extends "admin_header.html" %}
 
 {% block head_extra %}
+  <link rel="stylesheet" href="{{ asset_url('css/forms.css') }}">
   <link rel="stylesheet" href="{{ asset_url('css/admin-form-builder.css') }}">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@26.0.6/build/css/intlTelInput.css">
 {% endblock %}
@@ -119,6 +120,11 @@
         </div>
       </div>
 
+      <div class="bg-white rounded-xl shadow p-6 mb-6">
+        <label for="meta-svg" class="block font-bold mb-2">Ikona na pasku wyboru formularza (SVG, opcjonalnie)</label>
+        <textarea id="meta-svg" rows="4" class="w-full border p-2 rounded font-mono" placeholder="Wklej kod &lt;svg&gt; lub wybierz plik" oninput="triggerLivePreview()"></textarea>
+        <input type="file" accept=".svg,image/svg+xml" aria-label="Wczytaj ikonę formularza" onchange="readSvgFile(this, document.getElementById('meta-svg'), null)">
+      </div>
       <!-- Field Cards Container -->
       <div id="fields-container" class="space-y-4 mb-6"></div>
 
@@ -185,6 +191,17 @@ function updateRegistrationFormLimit() {
 registrationFormChoices.forEach(choice => choice.addEventListener("change", updateRegistrationFormLimit));
 updateRegistrationFormLimit();
 
+function escapeAttribute(value) {
+  return String(value ?? '').replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+async function readSvgFile(input, target, index) {
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 100000) { alert('Ikona SVG może mieć maksymalnie 100 KB.'); return; }
+  target.value = await file.text();
+  if (index !== null) updateField(index, 'svg', target.value);
+  else triggerLivePreview();
+}
 function renderFieldsList() {
   const container = document.getElementById("fields-container");
   container.innerHTML = "";
@@ -192,6 +209,8 @@ function renderFieldsList() {
   fields.forEach((field, index) => {
     const isInfo = field.type.startsWith("infotext_");
     const isChoice = field.type === "list_choice";
+    const isFile = field.type === 'file';
+    const fileCategories = {{ file_category_choices | tojson }};
     const isDouble = field.type === "double";
 
     const card = document.createElement("div");
@@ -213,6 +232,7 @@ function renderFieldsList() {
             <optgroup label="Pola wejściowe">
               <option value="text" ${field.type==='text'?'selected':''}>Tekst</option>
               <option value="email" ${field.type==='email'?'selected':''}>Email</option>
+              <option value="file" ${field.type==='file'?'selected':''}>Plik</option>
               <option value="phone" ${field.type==='phone'?'selected':''}>Telefon</option>
               <option value="textarea" ${field.type==='textarea'?'selected':''}>Długi tekst</option>
               <option value="list_choice" ${field.type==='list_choice'?'selected':''}>Lista wyboru</option>
@@ -230,13 +250,13 @@ function renderFieldsList() {
 
         <div>
           <label class="block text-xs font-bold text-gray-600 mb-1">Pytanie / Etykieta</label>
-          <input type="text" value="${field.question || ''}" oninput="updateField(${index}, 'question', this.value)" class="w-full border p-1.5 rounded text-sm">
+          <input type="text" value="${escapeAttribute(field.question || '')}" oninput="updateField(${index}, 'question', this.value)" class="w-full border p-1.5 rounded text-sm">
         </div>
 
         ${!isInfo ? `
         <div>
           <label class="block text-xs font-bold text-gray-600 mb-1">Klucz w bazie (name)</label>
-          <input type="text" value="${field.name || ''}" oninput="updateField(${index}, 'name', this.value)" class="w-full border p-1.5 rounded text-sm">
+          <input type="text" value="${escapeAttribute(field.name || '')}" oninput="updateField(${index}, 'name', this.value)" class="w-full border p-1.5 rounded text-sm">
         </div>
         <div class="flex items-center pt-5">
           <label class="text-xs font-bold flex items-center gap-2 cursor-pointer">
@@ -246,24 +266,36 @@ function renderFieldsList() {
 
         ${!isInfo ? `
         <div class="col-span-2">
-          <label class="block text-xs font-bold text-gray-600 mb-1">SVG HTML (opcjonalnie)</label>
+          <label class="block text-xs font-bold text-gray-600 mb-1">Ikona pola — kod SVG (opcjonalnie)</label>
           <textarea data-svg-index="${index}" rows="3" placeholder="&lt;svg ...&gt;...&lt;/svg&gt;" class="w-full border p-1.5 rounded text-sm font-mono"></textarea>
+          <input type="file" accept=".svg,image/svg+xml" aria-label="Wczytaj ikonę pola" onchange="readSvgFile(this, this.previousElementSibling, ${index})">
         </div>` : ''}
+
+        ${isFile ? `
+        <fieldset class="col-span-2">
+          <legend class="text-xs font-bold text-gray-600 mb-2">Dozwolone typy plików (wybierz co najmniej jeden)</legend>
+          <div class="flex flex-wrap gap-4">
+            ${fileCategories.map(([value, label]) => `<label class="flex items-center gap-2 text-sm">
+              <input type="checkbox" ${(field.accepted_types || ['videos', 'images', 'documents']).includes(value) ? 'checked' : ''}
+                onchange="updateFileTypes(${index}, '${value}', this)">${label}</label>`).join('')}
+          </div>
+          <p class="text-xs text-gray-600 mt-2">Jeden plik na pole, maksymalnie 100 MB. Archiwa są przechowywane bez rozpakowywania.</p>
+        </fieldset>` : ''}
 
         ${isChoice ? `
         <div class="col-span-2">
           <label class="block text-xs font-bold text-gray-600 mb-1">Opcje (oddzielone przecinkami)</label>
-          <input type="text" value="${(field.options || []).join(', ')}" oninput="updateOptions(${index}, this.value)" class="w-full border p-1.5 rounded text-sm">
+          <input type="text" value="${escapeAttribute((field.options || []).join(', '))}" oninput="updateOptions(${index}, this.value)" class="w-full border p-1.5 rounded text-sm">
         </div>` : ''}
 
         ${isDouble ? `
         <div>
           <label class="block text-xs font-bold text-gray-600 mb-1">Drugi Klucz (name2)</label>
-          <input type="text" value="${field.name2 || ''}" oninput="updateField(${index}, 'name2', this.value)" class="w-full border p-1.5 rounded text-sm">
+          <input type="text" value="${escapeAttribute(field.name2 || '')}" oninput="updateField(${index}, 'name2', this.value)" class="w-full border p-1.5 rounded text-sm">
         </div>
         <div>
           <label class="block text-xs font-bold text-gray-600 mb-1">Druga Etykieta (question2)</label>
-          <input type="text" value="${field.question2 || ''}" oninput="updateField(${index}, 'question2', this.value)" class="w-full border p-1.5 rounded text-sm">
+          <input type="text" value="${escapeAttribute(field.question2 || '')}" oninput="updateField(${index}, 'question2', this.value)" class="w-full border p-1.5 rounded text-sm">
         </div>` : ''}
       </div>
     `;
@@ -282,6 +314,18 @@ function updateField(idx, key, val) {
   fields[idx][key] = val;
   if (key === 'type') renderFieldsList();
   else triggerLivePreview();
+}
+
+function updateFileTypes(idx, value, checkbox) {
+  const selected = new Set(fields[idx].accepted_types || ['videos', 'images', 'documents']);
+  if (checkbox.checked) selected.add(value);
+  else selected.delete(value);
+  if (!selected.size) {
+    checkbox.checked = true;
+    return;
+  }
+  fields[idx].accepted_types = [...selected];
+  triggerLivePreview();
 }
 
 function updateOptions(idx, val) {
@@ -330,7 +374,7 @@ function triggerLivePreview() {
     const res = await fetch("/admin/forms/preview-draft", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ fields })
+      body: JSON.stringify({ fields, svg: document.getElementById('meta-svg').value || null })
     });
     if (res.ok) {
       document.getElementById("live-preview-box").innerHTML = await res.text();
@@ -393,6 +437,7 @@ async function loadVersion(formId, versionId) {
   document.getElementById("meta-slug").value = version.slug;
   document.getElementById("meta-display").value = version.display_name || "";
   document.getElementById("meta-desc").value = version.description || "";
+  document.getElementById("meta-svg").value = version.svg || "";
   document.getElementById("meta-name").disabled = true;
   document.getElementById("meta-slug").disabled = true;
   document.getElementById("creator-title").textContent = `Nowa wersja formularza: ${version.name}`;
@@ -409,6 +454,7 @@ function cancelEdit() {
   document.getElementById("meta-slug").value = "";
   document.getElementById("meta-display").value = "";
   document.getElementById("meta-desc").value = "";
+  document.getElementById("meta-svg").value = "";
   document.getElementById("meta-name").disabled = false;
   document.getElementById("meta-slug").disabled = false;
   document.getElementById("creator-title").textContent = "Kreator Nowego Formularza / Wersji";
@@ -427,6 +473,7 @@ async function saveForm() {
     slug: document.getElementById("meta-slug").value.trim(),
     display_name: document.getElementById("meta-display").value.trim(),
     description: document.getElementById("meta-desc").value.trim(),
+    svg: document.getElementById("meta-svg").value || null,
     enabled: true,
     fields
   };
@@ -442,7 +489,7 @@ async function saveForm() {
     ? `/admin/forms/${editingFormId}/new-version`
     : "/admin/forms/create";
   const body = editingFormId
-    ? { display_name: payload.display_name, description: payload.description, fields }
+    ? { display_name: payload.display_name, description: payload.description, svg: payload.svg, fields }
     : payload;
   const res = await fetch(url, {
     method: "POST",
@@ -454,7 +501,10 @@ async function saveForm() {
     location.reload();
   } else {
     const err = await res.json();
-    alert("Błąd: " + (err.detail || "Nie udało się zapisać formularza"));
+    const message = Array.isArray(err.detail)
+      ? err.detail.map(item => item.msg.replace(/^Value error, /, '')).join(' ')
+      : err.detail;
+    alert("Błąd: " + (message || "Nie udało się zapisać formularza"));
   }
 }
 
