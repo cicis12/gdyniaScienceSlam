@@ -9,7 +9,7 @@
 {% endmacro %}
 {% block content %}
 <main class="content-admin">
-  <h1>Dokumenty</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+  <h1>Dokumenty</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
   {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
   {% if request.query_params.get('saved') %}<p role="status" class="content-notice">Zmiany zostały zapisane.</p>{% endif %}
   <section class="content-panel"><h2>Dodaj dokument</h2>

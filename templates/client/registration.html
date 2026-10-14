@@ -43,6 +43,13 @@
           </div>
         {% endfor %}
 
+        {% elif not standalone_forms %}
+        <section class="creator-registration-list" aria-labelledby="no-active-forms-title">
+          <p class="registration-eyebrow">Rejestracja online</p>
+          <h1 id="no-active-forms-title" class="text-3xl font-bold text-white">Brak aktywnych formularzy</h1>
+          <p class="mt-3 text-[#d5e2f6]">Nowe formularze rejestracyjne pojawią się tutaj, gdy będą dostępne.</p>
+        </section>
+        {% endif %}
         {% if standalone_forms %}
           <section class="creator-registration-list mt-12" aria-labelledby="standalone-forms-title">
             <h2 id="standalone-forms-title" class="mb-4 text-xl font-bold text-white">Pozostałe formularze</h2>
@@ -50,20 +57,13 @@
               {% for form in standalone_forms %}
                 <a class="creator-registration-link" href="/forms/{{ form.slug }}">
                   <span class="creator-registration-link-copy">
-                    <strong>{{ form.name }} <span aria-hidden="true">→</span></strong>
+                    <strong>{{ form.name }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></strong>
                     {% if form.description %}<span>{{ form.description | safe_html }}</span>{% endif %}
                   </span>
                 </a>
               {% endfor %}
             </div>
           </section>
-        {% endif %}
-        {% else %}
-        <section class="creator-registration-list" aria-labelledby="no-active-forms-title">
-          <p class="registration-eyebrow">Rejestracja online</p>
-          <h1 id="no-active-forms-title" class="text-3xl font-bold text-white">Brak aktywnych formularzy</h1>
-          <p class="mt-3 text-[#d5e2f6]">Nowe formularze rejestracyjne pojawią się tutaj, gdy będą dostępne.</p>
-        </section>
         {% endif %}
       </div>
     </section>

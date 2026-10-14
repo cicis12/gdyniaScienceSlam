@@ -3,7 +3,7 @@
 {% block content %}
 <div class="content-admin">
   <h1>Przenieś konfigurację strony</h1>
-  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
   <p>Przygotuj treści na środowisku deweloperskim, pobierz pakiet ZIP i wgraj go na produkcji. Pakiet zawiera również zdjęcia.</p>
   {% if error %}<p role="alert" class="content-error">{{ error }}</p>{% endif %}
   {% if request.query_params.get('imported') %}<p role="status" class="content-notice">Import zakończony. Nowe treści są już dostępne.</p>{% endif %}
@@ -33,7 +33,7 @@
   <section class="content-panel">
     <h2>Eksport</h2>
     <p>Ustawienia strony, wspólne kolory, stopka, teksty strony głównej, partnerzy i ich logotypy, dokumenty PDF, zdjęcia strony głównej, oś czasu O nas, zespół, galeria, film, bieżące definicje formularzy i zdjęcia. Pakiet nie zawiera kodu strony, kont, sekretów, zgłoszeń ani głosów.</p>
-    <form action="/admin/transfer/export" method="get"><button type="submit">Pobierz konfigurację ZIP ↓</button></form>
+    <form action="/admin/transfer/export" method="get"><button type="submit">Pobierz konfigurację ZIP {% include 'macros/fontawesome/arrow-down.svg' %}</button></form>
   </section>
   <section class="content-panel">
     <h2>Import</h2>

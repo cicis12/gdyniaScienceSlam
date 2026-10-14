@@ -37,7 +37,7 @@
       <article><h3>Zobaczysz inną perspektywę</h3><p>Będziesz mieć wyjątkową okazje zobaczyć, jak wygląda duża konferencja od drugiej strony.</p></article>
       <article><h3>Czekają na Ciebie nagrody</h3><p>Dla najlepszych według Jury i publiczności prelegentów przewidziane są nagrody pieniężne i rzeczowe.</p></article>
     </div>
-    {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link about-registration-link" href="/registration">Zgłoś się <span aria-hidden="true">→</span></a>{% endif %}
+    {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link about-registration-link" href="/registration">Zgłoś się <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endif %}
   </section>
 </main>
 {% endblock %}

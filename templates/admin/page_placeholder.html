@@ -2,7 +2,7 @@
 {% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
 {% block content %}
 <main class="content-admin"><h1>Dokumenty</h1>
-<p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+<p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
 
 <section class="content-panel"><h2>Planowany edytor</h2><p>To podgląd układu przyszłego panelu. Dodawanie i usuwanie zostaną uruchomione podczas przebudowy strony.</p>
 

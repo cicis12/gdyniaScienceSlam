@@ -52,17 +52,22 @@ def admin_forms_dashboard(request: Request, db: Session = Depends(get_db)):
             selected_registration_form_ids = [int(value) for value in setting.value.split(",") if value]
         except ValueError:
             selected_registration_form_ids = []
+    enabled_ids = {form.id for form in forms if form.enabled}
+    selected_registration_form_ids = [form_id for form_id in selected_registration_form_ids if form_id in enabled_ids]
+    other_forms_setting = db.get(SystemSetting, 'registration_show_other_forms')
     return templates.TemplateResponse(request, "admin/form_builder.html", {
         "request": request,
         "forms": forms,
         "admin": getattr(request.state, "admin", None),
         "selected_registration_form_ids": selected_registration_form_ids,
+        "show_other_forms": bool(other_forms_setting and other_forms_setting.value == 'true'),
     })
 
 
 @router.post("/registration-selection")
 def save_registration_form_selection(
     form_ids: List[int] = Form(default=[]),
+    show_other_forms: bool = Form(False),
     db: Session = Depends(get_db),
 ):
     selected_ids = list(dict.fromkeys(form_ids))
@@ -84,8 +89,19 @@ def save_registration_form_selection(
         setting.value = value
     else:
         db.add(SystemSetting(key="registration_form_ids", value=value))
+    db.merge(SystemSetting(key='registration_show_other_forms', value='true' if show_other_forms else 'false'))
     db.commit()
     return RedirectResponse("/admin/forms", status_code=303)
+
+
+@router.post('/{form_id}/status')
+def set_form_status(form_id: int, enabled: bool = Form(...), db: Session = Depends(get_db)):
+    form = db.query(FormInfo).filter(FormInfo.id == form_id).with_for_update().first()
+    if form is None:
+        raise HTTPException(404, 'Formularz nie istnieje.')
+    form.enabled = enabled
+    db.commit()
+    return RedirectResponse(f'/admin/forms#managed-form-{form_id}', status_code=303)
 
 # active form version change
 @router.post("/{form_id}/set-active/{version_id}")

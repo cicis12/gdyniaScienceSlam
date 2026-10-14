@@ -76,9 +76,9 @@
   {% endif %}
 {% if selected_form and (page > 1 or has_next) %}
   <nav aria-label="Strony zgłoszeń" class="flex justify-between gap-4 mt-6 font-bold">
-    {% if page > 1 %}<a href="?form_id={{ selected_form.id }}&page={{ page - 1 }}">← Poprzednia strona</a>{% endif %}
+    {% if page > 1 %}<a href="?form_id={{ selected_form.id }}&page={{ page - 1 }}">{% include 'macros/fontawesome/arrow-left.svg' %} Poprzednia strona</a>{% endif %}
     <span>Strona {{ page }}</span>
-    {% if has_next %}<a href="?form_id={{ selected_form.id }}&page={{ page + 1 }}">Następna strona →</a>{% endif %}
+    {% if has_next %}<a href="?form_id={{ selected_form.id }}&page={{ page + 1 }}">Następna strona {% include 'macros/fontawesome/arrow-right.svg' %}</a>{% endif %}
   </nav>
 {% endif %}
 </main>

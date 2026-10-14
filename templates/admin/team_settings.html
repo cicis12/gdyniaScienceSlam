@@ -15,7 +15,7 @@
 <label>Opis<textarea name="description" rows="5" maxlength="10000" required>{{ member.description if member else '' }}</textarea></label>
 {% endmacro %}
 {% block content %}
-<main class="content-admin"><h1>Zespół</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+<main class="content-admin"><h1>Zespół</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
 
 {% if request.query_params.get("saved") %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}
   <section id="team" class="content-panel">

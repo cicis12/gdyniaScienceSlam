@@ -124,7 +124,8 @@ def registration(request: Request, db: Session = Depends(get_db)):
             })
 
     standalone_forms = []
-    for form in active_forms:
+    show_other_forms = get_setting(db, 'registration_show_other_forms', 'false') == 'true'
+    for form in active_forms if show_other_forms else []:
         if form.id in selected_form_ids:
             continue
         version = db.query(FormVersion).filter(

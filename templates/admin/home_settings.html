@@ -1,7 +1,7 @@
 {% extends "admin_header.html" %}
 {% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
 {% block content %}
-<main class="content-admin"><h1>Strona główna</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">←</span> Ustawienia systemowe</a></p>
+<main class="content-admin"><h1>Strona główna</h1><p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
 
 {% if error %}<p class="content-error" role="alert">{{ error }}</p>{% endif %}
 {% if request.query_params.get('saved') %}<p class="content-notice" role="status">Zmiany zostały zapisane.</p>{% endif %}

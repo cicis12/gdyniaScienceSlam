@@ -10,7 +10,7 @@
       {% for document in items %}
       <a class="document-download" href="/documents/download/{{ document.id }}">
         <span class="document-label"><strong>{{ document.title }}</strong><small>PDF</small></span>
-        <span class="redirect-link">Pobierz <span aria-hidden="true">→</span></span>
+        <span class="redirect-link">Pobierz <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></span>
       </a>
       {% endfor %}
     </div>

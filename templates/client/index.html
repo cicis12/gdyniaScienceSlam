@@ -1,5 +1,5 @@
 {% extends "client/client_header.html" %}
-{% block head_extra %}<script src="{{ asset_url('js/home-sliders.js') }}" defer></script><link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
+{% block head_extra %}<script src="{{ asset_url('js/home-layout.js') }}" defer></script><script src="{{ asset_url('js/home-sliders.js') }}" defer></script><link rel="stylesheet" href="{{ asset_url('css/partners.css') }}">{% endblock %}
 {% from 'macros/partner_logo.html' import partner_logo %}
 {% block content %}
 {% set home_content = (request.state.site_settings|default(default_site_settings)).home %}
@@ -13,7 +13,7 @@
     class="countdown-hero {{ section_theme.next() }} home-scroll-section relative bg-cover bg-center flex items-center"
     style="background-image: url('{{ home_images.hero.photo }}'); background-position: {{ home_images.hero.position }};"
   >
-      <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 py-12 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started | clean_html }}">
+      <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started | clean_html }}">
         <h1 class="countdown-title mb-4">{{ home_content.hero_title }}</h1>
         <div id="event-date-label" class="mb-7 text-base md:text-lg text-white/90">
           {% if event_datetime %}<span id="event-date-value"></span>{% else %}{{ home_content.hero_no_date | safe_html }}{% endif %}
@@ -28,8 +28,8 @@
           {% if not event_datetime %}{{ home_content.hero_waiting | safe_html }}{% endif %}
         </div>
         <div class="flex flex-wrap justify-center gap-x-8 gap-y-3">
-          {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link" href="/registration">{{ home_content.registration_link }} <span aria-hidden="true">→</span></a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('topics', true) %}<a class="redirect-link" href="/topics">{{ home_content.topics_link }} <span aria-hidden="true">→</span></a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('registration', true) %}<a class="redirect-link" href="/registration">{{ home_content.registration_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('topics', true) %}<a class="redirect-link" href="/topics">{{ home_content.topics_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endif %}
         </div>
       </div>
   </section>
@@ -72,7 +72,7 @@
 
   {% if home_sections.about %}
   <!--about-->
-  <section class="home-scroll-section home-editorial home-editorial-about {{ section_theme.next() }} home-section-blue-light py-20 bg-[#819edb] text-[#18395d]">
+  <section class="home-scroll-section home-editorial home-editorial-about {{ section_theme.next() }} home-section-blue-light bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -84,7 +84,7 @@
 
         {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about"
            class="redirect-link">
-          {{ home_content.about_link }} <span aria-hidden="true">→</span>
+          {{ home_content.about_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span>
         </a>{% endif %}
       </div>
 
@@ -97,7 +97,7 @@
   {% endif %}
   {% if home_sections.team and (request.state.page_visibility|default({})).get('team', true) and members %}
   <!--zespol-->
- <section class="home-scroll-section home-section-blue-deep home-team-section {{ section_theme.next() }} pt-20 pb-15 bg-[#5e85b8]">
+ <section class="home-scroll-section home-section-blue-deep home-team-section {{ section_theme.next() }} bg-[#5e85b8]">
   <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
     <div>
       <p class="home-eyebrow">{{ home_content.team_overline }}</p>
@@ -105,7 +105,7 @@
     </div>
     <div>
       <div class="text-lg">{{ home_content.team_description | safe_html }}</div>
-      {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="redirect-link">{{ home_content.team_link }} <span aria-hidden="true">→</span></a>{% endif %}
+      {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="redirect-link">{{ home_content.team_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endif %}
     </div>
   </div>
 
@@ -129,7 +129,7 @@
 
   {% if home_sections.archive %}
   <!--poprzednia edycja-->
-  <section class="home-scroll-section home-editorial home-editorial-archive {{ section_theme.next() }} home-section-blue-mid py-20 bg-[#819edb] text-[#18395d]">
+  <section class="home-scroll-section home-editorial home-editorial-archive {{ section_theme.next() }} home-section-blue-mid bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -141,7 +141,7 @@
 
         {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions"
            class="redirect-link">
-          {{ home_content.archive_link }} <span aria-hidden="true">→</span>
+          {{ home_content.archive_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span>
         </a>{% endif %}
       </div>
 
@@ -153,7 +153,7 @@
   </section>
   {% endif %}
   {% if home_sections.partners and carousel_partners %}
-  <section class="home-scroll-section home-section-wisteria home-partners-section {{ section_theme.next() }} py-20">
+  <section class="home-scroll-section home-section-wisteria home-partners-section {{ section_theme.next() }}">
     <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
       <div><p class="home-eyebrow">{{ home_content.partners_overline }}</p><h2 class="home-editorial-title">{{ home_content.partners_title }}</h2></div>
       <div class="text-lg">{{ home_content.partners_description | safe_html }}</div>
@@ -167,7 +167,7 @@
         {% endfor %}
       </div>
     </div>
-    {% if (request.state.page_visibility|default({})).get('partners', true) %}<div class="max-w-7xl mx-auto px-6 pt-10"><a href="/partners" class="redirect-link">{{ home_content.partners_link }} <span aria-hidden="true">→</span></a></div>{% endif %}
+    {% if (request.state.page_visibility|default({})).get('partners', true) %}<div class="max-w-7xl mx-auto px-6 pt-10"><a href="/partners" class="redirect-link">{{ home_content.partners_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a></div>{% endif %}
   </section>
   {% endif %}
 
@@ -208,19 +208,7 @@
       });
     })();
   </script>
-  <script>
-    (() => {
-      if (!document.documentElement.classList.contains("homepage-scroll-snap")) return;
 
-      const nav = document.querySelector('.site-nav');
-      if (!nav) return;
-      const updateOffset = () => {
-        document.documentElement.style.setProperty('--site-nav-height', `${nav.getBoundingClientRect().height}px`);
-      };
-      updateOffset();
-      new ResizeObserver(updateOffset).observe(nav);
-    })();
-  </script>
 </main>
 <!--footer-->
 <style>

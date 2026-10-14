@@ -10,7 +10,7 @@
 <span class="team-card-info">
   <span class="team-position">{{ member.position }}</span>
   <span class="team-name">{{ member.name }}</span>
-  {% if interactive %}<span class="team-discover">Poznaj mnie <span class="team-plus" aria-hidden="true">↗</span></span>{% endif %}
+  {% if interactive %}<span class="team-discover">Poznaj mnie <span class="team-plus" aria-hidden="true"><span class="arrow-diagonal">{% include 'macros/fontawesome/arrow-right.svg' %}</span></span></span>{% endif %}
 </span>
 {% endmacro %}
 {% block content %}

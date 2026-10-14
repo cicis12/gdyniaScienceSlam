@@ -104,6 +104,48 @@ class FormFixTests(unittest.TestCase):
             db.commit()
         self.assertNotIn('id="tab-slider"', self.client.get('/registration').text)
 
+    def test_form_activation_blocks_public_access_and_preserves_submissions(self):
+        record = self.create([])
+        form_id = record['form_id']
+        payload = dict(form_id=form_id, form_version_id=record['version_id'], answers={})
+        self.client.post('/admin/forms/registration-selection', data={'form_ids': str(form_id)})
+        self.assertEqual(self.client.post('/api/forms/submit', json=payload).status_code, 200)
+        self.assertEqual(self.client.post(f'/admin/forms/{form_id}/status', data={'enabled': 'false'}, follow_redirects=False).status_code, 303)
+        self.assertEqual(self.client.get('/forms/test').status_code, 404)
+        self.assertEqual(self.client.post('/api/forms/submit', json=payload).status_code, 404)
+        self.assertNotIn(f'data-form-id="{form_id}"', self.client.get('/registration').text)
+        with self.sessions() as db:
+            self.assertEqual(db.query(FormSubmission).count(), 1)
+            self.assertEqual(db.get(FormInfo, form_id).cur_version_id, record['version_id'])
+        self.client.post(f'/admin/forms/{form_id}/status', data={'enabled': 'true'})
+        self.assertEqual(self.client.get('/forms/test').status_code, 200)
+        self.assertIn(f'data-form-id="{form_id}"', self.client.get('/registration').text)
+        self.assertEqual(self.client.post('/admin/forms/999999/status', data={'enabled': 'true'}).status_code, 404)
+        self.client.cookies.clear()
+        self.fixture.login('regular')
+        self.assertEqual(self.client.post(f'/admin/forms/{form_id}/status', data={'enabled': 'false'}).status_code, 403)
+
+    def test_other_forms_are_opt_in_and_only_include_enabled_forms(self):
+        first = self.create([])
+        second = self.create([], slug='second')
+        selection = {'form_ids': str(first['form_id'])}
+        self.client.post('/admin/forms/registration-selection', data=selection)
+        self.assertNotIn('standalone-forms-title', self.client.get('/registration').text)
+        self.assertEqual(self.client.get('/forms/second').status_code, 200)
+        self.client.post('/admin/forms/registration-selection', data={**selection, 'show_other_forms': 'true'})
+        soup = BeautifulSoup(self.client.get('/registration').text, 'html.parser')
+        self.assertTrue(soup.select_one('.creator-registration-link[href="/forms/second"]'))
+        self.assertFalse(soup.select_one('.creator-registration-link[href="/forms/test"]'))
+        self.client.post(f"/admin/forms/{second['form_id']}/status", data={'enabled': 'false'})
+        self.assertNotIn('standalone-forms-title', self.client.get('/registration').text)
+        # The explicit switch also works without embedded forms selected.
+        self.client.post('/admin/forms/registration-selection', data={'show_other_forms': 'true'})
+        soup = BeautifulSoup(self.client.get('/registration').text, 'html.parser')
+        self.assertTrue(soup.select_one('.creator-registration-link[href="/forms/test"]'))
+        self.assertFalse(soup.select_one('#no-active-forms-title'))
+        self.client.post('/admin/forms/registration-selection')
+        self.assertNotIn('standalone-forms-title', self.client.get('/registration').text)
+
     def test_cookies_expire_with_tokens(self):
         with patch('main.verify_password', return_value=True):
             response = self.client.post('/adminLogin', data={'username': 'super', 'password': 'test'}, follow_redirects=False)

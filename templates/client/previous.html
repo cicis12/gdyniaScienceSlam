@@ -17,7 +17,7 @@
   </section>
   {% endif %}
   {% if editions %}
-  <nav class="archive-years" aria-label="Przejdź do edycji"><span>Wybierz edycję</span>{% for year in editions %}<a class="redirect-link" href="#edition-{{ year }}">{{ year }} <span aria-hidden="true">→</span></a>{% endfor %}</nav>
+  <nav class="archive-years" aria-label="Przejdź do edycji"><span>Wybierz edycję</span>{% for year in editions %}<a class="redirect-link" href="#edition-{{ year }}">{{ year }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endfor %}</nav>
   {% endif %}
   {% for year, photos in editions.items() %}
   <section id="edition-{{ year }}" class="archive-edition" aria-labelledby="year-{{ year }}">
@@ -26,7 +26,7 @@
       {% for photo in photos %}
       <a class="archive-photo" href="{{ photo.photo }}" data-year="{{ year }}" data-caption="{{ (photo.caption or ('Gdynia Science Slam ' ~ year)) | clean_html }}" aria-label="Otwórz zdjęcie: {{ photo.caption or ('Gdynia Science Slam ' ~ year) }}">
         <img src="{{ photo.photo }}" alt="{{ photo.caption or ('Gdynia Science Slam ' ~ year) }}" loading="lazy" width="900" height="600">
-        <span class="archive-photo-overlay"><span>{{ (photo.caption or ('GSS ' ~ year)) | safe_html }}</span><span aria-hidden="true">↗</span></span>
+        <span class="archive-photo-overlay"><span>{{ (photo.caption or ('GSS ' ~ year)) | safe_html }}</span><span aria-hidden="true"><span class="arrow-diagonal">{% include 'macros/fontawesome/arrow-right.svg' %}</span></span></span>
       </a>
       {% endfor %}
     </div>
@@ -39,7 +39,7 @@
     <div class="gallery-stage"><img id="gallery-full-image" alt=""></div>
     <footer class="gallery-lightbox-footer">
       <div id="gallery-caption"></div>
-      <div class="gallery-controls"><button type="button" id="gallery-prev" aria-label="Poprzednie zdjęcie">←</button><span id="gallery-counter" aria-live="polite" aria-atomic="true"></span><button type="button" id="gallery-next" aria-label="Następne zdjęcie">→</button></div>
+      <div class="gallery-controls"><button type="button" id="gallery-prev" aria-label="Poprzednie zdjęcie">{% include 'macros/fontawesome/arrow-left.svg' %}</button><span id="gallery-counter" aria-live="polite" aria-atomic="true"></span><button type="button" id="gallery-next" aria-label="Następne zdjęcie">{% include 'macros/fontawesome/arrow-right.svg' %}</button></div>
     </footer>
   </dialog>
 </main>

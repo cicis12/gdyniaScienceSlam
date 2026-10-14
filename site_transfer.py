@@ -39,7 +39,7 @@ MEDIA_PATTERN = r'media/[a-f0-9]{64}\.(?:webp|png|jpg)'
 LOGO_MEDIA_PATTERN = r'media/[a-f0-9]{64}\.(?:webp|png|jpg|svg)'
 DOCUMENT_MEDIA_PATTERN = r'documents/[a-f0-9]{64}\.pdf'
 ADDITIONAL_SETTING_KEYS = {THEME_KEY, FOOTER_KEY, HOME_KEY, PAGE_MODES_KEY, HOME_SECTIONS_KEY}
-OPTIONAL_SETTING_KEYS = {'event_date_only'}
+OPTIONAL_SETTING_KEYS = {'event_date_only', 'registration_show_other_forms'}
 SETTING_KEYS = {PALETTE_KEY, DETAILS_KEY, 'event_datetime', 'voting_enabled'} | {'page_visible:' + key for key, _, _ in PUBLIC_PAGES}
 
 
@@ -150,7 +150,7 @@ class SiteBundle(Record):
         if not SETTING_KEYS <= set(self.settings) or set(self.settings) - (SETTING_KEYS | ADDITIONAL_SETTING_KEYS | OPTIONAL_SETTING_KEYS):
             raise ValueError('Nieobsługiwany zestaw ustawień.')
         for key, value in self.settings.items():
-            if key.startswith('page_visible:') or key in {DETAILS_KEY, 'voting_enabled', 'event_date_only'}:
+            if key.startswith('page_visible:') or key in {DETAILS_KEY, 'voting_enabled'} | OPTIONAL_SETTING_KEYS:
                 if value not in {'true', 'false'}:
                     raise ValueError('Nieprawidłowa widoczność strony.')
             elif key == 'event_datetime' and value:

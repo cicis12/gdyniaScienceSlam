@@ -368,11 +368,14 @@ body .site-nav {
 .homepage-flow > .home-scroll-section {
   display: flex;
   min-height: calc(100dvh - var(--site-nav-height));
+  padding-block: 5rem;
   flex-direction: column;
   justify-content: center;
   scroll-snap-align: start;
   scroll-snap-stop: always;
 }
+
+.homepage-flow > .countdown-hero { padding-block: 3rem; }
 
 .homepage-scroll-snap .site-footer {
   scroll-snap-align: start;
@@ -987,6 +990,8 @@ img {
 }
 
 .footer-icon { display: inline-block; width: 1em; height: 1em; margin-right: .4em; vertical-align: -.125em; fill: currentColor; }
+.arrow-icon { display: inline-block; width: 1em; height: 1em; vertical-align: -.125em; fill: currentColor; flex-shrink: 0; }
+.arrow-diagonal .arrow-icon { transform: rotate(-45deg); }
 
 .site-nav-actions { display: flex; align-items: center; gap: .75rem; flex-shrink: 0; }
 .theme-switch {
