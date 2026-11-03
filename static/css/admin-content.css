@@ -106,3 +106,28 @@ body.settings-preview-open { overflow: hidden; }
 
 .home-image-preview { display: block; width: min(100%, 480px); aspect-ratio: 16 / 9; object-fit: cover; margin: 1rem 0; border-radius: .4rem; }
 .content-hint { font-size: .85rem; margin-top: 1rem; color: #324a67; }
+.partnership-editor > p { margin-bottom: 1rem; }
+.partnership-editor #partnership-editor-fields { min-width: 0; border: 0; padding: 0; }
+.partnership-editor .member-fields fieldset { min-width: 0; border: 1px solid #42628a; border-radius: .5rem; padding: 1rem; display: grid; gap: 1rem; }
+.partnership-editor .member-fields legend { padding: 0 .5rem; font-weight: 700; }
+.partnership-save-bar { position: sticky; bottom: 0; z-index: 20; padding: 1.25rem; border: 1px solid #42628a; border-radius: .6rem; background: #eaf1fa; color: #06101d; box-shadow: 0 -6px 24px #06101d22; }
+.partnership-save-bar p { margin-bottom: .75rem; }
+.partnership-save-bar #save-partnership { padding: 1rem 2rem; font-size: 1.15rem; font-weight: 700; background: #18395d; color: #fff; border-radius: .4rem; }
+.partnership-save-bar #preview-partnership { padding: 1rem; border: 1px solid #42628a; border-radius: .4rem; }
+.partnership-save-bar button:disabled { opacity: .6; cursor: wait; }
+
+#partnership-preview-frame { display: block; flex: 1 1 auto; min-height: 20rem; height: 100%; }
+#partnership-preview-frame[hidden], #partnership-preview-status[hidden] { display: none; }
+.analytics-table-scroll { overflow-x: auto; }
+.analytics-table { width: 100%; border-collapse: collapse; }
+.analytics-table th, .analytics-table td { padding: .75rem; border-bottom: 1px solid #42628a55; text-align: left; }
+.analytics-table th { font-weight: 700; }
+
+.analytics-report-links { display: grid; gap: .75rem; margin-top: 1rem; }
+.analytics-report-link { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.5rem; padding: 1rem; border: 1px solid #42628a; border-radius: .5rem; background: #f4effb; color: #18395d; }
+.analytics-report-link strong { text-decoration: underline; text-underline-offset: .2em; }
+.analytics-report-link-details { min-width: 0; overflow-wrap: anywhere; }
+.analytics-report-link-details small { margin-top: .35rem; }
+.analytics-report-link-action { font-weight: 700; white-space: nowrap; }
+.analytics-report-link:hover { background: #d5e2f6; border-color: #18395d; }
+.analytics-report-link:focus-visible { outline: 3px solid #036363; outline-offset: 3px; }

@@ -1,0 +1,57 @@
+{% extends 'admin/partnership_preview_base.html' if preview|default(false) else 'client/client_header.html' %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/about.css') }}">
+<link rel="stylesheet" href="{{ asset_url('css/forms.css') }}">
+<link rel="stylesheet" href="{{ asset_url('css/partnership.css') }}">
+{% if not preview|default(false) %}<script src="{{ asset_url('js/partnership.js') }}" defer></script>{% endif %}
+{% endblock %}
+{% block content %}
+<main class="about-page partnership-page theme-dark">
+  <header class="about-intro"><h1>{{ config.title }}</h1></header>
+  {% if preview|default(false) and not (config.sections|selectattr('enabled')|list) %}
+  <p class="partnership-preview-empty">Brak włączonych sekcji. Zamknij podgląd i zaznacz „Pokaż sekcję” przy wybranej sekcji.</p>
+  {% endif %}
+  {% for s in config.sections if s.enabled %}
+  <section class="partnership-section{% if s.type == 'grid' %} about-benefits{% elif s.type == 'faq' %} partnership-faq-section{% endif %}" id="section-{{ s.id }}" {% if s.title %}aria-labelledby="heading-{{ s.id }}"{% endif %}>
+    {% if s.title %}<h2 id="heading-{{ s.id }}"{% if s.type == 'heading' %} class="partnership-big-heading"{% endif %}>{{ s.title }}</h2>{% endif %}
+    {% if s.type == 'grid' %}
+    <div class="about-benefits-grid">{% for item in s.items %}<article>{% if item.title %}<h3>{{ item.title }}</h3>{% endif %}<div class="partnership-copy">{{ item.text|safe_html }}</div></article>{% endfor %}</div>
+    {% elif s.type == 'paragraph' %}
+    <div class="partnership-copy">{{ s.text|safe_html }}</div>
+    {% elif s.type == 'icons' %}
+    <div class="partnership-icon-grid">{% for item in s.items %}<article><div class="partnership-icon" aria-hidden="true">{{ item.svg|safe_html }}</div>{% if item.title %}<h3>{{ item.title }}</h3>{% endif %}<div class="partnership-copy">{{ item.text|safe_html }}</div></article>{% endfor %}</div>
+    {% elif s.type == 'person' %}
+    <div class="partnership-people">
+    {% for person in s.people %}<article class="partnership-person">
+      {% if person.photo %}<img class="partnership-portrait" src="{{ person.photo }}" alt="{{ person.name }}" width="240" height="240" loading="lazy">{% endif %}
+      <h3>{{ person.name }}</h3><p class="partnership-occupation">{{ person.occupation }}</p>
+      <div class="partnership-copy">{{ person.details|safe_html }}</div>
+    </article>{% endfor %}
+    </div>
+    {% if s.team_link and (request.state.page_visibility|default({})).get('team', true) %}<a class="redirect-link partnership-team-link" href="/team">{{ s.team_link_label }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>{% endif %}
+    {% elif s.type == 'faq' %}
+    <div class="partnership-faq">{% for item in s.items %}
+      <details name="faq-{{ s.id }}" {% if loop.first %}open{% endif %}>
+        <summary>{{ item.question }}<svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></summary>
+        <div class="partnership-answer"><div class="partnership-copy">{{ item.answer|safe_html }}</div></div>
+      </details>
+    {% endfor %}</div>
+    {% elif s.type == 'contact' %}
+    {% if s.text %}<div class="partnership-copy">{{ s.text|safe_html }}</div>{% endif %}
+    <form class="public-form partnership-contact" action="/become-a-partner/contact/{{ s.id }}" method="post" data-partner-contact{% if preview|default(false) %} inert{% endif %}>
+      {% for field, label, kind, limit in [('name', 'Imię i nazwisko', 'text', 160), ('email', 'E-mail', 'email', 254), ('topic', 'Temat', 'text', 200), ('content', 'Treść wiadomości', 'textarea', 10000)] %}
+      <div class="form-field"><div class="form-control">
+        {% if kind == 'textarea' %}<textarea id="{{ s.id }}-{{ field }}" name="{{ field }}" rows="5" placeholder=" " maxlength="{{ limit }}" required></textarea>{% else %}<input id="{{ s.id }}-{{ field }}" name="{{ field }}" type="{{ kind }}" placeholder=" " maxlength="{{ limit }}" {% if field in ['name', 'email'] %}autocomplete="{{ field }}"{% endif %} required>{% endif %}
+        <label class="form-floating-label" for="{{ s.id }}-{{ field }}">{{ label }}</label>
+      </div></div>
+      {% endfor %}
+      <div class="partnership-honeypot" aria-hidden="true"><label>Strona internetowa<input name="website" tabindex="-1" autocomplete="off" maxlength="500"></label></div>
+      <button type="submit" class="partnership-submit"{% if preview|default(false) %} disabled{% endif %}>Wyślij wiadomość</button>
+      <p role="status" aria-live="polite" data-contact-status></p>
+      <noscript>Włącz JavaScript, aby wysłać wiadomość za pomocą formularza.</noscript>
+    </form>
+    {% endif %}
+  </section>
+  {% endfor %}
+</main>
+{% endblock %}

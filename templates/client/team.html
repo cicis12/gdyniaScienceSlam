@@ -15,10 +15,10 @@
 {% endmacro %}
 {% block content %}
 <main class="team-page theme-dark" style="{{ palette_style(team_palette) }}">
-  <header class="team-intro">
+  <header class="team-intro" data-analytics-section="team-intro">
     <h1>Nasz zespół</h1>
   </header>
-  <section class="team-grid" aria-label="Członkowie zespołu">
+  <section data-analytics-section="team-members" class="team-grid" aria-label="Członkowie zespołu">
     {% for member in members %}
     {% if team_details_enabled %}
     <details class="team-card">

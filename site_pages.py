@@ -8,6 +8,7 @@ PUBLIC_PAGES = (
     ('previous_editions', '/previous_editions', 'Poprzednie edycje'),
     ('topics', '/topics', 'Tematy prelekcji'),
     ('partners', '/partners', 'Partnerzy'),
+    ('become_partner', '/become-a-partner', 'Zostań partnerem'),
     ('documents', '/documents', 'Dokumenty'),
     ('registration', '/registration', 'Rejestracja'),
     ('vote', '/vote', 'Głosowanie'),
@@ -24,6 +25,8 @@ def page_visibility(db):
 
 def page_for_path(path):
     path = path.rstrip('/') or '/'
+    if path.startswith('/become-a-partner/contact/'):
+        return 'become_partner'
     if path.startswith('/documents/'):
         return 'documents'
     if path.startswith('/vote/'):

@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 form_rate_storage = storage_from_string(os.getenv('RATE_LIMIT_STORAGE_URI', 'memory://'))
 form_rate_limiter = FixedWindowRateLimiter(form_rate_storage)
 FORM_RATES = parse_many(os.getenv('FORM_SUBMISSION_RATE_LIMIT', '10/minute;100/hour'))
+ANALYTICS_RATES = parse_many(os.getenv('ANALYTICS_RATE_LIMIT', '240/minute;20000/hour'))
 
 
 class RequestLimitsMiddleware:
@@ -25,10 +26,12 @@ class RequestLimitsMiddleware:
         path = scope['path'].rstrip('/')
         headers = Headers(scope=scope)
         limit = 160 * 1024 * 1024  # Configuration ZIP imports use up to 150 MB.
-        if path == '/api/forms/submit' and scope['method'] == 'POST':
+        is_analytics = path in {'/api/interactions', '/api/referrals/decision'}
+        is_partner_contact = path.startswith('/become-a-partner/contact/')
+        if (path == '/api/forms/submit' or is_partner_contact or is_analytics) and scope['method'] == 'POST':
             address = (scope.get('client') or ('unknown',))[0]
             def allowed():
-                return all(form_rate_limiter.hit(rate, 'form-submissions', address) for rate in FORM_RATES)
+                return all(form_rate_limiter.hit(rate, 'interaction-analytics' if is_analytics else 'partner-contact' if is_partner_contact else 'form-submissions', address) for rate in (ANALYTICS_RATES if is_analytics else FORM_RATES))
             try:
                 accepted = await run_in_threadpool(allowed)
             except Exception:
@@ -39,7 +42,7 @@ class RequestLimitsMiddleware:
                 response = JSONResponse({'detail': 'Zbyt wiele prób. Spróbuj ponownie później.'},
                                         status_code=429, headers={'Retry-After': '60'})
                 return await response(scope, receive, send)
-            limit = 110 * 1024 * 1024 if headers.get('content-type', '').lower().startswith('multipart/form-data') else 256 * 1024
+            limit = 32 * 1024 if is_partner_contact or is_analytics else 110 * 1024 * 1024 if headers.get('content-type', '').lower().startswith('multipart/form-data') else 256 * 1024
         elif path in {'/adminLogin', '/vote/login'}:
             limit = 16 * 1024
         try:

@@ -1,0 +1,22 @@
+{% set referral = request.state.referral|default({}) %}
+{% set analytics_on = (request.state.site_settings|default({})).get('analytics_enabled', false) %}
+{% if public_html_path(request.url.path) and page_name|default('') != 'unavailable' and not request.cookies.get('admin_session') and referral.get('link_id') %}
+  {% set tracking_config = {'paths': public_paths, 'path': request.url.path, 'link_id': referral.link_id, 'consented': referral.consented} %}
+  <script type="application/json" id="referral-session-config">{{ {'tracking': tracking_config, 'analytics_enabled': analytics_on, 'analytics_url': asset_url('js/interaction-analytics.js'), 'needs_popup': referral.needs_popup, 'revision': referral.popup.revision}|tojson }}</script>
+  {% if referral.needs_popup %}
+  <dialog id="referral-consent" class="referral-consent" aria-labelledby="referral-consent-title" aria-describedby="referral-consent-content">
+    <h2 id="referral-consent-title" tabindex="-1" autofocus>{{ referral.popup.title }}</h2>
+    <div id="referral-consent-content" class="referral-consent-copy">{{ referral.popup.content|safe_html }}</div>
+    <p id="referral-consent-status" role="status" aria-live="polite"></p>
+    <div class="referral-consent-actions">
+      <button type="button" data-referral-choice="yes">{{ referral.popup.accept_label }}</button>
+      <button type="button" data-referral-choice="no">{{ referral.popup.reject_label }}</button>
+    </div>
+  </dialog>
+  {% endif %}
+  <script src="{{ asset_url('js/referral-consent.js') }}" defer></script>
+  {% if analytics_on and referral.consented %}
+  <script type="application/json" id="interaction-analytics-config">{{ tracking_config|tojson }}</script>
+  <script id="interaction-analytics-script" src="{{ asset_url('js/interaction-analytics.js') }}" defer></script>
+  {% endif %}
+{% endif %}

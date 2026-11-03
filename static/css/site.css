@@ -1017,3 +1017,25 @@ img {
   body.public-site:not([data-display-page="home"]) .site-mobile-menu:not([hidden]) { display: block !important; }
 }
 @media (prefers-reduced-motion: reduce) { .theme-switch-thumb { transition: none; } }
+.site-footer .analytics-opt-out {
+  margin-top: 1rem; padding: .6rem 1rem; border-radius: 999px;
+  background: transparent; color: var(--theme-footer-link, currentColor);
+  border: 1px solid var(--theme-footer-border, currentColor);
+  font: inherit; font-size: .875rem; text-decoration: underline; text-underline-offset: .2em; cursor: pointer;
+}
+.site-footer .analytics-opt-out:hover { background: color-mix(in srgb, var(--theme-footer-link, currentColor) 12%, transparent); }
+.site-footer .analytics-opt-out:focus-visible { outline: 2px solid var(--theme-footer-link, currentColor); outline-offset: 3px; }
+.analytics-opt-out[hidden] { display: none; }
+
+.referral-consent { width: min(36rem, calc(100% - 2rem)); max-height: calc(100dvh - 2rem); overflow-y: auto; margin: auto; padding: clamp(1.5rem, 4vw, 2.5rem); border: 1px solid var(--theme-light-border, #426076); border-radius: 1rem; background: var(--theme-light-background, #eaf1fa); color: var(--theme-light-text, #132e46); }
+.referral-consent::backdrop { background: #06101dbb; }
+.referral-consent h2 { font-size: 1.75rem; line-height: 1.2; font-weight: 700; margin-bottom: 1.25rem; color: var(--theme-light-heading, #18395d); }
+.referral-consent-copy { line-height: 1.7; white-space: pre-line; }
+.referral-consent-copy a { text-decoration: underline; }
+.referral-consent-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1.5rem; }
+.referral-consent-actions button { flex: 1 1 12rem; min-height: 48px; padding: .85rem 1rem; font: inherit; font-weight: 700; border: 1px solid var(--theme-light-button, #18395d); border-radius: .4rem; background: var(--theme-light-button, #18395d); color: var(--theme-light-button-text, #fff); cursor: pointer; }
+.referral-consent-actions button:focus-visible { outline: 3px solid var(--theme-light-link, #036363); outline-offset: 4px; }
+.referral-consent-actions button:disabled { opacity: .6; cursor: wait; }
+#referral-consent-status { margin-top: 1rem; }
+
+body.public-site #referral-consent h2 { color: var(--theme-light-heading, #18395d) !important; }

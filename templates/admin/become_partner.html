@@ -1,0 +1,55 @@
+{% extends 'admin_header.html' %}
+{% block head_extra %}
+<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">
+<script src="{{ asset_url('js/partnership-admin.js') }}" defer></script>
+{% endblock %}
+{% block content %}
+<main class="content-admin partnership-editor">
+  <h1>Zostań partnerem</h1>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a> · <a href="/become-a-partner" target="_blank" rel="noopener">Zobacz opublikowaną stronę</a> · <a href="/admin/analytics">Statystyki interakcji</a></p>
+  <p>Wszystkie zmiany, w tym dodawanie i usuwanie sekcji oraz osób, zostaną opublikowane po wybraniu „Zapisz całą stronę”.</p>
+  <noscript>Włącz JavaScript, aby edytować stronę i korzystać z podglądu.</noscript>
+  <script type="application/json" id="partnership-config">{{ config.model_dump()|tojson }}</script>
+  <script type="application/json" id="partnership-types">{{ section_types|tojson }}</script>
+  <form id="partnership-editor-form">
+    <fieldset id="partnership-editor-fields">
+      <section class="content-panel member-fields">
+        <h2>Ustawienia strony</h2>
+        <label>Tytuł strony<input name="title" value="{{ config.title }}" maxlength="160" required></label>
+        <label><input type="checkbox" name="featured" {% if config.featured %}checked{% endif %}> Pokaż osobną sekcję na stronie głównej, po partnerach</label>
+        <label><input type="checkbox" name="uuid_only" {% if config.uuid_only %}checked{% endif %}> Udostępniaj stronę tylko odbiorcom aktywnego linku UUID<small>Odmowa statystyk zachowuje dostęp do strony. Zwykli odwiedzający nie zobaczą strony ani jej linków.</small></label>
+        <label>Tekst sekcji na stronie głównej<textarea name="teaser" rows="3" maxlength="1000">{{ config.teaser }}</textarea></label>
+        <label>Tekst linku<input name="link_label" value="{{ config.link_label }}" maxlength="160" required></label>
+        <img id="feature-photo-preview" src="{{ config.feature_photo }}" alt="Zdjęcie sekcji na stronie głównej" class="home-image-preview" {% if not config.feature_photo %}hidden{% endif %}>
+        <label>Zdjęcie sekcji na stronie głównej<input type="file" id="feature-photo" accept="image/jpeg,image/png,image/webp"><small>Puste pole zachowuje obecne zdjęcie. JPG, PNG lub WebP; do 10 MB i 20 megapikseli.</small></label>
+        <label>Adres e-mail odbiorcy formularza<input type="email" name="recipient" value="{{ config.recipient }}" maxlength="254"><small>Puste pole wyłącza wysyłanie. Wymagane MAIL_API_KEY, EMAIL_FROM i zweryfikowany nadawca MailerSend w konfiguracji serwera.</small></label>
+      </section>
+      <section class="content-panel">
+        <h2>Sekcje <span id="section-count"></span></h2>
+        <p>Niższa wartość kolejności pojawia się wcześniej. Nowe sekcje są ukryte do czasu ich włączenia. Opisy obsługują bezpieczny HTML.</p>
+        <div id="partnership-sections"></div>
+        <div class="member-fields">
+          <label>Typ nowej sekcji<select id="new-section-type">{% for key, label in section_types.items() %}<option value="{{ key }}">{{ label }}</option>{% endfor %}</select></label>
+          <button type="button" id="add-partnership-section">Dodaj sekcję</button>
+        </div>
+      </section>
+    </fieldset>
+    <div class="partnership-save-bar">
+      <p id="partnership-editor-status" role="status" aria-live="polite">Brak niezapisanych zmian.</p>
+      <div class="settings-actions">
+        <button type="button" id="preview-partnership">Podgląd zmian</button>
+        <button type="submit" id="save-partnership">Zapisz całą stronę</button>
+      </div>
+    </div>
+  </form>
+</main>
+<dialog id="partnership-preview" class="site-preview" aria-labelledby="partnership-preview-title">
+  <div class="preview-toolbar"><h2 id="partnership-preview-title">Podgląd niezapisanych zmian</h2>
+    <label>Szerokość<select id="partnership-preview-width"><option value="100%">Komputer</option><option value="768px">Tablet</option><option value="390px">Telefon</option></select></label>
+    <button type="button" id="close-partnership-preview" autofocus>Zamknij podgląd</button>
+  </div>
+  <p class="preview-hint">Widok roboczy — zmiany nie zostały jeszcze opublikowane.</p>
+  <p id="partnership-preview-status" class="preview-hint" role="status" aria-live="polite" hidden></p>
+  <iframe id="partnership-preview-frame" name="partnership-preview-frame" title="Podgląd strony Zostań partnerem" sandbox="allow-same-origin" hidden></iframe>
+</dialog>
+{% endblock %}

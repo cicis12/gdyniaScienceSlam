@@ -1,0 +1,30 @@
+{% extends 'admin_header.html' %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<main class="content-admin">
+  <h1>{{ link.label or 'Raport linku UUID' }}</h1>
+  <p class="settings-back"><a href="/admin/analytics" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Wszystkie statystyki</a></p>
+  <section class="content-panel member-fields">
+    <label>Link do udostępnienia<input readonly value="{{ url }}" onclick="this.select()"></label>
+    <p>{{ visit_count }} odsłon · {{ '%.1f'|format(total_ms / 1000) }} s widoczności strony · {{ 'aktywny' if link.active else 'wyłączony' }}</p>
+    <p>Czas jest szacunkiem widoczności przy aktywnej karcie; zatrzymuje się po 60 sekundach bezczynności. Nie potwierdza przeczytania treści. Widoczne równocześnie sekcje i otwarte równolegle karty mogą mieć nakładający się czas. Odsłona oznacza otwarcie strony, nie unikalną osobę.</p>
+    <form action="/admin/analytics/{{ link.id }}/toggle" method="post"><button type="submit">{{ 'Wyłącz link' if link.active else 'Włącz link' }}</button></form>
+  </section>
+  <section class="content-panel">
+    <h2>Sekcje</h2>
+    <div class="analytics-table-scroll"><table class="analytics-table">
+      <thead><tr><th>Strona</th><th>Sekcja</th><th>Łącznie (s)</th><th>Średnio / odsłonę z sekcją (s)</th><th>Odsłony z sekcją</th><th>Kliknięcia</th><th>Otwarcia FAQ</th></tr></thead>
+      <tbody>{% for row in rows %}<tr><td>{{ row.page_label }}</td><td>{{ row.section_label }}</td><td>{{ '%.1f'|format(row.visible_ms / 1000) }}</td><td>{{ '%.1f'|format(row.visible_ms / 1000 / row.visits) }}</td><td>{{ row.visits }}</td><td>{{ row.clicks }}</td><td>{{ row.faq_opens }}</td></tr>{% else %}<tr><td colspan="7">Brak danych. Otwórz aktywny link poza sesją administratora; włącz wcześniej zbieranie danych.</td></tr>{% endfor %}</tbody>
+    </table></div>
+  </section>
+  <section class="content-panel">
+    <h2>Ostatnie odsłony (do 100)</h2>
+    {% for visit in recent_visits %}<p>{{ visit.path }} · {{ visit.created_at.strftime('%Y-%m-%d %H:%M') }} UTC · <code>{{ visit.id }}</code></p>{% else %}<p>Brak odsłon.</p>{% endfor %}
+  </section>
+  <section class="content-panel">
+    <h2>Usuwanie danych</h2>
+    <form action="/admin/analytics/{{ link.id }}/clear" method="post" onsubmit="return confirm('Usunąć statystyki tego linku?')"><button type="submit">Wyczyść statystyki</button></form>
+    <form action="/admin/analytics/{{ link.id }}/delete" method="post" onsubmit="return confirm('Usunąć link i wszystkie jego statystyki?')"><button type="submit" class="delete-member">Usuń link i dane</button></form>
+  </section>
+</main>
+{% endblock %}

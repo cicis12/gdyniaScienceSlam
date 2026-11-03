@@ -17,6 +17,7 @@ from database import get_db
 from models import FormInfo, SystemSetting, TeamMember
 from site_pages import PUBLIC_PAGES, page_visibility
 from partner_content import get_partners
+from partnership_content import get_partnership
 from home_images import HomeImage, HomeImages, IMAGE_SLOTS, IMAGE_POSITIONS, get_home_images, save_home_images
 from image_uploads import normalize_image, MAX_IMAGE_BYTES
 from starlette.concurrency import run_in_threadpool
@@ -79,6 +80,7 @@ def build_router(require_superadmin):
             'event_datetime': event.value if event else '',
             'event_date_only': bool(date_only and date_only.value == 'true'),
             'carousel_partners': get_partners(db).carousel_partners,
+            'partnership': get_partnership(db),
             'home_images': get_home_images(db),
             'members': db.query(TeamMember).order_by(TeamMember.id).all(),
         })

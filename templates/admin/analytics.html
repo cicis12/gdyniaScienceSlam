@@ -1,0 +1,50 @@
+{% extends 'admin_header.html' %}
+{% block head_extra %}<link rel="stylesheet" href="{{ asset_url('css/admin-content.css') }}">{% endblock %}
+{% block content %}
+<main class="content-admin">
+  <h1>Statystyki interakcji</h1>
+  <p class="settings-back"><a href="/admin/content" class="redirect-link"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Ustawienia systemowe</a></p>
+  <section class="content-panel">
+    <h2>Zbieranie danych</h2>
+    <p>UUID identyfikuje udostępniony link, nie potwierdzoną osobę. Przekazanie linku dalej łączy wyniki odbiorców. Statystyki nie zapisują adresów IP, zawartości formularzy ani odcisków przeglądarki. Zgoda i dostęp do strony są zapamiętywane osobno w podpisanych ciasteczkach sesyjnych.</p>
+    <p>Dostosuj treść okna zgody do informacji o prywatności i sposobu używania statystyk: <a href="https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-of-art-53-of-eprivacy-directive_en" target="_blank" rel="noopener noreferrer">wytyczne EROD dotyczące śledzenia przez URL</a>.</p>
+    <form method="post" action="/admin/analytics/settings" class="member-fields">
+      <label><input type="checkbox" name="enabled" value="true" {% if enabled %}checked{% endif %}> Włącz statystyki dla linków UUID na wszystkich publicznych stronach po zgodzie odbiorcy</label>
+      <button type="submit">Zapisz ustawienie</button>
+    </form>
+    <p>Dane starsze niż {{ retention_days }} dni są usuwane przy odbieraniu statystyk i otwieraniu raportów. Dane nie trafiają do eksportu konfiguracji. DNT i Global Privacy Control są respektowane; zalogowani administratorzy i podglądy są pomijani.</p>
+  </section>
+  <section class="content-panel">
+    <h2>Okno zgody dla linków UUID</h2>
+    <p>Okno pojawia się po wejściu przez aktywny link UUID. Statystyki zaczynają się dopiero po zgodzie. Odmowa pozostawia wyłącznie flagę dostępu do strony Zostań partnerem; UUID jest usuwany z adresu i ciasteczka zgody. Zmiana treści lub etykiet wymaga ponownej zgody.</p>
+    <form method="post" action="/admin/analytics/referral-settings" class="member-fields">
+      <label>Tytuł okna<input name="title" value="{{ popup.title }}" maxlength="160" required></label>
+      <label>Treść zgody (bezpieczny HTML)<textarea name="content" rows="6" maxlength="10000" required>{{ popup.content }}</textarea></label>
+      <label>Przycisk zgody<input name="accept_label" value="{{ popup.accept_label }}" maxlength="80" required></label>
+      <label>Przycisk odmowy<input name="reject_label" value="{{ popup.reject_label }}" maxlength="80" required></label>
+      <button type="submit">Zapisz treść okna</button>
+    </form>
+    <p>Ograniczenie dostępu do strony ustawisz w <a href="/admin/become-a-partner">edytorze Zostań partnerem</a>.</p>
+  </section>
+  <section class="content-panel">
+    <h2>Nowy link</h2>
+    <form method="post" action="/admin/analytics/links" class="member-fields">
+      <label>Etykieta (opcjonalna, bez danych osobowych)<input name="label" maxlength="120"></label>
+      <label>Strona początkowa<select name="path">{% for key, path, label in pages %}<option value="{{ path }}">{{ label }} · {{ path }}</option>{% endfor %}</select></label>
+      <button type="submit">Utwórz link UUID</button>
+    </form>
+  </section>
+  <section class="content-panel">
+    <h2>Linki · {{ links|length }}/500</h2>
+    <p>Kliknij wybrany link poniżej, aby zobaczyć jego raport: czas oglądania sekcji, kliknięcia i otwarcia FAQ.</p>
+    <div class="analytics-report-links">
+    {% for link in links %}
+      <a class="analytics-report-link" href="/admin/analytics/{{ link.id }}">
+        <span class="analytics-report-link-details"><strong>{{ link.label or link.id }}</strong><small>{{ link.path }} · {{ counts.get(link.id, 0) }} odsłon · {{ 'aktywny' if link.active else 'wyłączony' }}</small></span>
+        <span class="analytics-report-link-action">Zobacz raport <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></span>
+      </a>
+    {% else %}<p>Utwórz pierwszy link powyżej.</p>{% endfor %}
+    </div>
+  </section>
+</main>
+{% endblock %}

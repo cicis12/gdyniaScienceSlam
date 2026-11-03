@@ -10,7 +10,7 @@
     <h1>Poprzednie edycje</h1>
   </header>
   {% if video.enabled %}
-  <section class="archive-feature" aria-label="Film z wydarzenia">
+  <section data-analytics-section="video" class="archive-feature" aria-label="Film z wydarzenia">
     <div class="archive-player">
       <iframe src="{{ video.embed_url }}" title="{{ video.title }}" allow="fullscreen; picture-in-picture; encrypted-media" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>

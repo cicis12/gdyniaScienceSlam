@@ -2,6 +2,7 @@
 <html lang="pl" class="{% if page_name == 'home' %}homepage-scroll-snap{% endif %}">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="same-origin">
   <title>{% if header_title %}
     {{ header_title }}
     {% else %}
@@ -43,6 +44,7 @@
         {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "previous_editions" %} font-extrabold {% else %} font-bold {% endif %}">Poprzednie edycje</a>{% endif %}
         {% if (request.state.page_visibility|default({})).get('topics', true) %}<a href="/topics" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "topics" %} font-extrabold {% else %} font-bold {% endif %}">Tematy prelekcji</a>{% endif %}
         {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "partners" %} font-extrabold {% else %} font-bold {% endif %}">Partnerzy</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('become_partner', true) %}<a href="/become-a-partner" class="text-lg block font-bold" {% if page_name == 'become_partner' %}aria-current="page"{% endif %}>Zostań partnerem</a>{% endif %}
         {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="hover:text-blue-800 text-lg text-[#18395d] {% if page_name == "documents" %} font-extrabold {% else %} font-bold {% endif %}">Dokumenty</a>{% endif %}
         {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration"
            class="site-registration bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
@@ -75,6 +77,7 @@
           {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="text-lg block {% if page_name == "previous_editions" %} font-bold {% endif %}">Poprzednie edycje</a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('topics', true) %}<a href="/topics" class="text-lg block {% if page_name == "topics" %} font-bold {% endif %}">Tematy prelekcji</a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="text-lg block {% if page_name == "partners" %} font-bold {% endif %}">Partnerzy</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('become_partner', true) %}<a href="/become-a-partner" class="text-lg block font-bold" {% if page_name == 'become_partner' %}aria-current="page"{% endif %}>Zostań partnerem</a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="text-lg block {% if page_name == "documents" %} font-bold {% endif %}">Dokumenty</a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration"
              class="site-registration block bg-blue-600 text-white text-center py-2 rounded-full">
@@ -89,6 +92,7 @@
 <!--footer-->
 {% include "macros/site_footer.html" %}
 <script src="{{ asset_url('js/site-menu.js') }}" defer></script>
+{% include 'macros/interaction_analytics.html' %}
 </body>
 </html>
 

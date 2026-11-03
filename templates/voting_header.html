@@ -2,6 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
+  <meta name="referrer" content="same-origin">
   <title>Głosowanie – Gdynia Science Slam</title>
   <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -91,6 +92,7 @@
   <!-- FOOTER -->
   {% include "macros/site_footer.html" %}
   <script src="{{ asset_url('js/site-menu.js') }}" defer></script>
+{% include 'macros/interaction_analytics.html' %}
 </body>
 <style>
 /* track color change */

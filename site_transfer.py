@@ -3,7 +3,7 @@ from datetime import datetime
 from hashlib import sha256
 from io import BytesIO
 from pathlib import Path
-from typing import Literal
+from typing import Annotated, Literal
 from uuid import uuid4
 from zipfile import ZipFile, ZIP_DEFLATED, BadZipFile
 import json
@@ -17,6 +17,8 @@ from form_icons import check_svg
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, field_validator, model_validator
 from sqlalchemy import func
 
+from partnership_content import (PartnershipConfig, ContactPerson, PersonSection, GridSection, ParagraphSection, IconsSection,
+                                 HeadingSection, FAQSection, ContactSection, get_partnership, save_partnership)
 from forms import FormDefinition
 from about_content import TimelineEntry, MAX_ENTRIES, get_timeline, save_timeline
 from gallery import FeaturedVideo, VIDEO_KEY, get_featured_video
@@ -121,12 +123,40 @@ class HomeImagesBundle(BaseModel):
     archive: HomeImageRecord
 
 
+class PartnershipContactRecord(ContactPerson):
+    @field_validator('photo')
+    @classmethod
+    def valid_photo(cls, value):
+        if value and not re.fullmatch(MEDIA_PATTERN, value):
+            raise ValueError('Nieprawidłowe zdjęcie osoby kontaktowej.')
+        return value
+
+
+class PartnershipPersonRecord(PersonSection):
+    people: list[PartnershipContactRecord] = Field(default_factory=list, max_length=20)
+
+
+class PartnershipBundle(PartnershipConfig):
+    feature_photo: str = ''
+    sections: list[Annotated[GridSection | ParagraphSection | IconsSection | HeadingSection |
+                             PartnershipPersonRecord | FAQSection | ContactSection,
+                             Field(discriminator='type')]] = Field(default_factory=list, max_length=50)
+
+    @field_validator('feature_photo')
+    @classmethod
+    def valid_feature_photo(cls, value):
+        if value and not re.fullmatch(MEDIA_PATTERN, value):
+            raise ValueError('Nieprawidłowe zdjęcie sekcji na stronie głównej.')
+        return value
+
+
 class SiteBundle(Record):
     format: Literal['gdynia-science-slam']
     version: Literal[1, 2, 3, 4]
     documents: list[DocumentRecord] | None = Field(default=None, max_length=MAX_DOCUMENTS)
     home_images: HomeImagesBundle | None = None
     partners: PartnersBundle | None = None
+    partnership: PartnershipBundle | None = None
     about: list[TimelineRecord] | None = Field(default=None, max_length=MAX_ENTRIES)
     settings: dict[str, str]
     team: list[TeamRecord] = Field(max_length=200)
@@ -147,7 +177,8 @@ class SiteBundle(Record):
             raise ValueError('Powtórzone identyfikatory dokumentów.')
         if self.about is not None and len({entry.id for entry in self.about}) != len(self.about):
             raise ValueError('Powtórzone identyfikatory etapów osi czasu.')
-        if not SETTING_KEYS <= set(self.settings) or set(self.settings) - (SETTING_KEYS | ADDITIONAL_SETTING_KEYS | OPTIONAL_SETTING_KEYS):
+        # Older packages preserve the visibility of the new invitation page.
+        if not (SETTING_KEYS - {'page_visible:become_partner'}) <= set(self.settings) or set(self.settings) - (SETTING_KEYS | ADDITIONAL_SETTING_KEYS | OPTIONAL_SETTING_KEYS):
             raise ValueError('Nieobsługiwany zestaw ustawień.')
         for key, value in self.settings.items():
             if key.startswith('page_visible:') or key in {DETAILS_KEY, 'voting_enabled'} | OPTIONAL_SETTING_KEYS:
@@ -223,6 +254,14 @@ def export_bundle(db):
     for section in partners['sections']:
         for partner in section['partners']:
             partner['logo'] = add_logo(partner['logo'])
+    partnership = get_partnership(db).model_dump()
+    if partnership['feature_photo']:
+        partnership['feature_photo'] = add_media(partnership['feature_photo'])
+    for section in partnership['sections']:
+        if section['type'] == 'person':
+            for person in section['people']:
+                if person['photo']:
+                    person['photo'] = add_media(person['photo'])
     home_images = get_home_images(db).model_dump()
     for image in home_images.values():
         image['photo'] = add_media(image['photo'])
@@ -248,7 +287,7 @@ def export_bundle(db):
             id_to_slug[form.id] = form.slug
     selected = db.get(SystemSetting, 'registration_form_ids')
     selected_ids = [int(value) for value in (selected.value if selected else '').split(',') if value]
-    bundle = SiteBundle(format='gdynia-science-slam', version=4, documents=documents, home_images=home_images, partners=partners, about=about, settings=settings, team=team, gallery=gallery,
+    bundle = SiteBundle(format='gdynia-science-slam', version=4, partnership=partnership, documents=documents, home_images=home_images, partners=partners, about=about, settings=settings, team=team, gallery=gallery,
                         video=get_featured_video(db), forms=forms,
                         registration_forms=list(dict.fromkeys(id_to_slug[value] for value in selected_ids if value in id_to_slug))[:3])
     output = BytesIO()
@@ -282,6 +321,10 @@ def inspect_bundle(data):
                     raise ValueError('Niedozwolona ścieżka w pakiecie.')
             bundle = SiteBundle.model_validate_json(archive.read('manifest.json'))
             references = {record.photo for record in [*bundle.team, *bundle.gallery, *(bundle.about or [])]}
+            if bundle.partnership is not None:
+                references.update(p.photo for s in bundle.partnership.sections if s.type == 'person' for p in s.people if p.photo)
+                if bundle.partnership.feature_photo:
+                    references.add(bundle.partnership.feature_photo)
             if bundle.partners is not None:
                 references.update(partner.logo for section in bundle.partners.sections for partner in section.partners)
             if bundle.home_images is not None:
@@ -321,6 +364,10 @@ def apply_bundle(db, bundle, media, scope):
     records = [*bundle.gallery, *(bundle.team if scope == 'all' else []), *((bundle.about or []) if scope == 'all' else [])]
     partner_records = [partner for section in bundle.partners.sections for partner in section.partners] if scope == 'all' and bundle.partners is not None else []
     home_records = list(bundle.home_images.model_dump().values()) if scope == 'all' and bundle.home_images is not None else []
+    partnership_records = [p for s in bundle.partnership.sections if s.type == 'person' for p in s.people if p.photo] if scope == 'all' and bundle.partnership is not None else []
+    if scope == 'all' and bundle.partnership is not None and bundle.partnership.feature_photo:
+        home_records.append({'photo': bundle.partnership.feature_photo})
+    records += partnership_records
     destination = IMPORT_DIR / uuid4().hex
     new_documents = []
     paths = {}
@@ -335,6 +382,16 @@ def apply_bundle(db, bundle, media, scope):
         db.add_all([GalleryPhoto(**{**record.model_dump(), 'photo': paths[record.photo]}) for record in bundle.gallery])
         db.merge(SystemSetting(key=VIDEO_KEY, value=bundle.video.model_dump_json()))
         if scope == 'all':
+            if bundle.partnership is not None:
+                partnership = bundle.partnership.model_dump()
+                if partnership['feature_photo']:
+                    partnership['feature_photo'] = paths[partnership['feature_photo']]
+                for section in partnership['sections']:
+                    if section['type'] == 'person':
+                        for person in section['people']:
+                            if person['photo']:
+                                person['photo'] = paths[person['photo']]
+                save_partnership(db, PartnershipConfig.model_validate(partnership))
             if bundle.home_images is not None:
                 home = bundle.home_images.model_dump()
                 for image in home.values():

@@ -1,0 +1,60 @@
+.partnership-section { padding: clamp(2rem, 5vw, 4rem) 0; border-top: 1px solid var(--section-border); scroll-margin-top: calc(var(--site-nav-height, 97px) + 2rem); overflow-wrap: anywhere; }
+.partnership-section > h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--section-heading); margin-bottom: 2rem; }
+.partnership-section > .partnership-big-heading { font-size: clamp(2.5rem, 7vw, 6rem); max-width: 20ch; letter-spacing: -.04em; margin: 0; }
+.partnership-section.about-benefits { margin-top: 0; }
+.partnership-copy { white-space: pre-line; line-height: 1.7; }
+.partnership-copy a { text-decoration: underline; text-underline-offset: .2em; }
+.partnership-icon-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 3rem; text-align: center; }
+.partnership-icon { width: 5rem; height: 5rem; margin: 0 auto 1.5rem; color: var(--section-overline); }
+.partnership-icon svg { width: 100%; height: 100%; }
+.partnership-section h3 { font-size: 1.45rem; font-weight: 700; margin: .75rem 0; }
+.partnership-person { text-align: center; max-width: 42rem; margin: auto; }
+.partnership-portrait { width: 240px; height: 240px; max-width: 100%; aspect-ratio: 1; border-radius: 50%; object-fit: cover; margin: 0 auto 1.5rem; }
+.partnership-occupation { color: var(--section-overline); margin-bottom: 1rem; }
+.partnership-team-link { margin-top: 2.5rem; }
+.partnership-faq { max-width: 56rem; margin-inline: auto; }
+.partnership-faq-section > h2 { text-align: center; }
+.partnership-faq details { border-bottom: 1px solid var(--section-border); }
+.partnership-faq summary { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.3rem 0; list-style: none; cursor: pointer; font-weight: 600; }
+.partnership-faq summary::-webkit-details-marker { display: none; }
+.partnership-faq summary svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; transition: transform .3s ease; }
+.partnership-faq details[open] summary svg { transform: rotate(180deg); }
+.partnership-faq .partnership-copy { padding: 0 0 1.3rem; }
+.partnership-answer { min-height: 0; overflow: hidden; }
+/* Animate the native details content so keyboard behavior and exclusive groups
+   also work in the script-free admin preview. */
+@supports selector(details::details-content) {
+  .partnership-faq details::details-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    content-visibility: visible;
+    visibility: hidden;
+    opacity: 0;
+    transition: grid-template-rows .3s ease, opacity .3s ease, visibility .3s;
+  }
+  .partnership-faq details[open]::details-content { grid-template-rows: 1fr; visibility: visible; opacity: 1; }
+}
+@supports not selector(details::details-content) {
+  .partnership-faq details[open] .partnership-answer { animation: partnership-faq-reveal .3s ease; }
+}
+@keyframes partnership-faq-reveal {
+  from { opacity: 0; transform: translateY(-.4rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.partnership-faq summary:focus-visible, .partnership-contact button:focus-visible { outline: 3px solid var(--section-overline); outline-offset: 5px; }
+.partnership-contact { display: grid; gap: 1.5rem; max-width: 48rem; margin-top: 1.5rem; }
+.partnership-contact .form-control :is(input, textarea) { padding-left: 0; }
+.partnership-contact .form-control .form-floating-label { left: 0; }
+.partnership-contact .partnership-submit { background: var(--section-button); color: var(--section-button-text); padding: .9rem 1.5rem; border-radius: .25rem; justify-self: start; font-weight: 700; }
+.partnership-contact button:disabled { opacity: .6; cursor: wait; }
+.partnership-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+@media (max-width: 650px) { .partnership-icon-grid { grid-template-columns: minmax(0, 1fr); gap: 2.5rem; } }
+@media (prefers-reduced-motion: reduce) {
+  .partnership-faq summary svg { transition: none; }
+  .partnership-faq details::details-content { transition: none; }
+  .partnership-faq details[open] .partnership-answer { animation: none; }
+}
+.partnership-people { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 3rem; align-items: start; }
+.partnership-people .partnership-person { width: 100%; }
+.partnership-preview-page { margin: 0; min-height: 100vh; }
+.partnership-preview-empty { padding: 1.5rem; border: 1px solid var(--section-border); }

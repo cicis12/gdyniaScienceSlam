@@ -10,6 +10,7 @@ from file_types import file_accept, file_category_labels, FILE_CATEGORIES
 from system_settings import DEFAULT_THEME, DEFAULT_FOOTER, DEFAULT_HOME, DEFAULT_PAGE_MODES, DEFAULT_HOME_SECTIONS
 
 from site_pages import PUBLIC_PAGES, page_for_path
+from interaction_analytics import public_html_path
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -44,6 +45,8 @@ def create_templates():
     templates.env.globals['file_category_labels'] = file_category_labels
     templates.env.globals['file_category_choices'] = [(key, value[0]) for key, value in FILE_CATEGORIES.items()]
     templates.env.globals['asset_url'] = asset_url
+    templates.env.globals['public_html_path'] = public_html_path
+    templates.env.globals['public_paths'] = [path for _, path, _ in PUBLIC_PAGES]
     templates.env.globals['public_page_key'] = public_page_key
     templates.env.globals['page_display_mode'] = page_display_mode
     templates.env.globals['default_site_settings'] = {'theme': DEFAULT_THEME, 'footer': DEFAULT_FOOTER, 'home': DEFAULT_HOME, 'page_modes': DEFAULT_PAGE_MODES, 'home_sections': DEFAULT_HOME_SECTIONS}

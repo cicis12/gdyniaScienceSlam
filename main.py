@@ -13,6 +13,7 @@ from gallery import get_featured_video
 from site_pages import page_visibility, page_for_path
 from system_settings import load_public_settings
 from partner_content import get_partners
+from partnership_content import get_partnership
 from home_images import get_home_images
 from document_content import get_documents, document_path
 from team_theme import get_team_palette, team_details_enabled
@@ -58,9 +59,23 @@ from routers.forms import router as form_router
 app.include_router(form_router)
 
 
-def load_public_context():
+def load_public_context(request=None):
     with SessionLocal() as db:
-        return page_visibility(db), load_public_settings(db)
+        visibility, settings = page_visibility(db), load_public_settings(db)
+        if request is not None and not request.url.path.startswith('/admin'):
+            from referral_access import referral_context
+            state = referral_context(db, request)
+            request.state.referral = state
+            is_editor = False
+            if request.cookies.get('admin_session'):
+                try:
+                    admin = session_admin(db, request.cookies['admin_session'])
+                    is_editor = admin.is_superadmin or admin.is_sysadmin
+                except HTTPException:
+                    pass
+            if settings['partner_uuid_only'] and not state['access'] and not is_editor:
+                visibility['become_partner'] = False
+        return visibility, settings
 
 
 @app.exception_handler(RateLimitExceeded)
@@ -76,6 +91,7 @@ def home(request: Request, db: Session = Depends(get_db)):
         "header_title": "Gdynia Science Slam",
         "page_name": "home",
         "carousel_partners": get_partners(db).carousel_partners,
+        "partnership": get_partnership(db),
         "home_images": get_home_images(db),
         "event_datetime": get_setting(db, "event_datetime", ""),
         "event_date_only": get_setting(db, "event_date_only", "false") == "true",
@@ -241,6 +257,12 @@ app.include_router(build_gallery_router(require_superadmin))
 app.include_router(build_about_router(require_superadmin))
 from routers.partners_admin import build_router as build_partners_router
 app.include_router(build_partners_router(require_superadmin))
+from routers.partnership import public_router as partnership_router, build_admin_router as build_partnership_router
+app.include_router(partnership_router)
+app.include_router(build_partnership_router(require_superadmin))
+from routers.interaction_analytics import public_router as interactions_router, build_admin_router as build_analytics_router
+app.include_router(interactions_router)
+app.include_router(build_analytics_router(require_superadmin))
 from routers.documents_admin import build_router as build_documents_router
 app.include_router(build_documents_router(require_superadmin))
 app.include_router(build_transfer_router(require_superadmin, SECRET_KEY))

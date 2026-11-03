@@ -109,7 +109,10 @@ def get_settings(db, key, defaults):
 
 
 def load_public_settings(db):
+    from partnership_content import get_partnership
     return {
+        'partner_uuid_only': get_partnership(db).uuid_only,
+        'analytics_enabled': bool((tracking := db.get(SystemSetting, 'interaction_tracking_enabled')) and tracking.value == 'true'),
         'page_modes': get_settings(db, PAGE_MODES_KEY, DEFAULT_PAGE_MODES),
         'theme': get_settings(db, THEME_KEY, DEFAULT_THEME),
         'footer': get_settings(db, FOOTER_KEY, DEFAULT_FOOTER),

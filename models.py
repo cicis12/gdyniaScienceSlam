@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy import Column,Integer,String,TIMESTAMP,ForeignKey, Boolean, Date, DateTime, Text
 from sqlalchemy.orm import relationship, declarative_base
 from sqlalchemy.sql import func
@@ -95,3 +95,30 @@ class GalleryPhoto(Base):
     caption = Column(String(300), nullable=False, default="")
     photo = Column(String(500), nullable=False)
     sort_order = Column(Integer, nullable=False, default=0)
+
+
+class InteractionLink(Base):
+    __tablename__ = 'interaction_links'
+    id = Column(String(36), primary_key=True)
+    label = Column(String(120), nullable=False, default='')
+    path = Column(String(200), nullable=False)
+    active = Column(Boolean, nullable=False, default=True)
+    created_at = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+
+
+class InteractionVisit(Base):
+    __tablename__ = 'interaction_visits'
+    id = Column(String(36), primary_key=True)
+    link_id = Column(String(36), ForeignKey('interaction_links.id', ondelete='CASCADE'), nullable=False, index=True)
+    path = Column(String(200), nullable=False)
+    created_at = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None), index=True)
+    updated_at = Column(DateTime, nullable=False, default=lambda: datetime.now(timezone.utc).replace(tzinfo=None))
+
+
+class InteractionSection(Base):
+    __tablename__ = 'interaction_sections'
+    visit_id = Column(String(36), ForeignKey('interaction_visits.id', ondelete='CASCADE'), primary_key=True)
+    section_id = Column(String(100), primary_key=True)
+    visible_ms = Column(Integer, nullable=False, default=0)
+    clicks = Column(Integer, nullable=False, default=0)
+    faq_opens = Column(Integer, nullable=False, default=0)

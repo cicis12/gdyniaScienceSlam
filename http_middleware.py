@@ -17,15 +17,20 @@ class PublicContextMiddleware:
         request = Request(scope)
         path = scope['path']
         if not path.startswith('/static'):
-            request.state.page_visibility, request.state.site_settings = await run_in_threadpool(self.load_context)
+            request.state.page_visibility, request.state.site_settings = await run_in_threadpool(self.load_context, request)
             page = page_for_path(path)
             if page and not request.state.page_visibility[page]:
                 response = self.templates.TemplateResponse(request, 'client/unavailable.html', {
                     'request': request, 'page_name': 'unavailable',
                     'header_title': 'Strona niedostępna - Gdynia Science Slam',
-                }, status_code=404)
+                }, status_code=404, headers={'Cache-Control': 'private, no-store'})
                 return await response(scope, receive, send)
-        await self.app(scope, receive, send)
+        async def private_context(message):
+            if message['type'] == 'http.response.start' and hasattr(request.state, 'referral'):
+                headers = MutableHeaders(scope=message)
+                headers['Cache-Control'] = 'private, no-store'
+            await send(message)
+        await self.app(scope, receive, private_context)
 
 
 class AdminAccessMiddleware:

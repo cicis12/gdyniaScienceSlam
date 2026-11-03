@@ -4,4 +4,5 @@
   {% if footer.location %}<div class="footer-location mb-2">{% include 'macros/fontawesome/location-dot.svg' %} {{ footer.location| safe_html }}</div>{% endif %}
   <p class="footer-small text-sm">© 2026 Gdynia Science Slam</p>
   {% if footer.additional %}<div class="footer-small text-sm px-6">{{ footer.additional| safe_html }}</div>{% endif %}
+  {% if (request.state.site_settings|default({})).get('analytics_enabled', false) %}<button type="button" id="stop-link-analytics" class="analytics-opt-out" hidden>Wyłącz statystyki tej wizyty</button>{% endif %}
 </footer>

@@ -17,6 +17,7 @@
       {% if scope == 'all' %}
       <li>O nas: {% if preview.about is not none %}oś czasu zostanie zastąpiona przez {{ preview.about|length }} etapów wraz ze zdjęciami.{% else %}starszy pakiet nie zawiera osi czasu; obecna treść zostanie zachowana.{% endif %}</li>
       <li>Partnerzy: {% if preview.partners is not none %}sekcje, wpisy, logotypy i ich widoczność zostaną zastąpione konfiguracją z pakietu.{% else %}starszy pakiet nie zawiera partnerów; obecna konfiguracja zostanie zachowana.{% endif %}</li>
+      <li>Zostań partnerem: {% if preview.partnership is not none %}{{ preview.partnership.sections|length }} sekcji, zdjęcia, wyróżnienie na stronie głównej i adres odbiorcy formularza zostaną przeniesione.{% else %}starszy pakiet nie zawiera tej strony; obecna treść zostanie zachowana.{% endif %}</li>
       <li>Dokumenty i zdjęcia strony głównej: {% if preview.documents is not none %}pliki i ustawienia zostaną przeniesione z pakietu.{% else %}starszy pakiet ich nie zawiera; obecna zawartość zostanie zachowana.{% endif %}</li>
       <li>Zespół: {{ current_team }} obecnych profili zostanie zastąpionych przez {{ preview.team|length }} profili.</li>
       <li>Kolory, widoczność stron, rozwijanie profili, data wydarzenia i stan głosowania zostaną zastąpione.</li>
@@ -26,13 +27,13 @@
       {% endif %}
     </ul>
     <p>Konta, hasła, zgłoszenia, głosujący i oddane głosy nie są importowane. Przed zastąpieniem treści możesz pobrać obecną konfigurację w sekcji Eksport poniżej.</p>
-    <div class="settings-actions"><form action="/admin/transfer/apply" method="post"><input type="hidden" name="token" value="{{ token }}"><button type="submit">Zastosuj import</button></form><form action="/admin/transfer" method="get"><button type="submit" class="palette-reset">Anuluj</button></form></div>
+    <div class="settings-actions"><form action="/admin/transfer/apply" method="post"><input type="hidden" name="token" value="{{ token }}"><button type="submit">Zastosuj import</button></form><form action="/admin/transfer" method="get"><button type="submit" class="palette-reset"><span aria-hidden="true">{% include 'macros/fontawesome/arrow-left.svg' %}</span> Anuluj</button></form></div>
     <small>Podgląd jest ważny przez 30 minut.</small>
   </section>
   {% endif %}
   <section class="content-panel">
     <h2>Eksport</h2>
-    <p>Ustawienia strony, wspólne kolory, stopka, teksty strony głównej, partnerzy i ich logotypy, dokumenty PDF, zdjęcia strony głównej, oś czasu O nas, zespół, galeria, film, bieżące definicje formularzy i zdjęcia. Pakiet nie zawiera kodu strony, kont, sekretów, zgłoszeń ani głosów.</p>
+    <p>Ustawienia strony, wspólne kolory, stopka, teksty strony głównej, partnerzy i ich logotypy, strona Zostań partnerem wraz z adresem odbiorcy formularza, dokumenty PDF, zdjęcia strony głównej, oś czasu O nas, zespół, galeria, film, bieżące definicje formularzy i zdjęcia. Pakiet nie zawiera kodu strony, kont, sekretów, zgłoszeń ani głosów.</p>
     <form action="/admin/transfer/export" method="get"><button type="submit">Pobierz konfigurację ZIP {% include 'macros/fontawesome/arrow-down.svg' %}</button></form>
   </section>
   <section class="content-panel">

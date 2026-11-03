@@ -657,3 +657,141 @@ form attachments). Exceeding the storage budget rejects new uploads without
 deleting existing files. JSON-only submissions are limited to 256 KiB, individual
 text answers to 10,000 characters, and outdated form versions are rejected with a
 request to refresh. The admin viewer loads 50 submissions per page.
+
+### Partner invitation page
+
+`/become-a-partner` is edited by superadmins at `/admin/become-a-partner`
+(linked from system settings). Add, edit, hide, delete, and order up to 50 sections:
+a six-item grid matching About, paragraph, three SVG icon columns, large heading,
+a group of up to 20 contact people with circular photos and an optional Team link, FAQ, and a contact
+form. New sections start hidden. SVG code is validated and descriptive HTML is
+sanitized. FAQ questions can be added and removed individually.
+
+Enable the homepage feature to show a separate full section after Partners, using
+the same text-and-photo layout as About and Previous Editions. It has configurable
+text, link and photo (falling back to the homepage About photo). The invitation page
+must be visible. This section is independent of the Partners section visibility. Public
+page visibility is controlled in system settings and also blocks contact submissions.
+Use **Podgląd zmian** for a desktop/tablet/mobile preview of the unsaved draft,
+including selected photos. Preview loads as a regular, script-free page inside
+the admin dialog, with loading and error feedback. Preview never stores content
+or sends mail. All edits,
+additions and deletions are saved together with **Zapisz całą stronę**. Failed saves
+preserve the draft and roll back newly uploaded photos. Existing single-person
+sections are automatically read as a group containing that person.
+
+Content uses the existing `system_settings` table; no new migration is needed.
+Full configuration exports include this page and contact photos. Older bundles
+without its optional content preserve the existing page on import.
+
+Set the contact recipient in this editor. The recipient remains server-side.
+Mail uses the existing MailerSend configuration: `MAIL_API_KEY` and `EMAIL_FROM`
+in native `MAIL.env`, or `.deploy/secrets/MAIL.env` for Docker. Verify the sender
+or domain in MailerSend. After changing server mail settings, restart the app
+(or rerun `./deploy.sh` for Docker). No new provider or environment variable is
+required if mail is already configured.
+
+Messages are sent as plain text from `EMAIL_FROM`, with the visitor's address as
+`Reply-To`, and a `[Współpraca]` subject prefix. Empty recipient or missing mail
+configuration returns an unavailable message; provider rejection/timeout returns
+an error and preserves form input. Success means MailerSend accepted the message,
+not guaranteed inbox delivery. Messages are not stored in the database and no
+automatic reply is sent. Sending requires JavaScript. Contact requests are limited
+to 32 KiB and share the configured `FORM_SUBMISSION_RATE_LIMIT` values with a
+separate per-IP counter; Docker uses Redis across workers.
+
+### Link UUID interaction analytics
+
+Superadmins can create shareable links and view reports at `/admin/analytics`
+(**Statystyki interakcji** in system settings). Each link has a random UUID, for
+example `/become-a-partner?ref=<uuid>`. It is carried to other public HTML pages
+through internal links, including standalone forms and voting. UUIDs identify
+links, not verified people: forwarding a link combines recipients' activity.
+A fresh visit UUID is generated for each page load. No localStorage, sessionStorage,
+fingerprinting, external analytics service, or analytics IP storage is used. Signed
+session cookies remember tracking consent and partner-page access separately.
+Existing server/proxy access logs are separate and may still contain IPs and URLs.
+
+**Collection is off by default.** Enable it explicitly in the analytics admin page.
+Entering a public page through an active `?ref=<uuid>` link opens a configurable
+tracking-consent popup. Edit its title, sanitized HTML content, and Yes/No labels
+at `/admin/analytics`. No analytics script is started and no interaction data is
+accepted by the server until consent is granted. The submitted choice includes
+the exact popup revision: changing its content or labels invalidates prior consent,
+and an older open popup cannot approve wording the visitor has not seen.
+
+**No** (including Escape) removes the UUID from the current URL and internal links,
+deletes any tracking-consent cookie, and leaves only a signed `gss_partner_access`
+flag containing no UUID. **Yes** also creates `gss_tracking_consent`, containing the
+link UUID and consent revision. Both are HttpOnly, SameSite=Lax session cookies,
+Secure on HTTPS, with a signed validity limit of 24 hours. The access flag cannot
+be forged by setting a plain browser boolean. A rejected visitor is not associated
+with a link in the database. Reopening the original invitation after declining
+asks again; the access-only flag deliberately does not remember which UUID was
+rejected. Cookie handling must be enabled to remember the choice across navigation.
+
+DNT/GPC requests, logged-in admin sessions, and embedded/admin previews remain
+excluded. The footer **Wyłącz statystyki tej wizyty** action stops the tracker and
+revokes the consent cookie on the server while keeping partner-page access.
+Opening with `analytics=off` also prevents collection. The configurable consent
+text should match your privacy information; see the [EDPB URL-tracking guidance](https://www.edpb.europa.eu/documents/guideline/guidelines-22023-on-technical-scope-of-art-53-of-eprivacy-directive_en).
+
+In `/admin/become-a-partner`, enable **Udostępniaj stronę tylko odbiorcom aktywnego
+linku UUID** and use the main Save button to restrict the page. Ordinary visitors
+then get a 404, and its navigation links and homepage feature are hidden. An active
+invitation URL or the signed access flag grants access, even after tracking is
+refused. The contact endpoint follows the same access restriction. The normal
+public page-visibility setting still takes precedence. Superadmins can inspect
+the page and use previews without an invitation. Disabling a UUID prevents new
+invitations/analytics for that link; already-issued identity-free access flags remain
+valid until their session/24-hour expiry. Disable public page visibility to block
+all visitors immediately. This is link-based access, not a personal login system.
+
+Reports show estimated visible time, clicks, and FAQ openings per section and
+page. Time counts only while the tab is visible and focused and at least half of
+the smaller of a section or the available viewport is visible. Tracking pauses
+after 60 seconds without pointer, keyboard, touch, or scroll activity. The `Cała
+strona` row supplies total page time; **do not sum section times** because visible
+sections and parallel tabs overlap. This measures visibility, not reading, gaze,
+or verified human engagement. Click counts do not include entered values or
+link destinations. Form contents, email addresses, and voting choices are not
+read by the tracker. JavaScript blockers, offline navigation, abrupt browser
+termination, inactivity, and interrupted network requests can undercount.
+
+The browser sends cumulative counters every 10 seconds, with a final beacon when
+the page is hidden or left. Duplicate and out-of-order requests use maxima instead
+of adding time again. Each section's total is capped at 24 hours per page load and
+at the server-observed visit age plus 15 seconds. At most 100 section counters are
+accepted per visit. Client counters remain untrusted approximate analytics.
+`/api/interactions` accepts up to 32 KiB; `ANALYTICS_RATE_LIMIT` defaults to
+`240/minute;20000/hour` per IP, using the existing Redis/memory limiter storage.
+IP addresses used for the rate limiter are not written to analytics tables.
+
+Visits and their counters expire after 90 days; expired data is deleted when
+analytics are received or a report/dashboard is opened (not by a background job).
+Admins can disable a link, clear its statistics, or delete the link and all its
+visits. There is a limit of 500 links. Analytics, link labels/UUIDs, and the enabled
+switch and consent-popup settings are excluded from site configuration ZIP
+exports/imports; DB backups do include them. The partner UUID-only option travels
+with the partner-page content. Popup/access behavior uses the existing settings
+table and needs no additional migration beyond the analytics tables.
+
+This feature adds three tables. Apply the migration before opening the analytics
+admin page on another installation:
+
+```bash
+ENV_FILE=admin_DBcreds.env venv/bin/alembic upgrade head
+```
+
+For native deployment, grant the app role `SELECT, INSERT, UPDATE, DELETE` on
+`interaction_links`, `interaction_visits`, and `interaction_sections` if its default
+grants do not already cover new tables. Docker's normal `./deploy.sh` runs migrations
+and grants automatically. No external API key is needed. Test with a private
+browser window because logged-in administrators are excluded.
+
+Tracking script checks can also be run with Node.js:
+
+```bash
+node tests/interaction_analytics_test.cjs
+node tests/referral_consent_test.cjs
+```

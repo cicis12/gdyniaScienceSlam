@@ -10,7 +10,7 @@
     {% if home_sections.hero %}
     <!-- HERO -->
    <section
-    class="countdown-hero {{ section_theme.next() }} home-scroll-section relative bg-cover bg-center flex items-center"
+    data-analytics-section="hero" class="countdown-hero {{ section_theme.next() }} home-scroll-section relative bg-cover bg-center flex items-center"
     style="background-image: url('{{ home_images.hero.photo }}'); background-position: {{ home_images.hero.position }};"
   >
       <div class="countdown-hero-content relative max-w-7xl mx-auto w-full px-6 text-white text-center" data-event-date="{{ event_datetime or '' }}" data-started-text="{{ home_content.hero_started | clean_html }}">
@@ -72,7 +72,7 @@
 
   {% if home_sections.about %}
   <!--about-->
-  <section class="home-scroll-section home-editorial home-editorial-about {{ section_theme.next() }} home-section-blue-light bg-[#819edb] text-[#18395d]">
+  <section data-analytics-section="about" class="home-scroll-section home-editorial home-editorial-about {{ section_theme.next() }} home-section-blue-light bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -97,7 +97,7 @@
   {% endif %}
   {% if home_sections.team and (request.state.page_visibility|default({})).get('team', true) and members %}
   <!--zespol-->
- <section class="home-scroll-section home-section-blue-deep home-team-section {{ section_theme.next() }} bg-[#5e85b8]">
+ <section data-analytics-section="team" class="home-scroll-section home-section-blue-deep home-team-section {{ section_theme.next() }} bg-[#5e85b8]">
   <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
     <div>
       <p class="home-eyebrow">{{ home_content.team_overline }}</p>
@@ -129,7 +129,7 @@
 
   {% if home_sections.archive %}
   <!--poprzednia edycja-->
-  <section class="home-scroll-section home-editorial home-editorial-archive {{ section_theme.next() }} home-section-blue-mid bg-[#819edb] text-[#18395d]">
+  <section data-analytics-section="archive" class="home-scroll-section home-editorial home-editorial-archive {{ section_theme.next() }} home-section-blue-mid bg-[#819edb] text-[#18395d]">
     <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
       <div>
@@ -152,12 +152,14 @@
     </div>
   </section>
   {% endif %}
+  {% set feature_partnership = partnership is defined and partnership.featured and (request.state.page_visibility|default({})).get('become_partner', true) %}
   {% if home_sections.partners and carousel_partners %}
-  <section class="home-scroll-section home-section-wisteria home-partners-section {{ section_theme.next() }}">
+  <section data-analytics-section="partners" class="home-scroll-section home-section-wisteria home-partners-section {{ section_theme.next() }}">
     <div class="home-section-intro max-w-7xl mx-auto px-6 mb-12">
       <div><p class="home-eyebrow">{{ home_content.partners_overline }}</p><h2 class="home-editorial-title">{{ home_content.partners_title }}</h2></div>
       <div class="text-lg">{{ home_content.partners_description | safe_html }}</div>
     </div>
+    {% if carousel_partners %}
     <div class="partner-carousel w-full overflow-hidden" aria-label="Partnerzy wydarzenia">
       <div class="slider-track">
         {% for copy in range(2) %}
@@ -167,7 +169,21 @@
         {% endfor %}
       </div>
     </div>
+    {% endif %}
     {% if (request.state.page_visibility|default({})).get('partners', true) %}<div class="max-w-7xl mx-auto px-6 pt-10"><a href="/partners" class="redirect-link">{{ home_content.partners_link }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a></div>{% endif %}
+  </section>
+  {% endif %}
+  {% if feature_partnership %}
+  <section data-analytics-section="become_partner" class="home-scroll-section home-editorial home-editorial-partnership partnership-home-feature {{ section_theme.next() }}">
+    <div class="home-editorial-grid max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <p class="home-eyebrow">Współpraca</p>
+        <h2 class="home-editorial-title mb-5">{{ partnership.title }}</h2>
+        <p class="text-lg mb-6">{{ partnership.teaser }}</p>
+        <a href="/become-a-partner" class="redirect-link">{{ partnership.link_label }} <span aria-hidden="true">{% include 'macros/fontawesome/arrow-right.svg' %}</span></a>
+      </div>
+      <div><img src="{{ partnership.feature_photo or home_images.about.photo }}" alt="Gdynia Science Slam — współpraca" loading="lazy" class="w-full h-auto rounded-xl shadow-xl object-cover"></div>
+    </div>
   </section>
   {% endif %}
 

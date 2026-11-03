@@ -102,3 +102,22 @@ def send_email(to_email: str, content: str, subject: str,):
 
     except Exception as e:
         print("Email sending failed:", e)
+
+def send_partner_message(recipient: str, name: str, email: str, topic: str, content: str):
+    """Send plain-text visitor content; failures must reach the public form handler."""
+    if not API_KEY or not EMAIL_FROM:
+        raise RuntimeError('Mail delivery is not configured')
+    response = requests.post(
+        'https://api.mailersend.com/v1/email',
+        headers={'Authorization': f'Bearer {API_KEY}', 'Content-Type': 'application/json'},
+        json={
+            'from': {'email': EMAIL_FROM, 'name': 'Gdynia Science Slam'},
+            'to': [{'email': recipient}],
+            'reply_to': {'email': email, 'name': name},
+            'subject': '[Współpraca] ' + topic,
+            'text': f'Imię i nazwisko: {name}\nE-mail: {email}\nTemat: {topic}\n\n{content}',
+        },
+        timeout=15,
+    )
+    if response.status_code != 202:
+        raise RuntimeError('Mail provider did not accept the message')
