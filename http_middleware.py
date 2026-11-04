@@ -48,7 +48,7 @@ class AdminAccessMiddleware:
             except HTTPException:
                 return await RedirectResponse('/admin/login', status_code=303)(scope, receive, send)
             request.state.admin = admin
-            if not (admin.is_superadmin or admin.is_sysadmin) and not path.startswith(('/admin/uploads/', '/admin/video/', '/admin/admins')):
+            if not (admin.is_superadmin or admin.is_sysadmin) and not path.startswith(('/admin/uploads/', '/admin/video/', '/admin/admins', '/admin/form-submissions/')):
                 response = (RedirectResponse('/admin/form-submissions', status_code=303)
                             if scope['method'] in {'GET', 'HEAD'} else PlainTextResponse('Superadmin access required.', 403))
                 return await response(scope, receive, send)

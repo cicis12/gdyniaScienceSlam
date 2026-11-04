@@ -1,4 +1,5 @@
 import importlib.util
+import re
 from io import BytesIO
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -121,6 +122,17 @@ class ContentTests(unittest.TestCase):
         self.assertNotIn('href="/team"', response.text)
         self.assertNotIn('Original Person', response.text)
 
+    def test_navigation_marks_only_the_current_page(self):
+        for key, url, _ in PUBLIC_PAGES:
+            if key == 'vote':
+                continue  # Voting has a separate navigation without a vote link.
+            with self.subTest(page=key):
+                response = self.client.get(url)
+                self.assertEqual(response.status_code, 200)
+                nav = response.text.split('<nav class="site-nav', 1)[1].split('</nav>', 1)[0]
+                active_links = re.findall(r'<a href="([^"]+)"[^>]*aria-current="page"', nav)
+                self.assertEqual(active_links, [url, url])  # Desktop and mobile.
+
     def test_permissions(self):
         for username, expected in [(None, 303), ('regular', 403)]:
             if username:
@@ -199,7 +211,11 @@ class ContentTests(unittest.TestCase):
             form_id = form.id
             db.add(FormVersion(id=1, form_id=form_id, version_num=1, display_name='Example', definition={'fields': []}))
             db.commit()
-        self.assertEqual(self.client.get('/forms/example').status_code, 200)
+        form_response = self.client.get('/forms/example')
+        self.assertEqual(form_response.status_code, 200)
+        nav = form_response.text.split('<nav class="site-nav', 1)[1].split('</nav>', 1)[0]
+        self.assertEqual(re.findall(r'<a href="([^"]+)"[^>]*aria-current="page"', nav),
+                         ['/registration', '/registration'])
         self.assertEqual(self.client.post(f'/admin/content/forms/{form_id}').status_code, 200)
         self.assertEqual(self.client.get('/forms/example').status_code, 404)
         self.assertEqual(self.client.post('/api/forms/submit', json={'form_id': form_id, 'form_version_id': 1, 'answers': {}}).status_code, 404)

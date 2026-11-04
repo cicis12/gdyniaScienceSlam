@@ -14,7 +14,7 @@
 .team-card summary > img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; background: var(--card-color); }
 .team-card-info { display: block; padding: 1.25rem; }
 .team-position { display: block; font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
-.team-name { display: block; font-family: "Space Grotesk", sans-serif; font-size: 1.45rem; font-weight: 700; line-height: 1.2; margin-top: .55rem; overflow-wrap: anywhere; }
+.team-name { display: block; font-family: var(--font-heading); font-size: 1.45rem; font-weight: 700; line-height: 1.2; margin-top: .55rem; overflow-wrap: anywhere; }
 .team-discover { display: flex; justify-content: space-between; align-items: center; margin-top: 1.25rem; border-top: 1px solid currentColor; padding-top: .75rem; font-size: .85rem; font-weight: 700; }
 .team-plus { font-size: 1.5rem; line-height: 1; }
 .team-description { padding: 0 1.25rem 1.5rem; white-space: pre-line; overflow-wrap: anywhere; }

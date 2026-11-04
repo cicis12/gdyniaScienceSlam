@@ -658,14 +658,25 @@ deleting existing files. JSON-only submissions are limited to 256 KiB, individua
 text answers to 10,000 characters, and outdated form versions are rejected with a
 request to refresh. The admin viewer loads 50 submissions per page.
 
+In **Odpowiedzi formularzy**, select a form and choose **Eksportuj odpowiedzi (ZIP)**
+to download every submission, across all pages and form versions. The archive contains
+`answers.txt`, `answers.csv` (UTF-8 with BOM, semicolon separated), and an
+`attachments/<submission-id>/` folder. CSV uses one row per question with submission,
+date, version, field, question, answer, and attachment path columns. Questions follow
+the version originally submitted. Missing attachments are marked in the answers;
+the remaining records still export. Regular admins with access to submissions can
+also export them. ZIP generation uses temporary disk storage, cleaned after download.
+
+
 ### Partner invitation page
 
 `/become-a-partner` is edited by superadmins at `/admin/become-a-partner`
 (linked from system settings). Add, edit, hide, delete, and order up to 50 sections:
-a six-item grid matching About, paragraph, three SVG icon columns, large heading,
+a six-item grid matching About, paragraph with an optional side image, three SVG icon columns, large heading,
 a group of up to 20 contact people with circular photos and an optional Team link, FAQ, and a contact
 form. New sections start hidden. SVG code is validated and descriptive HTML is
-sanitized. FAQ questions can be added and removed individually.
+sanitized. Paragraph images can be uploaded, replaced, or removed, with configurable
+alt text; text and image stack on mobile. FAQ questions can be added and removed individually.
 
 Enable the homepage feature to show a separate full section after Partners, using
 the same text-and-photo layout as About and Previous Editions. It has configurable
@@ -681,7 +692,7 @@ preserve the draft and roll back newly uploaded photos. Existing single-person
 sections are automatically read as a group containing that person.
 
 Content uses the existing `system_settings` table; no new migration is needed.
-Full configuration exports include this page and contact photos. Older bundles
+Full configuration exports include this page, paragraph images, and contact photos. Older bundles
 without its optional content preserve the existing page on import.
 
 Set the contact recipient in this editor. The recipient remains server-side.

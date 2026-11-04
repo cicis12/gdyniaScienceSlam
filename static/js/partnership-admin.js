@@ -40,9 +40,9 @@
     parent.append(wrapper);
     return input;
   }
-  function photo(parent, person, key) {
+  function photo(parent, person, key, alt = 'Zdjęcie kontaktowe') {
     const image = node('img');
-    image.width = 100; image.height = 100; image.alt = 'Zdjęcie kontaktowe';
+    image.width = 100; image.height = 100; image.alt = alt;
     const source = urls.get(key) || person.photo;
     if (source) image.src = source;
     image.hidden = !source;
@@ -70,6 +70,18 @@
     field(fields, section, 'sort_order', 'Kolejność', { type: 'number', required: true });
     field(fields, section, 'enabled', 'Pokaż sekcję', { type: 'checkbox' });
     if (['paragraph', 'contact'].includes(section.type)) field(fields, section, 'text', 'Treść', { rows: 6, max: 10000 });
+    if (section.type === 'paragraph') {
+      photo(fields, section, `paragraph_photo:${section.id}`, 'Zdjęcie obok akapitu');
+      field(fields, section, 'photo_alt', 'Opis zdjęcia (dla czytników ekranu)', { max: 300 });
+      button(fields, 'Usuń zdjęcie', () => {
+        const key = `paragraph_photo:${section.id}`;
+        section.photo = '';
+        files.delete(key);
+        if (urls.has(key)) URL.revokeObjectURL(urls.get(key));
+        urls.delete(key);
+        changed(); refresh(section.id);
+      });
+    }
     if (['grid', 'icons'].includes(section.type)) section.items.forEach((item, index) => {
       const group = node('fieldset'); group.append(node('legend', 'Pole ' + (index + 1))); fields.append(group);
       if (section.type === 'icons') field(group, item, 'svg', 'Kod SVG (pełny kod z viewBox)', { rows: 4, max: 20000 });
@@ -122,6 +134,7 @@
     const type = document.getElementById('new-section-type').value;
     const section = { id: id(), type, title: types[type], enabled: false, sort_order: Math.min(100000, Math.max(-1, ...state.sections.map(s => s.sort_order)) + 1) };
     if (['paragraph', 'contact'].includes(type)) section.text = '';
+    if (type === 'paragraph') Object.assign(section, { photo: '', photo_alt: '' });
     if (['grid', 'icons'].includes(type)) section.items = Array.from({ length: type === 'grid' ? 6 : 3 }, () => ({ title: '', text: '', ...(type === 'icons' ? { svg: '' } : {}) }));
     if (type === 'person') Object.assign(section, { people: [newPerson()], team_link: false, team_link_label: 'Poznaj cały zespół' });
     if (type === 'faq') section.items = [];
@@ -130,7 +143,7 @@
   });
   function payload() {
     const body = new FormData(); body.append('config', JSON.stringify(state));
-    const keys = ['feature_photo', ...state.sections.filter(s => s.type === 'person').flatMap(s => s.people.map(p => `photo:${s.id}:${p.id}`))];
+    const keys = ['feature_photo', ...state.sections.filter(s => s.type === 'paragraph').map(s => `paragraph_photo:${s.id}`), ...state.sections.filter(s => s.type === 'person').flatMap(s => s.people.map(p => `photo:${s.id}:${p.id}`))];
     keys.forEach(key => { if (files.has(key)) body.append(key, files.get(key)); });
     return body;
   }

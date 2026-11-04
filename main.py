@@ -35,8 +35,11 @@ from slowapi.errors import RateLimitExceeded
 from operator import attrgetter
 from jose import JWTError
 from rapidfuzz import fuzz
-from urllib.parse import urlparse, parse_qs, quote
+from urllib.parse import urlparse, parse_qs
 from form_uploads import attachment_path, FILE_TYPES
+from form_answers import submission_answers
+from form_answers_export import export_form_answers
+from starlette.background import BackgroundTask
 from pydantic import BaseModel
 
 
@@ -305,30 +308,7 @@ def admin_form_submissions(
 
         for submission in saved_submissions:
             version = versions.get(submission.form_version_id)
-            labels = {}
-            if version:
-                for field in version.definition.get("fields", []):
-                    if field.get("name"):
-                        labels[field["name"]] = field.get("question") or field["name"]
-                    if field.get("name2"):
-                        labels[field["name2"]] = field.get("question2") or field["name2"]
-
-            file_fields = {f['name'] for f in version.definition.get('fields', []) if f.get('type') == 'file'} if version else set()
-            answers = [
-                {
-                    "key": key,
-                    "label": labels.get(key, key),
-                    "attachment": value if key in file_fields and isinstance(value, dict) and value.get('kind') == 'attachment' else None,
-                    "upload_url": f"/admin/uploads/{submission.id}/{quote(key, safe='')}",
-                    "value": (
-                        "—" if value in (None, "") else
-                        ("Tak" if value else "Nie") if isinstance(value, bool) else
-                        json.dumps(value, ensure_ascii=False, indent=2)
-                        if isinstance(value, (dict, list)) else str(value)
-                    ),
-                }
-                for key, value in (submission.data or {}).items()
-            ]
+            answers = submission_answers(submission, version)
             submissions.append({
                 "id": submission.id,
                 "submitted_at": submission.submitted_at,
@@ -343,6 +323,18 @@ def admin_form_submissions(
         "selected_form": selected_form,
         "submissions": submissions, "page": page, "total": total, "has_next": page * 50 < total,
     })
+
+@app.get('/admin/form-submissions/{form_id}/export')
+def download_form_answers(form_id: int, admin: AdminUser = Depends(get_current_admin),
+                          db: Session = Depends(get_db)):
+    form = db.get(FormInfo, form_id)
+    if form is None:
+        raise HTTPException(404)
+    archive = export_form_answers(db, form)
+    return FileResponse(archive, media_type='application/zip', filename=f'form-{form.id}-answers.zip',
+                        headers={'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff'},
+                        background=BackgroundTask(shutil.rmtree, archive.parent, ignore_errors=True))
+
 
 @app.get('/admin/uploads/{submission_id}/{field_name}')
 def download_submission_file(submission_id: int, field_name: str, download: bool = False,

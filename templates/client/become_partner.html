@@ -12,12 +12,18 @@
   <p class="partnership-preview-empty">Brak włączonych sekcji. Zamknij podgląd i zaznacz „Pokaż sekcję” przy wybranej sekcji.</p>
   {% endif %}
   {% for s in config.sections if s.enabled %}
-  <section class="partnership-section{% if s.type == 'grid' %} about-benefits{% elif s.type == 'faq' %} partnership-faq-section{% endif %}" id="section-{{ s.id }}" {% if s.title %}aria-labelledby="heading-{{ s.id }}"{% endif %}>
-    {% if s.title %}<h2 id="heading-{{ s.id }}"{% if s.type == 'heading' %} class="partnership-big-heading"{% endif %}>{{ s.title }}</h2>{% endif %}
+  <section class="partnership-section{% if s.type == 'grid' %} about-benefits{% elif s.type == 'faq' %} partnership-faq-section{% elif s.type == 'icons' %} partnership-icons-section{% elif s.type == 'contact' %} partnership-contact-section{% endif %}" id="section-{{ s.id }}" {% if s.title %}aria-labelledby="heading-{{ s.id }}"{% endif %}>
+    {% if s.title and s.type != 'paragraph' %}<h2 id="heading-{{ s.id }}"{% if s.type == 'heading' %} class="partnership-big-heading"{% endif %}>{{ s.title }}</h2>{% endif %}
     {% if s.type == 'grid' %}
     <div class="about-benefits-grid">{% for item in s.items %}<article>{% if item.title %}<h3>{{ item.title }}</h3>{% endif %}<div class="partnership-copy">{{ item.text|safe_html }}</div></article>{% endfor %}</div>
     {% elif s.type == 'paragraph' %}
-    <div class="partnership-copy">{{ s.text|safe_html }}</div>
+    <div class="partnership-paragraph{% if s.photo %} partnership-paragraph-with-photo{% endif %}">
+      <div class="partnership-paragraph-copy">
+        {% if s.title %}<h2 id="heading-{{ s.id }}">{{ s.title }}</h2>{% endif %}
+        <div class="partnership-copy">{{ s.text|safe_html }}</div>
+      </div>
+      {% if s.photo %}<img class="partnership-paragraph-photo" src="{{ s.photo }}" alt="{{ s.photo_alt }}" loading="lazy" width="800" height="600">{% endif %}
+    </div>
     {% elif s.type == 'icons' %}
     <div class="partnership-icon-grid">{% for item in s.items %}<article><div class="partnership-icon" aria-hidden="true">{{ item.svg|safe_html }}</div>{% if item.title %}<h3>{{ item.title }}</h3>{% endif %}<div class="partnership-copy">{{ item.text|safe_html }}</div></article>{% endfor %}</div>
     {% elif s.type == 'person' %}

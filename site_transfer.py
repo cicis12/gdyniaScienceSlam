@@ -136,9 +136,18 @@ class PartnershipPersonRecord(PersonSection):
     people: list[PartnershipContactRecord] = Field(default_factory=list, max_length=20)
 
 
+class PartnershipParagraphRecord(ParagraphSection):
+    @field_validator('photo')
+    @classmethod
+    def valid_photo(cls, value):
+        if value and not re.fullmatch(MEDIA_PATTERN, value):
+            raise ValueError('Nieprawidłowe zdjęcie akapitu.')
+        return value
+
+
 class PartnershipBundle(PartnershipConfig):
     feature_photo: str = ''
-    sections: list[Annotated[GridSection | ParagraphSection | IconsSection | HeadingSection |
+    sections: list[Annotated[GridSection | PartnershipParagraphRecord | IconsSection | HeadingSection |
                              PartnershipPersonRecord | FAQSection | ContactSection,
                              Field(discriminator='type')]] = Field(default_factory=list, max_length=50)
 
@@ -258,6 +267,8 @@ def export_bundle(db):
     if partnership['feature_photo']:
         partnership['feature_photo'] = add_media(partnership['feature_photo'])
     for section in partnership['sections']:
+        if section['type'] == 'paragraph' and section['photo']:
+            section['photo'] = add_media(section['photo'])
         if section['type'] == 'person':
             for person in section['people']:
                 if person['photo']:
@@ -322,6 +333,7 @@ def inspect_bundle(data):
             bundle = SiteBundle.model_validate_json(archive.read('manifest.json'))
             references = {record.photo for record in [*bundle.team, *bundle.gallery, *(bundle.about or [])]}
             if bundle.partnership is not None:
+                references.update(s.photo for s in bundle.partnership.sections if s.type == 'paragraph' and s.photo)
                 references.update(p.photo for s in bundle.partnership.sections if s.type == 'person' for p in s.people if p.photo)
                 if bundle.partnership.feature_photo:
                     references.add(bundle.partnership.feature_photo)
@@ -367,6 +379,8 @@ def apply_bundle(db, bundle, media, scope):
     partnership_records = [p for s in bundle.partnership.sections if s.type == 'person' for p in s.people if p.photo] if scope == 'all' and bundle.partnership is not None else []
     if scope == 'all' and bundle.partnership is not None and bundle.partnership.feature_photo:
         home_records.append({'photo': bundle.partnership.feature_photo})
+    if scope == 'all' and bundle.partnership is not None:
+        partnership_records += [s for s in bundle.partnership.sections if s.type == 'paragraph' and s.photo]
     records += partnership_records
     destination = IMPORT_DIR / uuid4().hex
     new_documents = []
@@ -387,6 +401,8 @@ def apply_bundle(db, bundle, media, scope):
                 if partnership['feature_photo']:
                     partnership['feature_photo'] = paths[partnership['feature_photo']]
                 for section in partnership['sections']:
+                    if section['type'] == 'paragraph' and section['photo']:
+                        section['photo'] = paths[section['photo']]
                     if section['type'] == 'person':
                         for person in section['people']:
                             if person['photo']:

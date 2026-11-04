@@ -70,6 +70,8 @@ def build_admin_router(require_superadmin):
                 targets = [('feature_photo', config, 'feature_photo')]
                 targets += [(f'photo:{section.id}:{person.id}', person, 'photo')
                             for section in config.sections if section.type == 'person' for person in section.people]
+                targets += [(f'paragraph_photo:{section.id}', section, 'photo')
+                            for section in config.sections if section.type == 'paragraph']
                 images = []
                 for key, target, attribute in targets:
                     photo = form.get(key)

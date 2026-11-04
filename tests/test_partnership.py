@@ -88,6 +88,54 @@ class PartnershipTests(unittest.TestCase):
         self.assertIsNotNone(admin.select_one('#preview-partnership'))
         self.assertIsNotNone(admin.select_one('#partnership-preview-frame'))
 
+    def test_paragraph_image_preview_save_validation_and_removal(self):
+        draft = PartnershipConfig(sections=[ParagraphSection(
+            id='story', title='Work with us', text='<strong>Our story</strong>', enabled=True,
+            photo_alt='People working together')])
+        response = self.submit(draft, 'preview', files={'paragraph_photo:story': self.fixture.photo()})
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        layout = soup.select_one('.partnership-paragraph-with-photo')
+        self.assertEqual(layout.select_one('h2').text, 'Work with us')
+        self.assertTrue(layout.img['src'].startswith('data:image/webp;base64,'))
+        self.assertEqual(layout.img['alt'], 'People working together')
+        self.assertFalse(list(self.photo_dir.glob('*')))
+        self.assertEqual(self.config().sections, [])
+        response = self.submit(draft, files={'paragraph_photo:story': self.fixture.photo()})
+        self.assertEqual(response.status_code, 200)
+        stored = self.config()
+        self.assertTrue(stored.sections[0].photo.startswith('/static/uploads/partnership/'))
+        self.assertEqual(len(list(self.photo_dir.glob('*.webp'))), 1)
+        soup = BeautifulSoup(self.client.get('/become-a-partner').text, 'html.parser')
+        self.assertEqual(soup.select_one('.partnership-paragraph-photo')['src'], stored.sections[0].photo)
+        failed = self.submit(stored, files={'paragraph_photo:story': ('bad.png', b'not an image', 'image/png')})
+        self.assertEqual(failed.status_code, 422)
+        self.assertEqual(self.config(), stored)
+        stored.sections[0].photo = ''
+        self.assertEqual(self.submit(stored).status_code, 200)
+        soup = BeautifulSoup(self.client.get('/become-a-partner').text, 'html.parser')
+        self.assertIsNone(soup.select_one('.partnership-paragraph-photo'))
+        self.assertIn('Our story', soup.text)
+        self.assertEqual(ParagraphSection.model_validate({'type': 'paragraph', 'text': 'Legacy'}).photo, '')
+        for path in ('https://external.example/image.jpg', 'data:image/png;base64,x'):
+            with self.assertRaises(ValidationError):
+                ParagraphSection(photo=path)
+
+    def test_preview_email_is_readable_without_decoding_scripts(self):
+        from partnership_content import ContactPerson
+        draft = PartnershipConfig(sections=[PersonSection(id='people', enabled=True, people=[
+            ContactPerson(name='Jane', occupation='Lead', photo='/static/uploads/contact.webp',
+                          details='<a href="mailto:partners@example.com">partners@example.com</a>')])])
+        response = self.submit(draft, 'preview')
+        self.assertEqual(response.status_code, 200)
+        # Cloudflare must leave script-free preview email addresses untouched.
+        start = response.text.index('<!--email_off-->')
+        end = response.text.index('<!--/email_off-->')
+        self.assertIn('mailto:partners@example.com', response.text[start:end])
+        soup = BeautifulSoup(response.text, 'html.parser')
+        self.assertEqual(soup.select_one('.partnership-person a').text, 'partners@example.com')
+        self.assertFalse(soup.select('script'))
+
     def test_settings_independent_home_section_visibility_and_order(self):
         config = PartnershipConfig(title='Join us', link_label='Partner with us', teaser='Build the next edition',
                                    featured=True, recipient='private-recipient@example.com')
@@ -126,6 +174,9 @@ class PartnershipTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         soup = BeautifulSoup(response.text, 'html.parser')
         self.assertEqual(soup.h1.text, 'Unsaved title')
+        gallery = BeautifulSoup(self.client.get('/previous_editions').text, 'html.parser')
+        self.assertEqual(soup.select_one('link[href*="fonts.googleapis.com/css2"]')['href'],
+                         gallery.select_one('link[href*="fonts.googleapis.com/css2"]')['href'])
         self.assertTrue(soup.select_one('.partnership-portrait')['src'].startswith('data:image/webp;base64,'))
         self.assertTrue(soup.select_one('[data-partner-contact]').has_attr('inert'))
         self.assertNotIn('alert(1)', response.text)
@@ -236,7 +287,8 @@ class PartnershipTransferTests(unittest.TestCase):
         with self.fixture.sessions() as db:
             original = PartnershipConfig(featured=True, uuid_only=True, feature_photo='/static/uploads/gallery/test.webp', sections=[
                 PersonSection(id='person', name='Person', photo='/static/uploads/gallery/test.webp'),
-                IconsSection(id='icons', items=[{'svg': SVG}] * 3)])
+                IconsSection(id='icons', items=[{'svg': SVG}] * 3),
+                ParagraphSection(id='story', photo='/static/uploads/gallery/test.webp', photo_alt='Our team')])
             save_partnership(db, original)
             db.commit()
             raw = export_bundle(db)
@@ -254,6 +306,8 @@ class PartnershipTransferTests(unittest.TestCase):
             person = actual.sections[0]
             self.assertTrue((self.fixture.static_root / person.people[0].photo.removeprefix('/static/')).is_file())
             self.assertEqual(actual.sections[1].items[0].svg, SVG)
+            self.assertTrue((self.fixture.static_root / actual.sections[2].photo.removeprefix('/static/')).is_file())
+            self.assertEqual(actual.sections[2].photo_alt, 'Our team')
             # An old bundle lacks the optional page data and visibility setting.
             with ZipFile(BytesIO(raw)) as archive:
                 entries = {name: archive.read(name) for name in archive.namelist()}

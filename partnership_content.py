@@ -8,7 +8,7 @@ from models import SystemSetting
 
 PARTNERSHIP_KEY = 'become_partner_content'
 PHOTO_PATTERN = r'^/static/(?:assets/images|uploads)/[a-zA-Z0-9_./-]+\.(?:webp|png|jpg|jpeg)$'
-SECTION_TYPES = {'grid': 'Siatka 6 tekstów', 'paragraph': 'Akapit', 'icons': '3 kolumny z ikonami SVG',
+SECTION_TYPES = {'grid': 'Siatka 6 tekstów', 'paragraph': 'Akapit ze zdjęciem', 'icons': '3 kolumny z ikonami SVG',
                  'heading': 'Duży nagłówek', 'person': 'Osoby kontaktowe', 'faq': 'FAQ', 'contact': 'Formularz kontaktowy'}
 
 
@@ -51,6 +51,16 @@ class GridSection(Section):
 class ParagraphSection(Section):
     type: Literal['paragraph'] = 'paragraph'
     text: str = Field(default='', max_length=10000)
+    photo: str = Field(default='', max_length=500)
+    photo_alt: str = Field(default='', max_length=300)
+
+    @field_validator('photo')
+    @classmethod
+    def valid_photo(cls, value):
+        import re
+        if value and not re.fullmatch(PHOTO_PATTERN, value):
+            raise ValueError('Nieprawidłowa ścieżka zdjęcia.')
+        return value
 
 
 class IconsSection(Section):

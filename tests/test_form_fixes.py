@@ -32,6 +32,53 @@ class FormFixTests(unittest.TestCase):
         self.assertEqual(response.status_code, 200, response.text)
         return response.json()
 
+    def test_admin_answers_follow_each_submissions_original_question_order(self):
+        record = self.create([
+            dict(name='z_first', type='text', question='First question'),
+            dict(name='names', name2='surname', type='double', question='Given name', question2='Surname'),
+            dict(name='attachment', type='file', question='Proposal'),
+            dict(name='optional', type='text', question='Unanswered optional question'),
+            dict(name='a_last', type='checkbox', question='Final question'),
+        ])
+        with self.sessions() as db:
+            old = FormSubmission(form_id=record['form_id'], form_version_id=record['version_id'], data={
+                'a_last': True, 'surname': 'Kowalska', 'legacy': 'Preserved answer',
+                'attachment': {'kind': 'attachment', 'filename': 'proposal.pdf', 'size': 123,
+                               'media_type': 'application/pdf'},
+                'names': 'Anna', 'z_first': 'First answer',
+            })
+            db.add(old)
+            db.flush()
+            old_id = old.id
+            version = FormVersion(form_id=record['form_id'], version_num=2, display_name='Reordered',
+                                  definition={'fields': [
+                                      dict(name='a_last', type='checkbox', question='Consent first'),
+                                      dict(name='z_first', type='text', question='Text second'),
+                                  ]})
+            db.add(version)
+            db.flush()
+            db.get(FormInfo, record['form_id']).cur_version_id = version.id
+            latest = FormSubmission(form_id=record['form_id'], form_version_id=version.id,
+                                    data={'z_first': 'Second answer', 'a_last': False})
+            db.add(latest)
+            db.flush()
+            latest_id = latest.id
+            db.commit()
+        response = self.client.get(f"/admin/form-submissions?form_id={record['form_id']}")
+        self.assertEqual(response.status_code, 200)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        articles = {article.h3.text.strip(): article for article in soup.select('article')}
+        original = articles[f'Zgłoszenie #{old_id}']
+        self.assertEqual([label.text.strip() for label in original.select('dt')],
+                         ['First question', 'Given name', 'Surname', 'Proposal', 'Final question', 'legacy'])
+        self.assertIn('Preserved answer', original.text)
+        self.assertIn('Tak', original.text)
+        self.assertIsNotNone(original.select_one(f'a[href="/admin/uploads/{old_id}/attachment?download=true"]'))
+        current = articles[f'Zgłoszenie #{latest_id}']
+        self.assertEqual([label.text.strip() for label in current.select('dt')],
+                         ['Consent first', 'Text second'])
+        self.assertIn('Nie', current.text)
+
     def test_optional_blanks_and_nulls_across_input_types(self):
         fields = [dict(name=kind, type=kind, question=kind, options=['A', 'B'])
                   for kind in ('text', 'email', 'phone', 'list_choice', 'textarea', 'school', 'checkbox')]

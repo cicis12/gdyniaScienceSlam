@@ -6,9 +6,7 @@
   <title>Głosowanie – Gdynia Science Slam</title>
   <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  {% include "macros/site_fonts.html" %}
   <link rel="stylesheet" href="{{ asset_url('css/site.css') }}">
   <!-- intl-tel-input stylesheet-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +17,7 @@
 <body data-display-page="{{ public_page_key(request, page_name|default('')) }}" data-display-mode="{{ page_display_mode(request, page_name|default('')) }}" class="public-site bg-[#819edb] text-[#18395d] flex flex-col min-h-screen">
 {% if public_page_key(request, page_name|default('')) != 'home' %}<script src="{{ asset_url('js/theme-switch.js') }}"></script>{% endif %}
 
+  {% set active_page = public_page_key(request, page_name|default('')) %}
   <!-- NAVBAR -->
   <!-- NAVBAR -->
   <nav class="site-nav bg-[#5e85b8] shadow-md">
@@ -34,14 +33,14 @@
       <!-- DESKTOP MENU -->
       <div class="site-links hidden md:flex space-x-6 items-center">
         <a href="/plan" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Plan wydarzenia</a>
-        {% if (request.state.page_visibility|default({})).get('home', true) %}<a href="/" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Home</a>{% endif %}
-        {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Team</a>{% endif %}
-        {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">About</a>{% endif %}
-        {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="hover:text-blue-800 font-bold text-lg text-[#18395d] hidden">Poprzednie edycje</a>{% endif %}
-        {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Partnerzy</a>{% endif %}
-        {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="hover:text-blue-800 font-bold text-lg text-[#18395d]">Dokumenty</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('home', true) %}<a href="/" class="hover:text-blue-800 text-lg text-[#18395d]"{% if active_page == 'home' %} aria-current="page"{% endif %}>Home</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="hover:text-blue-800 text-lg text-[#18395d]"{% if active_page == 'team' %} aria-current="page"{% endif %}>Team</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about" class="hover:text-blue-800 text-lg text-[#18395d]"{% if active_page == 'about' %} aria-current="page"{% endif %}>About</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="hover:text-blue-800 text-lg text-[#18395d] hidden"{% if active_page == 'previous_editions' %} aria-current="page"{% endif %}>Poprzednie edycje</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="hover:text-blue-800 text-lg text-[#18395d]"{% if active_page == 'partners' %} aria-current="page"{% endif %}>Partnerzy</a>{% endif %}
+        {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="hover:text-blue-800 text-lg text-[#18395d]"{% if active_page == 'documents' %} aria-current="page"{% endif %}>Dokumenty</a>{% endif %}
         {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration"
-           class="site-registration bg-[#18395d] text-[#5e85b8] text-lg font-extrabold px-4 py-2 rounded-full hover:bg-blue-700">
+           class="site-registration bg-[#18395d] text-[#5e85b8] text-lg px-4 py-2 rounded-full hover:bg-blue-700"{% if active_page == 'registration' %} aria-current="page"{% endif %}>
           Rejestracja
         </a>{% endif %}
       </div>
@@ -65,14 +64,14 @@
       class="site-mobile-menu" hidden>
         <div class="site-mobile-links">
           <a href="/plan" class="text-lg block">Plan wydarzenia</a>
-          {% if (request.state.page_visibility|default({})).get('home', true) %}<a href="/" class="text-lg block">Home</a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="text-lg block">Team</a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about" class="text-lg block">About</a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="text-lg block">Poprzednie edycje</a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="text-lg block">Partnerzy</a>{% endif %}
-          {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="text-lg block">Dokumenty</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('home', true) %}<a href="/" class="text-lg block"{% if active_page == 'home' %} aria-current="page"{% endif %}>Home</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('team', true) %}<a href="/team" class="text-lg block"{% if active_page == 'team' %} aria-current="page"{% endif %}>Team</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('about', true) %}<a href="/about" class="text-lg block"{% if active_page == 'about' %} aria-current="page"{% endif %}>About</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('previous_editions', true) %}<a href="/previous_editions" class="text-lg block"{% if active_page == 'previous_editions' %} aria-current="page"{% endif %}>Poprzednie edycje</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('partners', true) %}<a href="/partners" class="text-lg block"{% if active_page == 'partners' %} aria-current="page"{% endif %}>Partnerzy</a>{% endif %}
+          {% if (request.state.page_visibility|default({})).get('documents', true) %}<a href="/documents" class="text-lg block"{% if active_page == 'documents' %} aria-current="page"{% endif %}>Dokumenty</a>{% endif %}
           {% if (request.state.page_visibility|default({})).get('registration', true) %}<a href="/registration"
-             class="site-registration block bg-blue-600 text-white text-center py-2 rounded-full">
+             class="site-registration block bg-blue-600 text-white text-center py-2 rounded-full"{% if active_page == 'registration' %} aria-current="page"{% endif %}>
             Rejestracja
           </a>{% endif %}
         </div>
