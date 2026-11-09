@@ -1,4 +1,5 @@
-.partnership-section { padding: clamp(2rem, 5vw, 4rem) 0; border-top: 1px solid var(--section-border); scroll-margin-top: calc(var(--site-nav-height, 97px) + 2rem); overflow-wrap: anywhere; }
+.partnership-section { padding: clamp(2rem, 5vw, 4rem) 0; border-top: 0; scroll-margin-top: calc(var(--site-nav-height, 97px) + 2rem); overflow-wrap: anywhere; }
+.partnership-page .about-benefits article { border-top: 0; }
 .partnership-section > h2, .partnership-paragraph-copy > h2 { font-size: clamp(1.75rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.2; color: var(--section-heading); margin-bottom: 2rem; }
 .partnership-section > .partnership-big-heading { font-size: clamp(2.5rem, 7vw, 6rem); max-width: 20ch; letter-spacing: -.04em; margin: 0; }
 .partnership-section.about-benefits { margin-top: 0; }
@@ -20,7 +21,7 @@
 .partnership-team-link { margin-top: 2.5rem; }
 .partnership-faq { max-width: 56rem; margin-inline: auto; }
 .partnership-faq-section > h2 { text-align: center; }
-.partnership-faq details { border-bottom: 1px solid var(--section-border); }
+.partnership-faq details { border-bottom: 0; }
 .partnership-faq summary { display: flex; justify-content: space-between; align-items: center; gap: 1.5rem; padding: 1.3rem 0; list-style: none; cursor: pointer; font-weight: 600; }
 .partnership-faq summary::-webkit-details-marker { display: none; }
 .partnership-faq summary svg { width: 1.1rem; height: 1.1rem; flex-shrink: 0; transition: transform .3s ease; }
@@ -49,7 +50,8 @@
 }
 .partnership-faq summary:focus-visible, .partnership-contact button:focus-visible { outline: 3px solid var(--section-overline); outline-offset: 5px; }
 .partnership-contact { display: grid; gap: 1.5rem; width: 100%; max-width: 48rem; margin: 1.5rem auto 0; align-content: start; }
-.partnership-contact .form-control :is(input, textarea) { padding-left: 0; }
+.partnership-contact .form-control :is(input, textarea) { padding-left: 0; border: 0; }
+.partnership-contact .form-control :is(input, textarea):focus-visible { outline: 2px solid var(--section-overline); outline-offset: 3px; }
 .partnership-contact .form-control .form-floating-label { left: 0; }
 .partnership-contact .partnership-submit { background: var(--section-button); color: var(--section-button-text); display: inline-flex; align-items: center; justify-content: center; width: fit-content; max-width: 100%; height: auto; min-height: 3rem; padding: .65rem 1.25rem; border: 0; border-radius: .25rem; place-self: start center; font: inherit; font-size: 1rem; font-weight: 700; line-height: 1.5; appearance: none; -webkit-appearance: none; cursor: pointer; }
 .partnership-contact button:disabled { opacity: .6; cursor: wait; }
@@ -64,7 +66,7 @@
 .partnership-people { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 3rem; align-items: start; }
 .partnership-people .partnership-person { width: 100%; }
 .partnership-preview-page { margin: 0; min-height: 100vh; }
-.partnership-preview-empty { padding: 1.5rem; border: 1px solid var(--section-border); }
+.partnership-preview-empty { padding: 1.5rem; }
 
 /* The sandboxed preview does not load Tailwind’s JavaScript reset. */
 .partnership-page, .partnership-page *, .partnership-page *::before, .partnership-page *::after { box-sizing: border-box; }
